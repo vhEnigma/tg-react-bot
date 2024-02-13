@@ -1,39 +1,48 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { List, ListItemButton, ListItemText } from '@mui/material'
-import { useScrollFetching } from '../../hooks/useScrollFetching.ts'
 import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
 import { DirectionService } from '../../services/Direction'
+import useInfinityObserver from '../../hooks/useIntersectionObserver.ts'
 
 const Directions: FC = () => {
   const theme = useTheme()
   const [isFetching, setFetching] = useState(true)
-  const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(1)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
-  useScrollFetching({ setFetching, isSearchMode })
+  const lastElementRef = useRef(null)
+
+  const fetchList = useCallback(async () => {
+    const { result } = await DirectionService.listDirectionRequest(downloadedPages)
+    console.log('fetch list', lastElementRef, 'lastel')
+    setFetching(false)
+    setRenderList([...renderList, ...result])
+
+    if (result.length === 0) {
+      return
+    }
+
+    setDownloadedPages(downloadedPages + 1)
+  }, [renderList, downloadedPages])
+
+  useInfinityObserver(lastElementRef, fetchList)
 
   useEffect(() => {
-    const downloadData = async () => {
-      if (isFetching) {
-        document.body.style.cursor = 'wait'
-        const { result } = await DirectionService.listDirectionRequest(downloadedPages)
-        console.log(result, 'fuck')
-
-        setFetching(false)
-        setRenderList([...renderList, ...result])
-        if (result.length !== 0) {
-          setDownloadedPages(downloadedPages + 1)
-        }
-        document.body.style.cursor = 'default'
-      }
+    if (isFetching) {
+      fetchList()
     }
-    downloadData()
-  }, [isFetching, renderList, downloadedPages])
+  }, [isFetching, fetchList])
 
   const getDirections = () => {
-    return renderList.map(({ id, name }) => {
-      return <ListItemButton key={id} dense
+    const lastIndex = renderList.length - 1
+    return renderList.map(({ id, name }, index) => {
+      if (index === lastIndex) {
+        return <ListItemButton ref={lastElementRef} key={id}
+                               sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
+          <ListItemText primary={name} />
+        </ListItemButton>
+      }
+      return <ListItemButton key={id}
                              sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
         <ListItemText primary={name} />
       </ListItemButton>

@@ -32,7 +32,7 @@ const App: FC<PropsWithChildren> = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <div className={style.container}>
-          <Container sx={{ flexGrow: 1 }}>
+          <Container sx={{ height: 'calc(100vh - 56px)' }}>
             <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
