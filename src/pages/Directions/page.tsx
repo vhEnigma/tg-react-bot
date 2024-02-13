@@ -4,6 +4,7 @@ import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
 import { DirectionService } from '../../services/Direction'
 import {useInView} from "react-intersection-observer";
+import useDebounce from "../../hooks/useDebounce.ts";
 
 const Directions: FC = () => {
   const { ref, inView } = useInView({
@@ -14,9 +15,10 @@ const Directions: FC = () => {
   const [downloadedPages, setDownloadedPages] = useState(1)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
   const [searchValue, setSearchValue] = useState('')
+  const debouncedSearchValue = useDebounce(searchValue, 300);
 
   const fetchList = async () => {
-    console.log(searchValue, 'searchValue')
+
     const { result } = await DirectionService.listDirectionRequest(downloadedPages)
     setRenderList([...renderList, ...result, ...result])
 
@@ -37,6 +39,10 @@ const Directions: FC = () => {
       fetchList()
     }
   }, [inView])
+
+  useEffect(() => {
+    console.log(debouncedSearchValue, 'call')
+  }, [debouncedSearchValue]);
   const getDirections = () => {
     const lastIndex = renderList.length - 1
     return renderList.map(({ id, name }, index) => {
