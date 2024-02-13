@@ -1,5 +1,8 @@
 export const Endpoints = {
   directions: 'directions',
   tests: 'tests',
-  technologies: 'technologies'
+  technologies: 'technologies',
+  user: {
+    login: 'login'
+  }
 }

@@ -1,16 +1,15 @@
 declare global {
-    interface Window {
-        Telegram: any;
-    }
+  interface Window {
+    Telegram: any;
+  }
 }
 
-const tg = window.Telegram.WebApp;
+const tg = window.Telegram.WebApp
 
 export const useTelegram = () => {
-    tg.expand();
-
-    return {
-        tg,
-        tgUser: tg.initDataUnsafe?.user,
-    };
-};
+  tg.expand()
+  return {
+    tg,
+    tgUser: tg.initData?.user
+  }
+}

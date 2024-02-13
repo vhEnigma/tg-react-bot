@@ -7,17 +7,21 @@ import Loader from '../../components/Loader'
 import style from './style.module.css'
 import { RouteList } from '../../routes/routes.ts'
 import AppButton from '../../components/AppButton'
+import { UserService } from '../../services/User'
 
 
 const queryClient = new QueryClient()
 const App: FC<PropsWithChildren> = () => {
-  const { tg } = useTelegram()
+  const { tg, tgUser } = useTelegram()
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log(tg)
     tg.ready()
   }, [])
+
+  useEffect(() => {
+    UserService.loginUserRequest(tgUser)
+  }, [tgUser])
 
   // const handleClose = () => {
   //   tg.close()
