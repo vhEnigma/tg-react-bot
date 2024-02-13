@@ -21,7 +21,7 @@ const Directions: FC = () => {
         const { data, isSuccess } = await refetch()
         if (!isSuccess) return
         setFetching(false)
-        setRenderList([...renderList, ...data.result])
+        setRenderList([...renderList])
         if (data.result.length !== 0) {
           setDownloadedPages(downloadedPages + 1)
         }
