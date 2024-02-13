@@ -12,7 +12,7 @@ import { UserService } from '../../services/User'
 
 const queryClient = new QueryClient()
 const App: FC<PropsWithChildren> = () => {
-  const { tg, tgUser } = useTelegram()
+  const { tg } = useTelegram()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -20,9 +20,9 @@ const App: FC<PropsWithChildren> = () => {
   }, [])
 
   useEffect(() => {
-    console.log(tgUser)
-    UserService.loginUserRequest(tgUser)
-  }, [tgUser])
+    console.log(tg)
+    UserService.loginUserRequest(tg)
+  }, [tg])
 
   // const handleClose = () => {
   //   tg.close()
