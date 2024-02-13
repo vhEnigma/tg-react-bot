@@ -14,7 +14,7 @@ const Directions: FC = () => {
 
   const fetchList = useCallback(async () => {
     const { result } = await DirectionService.listDirectionRequest(downloadedPages)
-    console.log('fetch list', lastElementRef, 'lastel')
+    console.log('fetch list', lastElementRef, 'lastel', result, 'result', renderList, 'renderList')
     setFetching(false)
     setRenderList([...renderList, ...result])
 
