@@ -14,7 +14,7 @@ const Directions: FC = () => {
 
   const fetchList = useCallback(async (observer:IntersectionObserver) => {
     const { result } = await DirectionService.listDirectionRequest(downloadedPages)
-    console.log('fetch list', lastElementRef, 'lastel', result, 'result', renderList, 'renderList')
+    console.log('fetch list', result, 'result', renderList, 'renderList')
     setFetching(false)
     setRenderList([...renderList, ...result])
 
@@ -36,7 +36,6 @@ const Directions: FC = () => {
       fetchList(observer)
     }
   }, [isFetching, fetchList])
-  console.log(lastElementRef, 'lastElementRef')
   const getDirections = () => {
     const lastIndex = renderList.length - 1
     return renderList.map(({ id, name }, index) => {

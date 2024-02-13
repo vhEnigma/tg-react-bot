@@ -22,6 +22,7 @@ const useInfinityObserver = (elementRef: RefObject<HTMLElement>, callback: (obse
   const [observer, setObserver] = useState<IntersectionObserver | null>(null)
   const infinityObserver = new IntersectionObserver(([entry], observer) => {
     if (entry.isIntersecting) {
+      console.log(entry.target, 'entry.target')
       callback(observer)
       setObserver(observer)
       observer.unobserve(entry.target)
