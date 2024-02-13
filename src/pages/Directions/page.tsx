@@ -10,7 +10,7 @@ const Directions: FC = () => {
   const [isFetching, setFetching] = useState(true)
   const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(0)
-  const { refetch, data } = useDirections(downloadedPages)
+  const { refetch, data } = useDirections()
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>(data?.result || [])
   useScrollFetching({ setFetching, isSearchMode })
 
