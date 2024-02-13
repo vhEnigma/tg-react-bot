@@ -10,7 +10,7 @@ const Directions: FC = () => {
   const [isFetching, setFetching] = useState(true)
   const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(0)
-  const { data, isSuccess } = useDirections(downloadedPages)
+  const { data } = useDirections(downloadedPages)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>(data?.result || [])
   useScrollFetching({ setFetching, isSearchMode })
 
@@ -20,10 +20,9 @@ const Directions: FC = () => {
         console.log(data, 'fuck')
         document.body.style.cursor = 'wait'
         // const { data, isSuccess } = await refetch()
-        if (!isSuccess) return
         setFetching(false)
-        setRenderList([...renderList, ...data.result])
-        if (data.result.length !== 0) {
+        setRenderList([...renderList, ...data?.result || []])
+        if (data?.result.length !== 0) {
           setDownloadedPages(downloadedPages + 1)
         }
         document.body.style.cursor = 'default'
