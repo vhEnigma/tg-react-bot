@@ -20,7 +20,7 @@ const Directions: FC = () => {
     const { result } = await DirectionService.listDirectionRequest(downloadedPages)
     console.log('fetch list', result, 'result', renderList, 'renderList')
     setFetching(false)
-    setRenderList([...renderList, ...result])
+    setRenderList([...renderList, ...result, ...result])
 
     if (result.length === 0) {
       // console.log(lastElementRef.current)
