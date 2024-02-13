@@ -3,7 +3,6 @@ import { axiosInstance } from '../client/httpClient.ts'
 
 type LoginuserResponseType = {
   token: string
-  tokenType: string
 }
 
 
