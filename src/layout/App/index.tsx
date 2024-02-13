@@ -26,8 +26,10 @@ const App: FC<PropsWithChildren> = () => {
         TokenService.saveToken(token)
       }
     }
+    setTimeout(() => {
+      getToken()
 
-    getToken()
+    }, 10000)
   }, [])
 
 
