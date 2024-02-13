@@ -23,7 +23,7 @@ const Directions: FC = () => {
     }
 
     setDownloadedPages(downloadedPages + 1)
-  }, [renderList, downloadedPages])
+  }, [renderList, downloadedPages, lastElementRef.current])
 
   useInfinityObserver(lastElementRef, fetchList)
 
