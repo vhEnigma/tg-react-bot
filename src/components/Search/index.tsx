@@ -17,7 +17,7 @@ const Search: FC<SearchProps> = ({value, setValue}) => {
   const color = theme.palette.customColors.bgColor
 
   return <>
-    <TextField value={value}   InputProps={{
+    <TextField value={value} InputProps={{
       style: {
         color: 'red'
       }

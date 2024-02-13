@@ -12,21 +12,41 @@ import { axiosInstance } from '../client/httpClient.ts'
 // }
 let count = 0
 
+type ParamsListDirectionsRequest = {
+  searchValue?: string
+  page?: number
+}
+
 export class DirectionService {
-  static async listDirectionRequest(page?: number) {
+  static async listDirectionRequest(params:ParamsListDirectionsRequest) {
+    const {searchValue, page} = params
+
+    const url = new URL('https://jsonplaceholder.typicode.com/users');
+    const searchParams = new URLSearchParams();
+
+    if (searchValue) {
+      searchParams.append('search', searchValue);
+    }
+
+    if (page) {
+      searchParams.append('page', page.toString());
+    }
+
+    url.search = searchParams.toString();
+
+    console.log(url, 'URL')
     // const pageNumber = page || 1
     count++
 
     if (count === 4) {
       return {result: []}
     }
-    console.log(page)
 
     // const url = `${Endpoints.directions}?page=${pageNumber}&pageSize=100`
-    const url = `https://jsonplaceholder.typicode.com/users`
+    // const url = `https://jsonplaceholder.typicode.com/users`
 
     // const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url)
-    const { data: response } = await axiosInstance.get(url)
+    const { data: response } = await axiosInstance.get(url.toString())
     return {result: response}
     // return response
   }

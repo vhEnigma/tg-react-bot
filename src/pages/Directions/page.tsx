@@ -19,7 +19,7 @@ const Directions: FC = () => {
 
   const fetchList = async () => {
 
-    const { result } = await DirectionService.listDirectionRequest(downloadedPages)
+    const { result } = await DirectionService.listDirectionRequest({page:downloadedPages})
     setRenderList([...renderList, ...result, ...result])
 
     if (result.length === 0) {
