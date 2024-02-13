@@ -53,7 +53,7 @@ const Directions: FC = () => {
 
   return <>
     <Search />
-    <List ref={lastElementRef} component="nav" aria-label="secondary mailbox folder">
+    <List component="nav" aria-label="secondary mailbox folder">
       {getDirections()}
     </List>
   </>
