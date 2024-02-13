@@ -36,24 +36,29 @@ const Directions: FC = () => {
   const getDirections = () => {
     const lastIndex = renderList.length - 1
     return renderList.map(({ id, name }, index) => {
+      const isLastElement = index === lastIndex
       console.log(lastIndex, 'lastindex', index, 'index')
-      if (index === lastIndex) {
-        console.log('FUCKING SHIT')
-        return <ListItemButton ref={lastElementRef} key={id}
-                               sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
-          <ListItemText primary={name} />
-        </ListItemButton>
-      }
-      return <ListItemButton key={id}
-                             sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
-        <ListItemText primary={name} />
-      </ListItemButton>
+      const div = isLastElement ? <div ref={lastElementRef} /> : null
+      // if (index === lastIndex) {
+      //   console.log('FUCKING SHIT')
+      //   return <ListItemButton ref={lastElementRef} key={id}
+      //                          sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
+      //     <ListItemText primary={name} />
+      //   </ListItemButton>
+      // }
+      return <>
+            <ListItemButton key={id}
+                                 sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
+            <ListItemText primary={name} />
+          </ListItemButton>
+        {div}
+        </>
     })
   }
 
   return <>
     <Search />
-    <List ref={lastElementRef} component="nav" aria-label="secondary mailbox folder">
+    <List component="nav" aria-label="secondary mailbox folder">
       {getDirections()}
     </List>
   </>
