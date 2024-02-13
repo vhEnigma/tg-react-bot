@@ -1,4 +1,4 @@
-import { useEffect, RefObject } from 'react'
+import {useEffect, RefObject, useState} from 'react'
 
 // type IntersectionOptions = {
 //   root?: Element | null;
@@ -18,11 +18,12 @@ import { useEffect, RefObject } from 'react'
 // }
 
 
-const useInfinityObserver = (elementRef: RefObject<HTMLElement>, callback: () => void) => {
-
+const useInfinityObserver = (elementRef: RefObject<HTMLElement>, callback: (observer:IntersectionObserver) => void) => {
+  const [observer, setObserver] = useState<IntersectionObserver | null>(null)
   const infinityObserver = new IntersectionObserver(([entry], observer) => {
     if (entry.isIntersecting) {
-      callback()
+      callback(observer)
+      setObserver(observer)
       observer.unobserve(entry.target)
     }
   })
@@ -35,7 +36,7 @@ const useInfinityObserver = (elementRef: RefObject<HTMLElement>, callback: () =>
     }
   }, [elementRef.current])
 
-
+  return observer
 }
 
 export default useInfinityObserver
