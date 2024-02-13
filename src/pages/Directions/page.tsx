@@ -33,7 +33,8 @@ const Directions: FC = () => {
 
   const getDirections = () => {
     return renderList.map(({ id, name }) => {
-      return <ListItemButton key={id} dense sx={{ borderTop: `1px solid ${theme.palette.customColors.bgcolor}` }}>
+      return <ListItemButton key={id} dense
+                             sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
         <ListItemText primary={name} />
       </ListItemButton>
     })
