@@ -20,9 +20,8 @@ const App: FC<PropsWithChildren> = () => {
   }, [])
 
   useEffect(() => {
-    alert(1)
     UserService.loginUserRequest(tg.initData)
-  }, [tg])
+  })
 
   // const handleClose = () => {
   //   tg.close()
