@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles'
 
 const Directions: FC = () => {
   const theme = useTheme()
-  const [isFetching, setFetching] = useState(true)
+  const [isFetching, setFetching] = useState(false)
   const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(1)
   const { data } = useDirections(downloadedPages)
