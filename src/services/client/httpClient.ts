@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { INIT_DATA_KEY, TOKEN_KEY } from '../../constants/token.ts'
+import { USER_DATA_KEY, TOKEN_KEY } from '../../constants/token.ts'
 import { UserService } from '../User'
 
 const API_URL = 'https://rarely-modern-ray.ngrok-free.app/api/v1/'
@@ -23,7 +23,7 @@ axiosInstance.interceptors.response.use(config => config,
     if (error.response.status === 401 && error.config && !error.config._isRetry) {
       originalRequest._isRetry = true
       try {
-        const initData = localStorage.getItem(INIT_DATA_KEY)
+        const initData = localStorage.getItem(USER_DATA_KEY)
         if (initData) {
           await UserService.loginUserRequest(initData)
           return axiosInstance.request(originalRequest)
