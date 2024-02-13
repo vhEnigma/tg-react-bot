@@ -15,12 +15,13 @@ let count = 0
 export class DirectionService {
   static async listDirectionRequest(page?: number) {
     // const pageNumber = page || 1
-    console.log(page)
     count++
 
     if (count === 4) {
       return {result: []}
     }
+    console.log(page)
+
     // const url = `${Endpoints.directions}?page=${pageNumber}&pageSize=100`
     const url = `https://jsonplaceholder.typicode.com/users`
 

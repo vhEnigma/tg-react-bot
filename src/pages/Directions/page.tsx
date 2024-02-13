@@ -13,15 +13,12 @@ const Directions: FC = () => {
   const theme = useTheme()
   const [downloadedPages, setDownloadedPages] = useState(1)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
-  console.log(inView, 'inView')
 
   const fetchList = async () => {
     const { result } = await DirectionService.listDirectionRequest(downloadedPages)
-    console.log('fetch list', result, 'result', renderList, 'renderList')
     setRenderList([...renderList, ...result, ...result])
 
     if (result.length === 0) {
-      console.log('stop')
       setStopInfinityScroll(true)
       return
     }
@@ -42,14 +39,15 @@ const Directions: FC = () => {
     const lastIndex = renderList.length - 1
     return renderList.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
+      const opacity = inView && !isStopInfinityScroll ? 0.5 : 1
       if (isLastElement) {
         return <ListItemButton ref={ref} key={id}
-                               sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}`, opacity: `${inView ? 0.5 : 1}` }}>
+                               sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}`, opacity }}>
           <ListItemText primary={name} />
         </ListItemButton>
       }
       return <ListItemButton key={id}
-                                 sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}`, opacity: `${inView ? 0.5 : 1}` }}>
+                                 sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}`, opacity }}>
             <ListItemText primary={name} />
           </ListItemButton>
 
