@@ -17,12 +17,10 @@ const App: FC<PropsWithChildren> = () => {
 
   useEffect(() => {
     tg.ready()
-  }, [])
-
-  useEffect(() => {
     console.log(tg.initData)
     UserService.loginUserRequest(tg.initData)
-  })
+  }, [])
+
 
   // const handleClose = () => {
   //   tg.close()
