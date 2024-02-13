@@ -16,7 +16,7 @@ export class DirectionService {
     // const pageNumber = page || 1
     console.log(page)
     // const url = `${Endpoints.directions}?page=${pageNumber}&pageSize=100`
-    const url = `https://jsonplaceholder.typicode.com/todos?_limit=10`
+    const url = `https://jsonplaceholder.typicode.com/users?_limit=10`
 
     // const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url)
     const { data: response } = await axiosInstance.get(url)
