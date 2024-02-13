@@ -13,8 +13,10 @@ const Directions: FC = () => {
   const theme = useTheme()
   const [downloadedPages, setDownloadedPages] = useState(1)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
+  const [searchValue, setSearchValue] = useState('')
 
   const fetchList = async () => {
+    console.log(searchValue, 'searchValue')
     const { result } = await DirectionService.listDirectionRequest(downloadedPages)
     setRenderList([...renderList, ...result, ...result])
 
@@ -55,7 +57,7 @@ const Directions: FC = () => {
   }
 
   return <>
-    <Search />
+    <Search value={searchValue} setValue={setSearchValue}/>
     <List component="nav" aria-label="secondary mailbox folder">
       {getDirections()}
     </List>
