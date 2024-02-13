@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { USER_DATA_KEY, TOKEN_KEY } from '../../constants/token.ts'
 import { UserService } from '../User'
+import { TokenService } from '../TokenService'
 
 const API_URL = 'https://rarely-modern-ray.ngrok-free.app/api/v1/'
 export const axiosInstance = axios.create({
@@ -25,7 +26,8 @@ axiosInstance.interceptors.response.use(config => config,
       try {
         const initData = localStorage.getItem(USER_DATA_KEY)
         if (initData) {
-          await UserService.loginUserRequest(initData)
+          const { token } = await UserService.loginUserRequest(initData)
+          TokenService.saveToken(token)
           return axiosInstance.request(originalRequest)
         }
       } catch (e) {
