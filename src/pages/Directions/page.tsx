@@ -9,6 +9,7 @@ const Directions: FC = () => {
   const { ref, inView } = useInView({
     threshold: 0,
   });
+  const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
   const theme = useTheme()
   const [downloadedPages, setDownloadedPages] = useState(1)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
@@ -20,6 +21,8 @@ const Directions: FC = () => {
     setRenderList([...renderList, ...result, ...result])
 
     if (result.length === 0) {
+      console.log('stop')
+      setStopInfinityScroll(true)
       return
     }
 
@@ -31,7 +34,7 @@ const Directions: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !isStopInfinityScroll) {
       fetchList()
     }
   }, [inView])

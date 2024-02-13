@@ -10,11 +10,17 @@ import { axiosInstance } from '../client/httpClient.ts'
 //   page: number
 //   result: DirectionsType[]
 // }
+let count = 0
 
 export class DirectionService {
   static async listDirectionRequest(page?: number) {
     // const pageNumber = page || 1
     console.log(page)
+    count++
+
+    if (count === 4) {
+      return {result: []}
+    }
     // const url = `${Endpoints.directions}?page=${pageNumber}&pageSize=100`
     const url = `https://jsonplaceholder.typicode.com/users`
 
