@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { Button, Container, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { RouteList } from '../../routes/routes.ts'
+import { useTheme } from '@mui/material/styles'
 
 
 const styles = {
@@ -13,6 +14,7 @@ const styles = {
 }
 
 const ErrorBoundary: FC = () => {
+  const theme = useTheme()
   const navigate = useNavigate()
 
   const returnHandle = () => {
@@ -23,7 +25,8 @@ const ErrorBoundary: FC = () => {
     <Typography>
       Что-то пошло не так...
     </Typography>
-    <Button onClick={returnHandle} variant="contained">На главную</Button>
+    <Button onClick={returnHandle} sx={{ backgroundColor: theme.palette.customColors.bgColor }} variant="contained">На
+      главную</Button>
   </Container>
 }
 

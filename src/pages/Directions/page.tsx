@@ -29,7 +29,7 @@ const Directions: FC = () => {
       }
     }
     downloadData()
-  }, [isFetching])
+  }, [isFetching, renderList, downloadedPages])
 
   const getDirections = () => {
     return renderList.map(({ id, name }) => {
