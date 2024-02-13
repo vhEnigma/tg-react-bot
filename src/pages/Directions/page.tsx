@@ -10,15 +10,16 @@ const Directions: FC = () => {
   const [isFetching, setFetching] = useState(true)
   const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(0)
-  const { refetch, data } = useDirections()
+  const { data, isSuccess } = useDirections(downloadedPages)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>(data?.result || [])
   useScrollFetching({ setFetching, isSearchMode })
 
   useEffect(() => {
     const downloadData = async () => {
       if (isFetching) {
+        console.log(data, 'fuck')
         document.body.style.cursor = 'wait'
-        const { data, isSuccess } = await refetch()
+        // const { data, isSuccess } = await refetch()
         if (!isSuccess) return
         setFetching(false)
         setRenderList([...renderList, ...data.result])
