@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from 'react'
+import {FC, useCallback, useEffect, useRef, useState} from 'react'
 import { List, ListItemButton, ListItemText } from '@mui/material'
 import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
@@ -10,7 +10,7 @@ const Directions: FC = () => {
   const [isFetching, setFetching] = useState(true)
   const [downloadedPages, setDownloadedPages] = useState(1)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
-  const lastElementRef = useRef(null)
+  const lastElementRef = useRef<HTMLDivElement>(null)
 
   const fetchList = useCallback(async () => {
     const { result } = await DirectionService.listDirectionRequest(downloadedPages)

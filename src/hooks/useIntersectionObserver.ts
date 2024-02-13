@@ -29,6 +29,7 @@ const useInfinityObserver = (elementRef: RefObject<HTMLElement>, callback: () =>
 
   useEffect(() => {
     const node = elementRef.current
+    console.log(node, 'node')
     if (node) {
       infinityObserver.observe(node)
     }
