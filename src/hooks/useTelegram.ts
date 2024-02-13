@@ -10,10 +10,9 @@ export const useTelegram = () => {
   tg.expand()
   console.log(tg)
   if (tg.initData?.user) {
-    tg.showAlert(`Добро пожаловать, @${tg.initData?.user}.`)
+    tg.showAlert(`Добро пожаловать, @${tg.initData}.`)
   }
   return {
-    tg,
-    tgUser: tg.initData?.user
+    tg
   }
 }
