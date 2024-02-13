@@ -7,7 +7,7 @@ import { useScrollFetching } from '../../hooks/useScrollFetching.ts'
 
 const Directions: FC = () => {
 
-  const [isFetching, setFetching] = useState(true)
+  const [isFetching, setFetching] = useState(false)
   const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(0)
   const { refetch } = useDirections(downloadedPages)
@@ -15,20 +15,20 @@ const Directions: FC = () => {
   useScrollFetching({ setFetching, isSearchMode })
 
   useEffect(() => {
-    const downloadData = async () => {
-      if (isFetching) {
-        document.body.style.cursor = 'wait'
-        const { data, isSuccess } = await refetch()
-        if (!isSuccess) return
-        setFetching(false)
-        setRenderList([...renderList, ...data.result])
-        if (data.result.length !== 0) {
-          setDownloadedPages(downloadedPages + 1)
-        }
-        document.body.style.cursor = 'default'
+    // const downloadData = async () => {
+    if (isFetching) {
+      document.body.style.cursor = 'wait'
+      const { data, isSuccess } = refetch()
+      if (!isSuccess) return
+      setFetching(false)
+      setRenderList([...renderList, ...data.result])
+      if (data.result.length !== 0) {
+        setDownloadedPages(downloadedPages + 1)
       }
+      document.body.style.cursor = 'default'
     }
-    downloadData()
+    // }
+    // downloadData()
   }, [isFetching])
 
   // if (isLoading) return <Loader />
