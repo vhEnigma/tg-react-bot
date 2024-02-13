@@ -32,7 +32,7 @@ const Directions: FC = () => {
       fetchList()
     }
   }, [isFetching, fetchList])
-
+  console.log(lastElementRef, 'lastElementRef')
   const getDirections = () => {
     const lastIndex = renderList.length - 1
     return renderList.map(({ id, name }, index) => {
