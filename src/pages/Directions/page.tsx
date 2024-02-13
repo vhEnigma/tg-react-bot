@@ -1,28 +1,28 @@
 import { FC, useEffect, useState } from 'react'
 import { List, ListItemButton, ListItemText } from '@mui/material'
-import { useDirections } from '../../hooks/useDirections.ts'
 import { useScrollFetching } from '../../hooks/useScrollFetching.ts'
 import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
+import { DirectionService } from '../../services/Direction'
 
 const Directions: FC = () => {
   const theme = useTheme()
-  const [isFetching, setFetching] = useState(false)
+  const [isFetching, setFetching] = useState(true)
   const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(1)
-  const { data } = useDirections(downloadedPages)
-  const [renderList, setRenderList] = useState<{ id: number, name: string }[]>(data?.result || [])
+  const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
   useScrollFetching({ setFetching, isSearchMode })
 
   useEffect(() => {
     const downloadData = async () => {
       if (isFetching) {
-        console.log(data, 'fuck')
         document.body.style.cursor = 'wait'
-        // const { data, isSuccess } = await refetch()
+        const { result } = await DirectionService.listDirectionRequest(downloadedPages)
+        console.log(result, 'fuck')
+
         setFetching(false)
-        setRenderList([...renderList, ...data?.result || []])
-        if (data?.result.length !== 0) {
+        setRenderList([...renderList, ...result])
+        if (result.length !== 0) {
           setDownloadedPages(downloadedPages + 1)
         }
         document.body.style.cursor = 'default'
