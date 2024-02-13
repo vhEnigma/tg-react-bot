@@ -3,9 +3,10 @@ import { List, ListItemButton, ListItemText } from '@mui/material'
 import { useDirections } from '../../hooks/useDirections.ts'
 import { useScrollFetching } from '../../hooks/useScrollFetching.ts'
 import Search from '../../components/Search'
+import { useTheme } from '@mui/material/styles'
 
 const Directions: FC = () => {
-
+  const theme = useTheme()
   const [isFetching, setFetching] = useState(true)
   const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(0)
@@ -32,7 +33,7 @@ const Directions: FC = () => {
 
   const getDirections = () => {
     return renderList.map(({ id, name }) => {
-      return <ListItemButton key={id} dense sx={{ borderTop: '1px solid #1976d2' }}>
+      return <ListItemButton key={id} dense sx={{ borderTop: `1px solid ${theme.palette.customColors.main}` }}>
         <ListItemText primary={name} />
       </ListItemButton>
     })
