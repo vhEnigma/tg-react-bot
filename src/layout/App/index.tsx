@@ -20,6 +20,7 @@ const App: FC<PropsWithChildren> = () => {
   }, [])
 
   useEffect(() => {
+    console.log(tgUser)
     UserService.loginUserRequest(tgUser)
   }, [tgUser])
 
