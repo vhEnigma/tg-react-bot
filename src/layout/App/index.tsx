@@ -8,6 +8,8 @@ import style from './style.module.css'
 import { RouteList } from '../../routes/routes.ts'
 import AppButton from '../../components/AppButton'
 import { UserService } from '../../services/User'
+import { TokenService } from '../../services/TokenService'
+import { INIT_DATA_KEY } from '../../constants/token.ts'
 
 
 const queryClient = new QueryClient()
@@ -16,9 +18,16 @@ const App: FC<PropsWithChildren> = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    tg.ready()
     console.log(tg.initData)
-    UserService.loginUserRequest(tg.initData)
+    const getToken = async () => {
+      const { token } = await UserService.loginUserRequest(tg.initData)
+      if (token) {
+        localStorage.setItem(INIT_DATA_KEY, tg.initData)
+        TokenService.saveToken(token)
+      }
+    }
+
+    getToken()
   }, [])
 
 
