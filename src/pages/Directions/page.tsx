@@ -38,6 +38,7 @@ const Directions: FC = () => {
     return renderList.map(({ id, name }, index) => {
       console.log(lastIndex, 'lastindex', index, 'index')
       if (index === lastIndex) {
+        console.log('FUCKING SHIT')
         return <ListItemButton ref={lastElementRef} key={id}
                                sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
           <ListItemText primary={name} />
