@@ -1,17 +1,16 @@
 import { FC, useEffect, useState } from 'react'
-import Search from '../../components/Search'
 import { List, ListItemButton, ListItemText } from '@mui/material'
 import { useDirections } from '../../hooks/useDirections.ts'
 import { useScrollFetching } from '../../hooks/useScrollFetching.ts'
-
+import Search from '../../components/Search'
 
 const Directions: FC = () => {
 
   const [isFetching, setFetching] = useState(true)
   const [isSearchMode] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(0)
-  const { refetch } = useDirections(downloadedPages)
-  const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
+  const { refetch, data } = useDirections(downloadedPages)
+  const [renderList, setRenderList] = useState<{ id: number, name: string }[]>(data?.result || [])
   useScrollFetching({ setFetching, isSearchMode })
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const Directions: FC = () => {
         const { data, isSuccess } = await refetch()
         if (!isSuccess) return
         setFetching(false)
-        setRenderList([...renderList])
+        setRenderList([...renderList, ...data.result])
         if (data.result.length !== 0) {
           setDownloadedPages(downloadedPages + 1)
         }
@@ -31,16 +30,13 @@ const Directions: FC = () => {
     downloadData()
   }, [isFetching])
 
-  // if (isLoading) return <Loader />
   const getDirections = () => {
-    // if (!isSuccess) return
     return renderList.map(({ id, name }) => {
       return <ListItemButton key={id} dense sx={{ borderTop: '1px solid #1976d2' }}>
         <ListItemText primary={name} />
       </ListItemButton>
     })
   }
-
 
   return <>
     <Search />

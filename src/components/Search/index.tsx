@@ -1,6 +1,10 @@
-import { lazy } from 'react'
+import { FC } from 'react'
+import { TextField } from '@mui/material'
 
-
-const Search = lazy(() => import('./page.tsx'))
+const Search: FC = () => {
+  return <>
+    <TextField sx={{ mt: 2 }} fullWidth id="outlined-basic" label="Поиск" variant="outlined" />
+  </>
+}
 
 export default Search

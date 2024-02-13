@@ -18,7 +18,6 @@ export const useScrollFetching = (props: useScrollFetchingProps) => {
     const isBottomPage = visiblePart + scrollFromTop >= fullHeightWithScroll
 
     if (isBottomPage && !isSearchMode) {
-      console.log('fuck')
       setFetching(true)
     }
 
