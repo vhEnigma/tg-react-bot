@@ -9,7 +9,7 @@ const Directions: FC = () => {
   const theme = useTheme()
   const [isFetching, setFetching] = useState(true)
   const [downloadedPages, setDownloadedPages] = useState(1)
-  const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
+  const [renderList, setRenderList] = useState<{ id: number, name: string, title: string }[]>([])
   const lastElementRef = useRef(null)
 
   const fetchList = useCallback(async () => {
@@ -35,7 +35,7 @@ const Directions: FC = () => {
 
   const getDirections = () => {
     const lastIndex = renderList.length - 1
-    return renderList.map(({ id, name }, index) => {
+    return renderList.map(({ id, title:name }, index) => {
       if (index === lastIndex) {
         return <ListItemButton ref={lastElementRef} key={id}
                                sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
