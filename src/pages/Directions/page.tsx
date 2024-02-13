@@ -19,6 +19,10 @@ const Directions: FC = () => {
     setRenderList([...renderList, ...result])
 
     if (result.length === 0) {
+      if (lastElementRef.current) {
+        lastElementRef.current.remove()
+      }
+      console.log(lastElementRef.current)
       return
     }
 
@@ -38,7 +42,7 @@ const Directions: FC = () => {
     return renderList.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
       console.log(lastIndex, 'lastindex', index, 'index')
-      const div = isLastElement ? <div ref={lastElementRef} /> : null
+      const div = isLastElement ? <div style={{height: '1px', opacity: 0}} ref={lastElementRef} /> : null
       // if (index === lastIndex) {
       //   console.log('FUCKING SHIT')
       //   return <ListItemButton ref={lastElementRef} key={id}
