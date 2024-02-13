@@ -15,18 +15,23 @@ const Directions: FC = () => {
   const lastElementRef = useRef<HTMLDivElement>(null)
   console.log(inView, 'inView')
 
-  useEffect(() => {
-    const fetchList = async () => {
-      const { result } = await DirectionService.listDirectionRequest(downloadedPages)
-      console.log('fetch list', result, 'result', renderList, 'renderList')
-      setRenderList([...renderList, ...result, ...result])
+  const fetchList = async () => {
+    const { result } = await DirectionService.listDirectionRequest(downloadedPages)
+    console.log('fetch list', result, 'result', renderList, 'renderList')
+    setRenderList([...renderList, ...result, ...result])
 
-      if (result.length === 0) {
-        return
-      }
-
-      setDownloadedPages(downloadedPages + 1)
+    if (result.length === 0) {
+      return
     }
+
+    setDownloadedPages(downloadedPages + 1)
+  }
+
+  useEffect(() => {
+    fetchList()
+  }, []);
+
+  useEffect(() => {
     if (inView) {
       fetchList()
     }
@@ -38,7 +43,7 @@ const Directions: FC = () => {
       if (isLastElement) {
         console.log('FUCKING SHIT', lastIndex, 'lastindex', index, 'index')
         return <ListItemButton ref={ref} key={id}
-                               sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
+                               sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}`, opacity: `${inView ? 0.5 : 1}` }}>
           <ListItemText primary={name} />
         </ListItemButton>
       }
