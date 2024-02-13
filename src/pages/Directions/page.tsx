@@ -8,7 +8,7 @@ import {useInView} from "react-intersection-observer";
 const Directions: FC = () => {
   const { ref, inView } = useInView({
     /* Optional options */
-    threshold: 0,
+    threshold: 0.1,
   });
   const theme = useTheme()
   const [isFetching, setFetching] = useState(true)
