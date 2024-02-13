@@ -26,6 +26,8 @@ const useInfinityObserver = (elementRef: RefObject<HTMLElement>, callback: (obse
       setObserver(observer)
       observer.unobserve(entry.target)
     }
+  }, {
+    rootMargin: '50px 0 0 0'
   })
 
   useEffect(() => {
