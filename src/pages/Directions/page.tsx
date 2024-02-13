@@ -9,7 +9,7 @@ const Directions: FC = () => {
   const theme = useTheme()
   const [isFetching, setFetching] = useState(true)
   const [isSearchMode] = useState(false)
-  const [downloadedPages, setDownloadedPages] = useState(0)
+  const [downloadedPages, setDownloadedPages] = useState(1)
   const { data } = useDirections(downloadedPages)
   const [renderList, setRenderList] = useState<{ id: number, name: string }[]>(data?.result || [])
   useScrollFetching({ setFetching, isSearchMode })
