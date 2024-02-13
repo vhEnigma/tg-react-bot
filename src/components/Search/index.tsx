@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles'
 const Search: FC = () => {
   const theme = useTheme()
   return <>
-    <TextField sx={{ mt: 2, borderColor: theme.palette.customColors.bgColor.main }} fullWidth id="outlined-basic"
+    <TextField sx={{ mt: 2, borderColor: theme.palette.customColors.bgColor }} fullWidth id="outlined-basic"
                label="Поиск" variant="outlined" />
   </>
 }
