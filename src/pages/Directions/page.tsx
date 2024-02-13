@@ -36,6 +36,7 @@ const Directions: FC = () => {
   const getDirections = () => {
     const lastIndex = renderList.length - 1
     return renderList.map(({ id, name }, index) => {
+      console.log(lastIndex, 'lastindex', index, 'index')
       if (index === lastIndex) {
         return <ListItemButton ref={lastElementRef} key={id}
                                sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}` }}>
