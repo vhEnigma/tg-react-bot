@@ -21,16 +21,10 @@ const App: FC<PropsWithChildren> = () => {
       const { token } = await UserService.loginUserRequest(tg.initData)
       if (token) {
         TokenService.saveToken(token)
-        TokenService.saveUserData(tg.initData)
       }
     }
     getToken()
   }, [])
-
-
-  // const handleClose = () => {
-  //   tg.close()
-  // }
 
   const handleMain = () => {
     navigate(RouteList.Root)

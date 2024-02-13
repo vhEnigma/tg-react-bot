@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { USER_DATA_KEY, TOKEN_KEY } from '../../constants/token.ts'
+import { TOKEN_KEY } from '../../constants/token.ts'
 import { UserService } from '../User'
 import { TokenService } from '../TokenService'
 
@@ -21,10 +21,14 @@ axiosInstance.interceptors.request.use(config => {
 axiosInstance.interceptors.response.use(config => config,
   async error => {
     const originalRequest = error.config
+    if (error.response.status === 403) {
+      window.Telegram.WebApp.close()
+      TokenService.removeToken()
+    }
     if (error.response.status === 401 && error.config && !error.config._isRetry) {
       originalRequest._isRetry = true
       try {
-        const initData = localStorage.getItem(USER_DATA_KEY)
+        const { initData } = window.Telegram.WebApp
         if (initData) {
           const { token } = await UserService.loginUserRequest(initData)
           TokenService.saveToken(token)
