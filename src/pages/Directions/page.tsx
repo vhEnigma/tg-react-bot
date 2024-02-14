@@ -6,6 +6,7 @@ import { DirectionService } from '../../services/Direction'
 import {useInView} from "react-intersection-observer";
 import useDebounce from "../../hooks/useDebounce.ts";
 import Loader from "../../components/Loader";
+import style from './style.module.css'
 
 type ItemsType = {
   id: number, name: string
@@ -84,7 +85,7 @@ const Directions: FC = () => {
   console.log(isSearch, getDirections())
   return <>
     <Search value={searchValue} setValue={setSearchValue}/>
-    <div>
+    <div className={style.container}>
       <Loader />
 
       {/*<List component="div" aria-label="secondary mailbox folder">*/}
