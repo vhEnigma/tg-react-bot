@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react'
-import { List, ListItemButton, ListItemText } from '@mui/material'
+import {List, ListItemButton, ListItemText, Typography} from '@mui/material'
 import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
 import { DirectionService } from '../../services/Direction'
@@ -20,6 +20,7 @@ const Directions: FC = () => {
   const [renderList, setRenderList] = useState<ItemsType[]>([])
   const [searchList, setSearchList] = useState<ItemsType[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
+  const [isSearch, setSearch] = useState(false)
   const debouncedSearchValue = useDebounce(searchValue, 300);
 
   const fetchList = async () => {
@@ -47,6 +48,7 @@ const Directions: FC = () => {
 
   useEffect(() => {
     const findValues = async () => {
+      setSearch(true)
       const {result} = await DirectionService.listDirectionRequest({searchValue: debouncedSearchValue, pageSize: 1000})
       setSearchList(result)
     }
@@ -55,6 +57,8 @@ const Directions: FC = () => {
     } else {
       setSearchList(null)
     }
+
+    setSearch(false)
 
   }, [debouncedSearchValue]);
   const getDirections = () => {
@@ -80,7 +84,9 @@ const Directions: FC = () => {
   return <>
     <Search value={searchValue} setValue={setSearchValue}/>
     <List component="nav" aria-label="secondary mailbox folder">
-      {getDirections()}
+      {isSearch ? <Typography component='p'>
+        Поиск...
+      </Typography> : getDirections()}
     </List>
   </>
 }
