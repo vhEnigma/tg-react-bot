@@ -42,7 +42,7 @@ export const Navigation: FC = () => {
         component={Link}
         to={tab.route}
         sx={{
-          '& .Mui-selected': { color: 'secondary' },
+          '& .Mui-selected': { color: 'primary' },
           color: button_text_color
         }}
         label={tab.label}
