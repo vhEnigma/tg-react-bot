@@ -46,7 +46,7 @@ export class DirectionService {
 
     const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url)
     // const { data: response } = await axiosInstance.get(url.toString())
-    return {result: response}
+    return response
   }
 
 }
