@@ -31,7 +31,7 @@ const tabsConfig = [
 ]
 
 export const Navigation: FC = () => {
-  const {button_text_color, button_color, link_color} = useTgTheme()
+  const {text_color, bg_color} = useTgTheme()
 
   const [value, setValue] = useState(0)
 
@@ -42,8 +42,8 @@ export const Navigation: FC = () => {
         component={Link}
         to={tab.route}
         sx={{
-          '& .Mui-selected': { color: link_color },
-          color: button_text_color
+          '& .Mui-selected': { color: 'primary' },
+          color: text_color
         }}
         label={tab.label}
         icon={<tab.IconComponent />}
@@ -56,7 +56,7 @@ export const Navigation: FC = () => {
       <BottomNavigation
         component={'nav'}
         showLabels
-        sx={{ backgroundColor: button_color }}
+        sx={{ backgroundColor: bg_color }}
         value={value}
         onChange={(_, newValue) => {
           setValue(newValue)
