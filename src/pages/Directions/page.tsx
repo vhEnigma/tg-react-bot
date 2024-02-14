@@ -51,6 +51,7 @@ const Directions: FC = () => {
       setSearch(true)
       const {result} = await DirectionService.listDirectionRequest({searchValue: debouncedSearchValue, pageSize: 1000})
       setSearchList(result)
+      setSearch(false)
     }
     if (debouncedSearchValue) {
       findValues()
@@ -58,7 +59,6 @@ const Directions: FC = () => {
       setSearchList(null)
     }
 
-    setSearch(false)
 
   }, [debouncedSearchValue]);
   const getDirections = () => {
