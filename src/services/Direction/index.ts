@@ -33,7 +33,7 @@ export class DirectionService {
       searchParams.append('page', `${page}`);
     }
 
-    url+= searchParams.toString();
+    url+= `?${searchParams.toString()}`;
 
     console.log(url, 'url', url.toString(), 'fuck')
     const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url.toString())
