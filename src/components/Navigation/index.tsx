@@ -54,10 +54,8 @@ export const Navigation: FC = () => {
   return (
     <Paper
       sx={{
-        position: 'fixed',
+        position: 'sticky',
         bottom: 0,
-        left: 0,
-        right: 0
       }}>
       <BottomNavigation
         component={'nav'}
