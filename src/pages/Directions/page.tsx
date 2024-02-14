@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react'
-import {ListItemButton, ListItemText} from '@mui/material'
+import {List, ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
 import { DirectionService } from '../../services/Direction'
@@ -82,14 +82,12 @@ const Directions: FC = () => {
 
     })
   }
-  console.log(isSearch, getDirections())
   return <>
     <Search value={searchValue} setValue={setSearchValue}/>
     <div className={style.container}>
-      <Loader />
-
-      {/*<List component="div" aria-label="secondary mailbox folder">*/}
-      {/*</List>*/}
+      {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
+        {getDirections()}
+      </List>}
     </div>
   </>
 }
