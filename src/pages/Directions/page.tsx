@@ -6,6 +6,10 @@ import { DirectionService } from '../../services/Direction'
 import {useInView} from "react-intersection-observer";
 import useDebounce from "../../hooks/useDebounce.ts";
 
+type ItemsType = {
+  id: number, name: string
+}
+
 const Directions: FC = () => {
   const { ref, inView } = useInView({
     threshold: 0,
@@ -13,7 +17,8 @@ const Directions: FC = () => {
   const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
   const theme = useTheme()
   const [downloadedPages, setDownloadedPages] = useState(1)
-  const [renderList, setRenderList] = useState<{ id: number, name: string }[]>([])
+  const [renderList, setRenderList] = useState<ItemsType[]>([])
+  const [searchList, setSearchList] = useState<ItemsType[]>([])
   const [searchValue, setSearchValue] = useState('')
   const debouncedSearchValue = useDebounce(searchValue, 300);
 
@@ -41,11 +46,21 @@ const Directions: FC = () => {
   }, [inView])
 
   useEffect(() => {
-    console.log(debouncedSearchValue, 'call')
+    const findValues = async () => {
+      const {result} = await DirectionService.listDirectionRequest({searchValue: debouncedSearchValue, pageSize: 1000})
+      setSearchList(result)
+    }
+    if (debouncedSearchValue) {
+      findValues()
+    } else {
+      setSearchList([])
+    }
+
   }, [debouncedSearchValue]);
   const getDirections = () => {
-    const lastIndex = renderList.length - 1
-    return renderList.map(({ id, name }, index) => {
+    const array = searchList.length > 0 ? searchList : renderList
+    const lastIndex = array.length - 1
+    return array.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
       const opacity = inView && !isStopInfinityScroll ? 0.5 : 1
       if (isLastElement) {

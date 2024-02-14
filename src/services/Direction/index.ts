@@ -14,38 +14,27 @@ type ListDirectionsResponseType = {
 type ParamsListDirectionsRequest = {
   searchValue?: string
   page?: number
+  pageSize?: number
 }
 
 export class DirectionService {
   static async listDirectionRequest(params:ParamsListDirectionsRequest) {
-    const {page} = params
-    //
-    // const url = new URL('https://jsonplaceholder.typicode.com/users');
-    // const searchParams = new URLSearchParams();
-    // console.log(url)
-    // if (searchValue) {
-    //   searchParams.append('search', searchValue);
-    // }
-    //
-    // if (page) {
-    //   searchParams.append('page', page.toString());
-    // }
-    //
-    // url.search = searchParams.toString();
-    //
-    // console.log(url, 'URL')
-    // // const pageNumber = page || 1
-    // count++
-    //
-    // if (count === 4) {
-    //   return {result: []}
-    // }
+    const {page, searchValue, pageSize = 100} = params
+    const url =  new URL(`${Endpoints.directions}?page=${page}&pageSize=${pageSize}`)
 
-    const url = `${Endpoints.directions}?page=${page}&pageSize=100`
-    // const url = `https://jsonplaceholder.typicode.com/users`
+    const searchParams = new URLSearchParams();
+    if (searchValue) {
+      searchParams.append('search', searchValue);
+    }
 
-    const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url)
-    // const { data: response } = await axiosInstance.get(url.toString())
+    if (page) {
+      searchParams.append('page', `${page}`);
+    }
+
+    url.search = searchParams.toString();
+
+    console.log(url, 'url', url.toString(), 'fuck')
+    const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url.toString())
     return response
   }
 
