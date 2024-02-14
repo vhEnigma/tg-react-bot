@@ -18,7 +18,6 @@ const App: FC<PropsWithChildren> = () => {
 
   useEffect(() => {
     const getToken = async () => {
-      return
       const { token } = await UserService.loginUserRequest(tg.initData)
       if (token) {
         TokenService.saveToken(token)
