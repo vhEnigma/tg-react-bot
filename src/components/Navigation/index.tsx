@@ -4,7 +4,7 @@ import CorporateFareRounded from '@mui/icons-material/CorporateFareRounded'
 import GroupRounded from '@mui/icons-material/GroupRounded'
 import HomeRounded from '@mui/icons-material/HomeRounded'
 import { Paper } from '@mui/material'
-import { Link } from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import { FC, useState } from 'react'
 import { RouteList } from '../../routes/routes.ts'
 import useTgTheme from "../../hooks/useTgTheme.ts";
@@ -30,9 +30,16 @@ const tabsConfig = [
   }
 ]
 
+const valuesMap = {
+  0: RouteList.Root,
+  1: RouteList.Directions,
+  2: RouteList.Technology,
+}
+
 export const Navigation: FC = () => {
   const {text_color, bg_color} = useTgTheme()
-
+  const {pathname} = useLocation()
+  console.log(pathname, valuesMap)
   const [value, setValue] = useState(0)
 
   const getTabs = () => {
