@@ -18,7 +18,7 @@ const Directions: FC = () => {
   const theme = useTheme()
   const [downloadedPages, setDownloadedPages] = useState(1)
   const [renderList, setRenderList] = useState<ItemsType[]>([])
-  const [searchList, setSearchList] = useState<ItemsType[]>([])
+  const [searchList, setSearchList] = useState<ItemsType[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
   const debouncedSearchValue = useDebounce(searchValue, 300);
 
@@ -53,12 +53,12 @@ const Directions: FC = () => {
     if (debouncedSearchValue) {
       findValues()
     } else {
-      setSearchList([])
+      setSearchList(null)
     }
 
   }, [debouncedSearchValue]);
   const getDirections = () => {
-    const array = searchList.length > 0 ? searchList : renderList
+    const array = searchList ? searchList : renderList
     const lastIndex = array.length - 1
     return array.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
