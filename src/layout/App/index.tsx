@@ -1,6 +1,6 @@
-import { FC, PropsWithChildren, useEffect } from 'react'
+import { FC, PropsWithChildren, Suspense, useEffect } from 'react'
 import { Container } from '@mui/material'
-// import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useTelegram } from '../../hooks/useTelegram.ts'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Loader from '../../components/Loader'
@@ -18,7 +18,6 @@ const App: FC<PropsWithChildren> = () => {
 
   useEffect(() => {
     const getToken = async () => {
-      return
       const { token } = await UserService.loginUserRequest(tg.initData)
       if (token) {
         TokenService.saveToken(token)
@@ -34,10 +33,9 @@ const App: FC<PropsWithChildren> = () => {
       <ThemeProvider theme={theme}>
         <div className={style.container} style={{backgroundColor: theme.palette.customColors.secondary_bg_color.main}}>
           <Container sx={{ paddingBottom: '56px' }}>
-            {/*<Suspense fallback={<Loader />}>*/}
-            {/*  <Outlet />*/}
-            {/*</Suspense>*/}
-            <Loader />
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </Container>
           <Navigation />
         </div>
