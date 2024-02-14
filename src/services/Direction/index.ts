@@ -26,7 +26,7 @@ export class DirectionService {
 
     searchParams.append('pageSize', `${pageSize}`)
     if (searchValue) {
-      searchParams.append('search', searchValue);
+      searchParams.append('q', searchValue);
     }
 
     if (page) {
