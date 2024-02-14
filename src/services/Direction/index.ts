@@ -19,7 +19,7 @@ type ParamsListDirectionsRequest = {
 
 export class DirectionService {
   static async listDirectionRequest(params:ParamsListDirectionsRequest) {
-    const {page, searchValue, pageSize = 100} = params
+    const {page, searchValue, pageSize = 20} = params
     let url =  Endpoints.directions
 
     const searchParams = new URLSearchParams();
