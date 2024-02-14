@@ -1,17 +1,17 @@
 import { axiosInstance } from '../client/httpClient.ts'
 import {Endpoints} from "../client/endpoints.ts";
 
-type DirectionsType = {
+export type ItemsType = {
   id: number
   name: string
 }
 
 type ListDirectionsResponseType = {
   page: number
-  result: DirectionsType[]
+  result: ItemsType[]
 }
 
-type ParamsListDirectionsRequest = {
+export type ParamsListDirectionsRequest = {
   searchValue?: string
   page?: number
   pageSize?: number
@@ -33,10 +33,10 @@ export class DirectionService {
       searchParams.append('page', `${page}`);
     }
 
-    url+= `?${searchParams.toString()}`;
+    url += `?${searchParams.toString()}`;
 
     const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url)
-    return response
+    return response.result
   }
 
 }
