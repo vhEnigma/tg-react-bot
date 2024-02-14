@@ -7,7 +7,7 @@ import Loader from '../../components/Loader'
 import style from './style.module.css'
 import { UserService } from '../../services/User'
 import { TokenService } from '../../services/TokenService'
-import { ThemeProvider } from '@mui/material/styles'
+import {ThemeProvider} from '@mui/material/styles'
 import { createCustomTheme } from '../../utils/theme.ts'
 import { Navigation } from '../../components/Navigation'
 
@@ -32,7 +32,7 @@ const App: FC<PropsWithChildren> = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <div className={style.container}>
+        <div className={style.container} style={{backgroundColor: theme.palette.customColors.secondary_bg_color.main}}>
           <Container sx={{ paddingBottom: '56px' }}>
             <Suspense fallback={<Loader />}>
               <Outlet />
