@@ -32,7 +32,7 @@ const App: FC<PropsWithChildren> = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <div className={style.container} style={{backgroundColor: theme.palette.customColors.secondary_bg_color.main}}>
-          <Container sx={{maxHeight: 'calc(100vh - 56px)', overflow: 'auto'}}>
+          <Container sx={{height: 'calc(100vh - 56px)', overflow: 'auto'}}>
             <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
