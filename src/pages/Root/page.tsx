@@ -3,10 +3,12 @@ import {useTelegram} from "../../hooks/useTelegram.ts";
 import {Box, Typography} from "@mui/material";
 
 const Root: FC = () => {
-  const {tg} = useTelegram()
+  const {user} = useTelegram()
+
+  const title = `${user.first_name} (${user.username})`
   return <Box>
-    <Typography component='h1' sx={{m: '0 auto'}}>
-    {tg.initDataUnsafe.user.first_name}
+    <Typography component='h1' sx={{textAlign: 'center'}}>
+    {title}
   </Typography>
   </Box>
 }
