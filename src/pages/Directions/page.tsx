@@ -84,9 +84,11 @@ const Directions: FC = () => {
 
   return <>
     <Search value={searchValue} setValue={setSearchValue}/>
-    <List component="nav" aria-label="secondary mailbox folder">
-      {isSearch ? <Loader /> : getDirections()}
-    </List>
+    <div style={{height: '100%', position: 'relative'}}>
+      <List component="nav" aria-label="secondary mailbox folder">
+        {isSearch ? <Loader /> : getDirections()}
+      </List>
+    </div>
   </>
 }
 
