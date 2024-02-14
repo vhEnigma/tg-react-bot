@@ -2,16 +2,16 @@ import {FC, useEffect, useState} from 'react'
 import {List, ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
-import {DirectionService, ItemsType, ParamsListDirectionsRequest} from '../../services/Direction'
 import {useInView} from "react-intersection-observer";
 import useDebounce from "../../hooks/useDebounce.ts";
 import Loader from "../../components/Loader";
 import style from './style.module.css'
+import {MenuListType, ParamsMenuListRequest} from "../../types/menuList.ts";
 
 
 
 type DirectionsProps = {
-    callback:(params: ParamsListDirectionsRequest) => Promise<ItemsType[]>
+    callback:(params: ParamsMenuListRequest) => Promise<MenuListType[]>
 }
 
 const MenuList: FC<DirectionsProps> = ({callback}) => {
@@ -21,8 +21,8 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
     const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
     const theme = useTheme()
     const [downloadedPages, setDownloadedPages] = useState(1)
-    const [renderList, setRenderList] = useState<ItemsType[]>([])
-    const [searchList, setSearchList] = useState<ItemsType[] | null>(null)
+    const [renderList, setRenderList] = useState<MenuListType[]>([])
+    const [searchList, setSearchList] = useState<MenuListType[] | null>(null)
     const [searchValue, setSearchValue] = useState('')
     const [isSearch, setSearch] = useState(false)
     const debouncedSearchValue = useDebounce(searchValue, 500);
@@ -53,7 +53,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
     useEffect(() => {
         const findValues = async () => {
             setSearch(true)
-            const response = await DirectionService.listDirectionRequest({searchValue: debouncedSearchValue, pageSize: 1000})
+            const response = await callback({searchValue: debouncedSearchValue, pageSize: 1000})
             setSearchList(response)
             setSearch(false)
         }

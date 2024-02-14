@@ -1,9 +1,11 @@
 import { FC } from 'react'
-import Loader from '../../components/Loader'
+import MenuList from "../../components/MenuList";
+import {TechnologyService} from "../../services/Technology";
 
 
 const Technology: FC = () => {
-  return <Loader />
+  const callback = TechnologyService.listTechnologyRequest
+  return <MenuList callback={callback} />
 }
 
 export default Technology

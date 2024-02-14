@@ -1,24 +1,10 @@
 import { axiosInstance } from '../client/httpClient.ts'
 import {Endpoints} from "../client/endpoints.ts";
+import {MenuListResponseType, ParamsMenuListRequest} from "../../types/menuList.ts";
 
-export type ItemsType = {
-  id: number
-  name: string
-}
-
-type ListDirectionsResponseType = {
-  page: number
-  result: ItemsType[]
-}
-
-export type ParamsListDirectionsRequest = {
-  searchValue?: string
-  page?: number
-  pageSize?: number
-}
 
 export class DirectionService {
-  static async listDirectionRequest(params:ParamsListDirectionsRequest) {
+  static async listDirectionRequest(params:ParamsMenuListRequest) {
     const {page, searchValue, pageSize = 20} = params
     let url =  Endpoints.directions
 
@@ -35,7 +21,7 @@ export class DirectionService {
 
     url += `?${searchParams.toString()}`;
 
-    const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url)
+    const { data: response } = await axiosInstance.get<MenuListResponseType>(url)
     return response.result
   }
 
