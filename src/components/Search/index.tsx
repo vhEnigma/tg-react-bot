@@ -8,16 +8,14 @@ type SearchProps = {
 }
 
 const Search: FC<SearchProps> = ({value, setValue}) => {
-  const theme = useTheme()
+  const {palette:{customColors:{bg_color, text_color, section_bg_color}}} = useTheme()
 
   const onChange:ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(event.target.value)
   }
-  const {bg_color, text_color, section_bg_color,} = theme.palette.customColors
-  const color = bg_color.main
 
   return <>
-    <TextField value={value} onChange={onChange} InputLabelProps={{style:{color: text_color.main}}} InputProps={{style:{color: text_color.main, backgroundColor: section_bg_color.main}}} sx={{ mt: 2, borderColor: color, backgroundColor: color }} fullWidth id="outlined-basic"
+    <TextField value={value} onChange={onChange} InputLabelProps={{style:{color: text_color.main}}} InputProps={{style:{color: text_color.main, backgroundColor: section_bg_color.main}}} sx={{ mt: 2, borderColor: bg_color.main, backgroundColor: bg_color.main }} fullWidth id="outlined-basic"
                label="Поиск" variant="outlined" />
   </>
 }
