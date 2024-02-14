@@ -35,8 +35,7 @@ export class DirectionService {
 
     url+= `?${searchParams.toString()}`;
 
-    console.log(url, 'url', url.toString(), 'fuck')
-    const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url.toString())
+    const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url)
     return response
   }
 
