@@ -17,7 +17,7 @@ const Search: FC<SearchProps> = ({value, setValue}) => {
   const color = theme.palette.customColors.bg_color.main
 
   return <>
-    <TextField value={value} onChange={onChange} sx={{ mt: 2, borderColor: color, color: color }} fullWidth id="outlined-basic"
+    <TextField value={value} onChange={onChange} inputProps={{color}} sx={{ mt: 2, borderColor: color, color: color }} fullWidth id="outlined-basic"
                label="Поиск" variant="outlined" />
   </>
 }
