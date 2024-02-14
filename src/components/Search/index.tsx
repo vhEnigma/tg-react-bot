@@ -14,12 +14,12 @@ const Search: FC<SearchProps> = ({value, setValue}) => {
     setValue(event.target.value)
   }
 
-  const color = theme.palette.customColors.bgColor.main
+  const color = theme.palette.customColors.bgColor
 
   return <>
     <TextField value={value} InputProps={{
       style: {
-        color: color
+        color: color.main
       }
     }} onChange={onChange} sx={{ mt: 2, borderColor: color, color: color }} fullWidth id="outlined-basic"
                label="Поиск" variant="outlined" />
