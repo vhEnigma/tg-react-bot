@@ -20,7 +20,7 @@ type ParamsListDirectionsRequest = {
 export class DirectionService {
   static async listDirectionRequest(params:ParamsListDirectionsRequest) {
     const {page, searchValue, pageSize = 100} = params
-    const url =  new URL(Endpoints.directions)
+    let url =  Endpoints.directions
 
     const searchParams = new URLSearchParams();
 
@@ -33,7 +33,7 @@ export class DirectionService {
       searchParams.append('page', `${page}`);
     }
 
-    url.search = searchParams.toString();
+    url+= searchParams.toString();
 
     console.log(url, 'url', url.toString(), 'fuck')
     const { data: response } = await axiosInstance.get<ListDirectionsResponseType>(url.toString())
