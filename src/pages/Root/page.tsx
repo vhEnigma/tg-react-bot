@@ -7,7 +7,7 @@ const Root: FC = () => {
 
   const title = `${user.first_name} (${user.username})`
   return <Box>
-    <Typography component='h1' sx={{textAlign: 'center'}}>
+    <Typography component='h1' sx={{margin: '20px 0', textAlign: 'center'}}>
     {title}
   </Typography>
   </Box>
