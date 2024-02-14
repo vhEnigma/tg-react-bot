@@ -17,7 +17,7 @@ const Search: FC<SearchProps> = ({value, setValue}) => {
   const color = theme.palette.customColors.bg_color.main
 
   return <>
-    <TextField value={value} onChange={onChange} InputProps={{style:{color: theme.palette.customColors.text_color.main, backgroundColor: theme.palette.customColors.section_bg_color.main}}} sx={{ mt: 2, borderColor: color, backgroundColor: color }} fullWidth id="outlined-basic"
+    <TextField value={value} onChange={onChange} InputLabelProps={{style:{color: theme.palette.customColors.text_color.main}}} InputProps={{style:{color: theme.palette.customColors.text_color.main, backgroundColor: theme.palette.customColors.section_bg_color.main}}} sx={{ mt: 2, borderColor: color, backgroundColor: color }} fullWidth id="outlined-basic"
                label="Поиск" variant="outlined" />
   </>
 }
