@@ -1,10 +1,11 @@
 import {FC, useEffect, useState} from 'react'
-import {List, ListItemButton, ListItemText, Typography} from '@mui/material'
+import {List, ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
 import { DirectionService } from '../../services/Direction'
 import {useInView} from "react-intersection-observer";
 import useDebounce from "../../hooks/useDebounce.ts";
+import Loader from "../../components/Loader";
 
 type ItemsType = {
   id: number, name: string
@@ -21,7 +22,7 @@ const Directions: FC = () => {
   const [searchList, setSearchList] = useState<ItemsType[] | null>(null)
   const [searchValue, setSearchValue] = useState('')
   const [isSearch, setSearch] = useState(false)
-  const debouncedSearchValue = useDebounce(searchValue, 300);
+  const debouncedSearchValue = useDebounce(searchValue, 500);
 
   const fetchList = async () => {
 
@@ -84,9 +85,7 @@ const Directions: FC = () => {
   return <>
     <Search value={searchValue} setValue={setSearchValue}/>
     <List component="nav" aria-label="secondary mailbox folder">
-      {isSearch ? <Typography component='p'>
-        Поиск...
-      </Typography> : getDirections()}
+      {isSearch ? <Loader /> : getDirections()}
     </List>
   </>
 }
