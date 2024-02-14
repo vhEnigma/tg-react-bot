@@ -1,12 +1,12 @@
 import {FC, useEffect, useState} from 'react'
-import {List, ListItemButton, ListItemText} from '@mui/material'
+import {Box, List, ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
-import { useTheme } from '@mui/material/styles'
 import {useInView} from "react-intersection-observer";
 import useDebounce from "../../hooks/useDebounce.ts";
 import Loader from "../../components/Loader";
 import style from './style.module.css'
 import {MenuListType, ParamsMenuListRequest} from "../../types/menuList.ts";
+import useTgTheme from "../../hooks/useTgTheme.ts";
 
 
 
@@ -19,7 +19,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
         threshold: 0,
     });
     const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
-    const theme = useTheme()
+    const {button_color, } = useTgTheme()
     const [downloadedPages, setDownloadedPages] = useState(1)
     const [renderList, setRenderList] = useState<MenuListType[]>([])
     const [searchList, setSearchList] = useState<MenuListType[] | null>(null)
@@ -73,12 +73,12 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
             const opacity = inView && !isStopInfinityScroll ? 0.5 : 1
             if (isLastElement) {
                 return <ListItemButton ref={ref} key={id}
-                sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}`, opacity }}>
+                sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
                 <ListItemText primary={name} />
                 </ListItemButton>
             }
             return <ListItemButton key={id}
-            sx={{ borderTop: `1px solid ${theme.palette.customColors.button_color.main}`, opacity }}>
+            sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
             <ListItemText primary={name} />
             </ListItemButton>
 
@@ -86,11 +86,11 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
     }
     return <>
         <Search value={searchValue} setValue={setSearchValue}/>
-        <div className={style.container}>
+        <Box className={style.container}>
         {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
             {getDirections()}
         </List>}
-        </div>
+        </Box>
     </>
 }
 

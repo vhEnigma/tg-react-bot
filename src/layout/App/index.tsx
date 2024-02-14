@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, Suspense, useEffect } from 'react'
-import { Container } from '@mui/material'
+import {Box, Container} from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import { useTelegram } from '../../hooks/useTelegram.ts'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -31,14 +31,14 @@ const App: FC<PropsWithChildren> = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <div className={style.container} style={{backgroundColor: theme.palette.customColors.secondary_bg_color.main}}>
+        <Box className={style.container} style={{backgroundColor: theme.palette.customColors.secondary_bg_color.main}}>
           <Container sx={{height: 'calc(100vh - 56px)', overflow: 'auto'}}>
             <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
           </Container>
           <Navigation />
-        </div>
+        </Box>
       </ThemeProvider>
     </QueryClientProvider>
   )

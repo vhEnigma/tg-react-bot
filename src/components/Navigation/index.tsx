@@ -4,10 +4,10 @@ import CorporateFareRounded from '@mui/icons-material/CorporateFareRounded'
 import GroupRounded from '@mui/icons-material/GroupRounded'
 import HomeRounded from '@mui/icons-material/HomeRounded'
 import { Paper } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 import { Link } from 'react-router-dom'
 import { FC, useState } from 'react'
 import { RouteList } from '../../routes/routes.ts'
+import useTgTheme from "../../hooks/useTgTheme.ts";
 
 const tabsConfig = [
   {
@@ -31,7 +31,7 @@ const tabsConfig = [
 ]
 
 export const Navigation: FC = () => {
-  const theme = useTheme()
+  const {button_text_color, button_color} = useTgTheme()
 
   const [value, setValue] = useState(0)
 
@@ -43,7 +43,7 @@ export const Navigation: FC = () => {
         to={tab.route}
         sx={{
           '& .Mui-selected': { color: 'primary' },
-          color: theme.palette.customColors.text_color.main
+          color: button_text_color
         }}
         label={tab.label}
         icon={<tab.IconComponent />}
@@ -56,7 +56,7 @@ export const Navigation: FC = () => {
       <BottomNavigation
         component={'nav'}
         showLabels
-        sx={{ backgroundColor: theme.palette.customColors.bg_color.main }}
+        sx={{ backgroundColor: button_color }}
         value={value}
         onChange={(_, newValue) => {
           setValue(newValue)
