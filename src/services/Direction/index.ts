@@ -20,9 +20,11 @@ type ParamsListDirectionsRequest = {
 export class DirectionService {
   static async listDirectionRequest(params:ParamsListDirectionsRequest) {
     const {page, searchValue, pageSize = 100} = params
-    const url =  new URL(`${Endpoints.directions}?page=${page}&pageSize=${pageSize}`)
+    const url =  new URL(Endpoints.directions)
 
     const searchParams = new URLSearchParams();
+
+    searchParams.append('pageSize', `${pageSize}`)
     if (searchValue) {
       searchParams.append('search', searchValue);
     }
