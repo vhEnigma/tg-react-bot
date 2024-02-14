@@ -1,6 +1,6 @@
 import {ChangeEventHandler, Dispatch, FC, SetStateAction} from 'react'
 import {TextField} from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import useTgTheme from "../../hooks/useTgTheme.ts";
 
 type SearchProps = {
   value: string
@@ -8,14 +8,14 @@ type SearchProps = {
 }
 
 const Search: FC<SearchProps> = ({value, setValue}) => {
-  const {palette:{customColors:{bg_color, text_color, section_bg_color}}} = useTheme()
+  const {bg_color, text_color, section_bg_color} = useTgTheme()
 
   const onChange:ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(event.target.value)
   }
 
   return <>
-    <TextField value={value} onChange={onChange} InputLabelProps={{style:{color: text_color.main}}} InputProps={{style:{color: text_color.main, backgroundColor: section_bg_color.main}}} sx={{ mt: 2, borderColor: bg_color.main, backgroundColor: bg_color.main }} fullWidth id="outlined-basic"
+    <TextField value={value} onChange={onChange} InputLabelProps={{style:{color: text_color}}} InputProps={{style:{color: text_color, backgroundColor: section_bg_color}}} sx={{ mt: 2, borderColor: bg_color, backgroundColor: bg_color }} fullWidth id="outlined-basic"
                label="Поиск" variant="outlined" />
   </>
 }
