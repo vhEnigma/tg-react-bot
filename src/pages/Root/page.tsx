@@ -1,11 +1,12 @@
 import { FC } from 'react'
+import {useTelegram} from "../../hooks/useTelegram.ts";
 
 type RootProps = {}
 
 const Root: FC<RootProps> = () => {
-
+  const {tg} = useTelegram()
   return <>
-    Root
+    {tg.initDataUnsafe.user.first_name}
   </>
 }
 
