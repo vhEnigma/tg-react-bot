@@ -52,11 +52,7 @@ export const Navigation: FC = () => {
   }
 
   return (
-    <Paper
-      sx={{
-        position: 'sticky',
-        bottom: 0,
-      }}>
+    <Paper>
       <BottomNavigation
         component={'nav'}
         showLabels
