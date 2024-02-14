@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react'
-import {List, ListItemButton, ListItemText} from '@mui/material'
+import {ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
 import { DirectionService } from '../../services/Direction'
@@ -85,9 +85,10 @@ const Directions: FC = () => {
   return <>
     <Search value={searchValue} setValue={setSearchValue}/>
     <div>
-      <List component="nav" aria-label="secondary mailbox folder">
-        <Loader />
-      </List>
+      <Loader />
+
+      {/*<List component="div" aria-label="secondary mailbox folder">*/}
+      {/*</List>*/}
     </div>
   </>
 }
