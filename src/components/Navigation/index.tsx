@@ -30,17 +30,16 @@ const tabsConfig = [
   }
 ]
 
-const valuesMap = {
-  0: RouteList.Root,
-  1: RouteList.Directions,
-  2: RouteList.Technology,
+const valuesMap:Record<string, number> = {
+  [RouteList.Root]: 0,
+  [RouteList.Directions]: 1,
+  [RouteList.Technology]: 2,
 }
 
 export const Navigation: FC = () => {
   const {text_color, bg_color} = useTgTheme()
   const {pathname} = useLocation()
-  console.log(pathname, valuesMap)
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(valuesMap[pathname.slice(1)])
 
   const getTabs = () => {
     return tabsConfig.map((tab) => (
