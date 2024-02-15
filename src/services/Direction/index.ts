@@ -26,7 +26,7 @@ export class DirectionService {
   }
 
   static async getDirectionRequest (id: string) {
-    const url = `${Endpoints.directions}/${id}`
+    const url = `${Endpoints.directions}/${id}/courses`
 
     const { data: response } = await axiosInstance.get(url)
     console.log(response)
