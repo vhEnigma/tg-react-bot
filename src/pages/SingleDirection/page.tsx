@@ -65,7 +65,7 @@ const SingleDirection: FC = () => {
   }
 
   return <Box>
-    <Typography component='h1' sx={{color: text_color, textAlign: 'center', mt: '20px', textTransform: 'uppercase'}}>{title}</Typography>
+    <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
     <Container sx={{display: 'flex', justifyContent: 'space-between', gap: '50px'}}>
       {renderTabs()}
     </Container>
