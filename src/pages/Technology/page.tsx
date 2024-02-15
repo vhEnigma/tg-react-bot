@@ -1,11 +1,13 @@
 import { FC } from 'react'
 import MenuList from "../../components/MenuList";
 import {TechnologyService} from "../../services/Technology";
+import {RouteList} from "../../routes/routes.ts";
 
 
 const Technology: FC = () => {
   const callback = TechnologyService.listTechnologyRequest
-  return <MenuList callback={callback} />
+  const route = RouteList.Technology
+  return <MenuList route={route} callback={callback} />
 }
 
 export default Technology

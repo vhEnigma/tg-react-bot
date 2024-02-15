@@ -5,18 +5,19 @@ import {useInView} from "react-intersection-observer";
 import useDebounce from "../../hooks/useDebounce.ts";
 import Loader from "../../components/Loader";
 import style from './style.module.css'
-import {MenuListType, ParamsMenuListRequest} from "../../types/menuList.ts";
+import {MenuListType} from "../../types/menuList.ts";
 import useTgTheme from "../../hooks/useTgTheme.ts";
 import {useNavigate} from "react-router-dom";
-import {RouteList} from "../../routes/routes.ts";
+import {IParams} from "../../types/params.ts";
 
 
 
 type DirectionsProps = {
-    callback:(params: ParamsMenuListRequest) => Promise<MenuListType[]>
+    callback:(params: IParams) => Promise<MenuListType[]>
+    route: string
 }
 
-const MenuList: FC<DirectionsProps> = ({callback}) => {
+const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     const { ref, inView } = useInView({
         threshold: 0,
     });
@@ -56,7 +57,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
     useEffect(() => {
         const findValues = async () => {
             setSearch(true)
-            const response = await callback({searchValue: debouncedSearchValue, pageSize: 1000})
+            const response = await callback({q: debouncedSearchValue, pageSize: 1000})
             setSearchList(response)
             setSearch(false)
         }
@@ -70,8 +71,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
     }, [debouncedSearchValue]);
 
     const openItemHandle = (id: number) => {
-        console.log(id, 'id')
-        navigate(`/${RouteList.Directions}/${id}`)
+        navigate(`/${route}/${id}`)
     }
     const getDirections = () => {
         const array = searchList ? searchList : renderList
