@@ -72,10 +72,13 @@ const SingleDirection: FC = () => {
     <Search value={searchValue} setValue={setSearchValue} />
     <Box>
       <List component="div" aria-label="secondary mailbox folder">
-      <ListItemButton sx={{ borderTop: `1px solid ${button_color}` }}>
+      <ListItemButton sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
         <ListItemText primary={'article'} />
         <ListItemIcon>
-          <InboxIcon />
+          <Box sx={{display: 'flex', gap: '10px'}}>
+            <Typography>fsdfsdfds</Typography>
+            <InboxIcon />
+          </Box>
         </ListItemIcon>
       </ListItemButton>
       </List>
