@@ -76,7 +76,7 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     }
     const getDirections = () => {
         const array = searchList ? searchList : renderList
-        if (array.length === 0) {
+        if (Array.isArray(searchList) && searchList.length === 0) {
             return <Typography component='p' sx={{color: text_color}}>Ничего не найдено.</Typography>
         }
         const lastIndex = array.length - 1
