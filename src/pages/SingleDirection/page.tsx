@@ -38,7 +38,7 @@ const SingleDirection: FC = () => {
       if (id) {
         const {name} = await DirectionService.getDirectionInfoRequest(id)
         const {result} = await DirectionService.getArticleListByDirectionRequest({id})
-        // await DirectionService.getTestListByDirectionRequest({id})
+        await DirectionService.getTestListByDirectionRequest({id})
         setTitle(name)
         setArticleList(result)
       }
