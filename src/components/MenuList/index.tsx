@@ -71,7 +71,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
 
     const openItemHandle = (id: number) => {
         console.log(id, 'id')
-        navigate(`${RouteList.Directions}/${id}`)
+        navigate(`/${RouteList.Directions}/${id}`)
     }
     const getDirections = () => {
         const array = searchList ? searchList : renderList
