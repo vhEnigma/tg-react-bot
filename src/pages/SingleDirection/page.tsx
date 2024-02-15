@@ -6,7 +6,8 @@ import {Box, Button, Container, List, ListItemButton, ListItemIcon, ListItemText
 import Loader from "../../components/Loader";
 import Search from "../../components/Search";
 import useTgTheme from "../../hooks/useTgTheme.ts";
-import InboxIcon from '@mui/icons-material/Inbox';
+import StarRateIcon from '@mui/icons-material/StarRate';
+import {AccessTime} from "@mui/icons-material";
 
 const tabsConfig = [
   {
@@ -76,8 +77,10 @@ const SingleDirection: FC = () => {
         <ListItemText primary={'article'} />
         <ListItemIcon>
           <Box sx={{display: 'flex', gap: '10px'}}>
-            <Typography>fsdfsdfds</Typography>
-            <InboxIcon />
+            <Typography sx={{color: text_color}}>5 min</Typography>
+            <AccessTime sx={{color: text_color}} />
+            <Typography component='span'> | </Typography>
+            <StarRateIcon sx={{color: 'yellow'}}/>
           </Box>
         </ListItemIcon>
       </ListItemButton>
