@@ -75,10 +75,11 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
         navigate(`/${route}/${id}`)
     }
     const getDirections = () => {
-        const array = searchList ? searchList : renderList
         if (Array.isArray(searchList) && searchList.length === 0) {
-            return <Typography component='p' sx={{textAlign: 'center', color: text_color}}>Ничего не найдено.</Typography>
+            return <Typography component='p' sx={{textAlign: 'center', color: text_color, mt: '10px'}}>Ничего не найдено.</Typography>
         }
+
+        const array = searchList ? searchList : renderList
         const lastIndex = array.length - 1
         return array.map(({ id, name }, index) => {
             const isLastElement = index === lastIndex
