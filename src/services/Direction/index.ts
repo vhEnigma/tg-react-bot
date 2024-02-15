@@ -17,7 +17,7 @@ export class DirectionService {
   static async getDirectionInfoRequest (id:string) {
     const url = `${Endpoints.directions}/${id}`
 
-    const { data: response } = await axiosInstance.get(url)
+    const { data: response } = await axiosInstance.get<MenuListType>(url)
 
     return response
   }
