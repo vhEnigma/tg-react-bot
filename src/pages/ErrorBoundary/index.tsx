@@ -26,7 +26,7 @@ const ErrorBoundary: FC = () => {
     <Typography>
       Что-то пошло не так...
     </Typography>
-    <Button onClick={returnHandle} sx={{ backgroundColor: theme.palette.customColors.bg_color.main }} variant="contained">На
+    <Button onClick={returnHandle} sx={{ backgroundColor: theme.palette.customColors.bg_color }} variant="contained">На
       главную</Button>
   </Container>
 }
