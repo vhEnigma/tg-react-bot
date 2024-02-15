@@ -62,7 +62,7 @@ const SingleDirection: FC = () => {
 
   const renderItems = () => {
     return articleList.map((item) => {
-      const {id, article_link, rating, topic, reading_time} = item
+      const {id, article_link, rating, topic, reading_time, difficulty} = item
         return <ListItemButton onClick={() => openInNewTab(article_link)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
                 <ListItemText primary={topic} />
                 <ListItemIcon>
@@ -70,7 +70,7 @@ const SingleDirection: FC = () => {
                     <Typography sx={{color: text_color}}>{reading_time} мин.</Typography>
                     <AccessTime sx={{color: text_color}} />
                     <Typography sx={{color: text_color}} component='span'> | </Typography>
-                    <Typography sx={{color: text_color}} component='span'> ${rating}/5 </Typography>
+                    <Typography sx={{color: text_color}} component='span'> ${difficulty}/${rating} </Typography>
                     <StarRateIcon sx={{color: 'yellow'}}/>
                   </Box>
                 </ListItemIcon>
