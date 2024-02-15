@@ -70,7 +70,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
         const lastIndex = array.length - 1
         return array.map(({ id, name }, index) => {
             const isLastElement = index === lastIndex
-            const opacity = inView && !isStopInfinityScroll ? 0.5 : 1
+            const opacity = inView && !isStopInfinityScroll ? 0.3 : 1
             if (isLastElement) {
                 return <ListItemButton ref={ref} key={id}
                 sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
