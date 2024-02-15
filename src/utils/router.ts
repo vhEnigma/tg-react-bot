@@ -6,7 +6,8 @@ export const getActiveRoute = (pathname: string) => {
         [RouteList.Directions]: 1,
         [RouteList.Technology]: 2,
     }
-    const key = valuesMap[pathname.slice(1)]
 
-    return key || RouteList.Root
+    const key = pathname.slice(1) || RouteList.Root
+
+    return valuesMap[key]
 }

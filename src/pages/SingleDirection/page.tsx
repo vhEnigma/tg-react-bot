@@ -4,19 +4,19 @@ import {DirectionService} from "../../services/Direction";
 
 
 const SingleDirection: FC = () => {
-  const params = useParams()
+  const {id} = useParams()
 
   useEffect(() => {
     const fetchData = async () => {
-      if (params.id) {
-        await DirectionService.getDirectionRequest(params.id)
+      if (id) {
+        await DirectionService.getDirectionRequest({id})
       }
     }
 
     fetchData()
   }, []);
-  console.log(params)
-  return <div>Single direction ${params.id}</div>
+
+  return <div>Single direction</div>
 }
 
 export default SingleDirection

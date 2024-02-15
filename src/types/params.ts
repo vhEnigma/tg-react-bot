@@ -5,5 +5,5 @@ export interface IParams {
 }
 
 export interface IParamsWithId extends IParams{
-    id: number
+    id: string
 }
