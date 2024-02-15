@@ -85,7 +85,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
                 <ListItemText primary={name} />
                 </ListItemButton>
             }
-            return <ListItemButton key={id}
+            return <ListItemButton onClick={() => openItemHandle(id)} key={id}
             sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
             <ListItemText primary={name} />
             </ListItemButton>
