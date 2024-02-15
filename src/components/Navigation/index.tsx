@@ -8,6 +8,7 @@ import {Link, useLocation} from 'react-router-dom'
 import { FC, useState } from 'react'
 import { RouteList } from '../../routes/routes.ts'
 import useTgTheme from "../../hooks/useTgTheme.ts";
+import {getActiveRoute} from "../../utils/router.ts";
 
 const tabsConfig = [
   {
@@ -30,16 +31,10 @@ const tabsConfig = [
   }
 ]
 
-const valuesMap:Record<string, number> = {
-  [RouteList.Root]: 0,
-  [RouteList.Directions]: 1,
-  [RouteList.Technology]: 2,
-}
-
 export const Navigation: FC = () => {
   const {text_color, bg_color} = useTgTheme()
   const {pathname} = useLocation()
-  const [value, setValue] = useState(valuesMap[pathname.slice(1)])
+  const [value, setValue] = useState(getActiveRoute(pathname))
 
   const getTabs = () => {
     return tabsConfig.map((tab) => (
