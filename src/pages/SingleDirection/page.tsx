@@ -42,7 +42,7 @@ const SingleDirection: FC = () => {
   // }
 
   return <Box>
-    <Typography component='h1' sx={{color: text_color, textAlign: 'center', mt: '20px'}}>{title}</Typography>
+    <Typography component='h1' sx={{color: text_color, textAlign: 'center', mt: '20px', textTransform: 'uppercase'}}>{title}</Typography>
     <Container sx={{display: 'flex', justifyContent: 'space-between'}}>
       <Button sx={{background: button_color, color: button_text_color}} variant="contained">Статьи</Button>
       <Button sx={{background: button_color, color: button_text_color}} variant="contained">Тесты</Button>
