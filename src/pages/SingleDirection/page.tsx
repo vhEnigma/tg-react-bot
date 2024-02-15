@@ -58,8 +58,8 @@ const SingleDirection: FC = () => {
     return tabsConfig.map((options) => {
       const {id, title, key} = options
       const isActive = key === activeTab
-      const backgroundColor = isActive ? bg_color : button_color
-      const color = isActive ? link_color : button_text_color
+      const backgroundColor = isActive ? button_color : bg_color
+      const color = isActive ? button_text_color : link_color
       return <Button key={id} onClick={() => setActiveTab(key)} fullWidth sx={{backgroundColor, color}} variant="contained">{title}</Button>
     })
   }
