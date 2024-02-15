@@ -79,7 +79,8 @@ const SingleDirection: FC = () => {
           <Box sx={{display: 'flex', gap: '10px'}}>
             <Typography sx={{color: text_color}}>5 min</Typography>
             <AccessTime sx={{color: text_color}} />
-            <Typography component='span'> | </Typography>
+            <Typography sx={{color: text_color}} component='span'> | </Typography>
+            <Typography sx={{color: text_color}} component='span'> 4/5 </Typography>
             <StarRateIcon sx={{color: 'yellow'}}/>
           </Box>
         </ListItemIcon>
