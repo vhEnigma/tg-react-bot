@@ -8,6 +8,7 @@ import Search from "../../components/Search";
 import useTgTheme from "../../hooks/useTgTheme.ts";
 import StarRateIcon from '@mui/icons-material/StarRate';
 import {AccessTime} from "@mui/icons-material";
+import {openInNewTab} from "../../utils/common.ts";
 
 const tabsConfig = [
   {
@@ -47,7 +48,7 @@ const SingleDirection: FC = () => {
   }, []);
 
   if (isLoading) return <Loader />
-  console.log(articleList)
+
   const renderTabs = () => {
     return tabsConfig.map((options) => {
       const {id, title, key} = options
@@ -58,19 +59,10 @@ const SingleDirection: FC = () => {
     })
   }
 
-  const openInNewTab = (url: string): void => {
-    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
-    if (newWindow) newWindow.opener = null
-  }
-
-  const openItemHandle = (link: string) => {
-    openInNewTab(link)
-  }
-
   const renderItems = () => {
     return articleList.map((item) => {
       const {id, article_link, rating, topic, reading_time} = item
-        return <ListItemButton onClick={() => openItemHandle(article_link)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
+        return <ListItemButton onClick={() => openInNewTab(article_link)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
                 <ListItemText primary={topic} />
                 <ListItemIcon>
                   <Box sx={{display: 'flex', gap: '10px'}}>
