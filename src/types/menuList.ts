@@ -3,7 +3,19 @@ export type MenuListType = {
     name: string
 }
 
-export type MenuListResponseType = {
+export type ResultResponseType<T> = {
     page: number
-    result: MenuListType[]
+    result: T[]
+}
+
+export type ArticleType = {
+    id: number
+    topic: string
+    author: string
+    reading_time: number
+    article_link: string
+    rating: number
+    difficulty: number
+    technology_id: number
+    direction_id: number
 }

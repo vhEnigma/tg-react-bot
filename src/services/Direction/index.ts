@@ -1,6 +1,6 @@
 import { axiosInstance } from '../client/httpClient.ts'
 import {Endpoints} from "../client/endpoints.ts";
-import {MenuListResponseType} from "../../types/menuList.ts";
+import {ArticleType, MenuListType, ResultResponseType} from "../../types/menuList.ts";
 import {IParams, IParamsWithId} from "../../types/params.ts";
 import {getQueryString} from "../../utils/params.ts";
 
@@ -10,15 +10,23 @@ export class DirectionService {
     const queryString = getQueryString(params)
     const url =  `${Endpoints.directions}${queryString}`
 
-    const { data: response } = await axiosInstance.get<MenuListResponseType>(url)
+    const { data: response } = await axiosInstance.get<ResultResponseType<MenuListType>>(url)
     return response.result
   }
 
-  static async getDirectionRequest (params: IParamsWithId) {
+  static async getDirectionInfoRequest (id:string) {
+    const url = `${Endpoints.directions}/${id}`
+
+    const { data: response } = await axiosInstance.get(url)
+
+    return response
+  }
+
+  static async getArticleListByDirectionRequest (params: IParamsWithId) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.directions}/${params.id}/courses${queryString}`
 
-    const { data: response } = await axiosInstance.get(url)
+    const { data: response } = await axiosInstance.get<ResultResponseType<ArticleType>>(url)
 
     return response
   }

@@ -1,6 +1,6 @@
 import { axiosInstance } from '../client/httpClient.ts'
 import {Endpoints} from "../client/endpoints.ts";
-import {MenuListResponseType} from "../../types/menuList.ts";
+import {MenuListType, ResultResponseType} from "../../types/menuList.ts";
 import {IParams} from "../../types/params.ts";
 import {getQueryString} from "../../utils/params.ts";
 
@@ -9,7 +9,7 @@ export class TechnologyService {
     const queryString = getQueryString(params)
     const url =  `${Endpoints.technologies}${queryString}`
 
-    const { data: response } = await axiosInstance.get<MenuListResponseType>(url)
+    const { data: response } = await axiosInstance.get<ResultResponseType<MenuListType>>(url)
     return response.result
   }
 
