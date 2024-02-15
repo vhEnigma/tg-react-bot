@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Button, Container, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import { RouteList } from '../../routes/routes.ts'
 import { useTheme } from '@mui/material/styles'
 
@@ -16,7 +16,8 @@ const styles = {
 const ErrorBoundary: FC = () => {
   const theme = useTheme()
   const navigate = useNavigate()
-
+  const location = useLocation()
+  console.log(location)
   const returnHandle = () => {
     navigate(RouteList.Root)
   }
