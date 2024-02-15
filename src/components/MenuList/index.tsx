@@ -70,6 +70,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
     }, [debouncedSearchValue]);
 
     const openItemHandle = (id: number) => {
+        console.log(id, 'id')
         navigate(`${RouteList.Directions}/${id}`)
     }
     const getDirections = () => {
