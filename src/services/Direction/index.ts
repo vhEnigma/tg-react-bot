@@ -22,6 +22,15 @@ export class DirectionService {
     return response
   }
 
+  static async getTestListByDirectionRequest (params: IParamsWithId) {
+    const queryString = getQueryString(params)
+    const url = `${Endpoints.directions}/${params.id}/tests${queryString}`
+
+    const { data: response } = await axiosInstance.get<ResultResponseType<ArticleType>>(url)
+
+    return response
+  }
+
   static async getArticleListByDirectionRequest (params: IParamsWithId) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.directions}/${params.id}/courses${queryString}`
