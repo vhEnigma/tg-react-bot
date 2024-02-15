@@ -58,12 +58,32 @@ const SingleDirection: FC = () => {
     })
   }
 
-  // const renderItems = () => {
-  //   return articleList.map((item) => {
-  //     const {id, direction_id, article_link, author, rating, difficulty, topic, technology_id, reading_time} = item
-  //
-  //   })
-  // }
+  const openInNewTab = (url: string): void => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+
+  const openItemHandle = (link: string) => {
+    openInNewTab(link)
+  }
+
+  const renderItems = () => {
+    return articleList.map((item) => {
+      const {id, article_link, rating, topic, reading_time} = item
+        return <ListItemButton onClick={() => openItemHandle(article_link)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
+                <ListItemText primary={topic} />
+                <ListItemIcon>
+                  <Box sx={{display: 'flex', gap: '10px'}}>
+                    <Typography sx={{color: text_color}}>{reading_time} мин.</Typography>
+                    <AccessTime sx={{color: text_color}} />
+                    <Typography sx={{color: text_color}} component='span'> | </Typography>
+                    <Typography sx={{color: text_color}} component='span'> ${rating}/5 </Typography>
+                    <StarRateIcon sx={{color: 'yellow'}}/>
+                  </Box>
+                </ListItemIcon>
+              </ListItemButton>
+    })
+  }
 
   return <Box>
     <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
@@ -73,18 +93,7 @@ const SingleDirection: FC = () => {
     <Search value={searchValue} setValue={setSearchValue} />
     <Box>
       <List component="div" aria-label="secondary mailbox folder">
-      <ListItemButton sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
-        <ListItemText primary={'article'} />
-        <ListItemIcon>
-          <Box sx={{display: 'flex', gap: '10px'}}>
-            <Typography sx={{color: text_color}}>5 min</Typography>
-            <AccessTime sx={{color: text_color}} />
-            <Typography sx={{color: text_color}} component='span'> | </Typography>
-            <Typography sx={{color: text_color}} component='span'> 4/5 </Typography>
-            <StarRateIcon sx={{color: 'yellow'}}/>
-          </Box>
-        </ListItemIcon>
-      </ListItemButton>
+        {renderItems()}
       </List>
     </Box>
   </Box>
