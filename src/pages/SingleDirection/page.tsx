@@ -2,10 +2,11 @@ import {FC, useEffect, useState} from 'react'
 import {useParams} from "react-router-dom";
 import {DirectionService} from "../../services/Direction";
 import {ArticleType} from "../../types/menuList.ts";
-import {Box, Button, Container, Typography} from "@mui/material";
+import {Box, Button, Container, List, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
 import Loader from "../../components/Loader";
 import Search from "../../components/Search";
 import useTgTheme from "../../hooks/useTgTheme.ts";
+import InboxIcon from '@mui/icons-material/Inbox';
 
 const tabsConfig = [
   {
@@ -37,8 +38,8 @@ const SingleDirection: FC = () => {
         const {result} = await DirectionService.getArticleListByDirectionRequest({id})
         setTitle(name)
         setArticleList(result)
-        setLoading(false)
       }
+      setLoading(false)
     }
 
     fetchData()
@@ -46,14 +47,6 @@ const SingleDirection: FC = () => {
 
   if (isLoading) return <Loader />
   console.log(articleList)
-
-  // const renderArticle = () => {
-  //   return articleList.map((article) => {
-  //     const {id, direction_id, article_link, author, rating, difficulty, topic, technology_id, reading_time} = article
-  //
-  //   })
-  // }
-
   const renderTabs = () => {
     return tabsConfig.map((options) => {
       const {id, title, key} = options
@@ -64,12 +57,29 @@ const SingleDirection: FC = () => {
     })
   }
 
+  // const renderItems = () => {
+  //   return articleList.map((item) => {
+  //     const {id, direction_id, article_link, author, rating, difficulty, topic, technology_id, reading_time} = item
+  //
+  //   })
+  // }
+
   return <Box>
     <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
     <Container sx={{display: 'flex', justifyContent: 'space-between', gap: '50px'}}>
       {renderTabs()}
     </Container>
     <Search value={searchValue} setValue={setSearchValue} />
+    <Box>
+      <List component="div" aria-label="secondary mailbox folder">
+      <ListItemButton sx={{ borderTop: `1px solid ${button_color}` }}>
+        <ListItemText primary={'article'} />
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+      </ListItemButton>
+      </List>
+    </Box>
   </Box>
 }
 
