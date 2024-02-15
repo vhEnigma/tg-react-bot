@@ -7,6 +7,8 @@ import Loader from "../../components/Loader";
 import style from './style.module.css'
 import {MenuListType, ParamsMenuListRequest} from "../../types/menuList.ts";
 import useTgTheme from "../../hooks/useTgTheme.ts";
+import {useNavigate} from "react-router-dom";
+import {RouteList} from "../../routes/routes.ts";
 
 
 
@@ -26,6 +28,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
     const [searchValue, setSearchValue] = useState('')
     const [isSearch, setSearch] = useState(false)
     const debouncedSearchValue = useDebounce(searchValue, 500);
+    const navigate = useNavigate()
 
     const fetchList = async () => {
 
@@ -65,6 +68,10 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
 
 
     }, [debouncedSearchValue]);
+
+    const openItemHandle = (id: number) => {
+        navigate(`${RouteList.Directions}/${id}`)
+    }
     const getDirections = () => {
         const array = searchList ? searchList : renderList
         const lastIndex = array.length - 1
@@ -72,7 +79,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
             const isLastElement = index === lastIndex
             const opacity = inView && !isStopInfinityScroll ? 0.3 : 1
             if (isLastElement) {
-                return <ListItemButton ref={ref} key={id}
+                return <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id}
                 sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
                 <ListItemText primary={name} />
                 </ListItemButton>

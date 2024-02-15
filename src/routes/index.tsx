@@ -8,6 +8,7 @@ import Directions from '../pages/Directions'
 import Test from '../pages/Test'
 import TestResult from '../pages/TestResult'
 import Article from '../pages/Article'
+import SingleDirection from "../pages/SingleDirection";
 
 
 export const router = createBrowserRouter([
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: RouteList.Directions,
         element: <Directions />
+      },
+      {
+        path: `${RouteList.Directions}/:id`,
+        element: <SingleDirection />
       },
       {
         path: RouteList.Technology,

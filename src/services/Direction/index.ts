@@ -25,4 +25,10 @@ export class DirectionService {
     return response.result
   }
 
+  static async getDirectionRequest (id: string) {
+    const url = `${Endpoints.directions}/${id}}`
+
+    const { data: response } = await axiosInstance.get(url)
+    console.log(response)
+  }
 }
