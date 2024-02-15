@@ -8,6 +8,7 @@ import style from './style.module.css'
 import {MenuListType, ParamsMenuListRequest} from "../../types/menuList.ts";
 import useTgTheme from "../../hooks/useTgTheme.ts";
 import {useNavigate} from "react-router-dom";
+import {RouteList} from "../../routes/routes.ts";
 
 
 
@@ -70,7 +71,7 @@ const MenuList: FC<DirectionsProps> = ({callback}) => {
 
     const openItemHandle = (id: number) => {
         console.log(id, 'id')
-        navigate(`/${id}`)
+        navigate(`${RouteList.Directions}/${id}`)
     }
     const getDirections = () => {
         const array = searchList ? searchList : renderList
