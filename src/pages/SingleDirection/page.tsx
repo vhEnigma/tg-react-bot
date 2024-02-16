@@ -57,8 +57,8 @@ const SingleDirection: FC = () => {
   const renderTests = () => {
     return dataMap[TEST_KEY].map((test) => {
       const {id, name, rating, difficulty} = test
-      return <ListItemButton key={id} onClick={() => navigate(RouteList
-          .Test)} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
+      return <ListItemButton key={id} onClick={() => navigate(`${RouteList
+          .Test}`)} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
     <ListItemText primary={name} />
       <ListItemIcon>
         <Box sx={{display: 'flex', gap: '10px'}}>
@@ -73,7 +73,7 @@ const SingleDirection: FC = () => {
   const renderArticles = () => {
     return dataMap[ARTICLE_KEY].map((article) => {
       const {id, rating, topic, reading_time, difficulty} = article
-      return <ListItemButton onClick={() => navigate(RouteList.Article)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
+      return <ListItemButton onClick={() => navigate(`/${RouteList.Article}`)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
         <ListItemText primary={topic} />
         <ListItemIcon>
           <Box sx={{display: 'flex', gap: '10px'}}>
