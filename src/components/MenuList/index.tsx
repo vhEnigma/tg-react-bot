@@ -1,8 +1,7 @@
-import {FC, useEffect, useState} from 'react'
+import {FC, useEffect, useRef, useState} from 'react'
 import {Box, List, ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
 import Loader from "../../components/Loader";
-import style from './style.module.css'
 import {MenuListType} from "../../types/menuList.ts";
 import useTgTheme from "../../hooks/useTgTheme.ts";
 import {useNavigate} from "react-router-dom";
@@ -24,6 +23,7 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     const [renderList, setRenderList] = useState<MenuListType[]>([])
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<MenuListType[]>()
     const navigate = useNavigate()
+    const wrapperRef = useRef<HTMLDivElement>(null)
 
     const fetchList = async () => {
         const response = await callback({page:downloadedPages})
@@ -91,9 +91,14 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
 
         })
     }
+
+    const loaderWrapperHeight = `calc(100vh - ${wrapperRef.current?.clientHeight}px)`
+
     return <>
-        <Search value={searchValue} setValue={setSearchValue}/>
-        <Box className={style.container}>
+        <Box ref={wrapperRef}>
+            <Search value={searchValue} setValue={setSearchValue}/>
+        </Box>
+        <Box sx={{height: loaderWrapperHeight}}>
         {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
             {getDirections()}
         </List>}
