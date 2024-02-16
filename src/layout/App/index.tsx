@@ -18,7 +18,6 @@ const App: FC<PropsWithChildren> = () => {
   const { tg } = useTelegram()
 
   useEffect(() => {
-    return
     const getToken = async () => {
       const { token } = await UserService.loginUserRequest(tg.initData)
       if (token) {
