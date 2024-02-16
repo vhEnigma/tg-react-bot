@@ -9,6 +9,7 @@ import Test from '../pages/Test'
 import TestResult from '../pages/TestResult'
 import Article from '../pages/Article'
 import SingleDirection from "../pages/SingleDirection";
+import SingleTechnology from "../pages/SingleTechnology";
 
 
 export const router = createBrowserRouter([
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: RouteList.Technology,
         element: <Technology />
+      },
+      {
+        path: `${RouteList.Technology}/:id`,
+        element: <SingleTechnology />
       },
       {
         path: RouteList.Article,
