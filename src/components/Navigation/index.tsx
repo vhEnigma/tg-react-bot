@@ -9,6 +9,7 @@ import { FC, useState } from 'react'
 import { RouteList } from '../../routes/routes.ts'
 import useTgTheme from "../../hooks/useTgTheme.ts";
 import {getActiveRoute} from "../../utils/router.ts";
+import {NAVIGATION_HEIGHT} from "../../constants/style.ts";
 
 const tabsConfig = [
   {
@@ -53,7 +54,7 @@ export const Navigation: FC = () => {
   }
 
   return (
-    <Paper>
+    <Paper sx={{height: NAVIGATION_HEIGHT}}>
       <BottomNavigation
         component={'nav'}
         showLabels

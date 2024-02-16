@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 import {Box, List, ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
 import Loader from "../../components/Loader";
@@ -9,6 +9,7 @@ import {IParams} from "../../types/params.ts";
 import useSearch from "../../hooks/useSearch.ts";
 import NotFound from "../NotFound";
 import useInfinityScroll from "../../hooks/useInfinityScroll.ts";
+import useCalcHeight from "../../hooks/useCalcHeight.ts";
 
 
 type DirectionsProps = {
@@ -23,7 +24,7 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     const [renderList, setRenderList] = useState<MenuListType[]>([])
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<MenuListType[]>()
     const navigate = useNavigate()
-    const wrapperRef = useRef<HTMLDivElement>(null)
+    const {wrapperRef, loaderWrapperHeight} = useCalcHeight()
 
     const fetchList = async () => {
         const response = await callback({page:downloadedPages})
@@ -91,8 +92,6 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
 
         })
     }
-
-    const loaderWrapperHeight = `calc(100vh - ${wrapperRef.current?.clientHeight}px - 56px)`
 
     return <>
         <Box ref={wrapperRef}>

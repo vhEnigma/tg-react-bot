@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 import {useParams} from "react-router-dom";
 import {Box, Button, Container, List, Typography} from "@mui/material";
 import Loader from "../../components/Loader";
@@ -13,6 +13,7 @@ import NotFound from "../NotFound";
 import {isArticleTypeArray, isTestTypeArray} from "../../utils/typeGuards.ts";
 import ArticleListItem from "../ArticleListItem";
 import TestListItem from "../TestListItem";
+import useCalcHeight from "../../hooks/useCalcHeight.ts";
 
 type LibraryProps = {
     getInfo: (id: string) => Promise<MenuListType>
@@ -28,7 +29,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     const [title, setTitle] = useState('')
     const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<ItemsUnion>()
-    const wrapperRef = useRef<HTMLDivElement>(null)
+    const {wrapperRef, loaderWrapperHeight} = useCalcHeight()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -126,9 +127,6 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
         return rendersCallback[activeTab](array)
     }
 
-    const loaderWrapperHeight = `calc(100vh - ${wrapperRef.current?.clientHeight}px - 56px)`
-    console.log(loaderWrapperHeight, 'loaderWrapperHeight')
-    console.log(wrapperRef.current?.clientHeight, 'wrapperRef.current?.clientHeight')
     return <Box>
         <Box ref={wrapperRef}>
         <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
