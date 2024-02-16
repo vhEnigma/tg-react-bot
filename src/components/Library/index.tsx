@@ -13,6 +13,7 @@ import NotFound from "../NotFound";
 import {isArticleTypeArray, isTestTypeArray} from "../../utils/typeGuards.ts";
 import ArticleListItem from "../ArticleListItem";
 import TestListItem from "../TestListItem";
+import {useTelegram} from "../../hooks/useTelegram.ts";
 
 type LibraryProps = {
     getInfo: (id: string) => Promise<MenuListType>
@@ -29,6 +30,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     const [title, setTitle] = useState('')
     const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<ItemsUnion>()
+    const {tg} = useTelegram()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,7 +47,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
                 setDataMap(dataMap)
                 setLoading(false)
             } else {
-                alert(`fucking ${id}`)
+                tg.showAlert(`fucking ${id}`)
             }
         }
 
