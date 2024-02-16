@@ -1,7 +1,6 @@
 import {FC, useEffect, useState} from 'react'
 import {Box, List, ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
-import {useInView} from "react-intersection-observer";
 import Loader from "../../components/Loader";
 import style from './style.module.css'
 import {MenuListType} from "../../types/menuList.ts";
@@ -10,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {IParams} from "../../types/params.ts";
 import useSearch from "../../hooks/useSearch.ts";
 import NotFound from "../NotFound";
+import useInfinityScroll from "../../hooks/useInfinityScroll.ts";
 
 
 type DirectionsProps = {
@@ -18,12 +18,8 @@ type DirectionsProps = {
 }
 
 const MenuList: FC<DirectionsProps> = ({route, callback}) => {
-    const { ref, inView } = useInView({
-        threshold: 0,
-    });
-    const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
+    const {ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages} = useInfinityScroll()
     const {button_color, } = useTgTheme()
-    const [downloadedPages, setDownloadedPages] = useState(1)
     const [renderList, setRenderList] = useState<MenuListType[]>([])
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<MenuListType[]>()
     const navigate = useNavigate()
