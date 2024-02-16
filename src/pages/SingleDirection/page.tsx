@@ -57,7 +57,7 @@ const SingleDirection: FC = () => {
   const renderTests = () => {
     return dataMap[TEST_KEY].map((test) => {
       const {id, name, rating, difficulty} = test
-      return <ListItemButton key={id} onClick={() => navigate(`${RouteList
+      return <ListItemButton key={id} onClick={() => navigate(`/${RouteList
           .Test}`)} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
     <ListItemText primary={name} />
       <ListItemIcon>
