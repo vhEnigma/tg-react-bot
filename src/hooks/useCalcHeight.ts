@@ -7,11 +7,11 @@ const useCalcHeight = () => {
 
     useEffect(() => {
         if (wrapperRef.current) {
-            const height = `calc(100vh - ${wrapperRef.current?.clientHeight}px - ${NAVIGATION_HEIGHT})`
+            const height = `calc(100vh - ${wrapperRef.current.clientHeight}px - ${NAVIGATION_HEIGHT})`
             setLoaderWrapperHeight(height)
         }
     }, [wrapperRef.current]);
-
+    console.log(loaderWrapperHeight, 'fuck')
     return {
         wrapperRef,
         loaderWrapperHeight
