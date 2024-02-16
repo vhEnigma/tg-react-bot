@@ -127,12 +127,14 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     }
 
     return <>
-        <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
-        <Container sx={{display: 'flex', justifyContent: 'space-between', gap: '50px'}}>
-            {renderTabs()}
-        </Container>
-        <Search value={searchValue} setValue={setSearchValue} />
-        <Box sx={{height: calcLoaderWrapperHeight()}}>
+        <Box>
+            <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
+            <Container sx={{display: 'flex', justifyContent: 'space-between', gap: '50px'}}>
+                {renderTabs()}
+            </Container>
+            <Search value={searchValue} setValue={setSearchValue} />
+        </Box>
+        <Box sx={{height: calcLoaderWrapperHeight(0)}}>
             {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
                 {renderItems()}
             </List>}

@@ -95,7 +95,7 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
         <Box>
             <Search value={searchValue} setValue={setSearchValue}/>
         </Box>
-        <Box sx={{height: calcLoaderWrapperHeight()}}>
+        <Box sx={{height: calcLoaderWrapperHeight(72)}}>
         {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
             {getDirections()}
         </List>}
