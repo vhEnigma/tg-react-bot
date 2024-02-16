@@ -32,8 +32,8 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true)
             if (id) {
+                setLoading(true)
                 const {name} = await getInfo(id)
                 const {result:articles} = await getArticleByFilter({id})
                 const {result: tests} = await getTestByFilter({id})
@@ -43,8 +43,8 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
                     [TEST_KEY]: tests
                 }
                 setDataMap(dataMap)
+                setLoading(false)
             }
-            setLoading(false)
         }
 
         fetchData()
