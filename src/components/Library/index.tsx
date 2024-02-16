@@ -113,7 +113,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     }
 
     const renderItems = () => {
-        if (Array.isArray(searchList) && searchList.length === 0) {
+        if (Array.isArray(searchList) && searchList.length === 0 || searchList === null) {
             return <NotFound />
         }
 
