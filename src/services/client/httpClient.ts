@@ -3,7 +3,7 @@ import { TOKEN_KEY } from '../../constants/token.ts'
 import { UserService } from '../User'
 import { TokenService } from '../TokenService'
 
-const API_URL = 'https://resolved-ghoul-casual.ngrok-free.app/api/v1/'
+const API_URL = 'https://whole-formerly-robin.ngrok-free.app/api/v1/'
 export const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: { 'Content-Type': 'application/json', 'Accept-Language': 'ru', 'ngrok-skip-browser-warning': 'true' }
