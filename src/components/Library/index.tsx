@@ -13,6 +13,7 @@ import NotFound from "../NotFound";
 import {isArticleTypeArray, isTestTypeArray} from "../../utils/typeGuards.ts";
 import ArticleListItem from "../ArticleListItem";
 import TestListItem from "../TestListItem";
+import {calcLoaderWrapperHeight} from "../../utils/style.ts";
 
 type LibraryProps = {
     getInfo: (id: string) => Promise<MenuListType>
@@ -133,7 +134,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
         </Container>
         <Search value={searchValue} setValue={setSearchValue} />
         </Box>
-        <Box sx={{height: '100%'}}>
+        <Box sx={{height: calcLoaderWrapperHeight()}}>
             {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
                 {renderItems()}
             </List>}

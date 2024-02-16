@@ -9,6 +9,7 @@ import {IParams} from "../../types/params.ts";
 import useSearch from "../../hooks/useSearch.ts";
 import NotFound from "../NotFound";
 import useInfinityScroll from "../../hooks/useInfinityScroll.ts";
+import {calcLoaderWrapperHeight} from "../../utils/style.ts";
 
 type DirectionsProps = {
     callback:(params: IParams) => Promise<MenuListType[]>
@@ -94,7 +95,7 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
         <Box>
             <Search value={searchValue} setValue={setSearchValue}/>
         </Box>
-        <Box sx={{height: '100%'}}>
+        <Box sx={{height: calcLoaderWrapperHeight()}}>
         {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
             {getDirections()}
         </List>}
