@@ -126,7 +126,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
         return rendersCallback[activeTab](array)
     }
 
-    const loaderWrapperHeight = `calc(100vh - ${wrapperRef.current?.clientHeight}px)`
+    const loaderWrapperHeight = `calc(100vh - ${wrapperRef.current?.clientHeight}px - 56px)`
     console.log(loaderWrapperHeight, 'loaderWrapperHeight')
     console.log(wrapperRef.current?.clientHeight, 'wrapperRef.current?.clientHeight')
     return <Box>

@@ -92,7 +92,7 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
         })
     }
 
-    const loaderWrapperHeight = `calc(100vh - ${wrapperRef.current?.clientHeight}px)`
+    const loaderWrapperHeight = `calc(100vh - ${wrapperRef.current?.clientHeight}px - 56px)`
 
     return <>
         <Box ref={wrapperRef}>
