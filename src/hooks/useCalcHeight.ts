@@ -10,7 +10,8 @@ const useCalcHeight = () => {
             const height = `calc(100vh - ${wrapperRef.current?.clientHeight}px - ${NAVIGATION_HEIGHT})`
             setLoaderWrapperHeight(height)
         }
-    }, []);
+    }, [wrapperRef.current]);
+
     return {
         wrapperRef,
         loaderWrapperHeight
