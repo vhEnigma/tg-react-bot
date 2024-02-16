@@ -70,7 +70,7 @@ const SingleDirection: FC = () => {
                     <Typography sx={{color: text_color}}>{reading_time} мин.</Typography>
                     <AccessTime sx={{color: text_color}} />
                     <Typography sx={{color: text_color}} component='span'> | </Typography>
-                    <Typography sx={{color: text_color}} component='span'> ${difficulty}/${rating} </Typography>
+                    <Typography sx={{color: text_color}} component='span'> {difficulty}/{rating}</Typography>
                     <StarRateIcon sx={{color: 'yellow'}}/>
                   </Box>
                 </ListItemIcon>
