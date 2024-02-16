@@ -1,8 +1,9 @@
 import {IParams} from "../types/params.ts";
+import {PAGE_SIZE} from "../constants/common.ts";
 
 
 export const getQueryString = (params:IParams) => {
-    const {q, pageSize = 10, page} = params
+    const {q, pageSize = PAGE_SIZE, page} = params
     const searchParams = new URLSearchParams();
     searchParams.append('pageSize', `${pageSize}`)
 

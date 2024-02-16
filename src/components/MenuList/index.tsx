@@ -10,6 +10,7 @@ import useSearch from "../../hooks/useSearch.ts";
 import NotFound from "../NotFound";
 import useInfinityScroll from "../../hooks/useInfinityScroll.ts";
 import {calcLoaderWrapperHeight} from "../../utils/style.ts";
+import {PAGE_SIZE} from "../../constants/common.ts";
 
 type DirectionsProps = {
     callback:(params: IParams) => Promise<MenuListType[]>
@@ -28,7 +29,7 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
         const response = await callback({page:downloadedPages})
         setRenderList([...renderList, ...response])
         setLoading(false)
-        if (response.length === 0) {
+        if (response.length < PAGE_SIZE) {
             setStopInfinityScroll(true)
             return
         }
