@@ -1,15 +1,15 @@
 import {FC, useEffect, useState} from 'react'
-import {Box, List, ListItemButton, ListItemText, Typography} from '@mui/material'
+import {Box, List, ListItemButton, ListItemText} from '@mui/material'
 import Search from '../../components/Search'
 import {useInView} from "react-intersection-observer";
-import useDebounce from "../../hooks/useDebounce.ts";
 import Loader from "../../components/Loader";
 import style from './style.module.css'
 import {MenuListType} from "../../types/menuList.ts";
 import useTgTheme from "../../hooks/useTgTheme.ts";
 import {useNavigate} from "react-router-dom";
 import {IParams} from "../../types/params.ts";
-
+import useSearch from "../../hooks/useSearch.ts";
+import NotFound from "../NotFound";
 
 
 type DirectionsProps = {
@@ -25,12 +25,8 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     const {button_color, } = useTgTheme()
     const [downloadedPages, setDownloadedPages] = useState(1)
     const [renderList, setRenderList] = useState<MenuListType[]>([])
-    const [searchList, setSearchList] = useState<MenuListType[] | null>(null)
-    const [searchValue, setSearchValue] = useState('')
-    const [isSearch, setSearch] = useState(false)
-    const debouncedSearchValue = useDebounce(searchValue, 500);
+    const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<MenuListType[]>()
     const navigate = useNavigate()
-    const {text_color} = useTgTheme()
 
     const fetchList = async () => {
 
@@ -76,7 +72,7 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     }
     const getDirections = () => {
         if (Array.isArray(searchList) && searchList.length === 0) {
-            return <Typography component='p' sx={{textAlign: 'center', color: text_color, mt: '10px'}}>Ничего не найдено.</Typography>
+            return <NotFound />
         }
 
         const array = searchList ? searchList : renderList
