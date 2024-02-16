@@ -59,7 +59,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
                 [ARTICLE_KEY]: getArticleByFilter,
                 [TEST_KEY]: getTestByFilter,
             }
-            const {result} = await callbacks[activeTab]({q: debouncedSearchValue, pageSize: 20})
+            const {result} = await callbacks[activeTab]({id, q: debouncedSearchValue, pageSize: 20})
             setSearchList(result)
             setSearch(false)
         }
