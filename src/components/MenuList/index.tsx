@@ -9,8 +9,6 @@ import {IParams} from "../../types/params.ts";
 import useSearch from "../../hooks/useSearch.ts";
 import NotFound from "../NotFound";
 import useInfinityScroll from "../../hooks/useInfinityScroll.ts";
-import useCalcHeight from "../../hooks/useCalcHeight.ts";
-
 
 type DirectionsProps = {
     callback:(params: IParams) => Promise<MenuListType[]>
@@ -24,7 +22,6 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     const [renderList, setRenderList] = useState<MenuListType[]>([])
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<MenuListType[]>()
     const navigate = useNavigate()
-    const {wrapperRef, loaderWrapperHeight} = useCalcHeight()
 
     const fetchList = async () => {
         const response = await callback({page:downloadedPages})
@@ -94,10 +91,10 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     }
 
     return <>
-        <Box ref={wrapperRef}>
+        <Box>
             <Search value={searchValue} setValue={setSearchValue}/>
         </Box>
-        <Box sx={{height: loaderWrapperHeight}}>
+        <Box sx={{height: '100%'}}>
         {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
             {getDirections()}
         </List>}

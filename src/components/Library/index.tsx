@@ -13,7 +13,6 @@ import NotFound from "../NotFound";
 import {isArticleTypeArray, isTestTypeArray} from "../../utils/typeGuards.ts";
 import ArticleListItem from "../ArticleListItem";
 import TestListItem from "../TestListItem";
-import useCalcHeight from "../../hooks/useCalcHeight.ts";
 
 type LibraryProps = {
     getInfo: (id: string) => Promise<MenuListType>
@@ -29,7 +28,6 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     const [title, setTitle] = useState('')
     const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<ItemsUnion>()
-    const {callbackRef, loaderWrapperHeight} = useCalcHeight()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -128,14 +126,14 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     }
 
     return <Box>
-        <Box ref={callbackRef}>
+        <Box>
         <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
         <Container sx={{display: 'flex', justifyContent: 'space-between', gap: '50px'}}>
             {renderTabs()}
         </Container>
         <Search value={searchValue} setValue={setSearchValue} />
         </Box>
-        <Box sx={{height: loaderWrapperHeight}}>
+        <Box sx={{height: '100%'}}>
             {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
                 {renderItems()}
             </List>}
