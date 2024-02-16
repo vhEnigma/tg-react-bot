@@ -1,11 +1,16 @@
 import {FC} from 'react'
+import {useNavigate} from "react-router-dom";
 
-type TestProps = {
+const Test: FC = () => {
+    const navigate = useNavigate()
 
-}
-
-const Test: FC<TestProps> = () => {
-return <div>Test</div>
+    const handleBack = () => {
+        navigate(-1)
+    }
+    return <>
+        <button onClick={handleBack}>Назад </button>
+        <div>Test</div>
+    </>
 }
 
 export default Test
