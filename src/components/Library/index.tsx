@@ -20,7 +20,6 @@ type LibraryProps = {
     getTestByFilter: (params: IParamsWithId) => Promise<ResultResponseType<TestType>>
 }
 
-
 const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}) => {
     const {id} = useParams()
     const {button_color, button_text_color, text_color, bg_color, link_color} = useTgTheme()
@@ -29,7 +28,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     const [title, setTitle] = useState('')
     const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<ItemsUnion>()
-
+window.location.href = 'directions/1037'
     useEffect(() => {
         const fetchData = async () => {
             if (id) {
@@ -132,7 +131,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
             {renderTabs()}
         </Container>
         <Search value={searchValue} setValue={setSearchValue} />
-        <Box>
+        <Box sx={{height: 'calc(100% - 114px)'}}>
             {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
                 {renderItems()}
             </List>}
