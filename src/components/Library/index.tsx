@@ -44,7 +44,6 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
                 setDataMap(dataMap)
                 setLoading(false)
             }
-            console.log(id, 'id')
         }
 
         fetchData()
