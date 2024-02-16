@@ -1,10 +1,16 @@
-import {DataMap} from "./types.ts";
+import {DataMap, TabsType} from "./types.ts";
 
 export const ARTICLE_KEY = 'article'
 export const TEST_KEY = 'tests'
 
+type TabsCOnfigType = {
+    id:number
+    title: string
+    key: TabsType
+}
 
-export const tabsConfig = [
+
+export const tabsConfig:TabsCOnfigType[] = [
     {
         id: 1,
         title: 'Статьи',
@@ -15,7 +21,7 @@ export const tabsConfig = [
         title: 'Тесты',
         key: TEST_KEY
     }
-] as const
+]
 
 
 export const initDataMap:DataMap = {

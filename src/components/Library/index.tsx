@@ -74,13 +74,18 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
 
     if (isLoading) return <Loader />
 
+    const handleSwitchTab = (key: TabsType) => {
+        setSearchValue('')
+        setActiveTab(key)
+    }
+
     const renderTabs = () => {
         return tabsConfig.map((options) => {
             const {id, title, key} = options
             const isActive = key === activeTab
             const backgroundColor = isActive ? button_color : bg_color
             const color = isActive ? button_text_color : link_color
-            return <Button key={id} onClick={() => setActiveTab(key)} fullWidth sx={{backgroundColor, color}} variant="contained">{title}</Button>
+            return <Button key={id} onClick={() => handleSwitchTab(key)} fullWidth sx={{backgroundColor, color}} variant="contained">{title}</Button>
         })
     }
 
