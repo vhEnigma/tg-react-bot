@@ -126,7 +126,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
         return rendersCallback[activeTab](array)
     }
 
-    return <Box>
+    return <>
         <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
         <Container sx={{display: 'flex', justifyContent: 'space-between', gap: '50px'}}>
             {renderTabs()}
@@ -137,7 +137,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
                 {renderItems()}
             </List>}
         </Box>
-    </Box>
+    </>
 }
 
 export default Library
