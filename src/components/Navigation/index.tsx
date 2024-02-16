@@ -54,7 +54,7 @@ export const Navigation: FC = () => {
   }
 
   return (
-    <Paper sx={{height: NAVIGATION_HEIGHT}}>
+    <Paper sx={{height: `${NAVIGATION_HEIGHT}px`}}>
       <BottomNavigation
         component={'nav'}
         showLabels

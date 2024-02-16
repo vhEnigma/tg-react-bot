@@ -7,7 +7,7 @@ const useCalcHeight = () => {
 
     const callbackRef = (div:HTMLDivElement) => {
         const height = div.clientHeight
-        const style = `calc(100vh - ${height}px - ${NAVIGATION_HEIGHT})`
+        const style = `calc(100vh - ${height}px - ${NAVIGATION_HEIGHT}px)`
         console.log(height, style)
         setLoaderWrapperHeight(style)
     }

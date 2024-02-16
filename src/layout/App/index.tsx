@@ -10,6 +10,7 @@ import { TokenService } from '../../services/TokenService'
 import {ThemeProvider} from '@mui/material/styles'
 import { createCustomTheme } from '../../utils/theme.ts'
 import { Navigation } from '../../components/Navigation'
+import {NAVIGATION_HEIGHT} from "../../constants/style.ts";
 
 
 const queryClient = new QueryClient()
@@ -17,6 +18,7 @@ const App: FC<PropsWithChildren> = () => {
   const { tg } = useTelegram()
 
   useEffect(() => {
+    return
     const getToken = async () => {
       const { token } = await UserService.loginUserRequest(tg.initData)
       if (token) {
@@ -32,7 +34,7 @@ const App: FC<PropsWithChildren> = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <Box className={style.container} style={{backgroundColor: theme.palette.customColors.secondary_bg_color.main}}>
-          <Container sx={{height: 'calc(100vh - 56px)', overflow: 'auto'}}>
+          <Container sx={{height: `calc(100vh - ${NAVIGATION_HEIGHT}px)`, overflow: 'auto'}}>
             <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>

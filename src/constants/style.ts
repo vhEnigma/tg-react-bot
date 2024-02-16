@@ -1,1 +1,1 @@
-export const NAVIGATION_HEIGHT = '56px'
+export const NAVIGATION_HEIGHT = 56
