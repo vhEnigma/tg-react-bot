@@ -1,12 +1,9 @@
 import {FC, useEffect, useState} from 'react'
-import {useNavigate, useParams} from "react-router-dom";
-import {Box, Button, Container, List, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
+import {useParams} from "react-router-dom";
+import {Box, Button, Container, List, Typography} from "@mui/material";
 import Loader from "../../components/Loader";
 import Search from "../../components/Search";
 import useTgTheme from "../../hooks/useTgTheme.ts";
-import StarRateIcon from '@mui/icons-material/StarRate';
-import {AccessTime} from "@mui/icons-material";
-import {RouteList} from "../../routes/routes.ts";
 import useSearch from "../../hooks/useSearch.ts";
 import {DataMap, TabsType} from "../../pages/SingleDirection/types.ts";
 import {ARTICLE_KEY, initDataMap, tabsConfig, TEST_KEY} from "../../pages/SingleDirection/constants.ts";
@@ -14,6 +11,8 @@ import {ArticleType, ItemsUnion, MenuListType, ResultResponseType, TestType} fro
 import {IParamsWithId} from "../../types/params.ts";
 import NotFound from "../NotFound";
 import {isArticleTypeArray, isTestTypeArray} from "../../utils/typeGuards.ts";
+import ArticleListItem from "../ArticleListItem";
+import TestListItem from "../TestListItem";
 
 type LibraryProps = {
     getInfo: (id: string) => Promise<MenuListType>
@@ -30,7 +29,6 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     const [title, setTitle] = useState('')
     const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<ItemsUnion>()
-    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -94,16 +92,11 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
         if (!isTestTypeArray(array)) return
         return array.map((test) => {
             const {id, name, rating, difficulty} = test
-            return <ListItemButton key={id} onClick={() => navigate(`/${RouteList
-                .Test}`)} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
-                <ListItemText primary={name} />
-                <ListItemIcon>
-                    <Box sx={{display: 'flex', gap: '10px'}}>
-                        <Typography sx={{color: text_color}} component='span'> {difficulty}/{rating}</Typography>
-                        <StarRateIcon sx={{color: 'yellow'}}/>
-                    </Box>
-                </ListItemIcon>
-            </ListItemButton>
+            return <TestListItem
+                    key={id}
+                    name={name}
+                    rating={rating}
+                    difficulty={difficulty}/>
         })
     }
 
@@ -111,18 +104,11 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
         if (!isArticleTypeArray(array)) return
         return array.map((article) => {
             const {id, rating, topic, reading_time, difficulty} = article
-            return <ListItemButton onClick={() => navigate(`/${RouteList.Article}`)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
-                <ListItemText primary={topic} />
-                <ListItemIcon>
-                    <Box sx={{display: 'flex', gap: '10px'}}>
-                        <Typography sx={{color: text_color}}>{reading_time} мин.</Typography>
-                        <AccessTime sx={{color: text_color}} />
-                        <Typography sx={{color: text_color}} component='span'> | </Typography>
-                        <Typography sx={{color: text_color}} component='span'> {difficulty}/{rating}</Typography>
-                        <StarRateIcon sx={{color: 'yellow'}}/>
-                    </Box>
-                </ListItemIcon>
-            </ListItemButton>
+            return <ArticleListItem key={id}
+                                    rating={rating}
+                                    topic={topic}
+                                    reading_time={reading_time}
+                                    difficulty={difficulty}/>
         })
     }
 
