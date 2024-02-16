@@ -127,7 +127,8 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     }
 
     const loaderWrapperHeight = `calc(100vh - ${wrapperRef.current?.clientHeight}px)`
-
+    console.log(loaderWrapperHeight, 'loaderWrapperHeight')
+    console.log(wrapperRef.current?.clientHeight, 'wrapperRef.current?.clientHeight')
     return <Box>
         <Box ref={wrapperRef}>
         <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
