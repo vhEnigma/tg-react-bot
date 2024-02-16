@@ -1,6 +1,6 @@
 import { axiosInstance } from '../client/httpClient.ts'
 import {Endpoints} from "../client/endpoints.ts";
-import {ArticleType, MenuListType, ResultResponseType} from "../../types/menuList.ts";
+import {ArticleType, MenuListType, ResultResponseType, TestType} from "../../types/menuList.ts";
 import {IParams, IParamsWithId} from "../../types/params.ts";
 import {getQueryString} from "../../utils/params.ts";
 
@@ -26,7 +26,7 @@ export class DirectionService {
     const queryString = getQueryString(params)
     const url = `${Endpoints.directions}/${params.id}/tests${queryString}`
 
-    const { data: response } = await axiosInstance.get<ResultResponseType<ArticleType>>(url)
+    const { data: response } = await axiosInstance.get<ResultResponseType<TestType>>(url)
 
     return response
   }

@@ -13,4 +13,12 @@ export class TechnologyService {
     return response.result
   }
 
+  static async getTechnologyInfoRequest (id:string) {
+    const url = `${Endpoints.technologies}/${id}`
+
+    const { data: response } = await axiosInstance.get<MenuListType>(url)
+
+    return response
+  }
+
 }

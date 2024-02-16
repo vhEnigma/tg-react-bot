@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from 'react'
 import {useParams} from "react-router-dom";
 import {DirectionService} from "../../services/Direction";
-import {ArticleType} from "../../types/menuList.ts";
+import {ArticleType, TestType} from "../../types/menuList.ts";
 import {Box, Button, Container, List, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
 import Loader from "../../components/Loader";
 import Search from "../../components/Search";
@@ -10,37 +10,56 @@ import StarRateIcon from '@mui/icons-material/StarRate';
 import {AccessTime} from "@mui/icons-material";
 import {openInNewTab} from "../../utils/common.ts";
 
+const ARTICLE_KEY = 'article'
+const TEST_KEY = 'tests'
+
+type TabsType = typeof ARTICLE_KEY | typeof TEST_KEY
+
 const tabsConfig = [
   {
     id: 1,
     title: 'Статьи',
-    key: 'article'
+    key: ARTICLE_KEY
   },
   {
     id: 2,
     title: 'Тесты',
-    key: 'tests'
+    key: TEST_KEY
   }
-]
+] as const
+
+type DataMap = {
+  [ARTICLE_KEY]: ArticleType[],
+  [TEST_KEY]: TestType[]
+}
+
+const initDataMap:DataMap = {
+  [ARTICLE_KEY]: [],
+  [TEST_KEY]: []
+}
 
 const SingleDirection: FC = () => {
   const {id} = useParams()
   const {button_color, button_text_color, text_color, bg_color, link_color} = useTgTheme()
   const [isLoading, setLoading] = useState(false)
-  const [articleList, setArticleList] = useState<ArticleType[]>([])
+  const [dataMap, setDataMap] = useState<DataMap>(initDataMap)
   const [title, setTitle] = useState('')
   const [searchValue, setSearchValue] = useState('')
-  const [activeTab, setActiveTab] = useState('article')
+  const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
       if (id) {
         const {name} = await DirectionService.getDirectionInfoRequest(id)
-        const {result} = await DirectionService.getArticleListByDirectionRequest({id})
-        await DirectionService.getTestListByDirectionRequest({id})
+        const {result:articles} = await DirectionService.getArticleListByDirectionRequest({id})
+        const {result: tests} = await DirectionService.getTestListByDirectionRequest({id})
         setTitle(name)
-        setArticleList(result)
+        const dataMap = {
+          [ARTICLE_KEY]: articles,
+          [TEST_KEY]: tests
+        }
+        setDataMap(dataMap)
       }
       setLoading(false)
     }
@@ -60,22 +79,45 @@ const SingleDirection: FC = () => {
     })
   }
 
-  const renderItems = () => {
-    return articleList.map((item) => {
-      const {id, article_link, rating, topic, reading_time, difficulty} = item
-        return <ListItemButton onClick={() => openInNewTab(article_link)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
-                <ListItemText primary={topic} />
-                <ListItemIcon>
-                  <Box sx={{display: 'flex', gap: '10px'}}>
-                    <Typography sx={{color: text_color}}>{reading_time} мин.</Typography>
-                    <AccessTime sx={{color: text_color}} />
-                    <Typography sx={{color: text_color}} component='span'> | </Typography>
-                    <Typography sx={{color: text_color}} component='span'> {difficulty}/{rating}</Typography>
-                    <StarRateIcon sx={{color: 'yellow'}}/>
-                  </Box>
-                </ListItemIcon>
-              </ListItemButton>
+  const renderTests = () => {
+    return dataMap[TEST_KEY].map((test) => {
+      const {id, name, rating, difficulty} = test
+      return <ListItemButton key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
+    <ListItemText primary={name} />
+      <ListItemIcon>
+        <Box sx={{display: 'flex', gap: '10px'}}>
+          <Typography sx={{color: text_color}} component='span'> {difficulty}/{rating}</Typography>
+          <StarRateIcon sx={{color: 'yellow'}}/>
+        </Box>
+      </ListItemIcon>
+    </ListItemButton>
     })
+  }
+
+  const renderArticles = () => {
+    return dataMap[ARTICLE_KEY].map((article) => {
+      const {id, article_link, rating, topic, reading_time, difficulty} = article
+      return <ListItemButton onClick={() => openInNewTab(article_link)} key={id} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
+        <ListItemText primary={topic} />
+        <ListItemIcon>
+          <Box sx={{display: 'flex', gap: '10px'}}>
+            <Typography sx={{color: text_color}}>{reading_time} мин.</Typography>
+            <AccessTime sx={{color: text_color}} />
+            <Typography sx={{color: text_color}} component='span'> | </Typography>
+            <Typography sx={{color: text_color}} component='span'> {difficulty}/{rating}</Typography>
+            <StarRateIcon sx={{color: 'yellow'}}/>
+          </Box>
+        </ListItemIcon>
+      </ListItemButton>
+    })
+  }
+
+  const renderItems = () => {
+    const rendersCallback = {
+      [ARTICLE_KEY]: renderArticles,
+      [TEST_KEY]: renderTests,
+    }
+    return rendersCallback[activeTab]()
   }
 
   return <Box>

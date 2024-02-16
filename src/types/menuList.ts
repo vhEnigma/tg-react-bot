@@ -19,3 +19,10 @@ export type ArticleType = {
     technology_id: number
     direction_id: number
 }
+
+export type TestType = {
+    id: number
+    name: string
+    difficulty: number
+    rating: number
+}
