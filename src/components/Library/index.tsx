@@ -76,6 +76,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
 
     const handleSwitchTab = (key: TabsType) => {
         setSearchValue('')
+        setSearchList(null)
         setActiveTab(key)
     }
 
