@@ -2,7 +2,7 @@ import {NAVIGATION_HEIGHT} from "../constants/style.ts";
 import {useEffect, useRef, useState} from "react";
 
 const useCalcHeight = () => {
-    const [loaderWrapperHeight, setLoaderWrapperHeight] = useState('100%')
+    const [loaderWrapperHeight, setLoaderWrapperHeight] = useState('')
     const wrapperRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -12,7 +12,7 @@ const useCalcHeight = () => {
             console.log(height, style)
             setLoaderWrapperHeight(style)
         }
-    }, [wrapperRef.current]);
+    }, []);
     console.log(loaderWrapperHeight, 'fuck')
     return {
         wrapperRef,
