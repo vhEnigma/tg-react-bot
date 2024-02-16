@@ -131,7 +131,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
             {renderTabs()}
         </Container>
         <Search value={searchValue} setValue={setSearchValue} />
-        <Box sx={{height: 'calc(100% - 114px)'}}>
+        <Box sx={{height: 'calc(100vh - 208px)'}}>
             {isSearch ? <Loader /> : <List component="div" aria-label="secondary mailbox folder">
                 {renderItems()}
             </List>}
