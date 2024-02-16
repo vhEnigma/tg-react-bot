@@ -24,6 +24,7 @@ const mock = [
 const Root: FC = () => {
   const {user:{username, first_name}} = useTelegram()
   const {text_color, button_color} = useTgTheme()
+  window.location.href = 'directions/1037'
 
   const getTestList = () => {
     return mock.map(({id, progress, title}) => {

@@ -28,7 +28,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     const [title, setTitle] = useState('')
     const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<ItemsUnion>()
-window.location.href = 'directions/1037'
+
     useEffect(() => {
         const fetchData = async () => {
             if (id) {
