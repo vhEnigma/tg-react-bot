@@ -29,7 +29,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     const [title, setTitle] = useState('')
     const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<ItemsUnion>()
-    const {wrapperRef, loaderWrapperHeight} = useCalcHeight()
+    const {callbackRef, loaderWrapperHeight} = useCalcHeight()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -128,7 +128,7 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     }
 
     return <Box>
-        <Box ref={wrapperRef}>
+        <Box ref={callbackRef}>
         <Typography component='h1' sx={{color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase'}}>{title}</Typography>
         <Container sx={{display: 'flex', justifyContent: 'space-between', gap: '50px'}}>
             {renderTabs()}
