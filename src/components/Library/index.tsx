@@ -44,6 +44,8 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
                 }
                 setDataMap(dataMap)
                 setLoading(false)
+            } else {
+                alert(`fucking ${id}`)
             }
         }
 
