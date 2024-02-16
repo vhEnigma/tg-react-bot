@@ -20,15 +20,16 @@ type DirectionsProps = {
 const MenuList: FC<DirectionsProps> = ({route, callback}) => {
     const {ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages} = useInfinityScroll()
     const {button_color, } = useTgTheme()
+    const [isLoading, setLoading] = useState(false)
     const [renderList, setRenderList] = useState<MenuListType[]>([])
     const {searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue} = useSearch<MenuListType[]>()
     const navigate = useNavigate()
 
     const fetchList = async () => {
-
+        setLoading(true)
         const response = await callback({page:downloadedPages})
         setRenderList([...renderList, ...response])
-
+        setLoading(false)
         if (response.length === 0) {
             setStopInfinityScroll(true)
             return
@@ -62,6 +63,8 @@ const MenuList: FC<DirectionsProps> = ({route, callback}) => {
 
 
     }, [debouncedSearchValue]);
+
+    if (isLoading) return <Loader />
 
     const openItemHandle = (id: number) => {
         navigate(`/${route}/${id}`)
