@@ -113,9 +113,8 @@ const Library: FC<LibraryProps>= ({getInfo, getTestByFilter, getArticleByFilter}
     }
 
     const renderItems = () => {
-        if (Array.isArray(searchList) && searchList.length === 0 || searchList === null) {
-            return <NotFound />
-        }
+        const isNotFound = Array.isArray(searchList) && searchList.length === 0 || dataMap[activeTab].length === 0
+        if (isNotFound) return <NotFound />
 
         const rendersCallback = {
             [ARTICLE_KEY]: renderArticles,
