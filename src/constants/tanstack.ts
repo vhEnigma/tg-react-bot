@@ -15,6 +15,9 @@ export const QUERY_KEYS = {
     getTestListByTechnology: 'getTestListByTechnology'
   },
   test: {
-    listTests: 'listTests'
+    list: 'listTests'
+  },
+  article: {
+    list: 'listArticles'
   }
 }

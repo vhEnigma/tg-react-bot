@@ -16,6 +16,8 @@ import TestListItem from '../TestListItem'
 import { calcLoaderWrapperHeight } from '../../utils/style'
 import useInfinityScroll from '../../hooks/useInfinityScroll'
 import useGetInfo from '../../hooks/tanstack/useGetInfo'
+import useArticleByFilter from '../../hooks/tanstack/useArticleByFilter'
+import useTestByFilter from '../../hooks/tanstack/useTestByFilter'
 
 type GetInfoType = {
   request: (id: string) => Promise<MenuListType>
@@ -41,29 +43,32 @@ type LibraryProps = {
 const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilter }) => {
   const { id } = useParams()
   const { button_color, button_text_color, text_color, bg_color, link_color } = useTgTheme()
-  const [isLoading, setLoading] = useState(true)
   const [dataMap, setDataMap] = useState<DataMap>(initDataMap)
+  const [isLoader, setLoader] = useState(true)
   const { ref } = useInfinityScroll()
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<ItemsUnion>()
   const { data: info } = useGetInfo({ request: getInfo.request, queryKey: getInfo.queryKey, id })
+  const { data: articlesList, isSuccess: isSuccessArticles } = useArticleByFilter({
+    request: getArticleByFilter.request,
+    params: { id },
+    queryKey: getArticleByFilter.queryKey
+  })
+  const { data: testsList, isSuccess: isSuccessTests } = useTestByFilter({
+    request: getTestByFilter.request,
+    params: { id },
+    queryKey: getTestByFilter.queryKey
+  })
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (id) {
-        const { result: articles } = await getArticleByFilter.request({ id })
-        const { result: tests } = await getTestByFilter.request({ id })
-        const dataMap: DataMap = {
-          [ARTICLE_KEY]: articles,
-          [TEST_KEY]: tests
-        }
-        setDataMap(dataMap)
-        setLoading(false)
-      }
+    if (!isSuccessArticles || !isSuccessTests) return
+    const dataMap: DataMap = {
+      [ARTICLE_KEY]: articlesList,
+      [TEST_KEY]: testsList
     }
-
-    fetchData()
-  }, [])
+    setDataMap(dataMap)
+    setLoader(false)
+  }, [articlesList, testsList])
 
   useEffect(() => {
     const findValues = async () => {
@@ -83,7 +88,7 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
     }
   }, [debouncedSearchValue])
 
-  if (isLoading) return <Loader />
+  if (isLoader) return <Loader />
 
   const handleSwitchTab = (key: TabsType) => {
     setSearchValue('')
