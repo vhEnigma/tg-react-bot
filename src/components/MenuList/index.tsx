@@ -42,10 +42,9 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, callback }) => {
     setRenderList([...renderList, ...response])
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
-      return
     }
 
-    setDownloadedPages(downloadedPages + 1)
+    // setDownloadedPages(downloadedPages + 1)
   }, [response])
 
   useEffect(() => {
