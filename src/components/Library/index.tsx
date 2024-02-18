@@ -55,24 +55,24 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
     params: { id, page: downloadedPages },
     queryKey: getArticleByFilter.queryKey
   })
-  const { data: testsList, isSuccess: isSuccessTests } = useMenuListByFilter<TestType>({
-    request: getTestByFilter.request,
-    params: { id, page: downloadedPages },
-    queryKey: getTestByFilter.queryKey
-  })
+  // const { data: testsList, isSuccess: isSuccessTests } = useMenuListByFilter<TestType>({
+  //   request: getTestByFilter.request,
+  //   params: { id, page: downloadedPages },
+  //   queryKey: getTestByFilter.queryKey
+  // })
 
   useEffect(() => {
-    if (!isSuccessArticles || !isSuccessTests) return
+    if (!isSuccessArticles) return
     const dataMap: DataMap = {
       [ARTICLE_KEY]: articlesList,
-      [TEST_KEY]: testsList
+      [TEST_KEY]: []
     }
     setDataMap(dataMap)
     if (dataMap[activeTab].length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     }
     setLoader(false)
-  }, [articlesList, testsList])
+  }, [articlesList])
 
   useEffect(() => {
     if (inView && !isStopInfinityScroll) {
