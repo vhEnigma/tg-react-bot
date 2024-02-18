@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
       try {
         const { initData } = window.Telegram.WebApp
         if (initData) {
-          const { token } = await UserService.loginUserRequest(initData)
+          const { token } = await UserService.loginUser(initData)
           TokenService.saveToken(token)
           return await axiosInstance.request(originalRequest)
         }

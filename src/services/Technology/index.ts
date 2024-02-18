@@ -5,7 +5,7 @@ import { IParams, IParamsWithId } from '../../types/params'
 import { getQueryString } from '../../utils/params'
 
 export class TechnologyService {
-  static async listTechnologyRequest(params: IParams) {
+  static async listTechnology(params: IParams) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.technologies}${queryString}`
 
@@ -13,7 +13,7 @@ export class TechnologyService {
     return response.result
   }
 
-  static async getTechnologyInfoRequest(id: string) {
+  static async getTechnologyInfo(id: string) {
     const url = `${Endpoints.technologies}/${id}`
 
     const { data: response } = await axiosInstance.get<MenuListType>(url)
@@ -21,7 +21,7 @@ export class TechnologyService {
     return response
   }
 
-  static async getArticleListByTechnologyRequest(params: IParamsWithId) {
+  static async getArticleListByTechnology(params: IParamsWithId) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.technologies}/${params.id}/courses${queryString}`
 
@@ -30,7 +30,7 @@ export class TechnologyService {
     return response
   }
 
-  static async getTestListByTechnologyRequest(params: IParamsWithId) {
+  static async getTestListByTechnology(params: IParamsWithId) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.technologies}/${params.id}/tests${queryString}`
 

@@ -6,7 +6,7 @@ type LoginUserResponseType = {
 }
 
 export class UserService {
-  static async loginUserRequest(initDataString: string) {
+  static async loginUser(initDataString: string) {
     const { data: response } = await axiosInstance.get<LoginUserResponseType>(Endpoints.user.login, {
       params: { initData: initDataString }
     })

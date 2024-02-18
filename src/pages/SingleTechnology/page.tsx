@@ -3,9 +3,9 @@ import Library from '../../components/Library'
 import { TechnologyService } from '../../services/Technology'
 
 const SingleTechnology: FC = () => {
-  const getInfo = TechnologyService.getTechnologyInfoRequest
-  const getArticleByFilter = TechnologyService.getArticleListByTechnologyRequest
-  const getTestByFilter = TechnologyService.getTestListByTechnologyRequest
+  const getInfo = TechnologyService.getTechnologyInfo
+  const getArticleByFilter = TechnologyService.getArticleListByTechnology
+  const getTestByFilter = TechnologyService.getTestListByTechnology
 
   return <Library getInfo={getInfo} getArticleByFilter={getArticleByFilter} getTestByFilter={getTestByFilter} />
 }

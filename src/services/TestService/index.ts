@@ -2,7 +2,7 @@ import { Endpoints } from '../client/endpoints'
 import { axiosInstance } from '../client/httpClient'
 
 export class TestService {
-  static async listTestRequest(page?: number) {
+  static async listTests(page?: number) {
     const pageNumber = page || 1
     const url = `${Endpoints.tests}?page=${pageNumber}`
 

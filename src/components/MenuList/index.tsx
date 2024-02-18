@@ -11,41 +11,42 @@ import NotFound from '../NotFound'
 import useInfinityScroll from '../../hooks/useInfinityScroll'
 import { calcLoaderWrapperHeight } from '../../utils/style'
 import { PAGE_SIZE } from '../../constants/common'
+import useMenuList from '../../hooks/tanstack/useMenuList'
 
 type DirectionsProps = {
   callback: (params: IParams) => Promise<MenuListType[]>
   route: string
+  queryKey: string
 }
 
-const MenuList: FC<DirectionsProps> = ({ route, callback }) => {
+const MenuList: FC<DirectionsProps> = ({ route, queryKey, callback }) => {
   const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
   const { button_color } = useTgTheme()
-  const [isLoading, setLoading] = useState(true)
+  // const [isLoading, setLoading] = useState(true)
   const [renderList, setRenderList] = useState<MenuListType[]>([])
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<MenuListType[]>()
   const navigate = useNavigate()
+  const {
+    isLoading,
+    data: response,
+    isSuccess
+  } = useMenuList({
+    callback,
+    params: { page: downloadedPages },
+    queryKey,
+    condition: inView && !isStopInfinityScroll
+  })
 
-  const fetchList = async () => {
-    const response = await callback({ page: downloadedPages })
+  useEffect(() => {
+    if (!isSuccess) return
     setRenderList([...renderList, ...response])
-    setLoading(false)
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
       return
     }
 
     setDownloadedPages(downloadedPages + 1)
-  }
-
-  useEffect(() => {
-    fetchList()
-  }, [])
-
-  useEffect(() => {
-    if (inView && !isStopInfinityScroll) {
-      fetchList()
-    }
-  }, [inView])
+  }, [response])
 
   useEffect(() => {
     const findValues = async () => {

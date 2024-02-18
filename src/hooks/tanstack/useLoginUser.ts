@@ -5,8 +5,8 @@ import { TokenService } from '../../services/TokenService'
 
 const useLoginUser = (tgData: string) => {
   const { data: token, isLoading } = useQuery({
-    queryKey: [QUERY_KEYS.loginUser, tgData],
-    queryFn: () => UserService.loginUserRequest(tgData),
+    queryKey: [QUERY_KEYS.user.loginUser, tgData],
+    queryFn: () => UserService.loginUser(tgData),
     select: (data) => data.token
   })
 
