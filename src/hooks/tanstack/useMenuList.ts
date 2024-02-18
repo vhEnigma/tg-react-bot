@@ -10,12 +10,12 @@ type useMenuProps = {
 }
 
 const useMenuList = (props: useMenuProps) => {
-  const { queryKey, condition, callback, params } = props
+  const { queryKey, callback, params } = props
   return useQuery({
     queryKey: [queryKey, params],
-    queryFn: () => callback(params),
-    enabled: condition ?? true,
-    refetchOnMount: true
+    queryFn: () => callback(params)
+    // enabled: condition ?? true,
+    // refetchOnMount: true
   })
 }
 
