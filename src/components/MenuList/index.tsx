@@ -22,7 +22,6 @@ type DirectionsProps = {
 const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
   const { button_color } = useTgTheme()
-  // const [isLoading, setLoading] = useState(true)
   const [renderList, setRenderList] = useState<MenuListType[]>([])
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<MenuListType[]>()
   const navigate = useNavigate()
@@ -36,6 +35,8 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
     queryKey
   })
 
+  const isLoadNextPage = inView && !isStopInfinityScroll
+
   useEffect(() => {
     if (!isSuccess) return
     setRenderList([...renderList, ...response])
@@ -45,7 +46,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   }, [response])
 
   useEffect(() => {
-    if (inView && !isStopInfinityScroll) {
+    if (isLoadNextPage) {
       setDownloadedPages(downloadedPages + 1)
     }
   }, [inView, isStopInfinityScroll])
@@ -63,7 +64,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
       setSearchList(null)
     }
   }, [debouncedSearchValue])
-
+  alert(isLoading)
   if (isLoading) return <Loader />
 
   const openItemHandle = (id: number) => {
@@ -78,7 +79,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
     const lastIndex = array.length - 1
     return array.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
-      const opacity = inView && !isStopInfinityScroll ? 0.3 : 1
+      const opacity = isLoadNextPage ? 0.3 : 1
       if (isLastElement) {
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
