@@ -14,12 +14,12 @@ import { PAGE_SIZE } from '../../constants/common'
 import useMenuList from '../../hooks/tanstack/useMenuList'
 
 type DirectionsProps = {
-  callback: (params: IParams) => Promise<MenuListType[]>
+  request: (params: IParams) => Promise<MenuListType[]>
   route: string
   queryKey: string
 }
 
-const MenuList: FC<DirectionsProps> = ({ route, queryKey, callback }) => {
+const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
   const { button_color } = useTgTheme()
   // const [isLoading, setLoading] = useState(true)
@@ -31,10 +31,9 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, callback }) => {
     data: response,
     isSuccess
   } = useMenuList({
-    callback,
+    request,
     params: { page: downloadedPages },
-    queryKey,
-    condition: inView && !isStopInfinityScroll
+    queryKey
   })
 
   useEffect(() => {
@@ -42,16 +41,19 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, callback }) => {
     setRenderList([...renderList, ...response])
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
-      return
     }
-
-    setDownloadedPages(downloadedPages)
   }, [response])
+
+  useEffect(() => {
+    if (inView && !isStopInfinityScroll) {
+      setDownloadedPages(downloadedPages + 1)
+    }
+  }, [inView, isStopInfinityScroll])
 
   useEffect(() => {
     const findValues = async () => {
       setSearch(true)
-      const response = await callback({ q: debouncedSearchValue, pageSize: 1000 })
+      const response = await request({ q: debouncedSearchValue, pageSize: 1000 })
       setSearchList(response)
       setSearch(false)
     }

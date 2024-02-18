@@ -3,19 +3,16 @@ import { IParams } from '../../types/params'
 import { MenuListType } from '../../types/menuList'
 
 type useMenuProps = {
-  callback: (params: IParams) => Promise<MenuListType[]>
+  request: (params: IParams) => Promise<MenuListType[]>
   params: IParams
   queryKey: string
-  condition: boolean
 }
 
 const useMenuList = (props: useMenuProps) => {
-  const { queryKey, callback, params } = props
+  const { queryKey, request, params } = props
   return useQuery({
     queryKey: [queryKey, params],
-    queryFn: () => callback(params)
-    // enabled: condition ?? true,
-    // refetchOnMount: true
+    queryFn: () => request(params)
   })
 }
 
