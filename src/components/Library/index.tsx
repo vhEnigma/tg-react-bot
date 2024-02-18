@@ -61,14 +61,15 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
   //   queryKey: getTestByFilter.queryKey
   // })
 
+  // const onStopFetchNextPage = () => {
+  //
+  // }
+
   useEffect(() => {
     if (!isSuccessArticles) return
-    const dataMap: DataMap = {
-      [ARTICLE_KEY]: articlesList,
-      [TEST_KEY]: []
-    }
-    setDataMap(dataMap)
-    if (dataMap[activeTab].length < PAGE_SIZE) {
+    const map: DataMap = { ...dataMap, [activeTab]: [...dataMap[activeTab], ...articlesList] }
+    setDataMap(map)
+    if (map[activeTab].length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     }
     setLoader(false)
