@@ -10,27 +10,32 @@ import { Navigation } from '../../components/Navigation'
 import {NAVIGATION_HEIGHT} from "../../constants/style.ts";
 import useLoginUser from "../../hooks/tanstack/useLoginUser.ts";
 
+const styles = {height: `calc(100vh - ${NAVIGATION_HEIGHT}px)`, overflow: 'auto'}
 
 const App: FC<PropsWithChildren> = () => {
-  const { tg } = useTelegram()
-  const {isLoading} = useLoginUser(tg.initData)
+    const { tg } = useTelegram()
+    const {isLoading} = useLoginUser(tg.initData)
 
-  const theme = createCustomTheme(tg)
+    const theme = createCustomTheme(tg)
 
-    if (isLoading) return <Loader />
-
-  return (
-      <ThemeProvider theme={theme}>
-        <Box className={style.container} style={{backgroundColor: theme.palette.customColors.secondary_bg_color.main}}>
-          <Container sx={{height: `calc(100vh - ${NAVIGATION_HEIGHT}px)`, overflow: 'auto'}}>
-            <Suspense fallback={<Loader />}>
-              <Outlet />
-            </Suspense>
-          </Container>
-          <Navigation />
+    if (isLoading) {
+        return <Box sx={styles}>
+            <Loader />
         </Box>
-      </ThemeProvider>
-  )
+    }
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Box className={style.container} style={{backgroundColor: theme.palette.customColors.secondary_bg_color.main}}>
+                <Container sx={styles}>
+                    <Suspense fallback={<Loader />}>
+                        <Outlet />
+                    </Suspense>
+                </Container>
+                <Navigation />
+            </Box>
+        </ThemeProvider>
+    )
 }
 
 export default App
