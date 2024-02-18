@@ -27,7 +27,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<MenuListType[]>()
   const navigate = useNavigate()
   const {
-    isLoading,
+    isFetching: isLoading,
     data: response,
     isSuccess
   } = useMenuList({
