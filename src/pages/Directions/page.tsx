@@ -5,9 +5,8 @@ import { DirectionService } from '../../services/Direction'
 import { RouteList } from '../../routes/routes'
 import { QUERY_KEYS } from '../../constants/tanstack'
 
-const Directions: FC = () => {
-  const callback = DirectionService.listDirection
-  return <MenuList route={RouteList.Directions} callback={callback} queryKey={QUERY_KEYS.direction.listDirection} />
-}
+const Directions: FC = () => (
+  <MenuList route={RouteList.Directions} request={DirectionService.listDirection} queryKey={QUERY_KEYS.direction.listDirection} />
+)
 
 export default Directions
