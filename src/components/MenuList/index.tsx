@@ -22,6 +22,7 @@ type DirectionsProps = {
 const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
   const { button_color } = useTgTheme()
+  const [isLoader, setLoader] = useState(true)
   const [renderList, setRenderList] = useState<MenuListType[]>([])
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<MenuListType[]>()
   const navigate = useNavigate()
@@ -43,6 +44,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     }
+    setLoader(false)
   }, [response])
 
   useEffect(() => {
@@ -64,8 +66,8 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
       setSearchList(null)
     }
   }, [debouncedSearchValue])
-  alert(isLoading)
-  if (isLoading) return <Loader />
+
+  if (isLoader) return <Loader />
 
   const openItemHandle = (id: number) => {
     navigate(`/${route}/${id}`)
@@ -79,7 +81,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
     const lastIndex = array.length - 1
     return array.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
-      const opacity = isLoadNextPage ? 0.3 : 1
+      const opacity = isLoading ? 0.3 : 1
       if (isLastElement) {
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
