@@ -36,8 +36,6 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
     queryKey
   })
 
-  const isLoadNextPage = inView && !isStopInfinityScroll
-
   useEffect(() => {
     if (!isSuccess) return
     setRenderList([...renderList, ...response])
@@ -48,7 +46,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   }, [response])
 
   useEffect(() => {
-    if (isLoadNextPage) {
+    if (inView && !isStopInfinityScroll) {
       setDownloadedPages(downloadedPages + 1)
     }
   }, [inView, isStopInfinityScroll])
