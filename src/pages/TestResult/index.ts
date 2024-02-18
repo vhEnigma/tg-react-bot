@@ -1,6 +1,5 @@
 import { lazy } from 'react'
 
-
-const TestResult = lazy(() => import('./page.tsx'))
+const TestResult = lazy(() => import('./page'))
 
 export default TestResult

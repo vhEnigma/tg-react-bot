@@ -1,6 +1,7 @@
 declare global {
   interface Window {
-    Telegram: any;
+    // eslint-disable-next-line
+        Telegram: any
   }
 }
 
@@ -8,7 +9,7 @@ const tg = window.Telegram.WebApp
 
 export const useTelegram = () => {
   tg.expand()
-  const user = tg.initDataUnsafe.user
+  const { user } = tg.initDataUnsafe
   console.log(tg)
   return {
     tg,

@@ -1,6 +1,5 @@
 import { lazy } from 'react'
 
-
-const SingleDirection = lazy(() => import('./page.tsx'))
+const SingleDirection = lazy(() => import('./page'))
 
 export default SingleDirection

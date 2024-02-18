@@ -1,26 +1,27 @@
-import { axiosInstance } from '../client/httpClient.ts'
-import {Endpoints} from "../client/endpoints.ts";
-import {ArticleType, MenuListType, ResultResponseType, TestType} from "../../types/menuList.ts";
-import {IParams, IParamsWithId} from "../../types/params.ts";
-import {getQueryString} from "../../utils/params.ts";
+import { axiosInstance } from '../client/httpClient'
+import { Endpoints } from '../client/endpoints'
+import { ArticleType, MenuListType, ResultResponseType, TestType } from '../../types/menuList'
+import { IParams, IParamsWithId } from '../../types/params'
+import { getQueryString } from '../../utils/params'
 
 export class TechnologyService {
-  static async listTechnologyRequest(params:IParams) {
+  static async listTechnologyRequest(params: IParams) {
     const queryString = getQueryString(params)
-    const url =  `${Endpoints.technologies}${queryString}`
+    const url = `${Endpoints.technologies}${queryString}`
 
     const { data: response } = await axiosInstance.get<ResultResponseType<MenuListType>>(url)
     return response.result
   }
 
-  static async getTechnologyInfoRequest (id:string) {
+  static async getTechnologyInfoRequest(id: string) {
     const url = `${Endpoints.technologies}/${id}`
 
     const { data: response } = await axiosInstance.get<MenuListType>(url)
 
     return response
   }
-  static async getArticleListByTechnologyRequest (params: IParamsWithId) {
+
+  static async getArticleListByTechnologyRequest(params: IParamsWithId) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.technologies}/${params.id}/courses${queryString}`
 
@@ -29,7 +30,7 @@ export class TechnologyService {
     return response
   }
 
-  static async getTestListByTechnologyRequest (params: IParamsWithId) {
+  static async getTestListByTechnologyRequest(params: IParamsWithId) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.technologies}/${params.id}/tests${queryString}`
 
@@ -37,5 +38,4 @@ export class TechnologyService {
 
     return response
   }
-
 }
