@@ -4,8 +4,7 @@ import {UserService} from "../../services/User";
 import {TokenService} from "../../services/TokenService";
 
 const useLoginUser = (tgData:string) => {
-    console.log(tgData, 'TG DATA')
-    const {data:token} = useQuery({
+    const {data:token, isLoading} = useQuery({
         queryKey: [QUERY_KEYS.loginUser, tgData],
         queryFn: () => UserService.loginUserRequest(tgData),
         select: ({token}) => token
@@ -14,6 +13,8 @@ const useLoginUser = (tgData:string) => {
     if (token) {
         TokenService.saveToken(token)
     }
+
+    return {isLoading}
 }
 
 export default useLoginUser
