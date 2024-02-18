@@ -14,7 +14,8 @@ const useMenuList = (props: useMenuProps) => {
   return useQuery({
     queryKey: [queryKey, params],
     queryFn: () => callback(params),
-    enabled: condition ?? true
+    enabled: condition ?? true,
+    refetchOnMount: true
   })
 }
 
