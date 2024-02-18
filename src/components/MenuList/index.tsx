@@ -35,6 +35,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   useEffect(() => {
     if (!isSuccess) return
     setRenderList([...renderList, ...response])
+    console.log(response, 'resp')
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     }

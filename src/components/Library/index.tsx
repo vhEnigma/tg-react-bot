@@ -110,6 +110,7 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
     setSearchValue('')
     setSearchList(null)
     setDownloadedPages(1)
+    setStopInfinityScroll(false)
     setActiveTab(key)
   }
 
