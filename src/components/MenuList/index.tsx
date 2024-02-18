@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import { Box, List, ListItemButton, ListItemText } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { QueryCache } from '@tanstack/react-query'
 import Search from '../Search'
 import Loader from '../Loader'
 import { MenuListType } from '../../types/menuList'
@@ -19,7 +18,6 @@ type DirectionsProps = {
   route: string
   queryKey: string
 }
-const queryCache = new QueryCache()
 
 const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
@@ -33,9 +31,6 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
     params: { page: downloadedPages },
     queryKey
   })
-
-  const query = queryCache.findAll({ queryKey: [queryKey] })
-  console.log(query, 'FUCKING CAHCE')
 
   useEffect(() => {
     if (!isSuccess) return
