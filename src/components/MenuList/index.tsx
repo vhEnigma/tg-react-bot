@@ -37,6 +37,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
     setRenderList([...renderList, ...response])
     console.log(response, 'resp')
     if (response.length < PAGE_SIZE) {
+      console.log('stop')
       setStopInfinityScroll(true)
     }
     setLoader(false)
@@ -44,6 +45,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
 
   useEffect(() => {
     if (inView && !isStopInfinityScroll) {
+      console.log(inView, 'inView', !isStopInfinityScroll, '!isStopInfinityScroll')
       setDownloadedPages(downloadedPages + 1)
     }
   }, [inView, isStopInfinityScroll])
