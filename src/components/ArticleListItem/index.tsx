@@ -11,14 +11,16 @@ type ArticleCardProps = {
   topic: string
   reading_time: number
   difficulty: number
+  callbackRef?: (node: Element | null | undefined) => void
 }
 
-const ArticleListItem: FC<ArticleCardProps> = ({ rating, topic, reading_time, difficulty }) => {
+const ArticleListItem: FC<ArticleCardProps> = ({ rating, topic, reading_time, difficulty, callbackRef }) => {
   const navigate = useNavigate()
   const { bg_color, text_color, button_color } = useTgTheme()
 
   return (
     <ListItemButton
+      ref={callbackRef}
       onClick={() => navigate(`/${RouteList.Article}`)}
       sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
     >

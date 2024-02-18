@@ -14,11 +14,28 @@ import { isArticleTypeArray, isTestTypeArray } from '../../utils/typeGuards'
 import ArticleListItem from '../ArticleListItem'
 import TestListItem from '../TestListItem'
 import { calcLoaderWrapperHeight } from '../../utils/style'
+import useInfinityScroll from '../../hooks/useInfinityScroll'
+import useGetInfo from '../../hooks/tanstack/useGetInfo'
+
+type GetInfoType = {
+  request: (id: string) => Promise<MenuListType>
+  queryKey: string
+}
+
+type GetArticleByFilter = {
+  request: (params: IParamsWithId) => Promise<ResultResponseType<ArticleType>>
+  queryKey: string
+}
+
+type GetTestByFilter = {
+  request: (params: IParamsWithId) => Promise<ResultResponseType<TestType>>
+  queryKey: string
+}
 
 type LibraryProps = {
-  getInfo: (id: string) => Promise<MenuListType>
-  getArticleByFilter: (params: IParamsWithId) => Promise<ResultResponseType<ArticleType>>
-  getTestByFilter: (params: IParamsWithId) => Promise<ResultResponseType<TestType>>
+  getInfo: GetInfoType
+  getArticleByFilter: GetArticleByFilter
+  getTestByFilter: GetTestByFilter
 }
 
 const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilter }) => {
@@ -26,17 +43,16 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
   const { button_color, button_text_color, text_color, bg_color, link_color } = useTgTheme()
   const [isLoading, setLoading] = useState(true)
   const [dataMap, setDataMap] = useState<DataMap>(initDataMap)
-  const [title, setTitle] = useState('')
+  const { ref } = useInfinityScroll()
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<ItemsUnion>()
+  const { data: info } = useGetInfo({ request: getInfo.request, queryKey: getInfo.queryKey, id })
 
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
-        const { name } = await getInfo(id)
-        const { result: articles } = await getArticleByFilter({ id })
-        const { result: tests } = await getTestByFilter({ id })
-        setTitle(name)
+        const { result: articles } = await getArticleByFilter.request({ id })
+        const { result: tests } = await getTestByFilter.request({ id })
         const dataMap: DataMap = {
           [ARTICLE_KEY]: articles,
           [TEST_KEY]: tests
@@ -53,8 +69,8 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
     const findValues = async () => {
       setSearch(true)
       const callbacks = {
-        [ARTICLE_KEY]: getArticleByFilter,
-        [TEST_KEY]: getTestByFilter
+        [ARTICLE_KEY]: getArticleByFilter.request,
+        [TEST_KEY]: getTestByFilter.request
       }
       const { result } = await callbacks[activeTab]({ id, q: debouncedSearchValue, pageSize: 20 })
       setSearchList(result)
@@ -88,18 +104,41 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
       )
     })
 
-  const renderTests = (array: ItemsUnion) => {
+  const renderTests = (array: ItemsUnion, callbackRef: (node: Element | null | undefined) => void) => {
     if (!isTestTypeArray(array)) return
-    return array.map((test) => {
+    const lastIndex = array.length - 1
+
+    return array.map((test, index) => {
       const { id, name, rating, difficulty } = test
+      const isLastElement = index === lastIndex
+
+      if (isLastElement) {
+        return <TestListItem key={id} name={name} rating={rating} difficulty={difficulty} callbackRef={callbackRef} />
+      }
+
       return <TestListItem key={id} name={name} rating={rating} difficulty={difficulty} />
     })
   }
 
-  const renderArticles = (array: ItemsUnion) => {
+  const renderArticles = (array: ItemsUnion, callbackRef: (node: Element | null | undefined) => void) => {
     if (!isArticleTypeArray(array)) return
-    return array.map((article) => {
+    const lastIndex = array.length - 1
+    return array.map((article, index) => {
       const { id, rating, topic, reading_time, difficulty } = article
+      const isLastElement = index === lastIndex
+
+      if (isLastElement) {
+        return (
+          <ArticleListItem
+            key={id}
+            rating={rating}
+            topic={topic}
+            reading_time={reading_time}
+            difficulty={difficulty}
+            callbackRef={callbackRef}
+          />
+        )
+      }
       return <ArticleListItem key={id} rating={rating} topic={topic} reading_time={reading_time} difficulty={difficulty} />
     })
   }
@@ -116,14 +155,14 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
     const list = dataMap[activeTab]
 
     const array = searchList || list
-    return rendersCallback[activeTab](array)
+    return rendersCallback[activeTab](array, ref)
   }
 
   return (
     <>
       <Box>
         <Typography component='h1' sx={{ color: text_color, textAlign: 'center', m: '20px 0', textTransform: 'uppercase' }}>
-          {title}
+          {info?.name}
         </Typography>
         <Container sx={{ display: 'flex', justifyContent: 'space-between', gap: '50px' }}>{renderTabs()}</Container>
         <Search value={searchValue} setValue={setSearchValue} />

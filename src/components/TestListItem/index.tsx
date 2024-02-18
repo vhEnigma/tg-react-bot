@@ -9,14 +9,16 @@ type TestListItemProps = {
   name: string
   difficulty: number
   rating: number
+  callbackRef?: (node: Element | null | undefined) => void
 }
 
-const TestListItem: FC<TestListItemProps> = ({ name, rating, difficulty }) => {
+const TestListItem: FC<TestListItemProps> = ({ name, rating, difficulty, callbackRef }) => {
   const { button_color, bg_color, text_color } = useTgTheme()
   const navigate = useNavigate()
 
   return (
     <ListItemButton
+      ref={callbackRef}
       onClick={() => navigate(`/${RouteList.Test}`)}
       sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
     >

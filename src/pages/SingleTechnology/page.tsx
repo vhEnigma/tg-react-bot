@@ -1,12 +1,19 @@
 import { FC } from 'react'
 import Library from '../../components/Library'
 import { TechnologyService } from '../../services/Technology'
+import { QUERY_KEYS } from '../../constants/tanstack'
 
-const SingleTechnology: FC = () => {
-  const getInfo = TechnologyService.getTechnologyInfo
-  const getArticleByFilter = TechnologyService.getArticleListByTechnology
-  const getTestByFilter = TechnologyService.getTestListByTechnology
-
-  return <Library getInfo={getInfo} getArticleByFilter={getArticleByFilter} getTestByFilter={getTestByFilter} />
-}
+const SingleTechnology: FC = () => (
+  <Library
+    getInfo={{ request: TechnologyService.getTechnologyInfo, queryKey: QUERY_KEYS.technology.getTechnologyInfo }}
+    getArticleByFilter={{
+      request: TechnologyService.getArticleListByTechnology,
+      queryKey: QUERY_KEYS.technology.getArticleListByTechnology
+    }}
+    getTestByFilter={{
+      request: TechnologyService.getTestListByTechnology,
+      queryKey: QUERY_KEYS.technology.getTestListByTechnology
+    }}
+  />
+)
 export default SingleTechnology
