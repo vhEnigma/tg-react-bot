@@ -50,13 +50,13 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<ItemsUnion>()
   const { data: info } = useGetInfo({ request: getInfo.request, queryKey: getInfo.queryKey, id })
-  const { data: articlesList, isSuccess: isSuccessArticles } = useMenuListByFilter<ArticleType>({
+  const { data: articlesList } = useMenuListByFilter<ArticleType>({
     request: getArticleByFilter.request,
     params: { id, page: downloadedPages },
     queryKey: getArticleByFilter.queryKey,
     enabled: activeTab === ARTICLE_KEY
   })
-  const { data: testsList, isSuccess: isSuccessTests } = useMenuListByFilter<TestType>({
+  const { data: testsList } = useMenuListByFilter<TestType>({
     request: getTestByFilter.request,
     params: { id, page: downloadedPages },
     queryKey: getTestByFilter.queryKey,
@@ -64,10 +64,10 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
   })
 
   useEffect(() => {
-    if (!isSuccessArticles || !isSuccessTests) return
+    // if (!isSuccessArticles || !isSuccessTests) return
     const dataMap: DataMap = {
-      [ARTICLE_KEY]: articlesList,
-      [TEST_KEY]: testsList
+      [ARTICLE_KEY]: articlesList || [],
+      [TEST_KEY]: testsList || []
     }
     setDataMap(dataMap)
     if (dataMap[activeTab].length < PAGE_SIZE) {
