@@ -68,8 +68,9 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
   useEffect(() => {
     if (!isSuccessArticles) return
     const map: DataMap = { ...dataMap, [activeTab]: [...dataMap[activeTab], ...articlesList] }
+    console.log(articlesList, 'articleList')
     setDataMap(map)
-    if (map[activeTab].length < PAGE_SIZE) {
+    if (articlesList.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     }
     setLoader(false)
