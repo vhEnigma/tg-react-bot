@@ -55,26 +55,30 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
     params: { id, page: downloadedPages },
     queryKey: getArticleByFilter.queryKey
   })
-  // const { data: testsList, isSuccess: isSuccessTests } = useMenuListByFilter<TestType>({
-  //   request: getTestByFilter.request,
-  //   params: { id, page: downloadedPages },
-  //   queryKey: getTestByFilter.queryKey
-  // })
+  const { data: testsList, isSuccess: isSuccessTests } = useMenuListByFilter<TestType>({
+    request: getTestByFilter.request,
+    params: { id, page: downloadedPages },
+    queryKey: getTestByFilter.queryKey
+  })
 
   // const onStopFetchNextPage = () => {
   //
   // }
 
   useEffect(() => {
-    if (!isSuccessArticles) return
-    const map: DataMap = { ...dataMap, [activeTab]: [...dataMap[activeTab], ...articlesList] }
-    console.log(articlesList, 'articleList')
+    if (!isSuccessArticles || !isSuccessTests) return
+    const arrayMap = {
+      [ARTICLE_KEY]: articlesList,
+      [TEST_KEY]: testsList
+    }
+    const map: DataMap = { ...dataMap, [activeTab]: [...dataMap[activeTab], ...arrayMap[activeTab]] }
+    console.log(arrayMap[activeTab], 'renderedList')
     setDataMap(map)
     if (articlesList.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     }
     setLoader(false)
-  }, [articlesList])
+  }, [articlesList, testsList])
 
   useEffect(() => {
     if (inView && !isStopInfinityScroll) {
