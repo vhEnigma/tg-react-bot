@@ -16,6 +16,7 @@ type ArticleCardProps = {
 const ArticleListItem: FC<ArticleCardProps> = ({rating, topic, reading_time, difficulty}) => {
     const navigate= useNavigate()
     const {bg_color, text_color, button_color} = useTgTheme()
+
     return <ListItemButton onClick={() => navigate(`/${RouteList.Article}`)} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
         <ListItemText primary={topic} />
         <ListItemIcon>
