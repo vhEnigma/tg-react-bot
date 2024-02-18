@@ -9,16 +9,14 @@ type useTestByFilterProps<T> = {
     page: number
   }
   queryKey: string
-  enabled: boolean
 }
 
 const useMenuListByFilter = <T>(props: useTestByFilterProps<T>) => {
-  const { request, params, queryKey, enabled } = props
+  const { request, params, queryKey } = props
   return useQuery({
     queryKey: [queryKey, params],
     queryFn: () => request(params),
-    select: ({ result }) => result,
-    enabled
+    select: ({ result }) => result
   })
 }
 
