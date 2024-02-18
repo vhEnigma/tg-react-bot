@@ -16,8 +16,8 @@ import TestListItem from '../TestListItem'
 import { calcLoaderWrapperHeight } from '../../utils/style'
 import useInfinityScroll from '../../hooks/useInfinityScroll'
 import useGetInfo from '../../hooks/tanstack/useGetInfo'
-import useArticleByFilter from '../../hooks/tanstack/useArticleByFilter'
-import useTestByFilter from '../../hooks/tanstack/useTestByFilter'
+import { PAGE_SIZE } from '../../constants/common'
+import useMenuListByFilter from '../../hooks/tanstack/useMenuByFilter'
 
 type GetInfoType = {
   request: (id: string) => Promise<MenuListType>
@@ -45,19 +45,22 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
   const { button_color, button_text_color, text_color, bg_color, link_color } = useTgTheme()
   const [dataMap, setDataMap] = useState<DataMap>(initDataMap)
   const [isLoader, setLoader] = useState(true)
-  const { ref } = useInfinityScroll()
+  const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
+
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<ItemsUnion>()
   const { data: info } = useGetInfo({ request: getInfo.request, queryKey: getInfo.queryKey, id })
-  const { data: articlesList, isSuccess: isSuccessArticles } = useArticleByFilter({
+  const { data: articlesList, isSuccess: isSuccessArticles } = useMenuListByFilter<ArticleType>({
     request: getArticleByFilter.request,
-    params: { id },
-    queryKey: getArticleByFilter.queryKey
+    params: { id, page: downloadedPages },
+    queryKey: getArticleByFilter.queryKey,
+    enabled: activeTab === ARTICLE_KEY
   })
-  const { data: testsList, isSuccess: isSuccessTests } = useTestByFilter({
+  const { data: testsList, isSuccess: isSuccessTests } = useMenuListByFilter<TestType>({
     request: getTestByFilter.request,
-    params: { id },
-    queryKey: getTestByFilter.queryKey
+    params: { id, page: downloadedPages },
+    queryKey: getTestByFilter.queryKey,
+    enabled: activeTab === TEST_KEY
   })
 
   useEffect(() => {
@@ -67,8 +70,17 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
       [TEST_KEY]: testsList
     }
     setDataMap(dataMap)
+    if (dataMap[activeTab].length < PAGE_SIZE) {
+      setStopInfinityScroll(true)
+    }
     setLoader(false)
   }, [articlesList, testsList])
+
+  useEffect(() => {
+    if (inView && !isStopInfinityScroll) {
+      setDownloadedPages(downloadedPages + 1)
+    }
+  }, [inView, isStopInfinityScroll])
 
   useEffect(() => {
     const findValues = async () => {
@@ -93,6 +105,7 @@ const Library: FC<LibraryProps> = ({ getInfo, getTestByFilter, getArticleByFilte
   const handleSwitchTab = (key: TabsType) => {
     setSearchValue('')
     setSearchList(null)
+    setDownloadedPages(1)
     setActiveTab(key)
   }
 
