@@ -26,11 +26,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
   const [renderList, setRenderList] = useState<MenuListType[]>([])
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<MenuListType[]>()
   const navigate = useNavigate()
-  const {
-    isLoading,
-    data: response,
-    isSuccess
-  } = useMenuList({
+  const { data: response, isSuccess } = useMenuList({
     request,
     params: { page: downloadedPages },
     queryKey
@@ -79,7 +75,7 @@ const MenuList: FC<DirectionsProps> = ({ route, queryKey, request }) => {
     const lastIndex = array.length - 1
     return array.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
-      const opacity = isLoading ? 0.3 : 1
+      const opacity = inView && !isStopInfinityScroll ? 0.3 : 1
       if (isLastElement) {
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
