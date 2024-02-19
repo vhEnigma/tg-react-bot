@@ -28,5 +28,3 @@ export type TestType = {
   difficulty: number
   rating: number
 }
-
-export type ItemsUnion = ArticleType[] | TestType[]
