@@ -12,15 +12,18 @@ import { MenuItemType } from '../../types/menuList'
 type MenuListProps<T> = {
   request: (params: IParams) => Promise<T[]>
   getItems: (props: RenderItemsProps<T>) => ReactNode
+  requestId?: string
 }
 
-const MenuList = <T extends MenuItemType>({ request, getItems }: MenuListProps<T>) => {
+const MenuList = <T extends MenuItemType>({ requestId, request, getItems }: MenuListProps<T>) => {
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
 
   useEffect(() => {
     const findValues = async () => {
       setSearch(true)
-      const response = await request({ q: debouncedSearchValue, pageSize: 1000 })
+      const params: IParams = { q: debouncedSearchValue, pageSize: 1000 }
+      if (requestId) params.id = requestId
+      const response = await request(params)
       setSearchList(response)
       setSearch(false)
     }
@@ -50,7 +53,7 @@ const MenuList = <T extends MenuItemType>({ request, getItems }: MenuListProps<T
           <Loader />
         ) : (
           <List component='div' aria-label='secondary mailbox folder'>
-            <InfinityScrollList<T> renderItems={renderItems} enabled={!searchValue} request={request} />
+            <InfinityScrollList<T> renderItems={renderItems} enabled={!searchValue} request={request} requestId={requestId} />
           </List>
         )}
       </Box>

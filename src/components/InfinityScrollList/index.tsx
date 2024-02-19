@@ -8,6 +8,7 @@ type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
   request: (params: IParams) => Promise<T[]>
   enabled: boolean
+  requestId?: string
 }
 
 export type RenderItemsProps<T> = {
@@ -15,12 +16,14 @@ export type RenderItemsProps<T> = {
   ref: (node?: Element | null | undefined) => void
 }
 
-const InfinityScrollList = <T extends MenuItemType>({ enabled, renderItems, request }: InfinityScrollListProps<T>) => {
+const InfinityScrollList = <T extends MenuItemType>({ enabled, requestId, renderItems, request }: InfinityScrollListProps<T>) => {
   const { ref, setStopInfinityScroll, downloadedPages, setDownloadedPages, isFetchingNextPage } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
 
   const fetchWrapper = async () => {
-    const response = await request({ page: downloadedPages })
+    const params: IParams = { page: downloadedPages }
+    if (requestId) params.id = requestId
+    const response = await request(params)
     setDataList((prev) => [...prev, ...response])
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)

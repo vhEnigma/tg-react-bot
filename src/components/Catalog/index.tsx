@@ -150,8 +150,8 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
 
   const renderMenuList = () => {
     const menuLists = {
-      [ARTICLE_KEY]: <MenuList<ArticleType> request={articlesByFilterRequest} getItems={renderArticles} />,
-      [TEST_KEY]: <MenuList<TestType> request={testsByFilterRequest} getItems={renderTests} />
+      [ARTICLE_KEY]: <MenuList<ArticleType> requestId={id} request={articlesByFilterRequest} getItems={renderArticles} />,
+      [TEST_KEY]: <MenuList<TestType> requestId={id} request={testsByFilterRequest} getItems={renderTests} />
     }
 
     return menuLists[activeTab]
