@@ -12,7 +12,6 @@ type InfinityScrollListProps<T> = {
 export type RenderItemsProps<T> = {
   dataList: T[]
   ref: (node?: Element | null | undefined) => void
-  isFetchingNextPage: boolean
 }
 
 const InfinityScrollList = <T extends Record<string, string | number>>({ enabled, renderItems, request }: InfinityScrollListProps<T>) => {
@@ -43,8 +42,7 @@ const InfinityScrollList = <T extends Record<string, string | number>>({ enabled
 
   const props: RenderItemsProps<T> = {
     dataList,
-    ref,
-    isFetchingNextPage
+    ref
   }
 
   return renderItems(props)
