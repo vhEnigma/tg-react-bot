@@ -3,10 +3,6 @@ import MenuList from '../../components/MenuList'
 import { TechnologyService } from '../../services/Technology'
 import { RouteList } from '../../routes/routes'
 
-const Technology: FC = () => {
-  const callback = TechnologyService.listTechnologyRequest
-  const route = RouteList.Technology
-  return <MenuList route={route} callback={callback} />
-}
+const Technology: FC = () => <MenuList route={RouteList.Technology} request={TechnologyService.listTechnologyRequest} />
 
 export default Technology

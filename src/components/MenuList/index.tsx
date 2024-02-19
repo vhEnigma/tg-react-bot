@@ -12,11 +12,11 @@ import { calcLoaderWrapperHeight } from '../../utils/style'
 import InfinityScrollList, { RenderItemsProps } from '../InfinityScrollList'
 
 type DirectionsProps = {
-  callback: (params: IParams) => Promise<MenuListType[]>
+  request: (params: IParams) => Promise<MenuListType[]>
   route: string
 }
 
-const MenuList: FC<DirectionsProps> = ({ route, callback }) => {
+const MenuList: FC<DirectionsProps> = ({ route, request }) => {
   const { button_color } = useTgTheme()
   const navigate = useNavigate()
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<MenuListType[]>()
@@ -24,7 +24,7 @@ const MenuList: FC<DirectionsProps> = ({ route, callback }) => {
   useEffect(() => {
     const findValues = async () => {
       setSearch(true)
-      const response = await callback({ q: debouncedSearchValue, pageSize: 1000 })
+      const response = await request({ q: debouncedSearchValue, pageSize: 1000 })
       setSearchList(response)
       setSearch(false)
     }
@@ -73,7 +73,7 @@ const MenuList: FC<DirectionsProps> = ({ route, callback }) => {
           <Loader />
         ) : (
           <List component='div' aria-label='secondary mailbox folder'>
-            <InfinityScrollList<MenuListType> renderItems={renderItems} enabled={!searchValue} request={callback} />
+            <InfinityScrollList<MenuListType> renderItems={renderItems} enabled={!searchValue} request={request} />
           </List>
         )}
       </Box>
