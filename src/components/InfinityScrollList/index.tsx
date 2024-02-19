@@ -46,7 +46,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     if (enabled) {
       fetchWrapper()
     }
-  }, [enabled])
+  }, [enabled, activeTab])
 
   useEffect(() => {
     console.log(isFetchingNextPage && enabled, 'isFetchingNextPage && enabled')
