@@ -8,14 +8,16 @@ import NotFound from '../NotFound'
 import { calcLoaderWrapperHeight } from '../../utils/style'
 import InfinityScrollList, { RenderItemsProps } from '../InfinityScrollList'
 import { MenuItemType } from '../../types/menuList'
+import { TabsType } from '../../pages/SingleDirection/types'
 
 type MenuListProps<T> = {
   request: (params: IParams) => Promise<T[]>
   getItems: (props: RenderItemsProps<T>) => ReactNode
   requestId?: string
+  activeTab?: TabsType
 }
 
-const MenuList = <T extends MenuItemType>({ requestId, request, getItems }: MenuListProps<T>) => {
+const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getItems }: MenuListProps<T>) => {
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
 
   useEffect(() => {
@@ -53,7 +55,13 @@ const MenuList = <T extends MenuItemType>({ requestId, request, getItems }: Menu
           <Loader />
         ) : (
           <List component='div' aria-label='secondary mailbox folder'>
-            <InfinityScrollList<T> renderItems={renderItems} enabled={!searchValue} request={request} requestId={requestId} />
+            <InfinityScrollList<T>
+              renderItems={renderItems}
+              enabled={!searchValue}
+              request={request}
+              activeTab={activeTab}
+              requestId={requestId}
+            />
           </List>
         )}
       </Box>
