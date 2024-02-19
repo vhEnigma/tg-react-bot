@@ -1,7 +1,6 @@
 import { FC, PropsWithChildren, Suspense, useEffect } from 'react'
 import { Box, Container } from '@mui/material'
 import { Outlet } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from '@mui/material/styles'
 import { useTelegram } from '../../hooks/useTelegram'
 import Loader from '../../components/Loader'
@@ -12,7 +11,6 @@ import { createCustomTheme } from '../../utils/theme'
 import { Navigation } from '../../components/Navigation'
 import { NAVIGATION_HEIGHT } from '../../constants/style'
 
-const queryClient = new QueryClient()
 const App: FC<PropsWithChildren> = () => {
   const { tg } = useTelegram()
 
@@ -29,18 +27,16 @@ const App: FC<PropsWithChildren> = () => {
   const theme = createCustomTheme(tg)
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <Box className={style.container} style={{ backgroundColor: theme.palette.customColors.secondary_bg_color.main }}>
-          <Container sx={{ height: `calc(100vh - ${NAVIGATION_HEIGHT}px)`, overflow: 'auto' }}>
-            <Suspense fallback={<Loader />}>
-              <Outlet />
-            </Suspense>
-          </Container>
-          <Navigation />
-        </Box>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <Box className={style.container} style={{ backgroundColor: theme.palette.customColors.secondary_bg_color.main }}>
+        <Container sx={{ height: `calc(100vh - ${NAVIGATION_HEIGHT}px)`, overflow: 'auto' }}>
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </Container>
+        <Navigation />
+      </Box>
+    </ThemeProvider>
   )
 }
 
