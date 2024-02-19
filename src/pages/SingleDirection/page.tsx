@@ -1,13 +1,13 @@
 import { FC } from 'react'
-import Library from '../../components/Library'
 import { DirectionService } from '../../services/Direction'
+import Catalog from '../../components/Catalog'
 
-const SingleDirection: FC = () => {
-  const getInfo = DirectionService.getDirectionInfoRequest
-  const getArticleByFilter = DirectionService.getArticleListByDirectionRequest
-  const getTestByFilter = DirectionService.getTestListByDirectionRequest
-
-  return <Library getInfo={getInfo} getArticleByFilter={getArticleByFilter} getTestByFilter={getTestByFilter} />
-}
+const SingleDirection: FC = () => (
+  <Catalog
+    getInfoRequest={DirectionService.getDirectionInfoRequest}
+    articlesByFilterRequest={DirectionService.getArticleListByDirectionRequest}
+    testsByFilterRequest={DirectionService.getTestListByDirectionRequest}
+  />
+)
 
 export default SingleDirection

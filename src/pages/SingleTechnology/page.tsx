@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import Library from '../../components/Library'
 import { TechnologyService } from '../../services/Technology'
+import Catalog from '../../components/Catalog'
 
-const SingleTechnology: FC = () => {
-  const getInfo = TechnologyService.getTechnologyInfoRequest
-  const getArticleByFilter = TechnologyService.getArticleListByTechnologyRequest
-  const getTestByFilter = TechnologyService.getTestListByTechnologyRequest
-
-  return <Library getInfo={getInfo} getArticleByFilter={getArticleByFilter} getTestByFilter={getTestByFilter} />
-}
+const SingleTechnology: FC = () => (
+  <Catalog
+    getInfoRequest={TechnologyService.getTechnologyInfoRequest}
+    articlesByFilterRequest={TechnologyService.getArticleListByTechnologyRequest}
+    testsByFilterRequest={TechnologyService.getTestListByTechnologyRequest}
+  />
+)
 export default SingleTechnology
