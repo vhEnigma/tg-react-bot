@@ -6,6 +6,7 @@ import { IParams } from '../../types/params'
 type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
   request: (params: IParams) => Promise<T[]>
+  enabled: boolean
 }
 
 export type RenderItemsProps<T> = {
@@ -14,7 +15,7 @@ export type RenderItemsProps<T> = {
   isFetchingNextPage: boolean
 }
 
-const InfinityScrollList = <T extends Record<string, string | number>>({ renderItems, request }: InfinityScrollListProps<T>) => {
+const InfinityScrollList = <T extends Record<string, string | number>>({ enabled, renderItems, request }: InfinityScrollListProps<T>) => {
   const { ref, inView, setStopInfinityScroll, downloadedPages, setDownloadedPages, isFetchingNextPage } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
 
@@ -29,11 +30,13 @@ const InfinityScrollList = <T extends Record<string, string | number>>({ renderI
   }
 
   useEffect(() => {
-    fetchWrapper()
+    if (enabled) {
+      fetchWrapper()
+    }
   }, [])
 
   useEffect(() => {
-    if (isFetchingNextPage) {
+    if (isFetchingNextPage && enabled) {
       fetchWrapper()
     }
   }, [inView])

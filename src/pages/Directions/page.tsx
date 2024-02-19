@@ -70,7 +70,11 @@ const Directions: FC = () => {
           <Loader />
         ) : (
           <List component='div' aria-label='secondary mailbox folder'>
-            <InfinityScrollList<MenuListType> renderItems={renderItems} request={DirectionService.listDirectionRequest} />
+            <InfinityScrollList<MenuListType>
+              renderItems={renderItems}
+              enabled={!!searchList}
+              request={DirectionService.listDirectionRequest}
+            />
           </List>
         )}
       </Box>
