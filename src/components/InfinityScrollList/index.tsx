@@ -46,9 +46,9 @@ const InfinityScrollList = <T extends MenuItemType>({
       setStopInfinityScroll(true)
     }
 
-    setDownloadedPages(downloadedPages + 1)
+    setDownloadedPages((prev) => prev + 1)
   }
-  console.log('render infinityScroll')
+
   useEffect(() => {
     console.log(enabled, 'enabled')
     if (enabled) {
