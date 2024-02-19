@@ -18,7 +18,7 @@ export type RenderItemsProps<T> = {
 const InfinityScrollList = <T extends Record<string, string | number>>({ renderItems, request }: InfinityScrollListProps<T>) => {
   const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
-
+  console.log(inView, 'component')
   const fetchWrapper = async () => {
     const response = await request({ page: downloadedPages })
     setDataList((prev) => [...prev, ...response])

@@ -22,13 +22,14 @@ const Directions: FC = () => {
     // if (Array.isArray(searchList) && searchList.length === 0) {
     //   return <NotFound />
     // }
-
+    console.log(inView, 'renderItems', ref, 'ref')
     // const array = searchList || renderList
     const lastIndex = renderList.length - 1
     return renderList.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
       const opacity = inView && !isStopInfinityScroll ? 0.3 : 1
       if (isLastElement) {
+        console.log(isLastElement, 'isLastElement', name, 'name')
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
             <ListItemText primary={name} />
