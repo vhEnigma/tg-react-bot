@@ -16,6 +16,7 @@ const Search: FC<SearchProps> = ({ value, setValue }) => {
 
   return (
     <TextField
+      autoComplete='off'
       value={value}
       onChange={onChange}
       InputLabelProps={{ style: { color: text_color } }}
