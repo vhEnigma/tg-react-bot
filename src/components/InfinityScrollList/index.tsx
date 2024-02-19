@@ -38,15 +38,13 @@ const InfinityScrollList = <T extends MenuItemType>({
       setStopInfinityScroll(true)
     }
 
-    if (!activeTab) {
-      setDownloadedPages(downloadedPages + 1)
-    }
+    setDownloadedPages(downloadedPages + 1)
   }
 
   useEffect(() => {
     console.log(activeTab, 'ACTIVETAB')
     if (activeTab) {
-      setDownloadedPages(1)
+      setDownloadedPages(0)
       setDataList([])
       fetchWrapper()
     }
