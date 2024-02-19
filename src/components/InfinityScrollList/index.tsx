@@ -33,13 +33,13 @@ const InfinityScrollList = <T extends Record<string, string | number>>({ enabled
     if (enabled) {
       fetchWrapper()
     }
-  }, [])
+  }, [enabled])
 
   useEffect(() => {
     if (isFetchingNextPage && enabled) {
       fetchWrapper()
     }
-  }, [inView])
+  }, [inView, enabled])
 
   const props: RenderItemsProps<T> = {
     dataList,
