@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import useInfinityScroll from '../../hooks/useInfinityScroll'
 import { PAGE_SIZE } from '../../constants/common'
 import { IParams } from '../../types/params'
+import { MenuItemType } from '../../types/menuList'
 
 type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
@@ -14,7 +15,7 @@ export type RenderItemsProps<T> = {
   ref: (node?: Element | null | undefined) => void
 }
 
-const InfinityScrollList = <T extends Record<string, string | number>>({ enabled, renderItems, request }: InfinityScrollListProps<T>) => {
+const InfinityScrollList = <T extends MenuItemType>({ enabled, renderItems, request }: InfinityScrollListProps<T>) => {
   const { ref, setStopInfinityScroll, downloadedPages, setDownloadedPages, isFetchingNextPage } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
 

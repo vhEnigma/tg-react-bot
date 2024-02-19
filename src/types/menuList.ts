@@ -1,3 +1,5 @@
+export type MenuItemType = Record<string, string | number>
+
 export type MenuListType = {
   id: number
   name: string
