@@ -1,5 +1,5 @@
-import { Endpoints } from '../client/endpoints.ts'
-import { axiosInstance } from '../client/httpClient.ts'
+import { Endpoints } from '../client/endpoints'
+import { axiosInstance } from '../client/httpClient'
 
 export class TestService {
   static async listTestRequest(page?: number) {
@@ -10,5 +10,4 @@ export class TestService {
 
     return response
   }
-
 }

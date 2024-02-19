@@ -4,12 +4,12 @@ import CorporateFareRounded from '@mui/icons-material/CorporateFareRounded'
 import GroupRounded from '@mui/icons-material/GroupRounded'
 import HomeRounded from '@mui/icons-material/HomeRounded'
 import { Paper } from '@mui/material'
-import {Link, useLocation} from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { FC, useState } from 'react'
-import { RouteList } from '../../routes/routes.ts'
-import useTgTheme from "../../hooks/useTgTheme.ts";
-import {getActiveRoute} from "../../utils/router.ts";
-import {NAVIGATION_HEIGHT} from "../../constants/style.ts";
+import { RouteList } from '../../routes/routes'
+import useTgTheme from '../../hooks/useTgTheme'
+import { getActiveRoute } from '../../utils/router'
+import { NAVIGATION_HEIGHT } from '../../constants/style'
 
 const tabsConfig = [
   {
@@ -33,12 +33,12 @@ const tabsConfig = [
 ]
 
 export const Navigation: FC = () => {
-  const {text_color, bg_color} = useTgTheme()
-  const {pathname} = useLocation()
+  const { text_color, bg_color } = useTgTheme()
+  const { pathname } = useLocation()
   const [value, setValue] = useState(getActiveRoute(pathname))
 
-  const getTabs = () => {
-    return tabsConfig.map((tab) => (
+  const getTabs = () =>
+    tabsConfig.map((tab) => (
       <BottomNavigationAction
         key={tab.id}
         component={Link}
@@ -51,18 +51,18 @@ export const Navigation: FC = () => {
         icon={<tab.IconComponent />}
       />
     ))
-  }
 
   return (
-    <Paper sx={{height: `${NAVIGATION_HEIGHT}px`}}>
+    <Paper sx={{ height: `${NAVIGATION_HEIGHT}px` }}>
       <BottomNavigation
-        component={'nav'}
+        component='nav'
         showLabels
         sx={{ backgroundColor: bg_color }}
         value={value}
         onChange={(_, newValue) => {
           setValue(newValue)
-        }}>
+        }}
+      >
         {getTabs()}
       </BottomNavigation>
     </Paper>

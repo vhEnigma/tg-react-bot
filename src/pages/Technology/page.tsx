@@ -1,8 +1,7 @@
 import { FC } from 'react'
-import MenuList from "../../components/MenuList";
-import {TechnologyService} from "../../services/Technology";
-import {RouteList} from "../../routes/routes.ts";
-
+import MenuList from '../../components/MenuList'
+import { TechnologyService } from '../../services/Technology'
+import { RouteList } from '../../routes/routes'
 
 const Technology: FC = () => {
   const callback = TechnologyService.listTechnologyRequest

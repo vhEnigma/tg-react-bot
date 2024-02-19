@@ -1,5 +1,4 @@
-import { TOKEN_KEY } from '../../constants/token.ts'
-
+import { TOKEN_KEY } from '../../constants/token'
 
 export class TokenService {
   static saveToken(token: string) {
@@ -9,5 +8,4 @@ export class TokenService {
   static removeToken() {
     localStorage.removeItem(TOKEN_KEY)
   }
-
 }

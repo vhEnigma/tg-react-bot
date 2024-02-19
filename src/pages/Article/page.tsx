@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 const Article: FC = () => {
   const navigate = useNavigate()
@@ -7,10 +7,12 @@ const Article: FC = () => {
   const handleBack = () => {
     navigate(-1)
   }
-  return <>
-    <button onClick={handleBack}>Назад </button>
-    <div>Article</div>
+  return (
+    <>
+      <button onClick={handleBack}>Назад </button>
+      <div>Article</div>
     </>
+  )
 }
 
 export default Article

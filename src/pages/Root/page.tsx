@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import {useTelegram} from "../../hooks/useTelegram.ts";
-import {Box, List, ListItemButton, ListItemText, Typography} from "@mui/material";
-import useTgTheme from "../../hooks/useTgTheme.ts";
+import { Box, List, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { useTelegram } from '../../hooks/useTelegram'
+import useTgTheme from '../../hooks/useTgTheme'
 
 const mock = [
   {
@@ -22,27 +22,32 @@ const mock = [
 ] as const
 
 const Root: FC = () => {
-  const {user:{username, first_name}} = useTelegram()
-  const {text_color, button_color} = useTgTheme()
+  const {
+    user: { username, first_name }
+  } = useTelegram()
+  const { text_color, button_color } = useTgTheme()
 
-  const getTestList = () => {
-    return mock.map(({id, progress, title}) => {
+  const getTestList = () =>
+    mock.map(({ id, progress, title }) => {
       const displayValue = `${title} - ${progress}`
-      return <ListItemButton key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-        <ListItemText primary={displayValue} />
-      </ListItemButton>
+      return (
+        <ListItemButton key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
+          <ListItemText primary={displayValue} />
+        </ListItemButton>
+      )
     })
-  }
 
   const title = `${first_name} (${username})`
-  return <Box>
-    <Typography component='h1' sx={{margin: '20px 0', textAlign: 'center', color: text_color}}>
-    {title}
-  </Typography>
-    <List component="div" aria-label="secondary mailbox folder">
-      {getTestList()}
-    </List>
-  </Box>
+  return (
+    <Box>
+      <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
+        {title}
+      </Typography>
+      <List component='div' aria-label='secondary mailbox folder'>
+        {getTestList()}
+      </List>
+    </Box>
+  )
 }
 
 export default Root

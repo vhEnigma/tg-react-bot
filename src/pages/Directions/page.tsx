@@ -1,8 +1,8 @@
-import {FC} from 'react'
+import { FC } from 'react'
 
-import MenuList from "../../components/MenuList";
-import {DirectionService} from "../../services/Direction";
-import {RouteList} from "../../routes/routes.ts";
+import MenuList from '../../components/MenuList'
+import { DirectionService } from '../../services/Direction'
+import { RouteList } from '../../routes/routes'
 
 const Directions: FC = () => {
   const callback = DirectionService.listDirectionRequest
