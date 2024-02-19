@@ -29,7 +29,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   const [dataList, setDataList] = useState<T[]>([])
 
   const fetchWrapper = async () => {
-    console.log('request')
+    console.log('request', downloadedPages, 'pages')
     const params: IParams = { page: downloadedPages }
     if (requestId) params.id = requestId
     const response = await request(params)
