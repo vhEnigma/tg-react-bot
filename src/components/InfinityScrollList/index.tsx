@@ -29,6 +29,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   const [dataList, setDataList] = useState<T[]>([])
 
   useEffect(() => {
+    console.log(activeTab, 'ACTIVETAB')
     if (activeTab) {
       setDownloadedPages(1)
     }
