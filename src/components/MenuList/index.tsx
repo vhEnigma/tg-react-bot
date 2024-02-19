@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import { Box, List, ListItemButton, ListItemText } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import Search from '../Search'
@@ -8,9 +8,9 @@ import useTgTheme from '../../hooks/useTgTheme'
 import { IParams } from '../../types/params'
 import useSearch from '../../hooks/useSearch'
 import NotFound from '../NotFound'
-import useInfinityScroll from '../../hooks/useInfinityScroll'
 import { calcLoaderWrapperHeight } from '../../utils/style'
-import { PAGE_SIZE } from '../../constants/common'
+import { DirectionService } from '../../services/Direction'
+import InfinityScrollList, { RenderItemsProps } from '../InfinityScrollList'
 
 type DirectionsProps = {
   callback: (params: IParams) => Promise<MenuListType[]>
@@ -18,34 +18,9 @@ type DirectionsProps = {
 }
 
 const MenuList: FC<DirectionsProps> = ({ route, callback }) => {
-  const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
   const { button_color } = useTgTheme()
-  const [isLoading, setLoading] = useState(true)
-  const [renderList, setRenderList] = useState<MenuListType[]>([])
-  const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<MenuListType[]>()
   const navigate = useNavigate()
-
-  const fetchList = async () => {
-    const response = await callback({ page: downloadedPages })
-    setRenderList([...renderList, ...response])
-    setLoading(false)
-    if (response.length < PAGE_SIZE) {
-      setStopInfinityScroll(true)
-      return
-    }
-
-    setDownloadedPages(downloadedPages + 1)
-  }
-
-  useEffect(() => {
-    fetchList()
-  }, [])
-
-  useEffect(() => {
-    if (inView && !isStopInfinityScroll) {
-      fetchList()
-    }
-  }, [inView])
+  const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<MenuListType[]>()
 
   useEffect(() => {
     const findValues = async () => {
@@ -61,30 +36,28 @@ const MenuList: FC<DirectionsProps> = ({ route, callback }) => {
     }
   }, [debouncedSearchValue])
 
-  if (isLoading) return <Loader />
-
   const openItemHandle = (id: number) => {
     navigate(`/${route}/${id}`)
   }
-  const getDirections = () => {
+  const renderItems = (props: RenderItemsProps<MenuListType>) => {
+    const { ref, dataList: renderList } = props
     if (Array.isArray(searchList) && searchList.length === 0) {
       return <NotFound />
     }
-
     const array = searchList || renderList
     const lastIndex = array.length - 1
+
     return array.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
-      const opacity = inView && !isStopInfinityScroll ? 0.3 : 1
       if (isLastElement) {
         return (
-          <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
+          <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
             <ListItemText primary={name} />
           </ListItemButton>
         )
       }
       return (
-        <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}`, opacity }}>
+        <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
           <ListItemText primary={name} />
         </ListItemButton>
       )
@@ -101,7 +74,11 @@ const MenuList: FC<DirectionsProps> = ({ route, callback }) => {
           <Loader />
         ) : (
           <List component='div' aria-label='secondary mailbox folder'>
-            {getDirections()}
+            <InfinityScrollList<MenuListType>
+              renderItems={renderItems}
+              enabled={!searchValue}
+              request={DirectionService.listDirectionRequest}
+            />
           </List>
         )}
       </Box>
