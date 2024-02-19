@@ -9,7 +9,6 @@ import { IParams } from '../../types/params'
 import useSearch from '../../hooks/useSearch'
 import NotFound from '../NotFound'
 import { calcLoaderWrapperHeight } from '../../utils/style'
-import { DirectionService } from '../../services/Direction'
 import InfinityScrollList, { RenderItemsProps } from '../InfinityScrollList'
 
 type DirectionsProps = {
@@ -74,11 +73,7 @@ const MenuList: FC<DirectionsProps> = ({ route, callback }) => {
           <Loader />
         ) : (
           <List component='div' aria-label='secondary mailbox folder'>
-            <InfinityScrollList<MenuListType>
-              renderItems={renderItems}
-              enabled={!searchValue}
-              request={DirectionService.listDirectionRequest}
-            />
+            <InfinityScrollList<MenuListType> renderItems={renderItems} enabled={!searchValue} request={callback} />
           </List>
         )}
       </Box>
