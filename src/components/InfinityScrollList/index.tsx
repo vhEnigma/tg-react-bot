@@ -32,6 +32,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     console.log(activeTab, 'ACTIVETAB')
     if (activeTab) {
       setDownloadedPages(1)
+      setDataList([])
     }
   }, [activeTab])
 
