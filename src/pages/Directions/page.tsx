@@ -35,15 +35,16 @@ const Directions: FC = () => {
     navigate(`/${RouteList.Directions}/${id}`)
   }
   const renderItems = (props: RenderItemsProps<MenuListType>) => {
-    const { inView, ref, isStopInfinityScroll, dataList: renderList } = props
+    const { ref, isFetchingNextPage, dataList: renderList } = props
     if (Array.isArray(searchList) && searchList.length === 0) {
       return <NotFound />
     }
     const array = searchList || renderList
     const lastIndex = array.length - 1
+    const opacity = isFetchingNextPage && !!searchList?.length ? 0.3 : 1
+
     return array.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
-      const opacity = inView && !isStopInfinityScroll ? 0.3 : 1
       if (isLastElement) {
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}`, opacity }}>

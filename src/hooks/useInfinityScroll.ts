@@ -7,8 +7,9 @@ const useInfinityScroll = () => {
   })
   const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(1)
-
+  const isFetchingNextPage = inView && !isStopInfinityScroll
   return {
+    isFetchingNextPage,
     ref,
     inView,
     isStopInfinityScroll,

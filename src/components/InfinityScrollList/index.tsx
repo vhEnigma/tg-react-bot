@@ -11,12 +11,11 @@ type InfinityScrollListProps<T> = {
 export type RenderItemsProps<T> = {
   dataList: T[]
   ref: (node?: Element | null | undefined) => void
-  inView: boolean
-  isStopInfinityScroll: boolean
+  isFetchingNextPage: boolean
 }
 
 const InfinityScrollList = <T extends Record<string, string | number>>({ renderItems, request }: InfinityScrollListProps<T>) => {
-  const { ref, inView, setStopInfinityScroll, isStopInfinityScroll, downloadedPages, setDownloadedPages } = useInfinityScroll()
+  const { ref, inView, setStopInfinityScroll, downloadedPages, setDownloadedPages, isFetchingNextPage } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
 
   const fetchWrapper = async () => {
@@ -34,7 +33,7 @@ const InfinityScrollList = <T extends Record<string, string | number>>({ renderI
   }, [])
 
   useEffect(() => {
-    if (inView && !isStopInfinityScroll) {
+    if (isFetchingNextPage) {
       fetchWrapper()
     }
   }, [inView])
@@ -42,8 +41,7 @@ const InfinityScrollList = <T extends Record<string, string | number>>({ renderI
   const props: RenderItemsProps<T> = {
     dataList,
     ref,
-    inView,
-    isStopInfinityScroll
+    isFetchingNextPage
   }
 
   return renderItems(props)
