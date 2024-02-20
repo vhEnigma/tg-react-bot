@@ -41,7 +41,7 @@ const Test: FC = () => {
           sx={{
             p: '10px',
             m: '10px',
-            textTransform: 'uppercase',
+            textTransform: 'capitalize',
             borderBottom: `2px solid ${section_bg_color}`,
             color: text_color
           }}
