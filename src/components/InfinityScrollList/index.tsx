@@ -47,6 +47,7 @@ const InfinityScrollList = <T extends MenuItemType>({
       console.log(activeTab, 'ACTIVETAB')
       setDownloadedPages(1)
       setDataList([])
+      setStopInfinityScroll(false)
       setCountSwitchTab((prev) => prev + 1)
     }
   }, [activeTab])
