@@ -45,7 +45,7 @@ const Test: FC = () => {
             borderBottom: `2px solid ${section_bg_color}`
           }}
         >
-          ${index + 1}.{text}
+          {index + 1}. {text}
         </Box>
       )
     })
