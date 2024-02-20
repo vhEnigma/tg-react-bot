@@ -15,7 +15,7 @@ const Article: FC = () => {
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [article, setArticle] = useState<ArticleType>()
-  const [userRating, setUserRating] = useState(3)
+  const [userRating, setUserRating] = useState(0)
 
   const handleBack = () => {
     navigate(-1)
@@ -36,6 +36,7 @@ const Article: FC = () => {
         technology_id: 1,
         direction_id: 1
       }
+      setUserRating(response.rating)
       setArticle(response)
       setLoading(false)
     }
@@ -47,7 +48,7 @@ const Article: FC = () => {
 
   if (isLoading || !article) return <Loader />
 
-  const handleChangeRating = async (event: SyntheticEvent<Element, Event>, newValue: number | null) => {
+  const handleChangeRating = async (_: SyntheticEvent<Element, Event>, newValue: number | null) => {
     if (!newValue || !id) return
     setUserRating(newValue)
 
