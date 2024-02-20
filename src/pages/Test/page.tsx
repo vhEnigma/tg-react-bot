@@ -64,7 +64,7 @@ const Test: FC = () => {
             {index + 1}. {text}
           </Typography>
           <Box sx={{ width: '100%' }}>
-            <Grid container rowSpacing={1} columnSpacing={1}>
+            <Grid container spacing={1}>
               {answers}
             </Grid>
           </Box>
