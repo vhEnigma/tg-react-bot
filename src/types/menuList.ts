@@ -27,4 +27,18 @@ export type TestType = {
   name: string
   difficulty: number
   rating: number
+  questions: QuestionType[]
+}
+
+export type AnswerType = {
+  id: number
+  text: string
+  is_correct: boolean
+  weight: number
+}
+
+export type QuestionType = {
+  id: number
+  text: string
+  answer_options: AnswerType[]
 }

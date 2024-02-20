@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Typography } from '@mui/material'
-import { TestType } from '../../types/menuList'
+import { QuestionType, TestType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import MenuItemInfo from '../../components/MenuItemInfo'
 import { TestService } from '../../services/TestService'
 
 const Test: FC = () => {
-  const { button_color, button_text_color, text_color } = useTgTheme()
+  const { button_color, button_text_color, text_color, section_bg_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
@@ -32,7 +32,17 @@ const Test: FC = () => {
     navigate(-1)
   }
 
-  const { name: title, rating, difficulty } = test
+  const getQuestionList = (questions: QuestionType[]) =>
+    questions.map((question) => {
+      const { id, text } = question
+      return (
+        <Box key={id} sx={{ textTransform: 'uppercase', borderBottom: `1px solid ${section_bg_color}` }}>
+          {text}
+        </Box>
+      )
+    })
+
+  const { name: title, rating, difficulty, questions } = test
 
   return (
     <>
@@ -58,6 +68,7 @@ const Test: FC = () => {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <MenuItemInfo rating={rating} difficulty={difficulty} />
       </Box>
+      {getQuestionList(questions)}
     </>
   )
 }
