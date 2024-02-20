@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Container, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Box, Button, Container, ListItemButton, ListItemText, Typography } from '@mui/material'
 import useTgTheme from '../../hooks/useTgTheme'
 import { ARTICLE_KEY, tabsConfig, TEST_KEY } from '../../pages/SingleDirection/constants'
 import { ArticleType, MenuListType, TestType } from '../../types/menuList'
@@ -61,9 +61,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const content = (
         <>
           <ListItemText primary={name} />
-          <ListItemIcon>
-            <MenuItemInfo rating={rating} difficulty={difficulty} />
-          </ListItemIcon>
+          <MenuItemInfo rating={rating} difficulty={difficulty} />
         </>
       )
 
