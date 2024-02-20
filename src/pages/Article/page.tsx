@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Rating, Typography } from '@mui/material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -12,6 +12,7 @@ const Article: FC = () => {
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [article, setArticle] = useState<ArticleType>()
+  const [userRating, setUserRating] = useState(0)
 
   const handleBack = () => {
     navigate(-1)
@@ -42,6 +43,11 @@ const Article: FC = () => {
   }, [])
 
   if (isLoading || !article) return <Loader />
+
+  const handleChangeRating = (event: SyntheticEvent<Element, Event>, newValue: number | null) => {
+    if (!newValue) return
+    setUserRating(newValue)
+  }
 
   const { topic: title, author, reading_time, rating, difficulty, article_link } = article
   const subtitle = `${author} | ${reading_time} мин | ${rating}/${difficulty}`
@@ -82,6 +88,7 @@ const Article: FC = () => {
           Читать статью
         </Button>
       </Box>
+      <Rating name='simple-controlled' value={userRating} onChange={handleChangeRating} />
     </>
   )
 }
