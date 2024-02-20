@@ -36,9 +36,9 @@ const InfinityScrollList = <T extends MenuItemType>({
     setDataList((prev) => [...prev, ...response])
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
+    } else {
+      setDownloadedPages(downloadedPages + 1)
     }
-
-    setDownloadedPages(downloadedPages + 1)
   }
 
   useEffect(() => {
