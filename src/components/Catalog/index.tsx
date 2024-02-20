@@ -100,7 +100,6 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
         <>
           <ListItemText primary={topic} />
           <MenuItemInfo rating={rating} reading_time={reading_time} difficulty={difficulty} />
-          <ListItemIcon />
         </>
       )
 
