@@ -42,7 +42,8 @@ const Test: FC = () => {
             p: '10px',
             m: '10px',
             textTransform: 'uppercase',
-            borderBottom: `2px solid ${section_bg_color}`
+            borderBottom: `2px solid ${section_bg_color}`,
+            color: text_color
           }}
         >
           {index + 1}. {text}
