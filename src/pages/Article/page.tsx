@@ -4,6 +4,7 @@ import { Box, Button, Typography } from '@mui/material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
+import ErrorBoundary from '../ErrorBoundary'
 
 const Article: FC = () => {
   const { button_color, button_text_color, text_color } = useTgTheme()
@@ -39,8 +40,8 @@ const Article: FC = () => {
     }
   }, [])
 
-  if (isLoading || !article) return <Loader />
-
+  if (isLoading) return <Loader />
+  if (!article) return <ErrorBoundary />
   const { topic: title, author, reading_time, rating, difficulty } = article
   const subtitle = `${author} | ${reading_time} мин | ${rating}/${difficulty}`
 
