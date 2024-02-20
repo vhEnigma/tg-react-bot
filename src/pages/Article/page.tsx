@@ -2,7 +2,7 @@ import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Rating, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { Star } from '@mui/icons-material'
+import { StarOutline } from '@mui/icons-material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -105,7 +105,7 @@ const Article: FC = () => {
           value={userRating}
           onChange={handleChangeRating}
           size='large'
-          emptyIcon={<Star sx={{ borderColor: 'red' }} />}
+          emptyIcon={<StarOutline sx={{ borderColor: 'red' }} fontSize='inherit' />}
         />
       </Box>
     </>
