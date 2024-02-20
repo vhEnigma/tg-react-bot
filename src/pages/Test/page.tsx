@@ -93,6 +93,11 @@ const Test: FC = () => {
         <MenuItemInfo rating={rating} difficulty={difficulty} />
       </Box>
       {getQuestionList(questions)}
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Button sx={{ mt: '20px', width: '50%' }} variant='contained'>
+          Отправить
+        </Button>
+      </Box>
     </>
   )
 }
