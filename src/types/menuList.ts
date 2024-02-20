@@ -1,4 +1,5 @@
-export type MenuItemType = Record<string, string | number>
+// eslint-disable-next-line
+export type MenuItemType = Record<string, any>
 
 export type MenuListType = {
   id: number
