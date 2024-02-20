@@ -56,10 +56,10 @@ const Article: FC = () => {
 
   const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-      color: '#ff6d75'
+      color: '#faaf00'
     },
     '& .MuiRating-iconHover': {
-      color: '#ff3d47'
+      color: '#f2ba39'
     }
   })
 
