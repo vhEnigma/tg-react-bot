@@ -72,7 +72,7 @@ const Article: FC = () => {
           {subtitle}
         </Typography>
       </Box>
-      <Box sx={{ m: '0 auto', width: '50%' }}>
+      <Box sx={{ m: '20px auto', width: '50%' }}>
         <Button
           onClick={() => openInNewTab(article_link)}
           fullWidth
