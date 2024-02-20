@@ -4,13 +4,12 @@ import { Box, Button, Typography } from '@mui/material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
-import ErrorBoundary from '../ErrorBoundary'
 
 const Article: FC = () => {
   const { button_color, button_text_color, text_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
-  const [isLoading] = useState(true)
+  const [isLoading, setLoading] = useState(true)
   const [article, setArticle] = useState<ArticleType>()
 
   const handleBack = () => {
@@ -33,6 +32,7 @@ const Article: FC = () => {
         direction_id: 1
       }
       setArticle(response)
+      setLoading(false)
     }
 
     if (id) {
@@ -40,8 +40,7 @@ const Article: FC = () => {
     }
   }, [])
 
-  if (isLoading) return <Loader />
-  if (!article) return <ErrorBoundary />
+  if (isLoading || !article) return <Loader />
   const { topic: title, author, reading_time, rating, difficulty } = article
   const subtitle = `${author} | ${reading_time} мин | ${rating}/${difficulty}`
 
