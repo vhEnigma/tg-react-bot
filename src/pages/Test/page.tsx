@@ -33,7 +33,7 @@ const Test: FC = () => {
   }
 
   const getQuestionList = (questions: QuestionType[]) =>
-    questions.map((question) => {
+    questions.map((question, index) => {
       const { id, text } = question
       return (
         <Box
@@ -45,7 +45,7 @@ const Test: FC = () => {
             borderBottom: `2px solid ${section_bg_color}`
           }}
         >
-          {text}
+          ${index + 1}.{text}
         </Box>
       )
     })
