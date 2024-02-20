@@ -2,6 +2,7 @@ import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Rating, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import { StarOutline } from '@mui/icons-material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -99,7 +100,13 @@ const Article: FC = () => {
         </Button>
       </Box>
       <Box sx={{ textAlign: 'center' }}>
-        <StyledRating name='simple-controlled' value={userRating} onChange={handleChangeRating} size='large' />
+        <StyledRating
+          name='simple-controlled'
+          value={userRating}
+          onChange={handleChangeRating}
+          size='large'
+          emptyIcon={<StarOutline sx={{ borderColor: 'red' }} fontSize='inherit' color='primary' />}
+        />
       </Box>
     </>
   )
