@@ -46,7 +46,12 @@ const Article: FC = () => {
 
   return (
     <>
-      <Button onClick={handleBack} fullWidth sx={{ backgroundColor: button_color, color: button_text_color }} variant='contained'>
+      <Button
+        onClick={handleBack}
+        fullWidth
+        sx={{ width: '25%', backgroundColor: button_color, color: button_text_color }}
+        variant='contained'
+      >
         Назад
       </Button>
       <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
