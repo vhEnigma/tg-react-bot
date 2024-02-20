@@ -56,6 +56,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   const renderTests = (props: RenderItemsProps<TestType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
+    const redirect = () => navigate(`/${RouteList.Test}/${id}`)
     return dataList.map((test) => {
       const { id, name, rating, difficulty } = test
       const content = (
@@ -67,22 +68,13 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
 
       if (lastIndex) {
         return (
-          <ListItemButton
-            key={id}
-            ref={ref}
-            onClick={() => navigate(`/${RouteList.Test}`)}
-            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-          >
+          <ListItemButton key={id} ref={ref} onClick={redirect} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
             {content}
           </ListItemButton>
         )
       }
       return (
-        <ListItemButton
-          key={id}
-          onClick={() => navigate(`/${RouteList.Test}`)}
-          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-        >
+        <ListItemButton key={id} onClick={redirect} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
           {content}
         </ListItemButton>
       )
@@ -92,6 +84,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
+    const redirect = () => navigate(`/${RouteList.Article}/${id}`)
     return dataList.map((article) => {
       const { id, rating, topic, reading_time, difficulty } = article
       const content = (
@@ -103,22 +96,13 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
 
       if (lastIndex) {
         return (
-          <ListItemButton
-            key={id}
-            ref={ref}
-            onClick={() => navigate(`/${RouteList.Article}/${id}`)}
-            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-          >
+          <ListItemButton key={id} ref={ref} onClick={redirect} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
             {content}
           </ListItemButton>
         )
       }
       return (
-        <ListItemButton
-          key={id}
-          onClick={() => navigate(`/${RouteList.Article}/${id}`)}
-          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-        >
+        <ListItemButton key={id} onClick={redirect} sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}>
           {content}
         </ListItemButton>
       )
