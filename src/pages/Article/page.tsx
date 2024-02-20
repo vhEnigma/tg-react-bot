@@ -4,6 +4,7 @@ import { Box, Button, Typography } from '@mui/material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
+import { openInNewTab } from '../../utils/common'
 
 const Article: FC = () => {
   const { button_color, button_text_color, text_color } = useTgTheme()
@@ -41,7 +42,8 @@ const Article: FC = () => {
   }, [])
 
   if (isLoading || !article) return <Loader />
-  const { topic: title, author, reading_time, rating, difficulty } = article
+
+  const { topic: title, author, reading_time, rating, difficulty, article_link } = article
   const subtitle = `${author} | ${reading_time} мин | ${rating}/${difficulty}`
 
   return (
@@ -70,6 +72,14 @@ const Article: FC = () => {
           {subtitle}
         </Typography>
       </Box>
+      <Button
+        onClick={() => openInNewTab(article_link)}
+        fullWidth
+        sx={{ m: '0 auto', width: '50%', backgroundColor: button_color, color: button_text_color }}
+        variant='contained'
+      >
+        Читать статью
+      </Button>
     </>
   )
 }
