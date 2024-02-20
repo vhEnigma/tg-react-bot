@@ -89,7 +89,7 @@ const Article: FC = () => {
         </Button>
       </Box>
       <Box sx={{ m: '0 auto' }}>
-        <Rating name='simple-controlled' value={userRating} onChange={handleChangeRating} />
+        <Rating name='simple-controlled' value={userRating} onChange={handleChangeRating} size='large' />
       </Box>
     </>
   )
