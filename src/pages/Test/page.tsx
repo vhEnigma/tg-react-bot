@@ -8,7 +8,7 @@ import MenuItemInfo from '../../components/MenuItemInfo'
 import { TestService } from '../../services/TestService'
 
 const Test: FC = () => {
-  const { button_color, button_text_color, text_color, section_bg_color } = useTgTheme()
+  const { button_color, button_text_color, text_color, section_bg_color, bg_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
@@ -38,7 +38,7 @@ const Test: FC = () => {
       return (
         <Grid key={id} item xs={6}>
           <Box sx={{ display: 'flex', gap: '10px' }}>
-            <Checkbox sx={{ backgroundColor: section_bg_color }} />
+            <Checkbox />
             <Typography sx={{ color: text_color }}>{text}</Typography>
           </Box>
         </Grid>
@@ -55,7 +55,8 @@ const Test: FC = () => {
           sx={{
             p: '10px',
             m: '10px',
-            borderBottom: `2px solid ${section_bg_color}`,
+            backgroundColor: section_bg_color,
+            borderBottom: `2px solid ${bg_color}`,
             color: text_color
           }}
         >
