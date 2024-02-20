@@ -9,6 +9,15 @@ import useTgTheme from '../../hooks/useTgTheme'
 import { openInNewTab } from '../../utils/common'
 import { ArticleService } from '../../services/ArticleService'
 
+const StyledRating = styled(Rating)({
+  '& .MuiRating-iconFilled': {
+    color: '#faaf00'
+  },
+  '& .MuiRating-iconHover': {
+    color: '#f2ba39'
+  }
+})
+
 const Article: FC = () => {
   const { button_color, button_text_color, text_color, link_color } = useTgTheme()
   const navigate = useNavigate()
@@ -57,15 +66,6 @@ const Article: FC = () => {
 
   const { topic: title, author, reading_time, rating, difficulty, article_link } = article
   const subtitle = `${author} | ${reading_time} мин | ${rating}/${difficulty}`
-
-  const StyledRating = styled(Rating)({
-    '& .MuiRating-iconFilled': {
-      color: '#faaf00'
-    },
-    '& .MuiRating-iconHover': {
-      color: '#f2ba39'
-    }
-  })
 
   return (
     <>

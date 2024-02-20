@@ -118,7 +118,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
                 {' '}
                 {difficulty}/{rating}
               </Typography>
-              <StarRateIcon sx={{ color: 'yellow' }} />
+              <StarRateIcon sx={{ color: '#faaf00' }} />
             </Box>
           </ListItemIcon>
         </>
