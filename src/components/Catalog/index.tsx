@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Container, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
-import StarRateIcon from '@mui/icons-material/StarRate'
 import useTgTheme from '../../hooks/useTgTheme'
 import { ARTICLE_KEY, tabsConfig, TEST_KEY } from '../../pages/SingleDirection/constants'
 import { ArticleType, MenuListType, TestType } from '../../types/menuList'
@@ -63,13 +62,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
         <>
           <ListItemText primary={name} />
           <ListItemIcon>
-            <Box sx={{ display: 'flex', gap: '10px' }}>
-              <Typography sx={{ color: text_color }} component='span'>
-                {' '}
-                {difficulty}/{rating}
-              </Typography>
-              <StarRateIcon sx={{ color: 'yellow' }} />
-            </Box>
+            <MenuItemInfo rating={rating} difficulty={difficulty} />
           </ListItemIcon>
         </>
       )

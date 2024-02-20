@@ -66,7 +66,6 @@ const Article: FC = () => {
   }
 
   const { topic: title, author, reading_time, rating, difficulty, article_link } = article
-  const subtitle = `${author} | ${reading_time} мин | ${rating}/${difficulty}`
 
   return (
     <>
@@ -90,10 +89,7 @@ const Article: FC = () => {
         {title}
       </Typography>
       <Box sx={{ margin: '0 auto', textAlign: 'center' }}>
-        <Typography component='span' sx={{ color: text_color }}>
-          {subtitle}
-        </Typography>
-        <MenuItemInfo rating={rating} reading_time={reading_time} difficulty={difficulty} />
+        <MenuItemInfo author={author} rating={rating} reading_time={reading_time} difficulty={difficulty} />
       </Box>
       <Box sx={{ m: '20px auto', width: '50%' }}>
         <Button
