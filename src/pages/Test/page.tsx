@@ -9,7 +9,9 @@ const Test: FC = () => {
   }
   return (
     <>
-      <button onClick={handleBack}>Назад </button>
+      <button type='submit' onClick={handleBack}>
+        Назад
+      </button>
       <div>Test</div>
     </>
   )
