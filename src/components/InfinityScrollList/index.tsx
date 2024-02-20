@@ -52,7 +52,7 @@ const InfinityScrollList = <T extends MenuItemType>({
 
   useEffect(() => {
     console.log(enabled, 'enabled')
-    if (enabled) {
+    if (enabled && !activeTab) {
       fetchWrapper()
     }
   }, [enabled])
