@@ -129,7 +129,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
           <ListItemButton
             key={id}
             ref={ref}
-            onClick={() => navigate(`/${RouteList.Article}`)}
+            onClick={() => navigate(`/${RouteList.Article}/${id}`)}
             sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
           >
             {content}
@@ -139,7 +139,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       return (
         <ListItemButton
           key={id}
-          onClick={() => navigate(`/${RouteList.Article}`)}
+          onClick={() => navigate(`/${RouteList.Article}/${id}`)}
           sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
         >
           {content}

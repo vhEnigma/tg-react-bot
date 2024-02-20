@@ -39,11 +39,11 @@ export const router = createBrowserRouter(
           element: <SingleTechnology />
         },
         {
-          path: RouteList.Article,
+          path: `${RouteList.Article}/:id`,
           element: <Article />
         },
         {
-          path: RouteList.Test,
+          path: `${RouteList.Test}/:id`,
           element: <Test />
         },
         {
