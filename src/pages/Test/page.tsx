@@ -38,7 +38,7 @@ const Test: FC = () => {
       return (
         <Grid key={id} item xs={6}>
           <Box>
-            <Checkbox inputProps={{ 'aria-label': 'Checkbox demo' }} />
+            <Checkbox sx={{ backgroundColor: section_bg_color }} inputProps={{ 'aria-label': 'Checkbox demo' }} />
             <Typography sx={{ color: text_color }}>{text}</Typography>
           </Box>
         </Grid>
