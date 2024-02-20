@@ -13,4 +13,12 @@ export class ArticleService {
 
     return response
   }
+
+  static async setRating(id: string, rating: number) {
+    const url = `${Endpoints.article.getSingle}/${id}/rating`
+
+    const { data: response } = await axiosInstance.put<ArticleType>(url, { rating })
+
+    return response
+  }
 }

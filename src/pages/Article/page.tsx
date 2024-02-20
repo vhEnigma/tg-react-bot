@@ -7,6 +7,7 @@ import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import { openInNewTab } from '../../utils/common'
+import { ArticleService } from '../../services/ArticleService'
 
 const Article: FC = () => {
   const { button_color, button_text_color, text_color, link_color } = useTgTheme()
@@ -46,9 +47,11 @@ const Article: FC = () => {
 
   if (isLoading || !article) return <Loader />
 
-  const handleChangeRating = (event: SyntheticEvent<Element, Event>, newValue: number | null) => {
-    if (!newValue) return
+  const handleChangeRating = async (event: SyntheticEvent<Element, Event>, newValue: number | null) => {
+    if (!newValue || !id) return
     setUserRating(newValue)
+
+    await ArticleService.setRating(id, newValue)
   }
 
   const { topic: title, author, reading_time, rating, difficulty, article_link } = article
