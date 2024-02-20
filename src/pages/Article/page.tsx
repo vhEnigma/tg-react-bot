@@ -72,14 +72,16 @@ const Article: FC = () => {
           {subtitle}
         </Typography>
       </Box>
-      <Button
-        onClick={() => openInNewTab(article_link)}
-        fullWidth
-        sx={{ m: '0 auto', width: '50%', backgroundColor: button_color, color: button_text_color }}
-        variant='contained'
-      >
-        Читать статью
-      </Button>
+      <Box sx={{ m: '0 auto', width: '50%' }}>
+        <Button
+          onClick={() => openInNewTab(article_link)}
+          fullWidth
+          sx={{ backgroundColor: button_color, color: button_text_color }}
+          variant='contained'
+        >
+          Читать статью
+        </Button>
+      </Box>
     </>
   )
 }
