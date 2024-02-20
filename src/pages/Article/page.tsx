@@ -13,7 +13,7 @@ const Article: FC = () => {
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [article, setArticle] = useState<ArticleType>()
-  const [userRating, setUserRating] = useState(0)
+  const [userRating, setUserRating] = useState(5)
 
   const handleBack = () => {
     navigate(-1)
