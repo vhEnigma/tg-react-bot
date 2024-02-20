@@ -36,7 +36,7 @@ const Test: FC = () => {
     questions.map((question) => {
       const { id, text } = question
       return (
-        <Box key={id} sx={{ p: '10px', textTransform: 'uppercase', borderBottom: `1px solid ${section_bg_color}` }}>
+        <Box key={id} sx={{ p: '10px', textTransform: 'uppercase', borderBottom: `2px solid ${section_bg_color}` }}>
           {text}
         </Box>
       )
