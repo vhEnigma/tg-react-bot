@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Container, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
-import { AccessTime } from '@mui/icons-material'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import useTgTheme from '../../hooks/useTgTheme'
 import { ARTICLE_KEY, tabsConfig, TEST_KEY } from '../../pages/SingleDirection/constants'
@@ -12,6 +11,7 @@ import MenuList from '../MenuList'
 import { RenderItemsProps } from '../InfinityScrollList'
 import { RouteList } from '../../routes/routes'
 import { IParams } from '../../types/params'
+import MenuItemInfo from '../MenuItemInfo'
 
 type CatalogProps = {
   getInfoRequest: (id: string) => Promise<MenuListType>
@@ -106,21 +106,8 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const content = (
         <>
           <ListItemText primary={topic} />
-          <ListItemIcon>
-            <Box sx={{ display: 'flex', gap: '10px' }}>
-              <Typography sx={{ color: text_color }}>{reading_time} мин.</Typography>
-              <AccessTime sx={{ color: text_color }} />
-              <Typography sx={{ color: text_color }} component='span'>
-                {' '}
-                |{' '}
-              </Typography>
-              <Typography sx={{ color: text_color }} component='span'>
-                {' '}
-                {difficulty}/{rating}
-              </Typography>
-              <StarRateIcon sx={{ color: 'yellow' }} />
-            </Box>
-          </ListItemIcon>
+          <MenuItemInfo rating={rating} reading_time={reading_time} difficulty={difficulty} />
+          <ListItemIcon />
         </>
       )
 

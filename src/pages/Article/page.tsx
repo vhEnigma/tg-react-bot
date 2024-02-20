@@ -8,6 +8,7 @@ import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import { openInNewTab } from '../../utils/common'
 import { ArticleService } from '../../services/ArticleService'
+import MenuItemInfo from '../../components/MenuItemInfo'
 
 const StyledRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
@@ -92,6 +93,7 @@ const Article: FC = () => {
         <Typography component='span' sx={{ color: text_color }}>
           {subtitle}
         </Typography>
+        <MenuItemInfo rating={rating} reading_time={reading_time} difficulty={difficulty} />
       </Box>
       <Box sx={{ m: '20px auto', width: '50%' }}>
         <Button
