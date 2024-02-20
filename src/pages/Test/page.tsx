@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Typography } from '@mui/material'
-import { QuestionType, TestType } from '../../types/menuList'
+import { Box, Button, Checkbox, Grid, Typography } from '@mui/material'
+import { AnswerType, QuestionType, TestType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import MenuItemInfo from '../../components/MenuItemInfo'
@@ -32,21 +32,41 @@ const Test: FC = () => {
     navigate(-1)
   }
 
+  const renderAnswers = (answers: AnswerType[]) =>
+    answers.map((answer) => {
+      const { id, text } = answer
+      return (
+        <Grid key={id} item xs={6}>
+          <Box>
+            <Checkbox />
+            <Typography sx={{ color: text_color }}>{text}</Typography>
+          </Box>
+        </Grid>
+      )
+    })
+
   const getQuestionList = (questions: QuestionType[]) =>
     questions.map((question, index) => {
-      const { id, text } = question
+      const { id, text, answer_options } = question
+      const answers = renderAnswers(answer_options)
       return (
         <Box
           key={id}
           sx={{
             p: '10px',
             m: '10px',
-            textTransform: 'capitalize',
             borderBottom: `2px solid ${section_bg_color}`,
             color: text_color
           }}
         >
-          {index + 1}. {text}
+          <Typography sx={{ color: text_color }}>
+            {index + 1}. {text}
+          </Typography>
+          <Box sx={{ width: '100%' }}>
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              {answers}
+            </Grid>
+          </Box>
         </Box>
       )
     })
