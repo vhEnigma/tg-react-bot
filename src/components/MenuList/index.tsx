@@ -36,6 +36,13 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
     }
   }, [debouncedSearchValue])
 
+  useEffect(() => {
+    if (activeTab) {
+      setSearchList(null)
+      setSearchValue('')
+    }
+  }, [activeTab])
+
   const renderItems = (props: RenderItemsProps<T>) => {
     if (Array.isArray(searchList) && searchList.length === 0) {
       return <NotFound />
