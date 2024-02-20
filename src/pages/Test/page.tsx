@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Checkbox, Grid, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Typography } from '@mui/material'
 import { AnswerType, QuestionType, TestType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -36,12 +36,10 @@ const Test: FC = () => {
     answers.map((answer) => {
       const { id, text } = answer
       return (
-        <Grid key={id} item xs={6}>
-          <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-            <Checkbox />
-            <Typography sx={{ color: text_color }}>{text}</Typography>
-          </Box>
-        </Grid>
+        <Box key={id} sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <Checkbox />
+          <Typography sx={{ color: text_color }}>{text}</Typography>
+        </Box>
       )
     })
 
@@ -63,11 +61,7 @@ const Test: FC = () => {
           <Typography sx={{ color: text_color }}>
             {index + 1}. {text}
           </Typography>
-          <Box sx={{ width: '100%' }}>
-            <Grid container spacing={1}>
-              {answers}
-            </Grid>
-          </Box>
+          <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>{answers}</Box>
         </Box>
       )
     })
