@@ -1,14 +1,12 @@
 import { Endpoints } from '../client/endpoints'
 import { axiosInstance } from '../client/httpClient'
-import { IParams } from '../../types/params'
-import { getQueryString } from '../../utils/params'
+import { TestType } from '../../types/menuList'
 
 export class TestService {
-  static async listTestRequest(params: IParams) {
-    const queryString = getQueryString(params)
-    const url = `${Endpoints.tests}${queryString}`
+  static async getTest(id: string) {
+    const url = `${Endpoints.tests}${id}`
 
-    const { data: response } = await axiosInstance.get(url)
+    const { data: response } = await axiosInstance.get<TestType>(url)
 
     return response
   }

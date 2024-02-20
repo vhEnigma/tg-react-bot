@@ -27,10 +27,6 @@ const Article: FC = () => {
   const [article, setArticle] = useState<ArticleType>()
   const [userRating, setUserRating] = useState(0)
 
-  const handleBack = () => {
-    navigate(-1)
-  }
-
   useEffect(() => {
     const fetch = async () => {
       // const response = await ArticleService.getSingleArticle({ id })
@@ -51,12 +47,14 @@ const Article: FC = () => {
       setLoading(false)
     }
 
-    if (id) {
-      fetch()
-    }
+    fetch()
   }, [])
 
   if (isLoading || !article) return <Loader />
+
+  const handleBack = () => {
+    navigate(-1)
+  }
 
   const handleChangeRating = async (_: SyntheticEvent<Element, Event>, newValue: number | null) => {
     if (!newValue || !id) return
