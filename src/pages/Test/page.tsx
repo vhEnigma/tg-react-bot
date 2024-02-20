@@ -94,7 +94,7 @@ const Test: FC = () => {
       </Box>
       {getQuestionList(questions)}
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Button sx={{ mt: '20px', width: '50%' }} variant='contained'>
+        <Button sx={{ mt: '20px', width: '50%', color: button_text_color, backgroundColor: button_color }} variant='contained'>
           Отправить
         </Button>
       </Box>
