@@ -37,7 +37,7 @@ const Test: FC = () => {
       const { id, text } = answer
       return (
         <Grid key={id} item xs={6}>
-          <Box sx={{ display: 'flex', gap: '10px' }}>
+          <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <Checkbox />
             <Typography sx={{ color: text_color }}>{text}</Typography>
           </Box>
