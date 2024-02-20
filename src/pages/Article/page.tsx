@@ -54,7 +54,15 @@ const Article: FC = () => {
       >
         Назад
       </Button>
-      <Typography component='h1' sx={{ margin: '20px 0 10px 0', textAlign: 'center', color: text_color }}>
+      <Typography
+        component='h1'
+        sx={{
+          margin: '20px 0 10px 0',
+          textAlign: 'center',
+          color: text_color,
+          textTransform: 'uppercase'
+        }}
+      >
         {title}
       </Typography>
       <Box sx={{ margin: '0 auto', textAlign: 'center' }}>
