@@ -1,6 +1,8 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Rating, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import { Star } from '@mui/icons-material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -52,6 +54,15 @@ const Article: FC = () => {
   const { topic: title, author, reading_time, rating, difficulty, article_link } = article
   const subtitle = `${author} | ${reading_time} мин | ${rating}/${difficulty}`
 
+  const StyledRating = styled(Rating)({
+    '& .MuiRating-iconFilled': {
+      color: '#ff6d75'
+    },
+    '& .MuiRating-iconHover': {
+      color: '#ff3d47'
+    }
+  })
+
   return (
     <>
       <Button
@@ -89,7 +100,13 @@ const Article: FC = () => {
         </Button>
       </Box>
       <Box sx={{ textAlign: 'center' }}>
-        <Rating name='simple-controlled' value={userRating} onChange={handleChangeRating} size='large' />
+        <StyledRating
+          name='simple-controlled'
+          value={userRating}
+          onChange={handleChangeRating}
+          size='large'
+          emptyIcon={<Star sx={{ borderColor: 'red' }} />}
+        />
       </Box>
     </>
   )
