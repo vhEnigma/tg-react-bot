@@ -10,7 +10,7 @@ const Test: FC = () => {
   return (
     <>
       <button type='submit' onClick={handleBack}>
-        Назад!
+        Назад
       </button>
       <div>Test</div>
     </>
