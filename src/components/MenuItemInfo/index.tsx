@@ -40,7 +40,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, difficulty,
       {getAuthor()}
       {getReadingTime()}
       <Typography sx={{ color: text_color }} component='span'>
-        {difficulty}/{rating}
+        {rating}/{difficulty}
       </Typography>
       <StarRateIcon sx={{ color: 'yellow' }} />
     </Box>
