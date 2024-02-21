@@ -5,7 +5,6 @@ import { IParams } from '../../types/params'
 import { MenuItemType } from '../../types/menuList'
 import { TabsType } from '../../pages/SingleDirection/types'
 import NotFound from '../NotFound'
-import Loader from '../Loader'
 
 type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
@@ -29,12 +28,7 @@ const InfinityScrollList = <T extends MenuItemType>({
 }: InfinityScrollListProps<T>) => {
   const { ref, setStopInfinityScroll, downloadedPages, setDownloadedPages, isFetchingNextPage } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
-  const [isFirstRender, setFirstRender] = useState(true)
   const [countSwitchTab, setCountSwitchTab] = useState(0) // todo костыль => выпилить
-
-  useEffect(() => {
-    setFirstRender(false)
-  }, [])
 
   const fetchWrapper = async () => {
     const params: IParams = { page: downloadedPages }
@@ -72,10 +66,6 @@ const InfinityScrollList = <T extends MenuItemType>({
   const props: RenderItemsProps<T> = {
     dataList,
     ref
-  }
-  console.log(isFirstRender, 'FIRST RENDER')
-  if (isFirstRender) {
-    return <Loader />
   }
 
   return dataList.length === 0 ? <NotFound /> : renderItems(props)
