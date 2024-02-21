@@ -8,8 +8,10 @@ import { openInNewTab } from '../../utils/common'
 import { ArticleService } from '../../services/ArticleService'
 import MenuItemInfo from '../../components/MenuItemInfo'
 import CustomRating from '../../components/CustomRating'
+import { useTelegram } from '../../hooks/useTelegram'
 
 const Article: FC = () => {
+  const { tg } = useTelegram()
   const { button_color, button_text_color, text_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
@@ -27,6 +29,7 @@ const Article: FC = () => {
     }
 
     fetch()
+    tg.backButton.show()
   }, [])
 
   if (isLoading || !article) return <Loader />

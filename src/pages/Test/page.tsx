@@ -10,7 +10,7 @@ import { useTelegram } from '../../hooks/useTelegram'
 import { RouteList } from '../../routes/routes'
 
 const Test: FC = () => {
-  const { user } = useTelegram()
+  const { tg, user } = useTelegram()
   const { button_color, button_text_color, text_color, section_bg_color, bg_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
@@ -33,6 +33,7 @@ const Test: FC = () => {
     }
 
     fetch()
+    tg.backButton.show()
   }, [])
 
   if (isLoading || !answersMap || !id || !test) return <Loader />
