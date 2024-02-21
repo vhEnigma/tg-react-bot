@@ -7,7 +7,6 @@ import { RouteList } from '../../routes/routes'
 import useTgTheme from '../../hooks/useTgTheme'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
 import { MenuListType } from '../../types/menuList'
-import NotFound from '../../components/NotFound'
 
 const Technology: FC = () => {
   const { button_color } = useTgTheme()
@@ -18,7 +17,6 @@ const Technology: FC = () => {
   }
   const getItems = (props: RenderItemsProps<MenuListType>) => {
     const { dataList, ref } = props
-    if (dataList.length === 0) return <NotFound />
     const lastIndex = dataList.length - 1
     return dataList.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex

@@ -4,6 +4,7 @@ import { PAGE_SIZE } from '../../constants/common'
 import { IParams } from '../../types/params'
 import { MenuItemType } from '../../types/menuList'
 import { TabsType } from '../../pages/SingleDirection/types'
+import Loader from '../Loader'
 
 type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
@@ -67,7 +68,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     ref
   }
 
-  return renderItems(props)
+  return dataList.length === 0 ? <Loader /> : renderItems(props)
 }
 
 export default InfinityScrollList
