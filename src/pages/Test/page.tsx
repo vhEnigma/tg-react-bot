@@ -21,7 +21,7 @@ const Test: FC = () => {
 
   useEffect(() => {
     if (tg.ready()) {
-      tg.backButton.show()
+      tg.BackButton.show()
     }
     const fetch = async () => {
       if (!id) return
