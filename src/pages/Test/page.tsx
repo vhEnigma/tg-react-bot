@@ -15,14 +15,14 @@ const Test: FC = () => {
   const [test, setTest] = useState<TestType>()
   const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
   const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
-
+  console.log(answersMap)
   useEffect(() => {
     const fetch = async () => {
       if (!id) return
       const response = await TestService.getTest(id)
       const map: Record<string, number[]> = {}
       response.questions.forEach(({ id }) => {
-        map[`${id}`] = []
+        map[id] = []
       })
       setTest(response)
       setAnswersMap(map)
@@ -85,7 +85,7 @@ const Test: FC = () => {
           <Typography sx={{ color: text_color }}>
             {index + 1}. {text}
           </Typography>
-          {isError && <Typography sx={{ color: text_color }}>Нужно ответить на вопрос</Typography>}
+          {isError && <Typography sx={{ color: 'red' }}>Нужно ответить на вопрос</Typography>}
           <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>{answers}</Box>
         </Box>
       )
