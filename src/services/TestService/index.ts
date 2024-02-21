@@ -12,7 +12,7 @@ export class TestService {
   }
 
   static async sendTest(data: Record<string, string | Record<string, number[]>>) {
-    const url = `${Endpoints.tests}/${data.id}`
+    const url = `${Endpoints.tests}/${data.id}/${data.tgId}`
     const { data: response } = await axiosInstance.post(url, data.answersMap)
 
     return response

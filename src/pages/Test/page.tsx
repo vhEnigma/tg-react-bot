@@ -6,8 +6,10 @@ import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import MenuItemInfo from '../../components/MenuItemInfo'
 import { TestService } from '../../services/TestService'
+import { useTelegram } from '../../hooks/useTelegram'
 
 const Test: FC = () => {
+  const { user } = useTelegram()
   const { button_color, button_text_color, text_color, section_bg_color, bg_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
@@ -90,7 +92,8 @@ const Test: FC = () => {
     })
 
   const onSendAnswers = async () => {
-    await TestService.sendTest({ answersMap, id })
+    const tgId = user.id
+    await TestService.sendTest({ answersMap, id, tgId })
   }
 
   const validateHandle = () => {
