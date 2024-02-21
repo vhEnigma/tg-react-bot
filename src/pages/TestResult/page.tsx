@@ -7,6 +7,7 @@ import { useTelegram } from '../../hooks/useTelegram'
 import useTgTheme from '../../hooks/useTgTheme'
 import CustomRating from '../../components/CustomRating'
 import ErrorBoundary from '../ErrorBoundary'
+import { TestService } from '../../services/TestService'
 
 const TestResult: FC = () => {
   const { text_color, section_bg_color } = useTgTheme()
@@ -23,7 +24,7 @@ const TestResult: FC = () => {
     if (!newValue || !id) return
     setUserRating(newValue)
 
-    // await Te.setRating(id, newValue)
+    await TestService.setRating(id, newValue)
   }
 
   const test = userInfo.test_results.find((test) => test.id === Number(id))

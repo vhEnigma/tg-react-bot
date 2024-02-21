@@ -17,4 +17,12 @@ export class TestService {
 
     return response
   }
+
+  static async setRating(id: string, rating: number) {
+    const url = `${Endpoints.tests}/${id}/rating`
+
+    const { data: response } = await axiosInstance.put<TestType>(url, { rating })
+
+    return response
+  }
 }
