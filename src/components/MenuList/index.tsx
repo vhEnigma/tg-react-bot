@@ -9,6 +9,7 @@ import { calcLoaderWrapperHeight } from '../../utils/style'
 import InfinityScrollList, { RenderItemsProps } from '../InfinityScrollList'
 import { MenuItemType } from '../../types/menuList'
 import { TabsType } from '../../pages/SingleDirection/types'
+import { useTelegram } from '../../hooks/useTelegram'
 
 type MenuListProps<T> = {
   request: (params: IParams) => Promise<T[]>
@@ -19,7 +20,7 @@ type MenuListProps<T> = {
 
 const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getItems }: MenuListProps<T>) => {
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
-
+  const { tg } = useTelegram()
   useEffect(() => {
     const findValues = async () => {
       setSearch(true)
@@ -45,6 +46,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
 
   const renderItems = (props: RenderItemsProps<T>) => {
     if (Array.isArray(searchList) && searchList.length === 0) {
+      tg.HapticFeedback.notificationOccurred('error')
       return <NotFound />
     }
     const array = searchList || props.dataList
