@@ -61,7 +61,7 @@ const Test: FC = () => {
       const { id, text } = answer
 
       return (
-        <FormGroup key={id} sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <FormGroup key={id} sx={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
           <FormControlLabel
             control={<Checkbox onChange={(event) => onChangeHandler(event, questionId, id)} />}
             label={<Typography sx={{ color: text_color }}>{text}</Typography>}
