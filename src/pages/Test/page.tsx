@@ -21,6 +21,7 @@ const Test: FC = () => {
 
   useEffect(() => {
     tg.BackButton.show()
+    tg.BackButton.onClick(() => navigate(-1))
     const fetch = async () => {
       if (!id) return
       const response = await TestService.getTest(id)
@@ -37,10 +38,6 @@ const Test: FC = () => {
   }, [])
 
   if (isLoading || !answersMap || !id || !test) return <Loader />
-
-  const handleBack = () => {
-    navigate(-1)
-  }
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>, questionId: number, answerId: number) => {
     const { checked } = event.target
@@ -126,14 +123,6 @@ const Test: FC = () => {
 
   return (
     <>
-      <Button
-        onClick={handleBack}
-        fullWidth
-        sx={{ mt: '20px', width: '25%', backgroundColor: button_color, color: button_text_color }}
-        variant='contained'
-      >
-        Назад
-      </Button>
       <Typography
         component='h1'
         sx={{

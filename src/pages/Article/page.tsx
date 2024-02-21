@@ -21,6 +21,7 @@ const Article: FC = () => {
 
   useEffect(() => {
     tg.BackButton.show()
+    tg.BackButton.onClick(() => navigate(-1))
     const fetch = async () => {
       if (!id) return
       const response = await ArticleService.getSingleArticle(id)
@@ -34,10 +35,6 @@ const Article: FC = () => {
 
   if (isLoading || !article) return <Loader />
 
-  const handleBack = () => {
-    navigate(-1)
-  }
-
   const handleChangeRating = async (_: SyntheticEvent<Element, Event>, newValue: number | null) => {
     if (!newValue || !id) return
     setUserRating(newValue)
@@ -49,14 +46,6 @@ const Article: FC = () => {
 
   return (
     <>
-      <Button
-        onClick={handleBack}
-        fullWidth
-        sx={{ mt: '20px', width: '25%', backgroundColor: button_color, color: button_text_color }}
-        variant='contained'
-      >
-        Назад
-      </Button>
       <Typography
         component='h1'
         sx={{
