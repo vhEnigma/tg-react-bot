@@ -20,6 +20,7 @@ export type TestResult = {
   id: number
   name: string
   result: number
+  rating: number
 }
 
 export class UserService {

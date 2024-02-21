@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useState } from 'react'
+import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Typography } from '@mui/material'
 import useUserInfo from '../../hooks/useUserInfo'
@@ -16,8 +16,20 @@ const TestResult: FC = () => {
   const { userInfo, isLoading } = useUserInfo(user.id)
   const [userRating, setUserRating] = useState(0)
 
+  const test = userInfo?.test_results.find((test) => test.id === Number(id))
+
+  useEffect(() => {
+    if (test) {
+      setUserRating(test.rating)
+    }
+  }, [test])
+
   if (isLoading || !userInfo) {
     return <Loader />
+  }
+
+  if (!test) {
+    return <ErrorBoundary />
   }
 
   const handleChangeRating = async (_: SyntheticEvent<Element, Event>, newValue: number | null) => {
@@ -27,11 +39,6 @@ const TestResult: FC = () => {
     await TestService.setRating(id, newValue)
   }
 
-  const test = userInfo.test_results.find((test) => test.id === Number(id))
-
-  if (!test) {
-    return <ErrorBoundary />
-  }
   return (
     <Box>
       <Typography component='h1' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
