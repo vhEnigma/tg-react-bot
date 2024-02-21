@@ -17,14 +17,18 @@ const Test: FC = () => {
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [test, setTest] = useState<TestType>()
-  // const [answersMap, setAnswersMap] = useState()
+  const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
 
   useEffect(() => {
     const fetch = async () => {
       if (!id) return
       const response = await TestService.getTest(id)
-
+      const map: Record<string, number[]> = {}
+      response.questions.forEach(({ id }) => {
+        map[`${id}`] = []
+      })
       setTest(response)
+      setAnswersMap(map)
       setLoading(false)
     }
 
@@ -38,7 +42,17 @@ const Test: FC = () => {
   }
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>, questionId: number, answerId: number) => {
-    console.log(event.target.checked, questionId, 'questionId', answerId, 'answerId')
+    const { checked } = event.target
+    if (!answersMap) return
+    const map = { ...answersMap }
+    if (checked) {
+      map[`${questionId}`].push(answerId)
+    } else {
+      map[`${questionId}`] = map[`${questionId}`].filter((number) => number !== answerId)
+    }
+
+    setAnswersMap(map)
+    console.log(event.target.checked, questionId, 'questionId', answerId, 'answerId', answersMap, 'answersMap')
   }
 
   const renderAnswers = (answers: AnswerType[], questionId: number) =>
