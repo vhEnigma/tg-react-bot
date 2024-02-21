@@ -1,7 +1,9 @@
 import { FC } from 'react'
+import { useParams } from 'react-router-dom'
 
-type TestResultProps = {}
-
-const TestResult: FC<TestResultProps> = () => <div>TestResult</div>
+const TestResult: FC = () => {
+  const { id } = useParams()
+  return <div>{`TestResult ${id}`}</div>
+}
 
 export default TestResult

@@ -47,7 +47,7 @@ export const router = createBrowserRouter(
           element: <Test />
         },
         {
-          path: RouteList.TestResult,
+          path: `${RouteList.TestResult}/:id`,
           element: <TestResult />
         }
       ]
