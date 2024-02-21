@@ -73,7 +73,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     dataList,
     ref
   }
-
+  console.log(isFirstRender, 'FIRST RENDER')
   if (isFirstRender) {
     return <Loader />
   }
