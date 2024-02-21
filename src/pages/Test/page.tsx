@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Checkbox, Typography } from '@mui/material'
+import { Box, Button, Checkbox, FormControlLabel, FormGroup, Typography } from '@mui/material'
 import { AnswerType, QuestionType, TestType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -59,11 +59,12 @@ const Test: FC = () => {
   const renderAnswers = (answers: AnswerType[], questionId: number) =>
     answers.map((answer) => {
       const { id, text } = answer
+      /* <Typography sx={{ color: text_color }}>{text}</Typography> */
+
       return (
-        <Box key={id} sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <Checkbox aria-label={text} onChange={(event) => onChangeHandler(event, questionId, id)} />
-          {/* <Typography sx={{ color: text_color }}>{text}</Typography> */}
-        </Box>
+        <FormGroup key={id} sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <FormControlLabel control={<Checkbox onChange={(event) => onChangeHandler(event, questionId, id)} />} label={text} />
+        </FormGroup>
       )
     })
 
