@@ -38,7 +38,7 @@ const Test: FC = () => {
   }
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>, questionId: number, answerId: number) => {
-    console.log(event, questionId, 'questionId', answerId, 'answerId')
+    console.log(event.target.checked, questionId, 'questionId', answerId, 'answerId')
   }
 
   const renderAnswers = (answers: AnswerType[], questionId: number) =>
