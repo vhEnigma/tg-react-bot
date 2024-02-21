@@ -6,7 +6,7 @@ export const Endpoints = {
     getSingle: 'courses'
   },
   user: {
-    getUser: 'user',
+    getUser: 'users',
     login: 'login'
   }
 }
