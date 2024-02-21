@@ -19,19 +19,7 @@ const Article: FC = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      // const response = await ArticleService.getSingleArticle({ id })
-      const response: ArticleType = {
-        id: 1,
-        topic: 'Статья1',
-        author: 'автор',
-        reading_time: 5,
-        article_link:
-          'https://telegraf.news/world-news/davajte-perestanem-nyt-premer-niderlandov-prizval-liderov-evropy-gotovitsya-k-pobede-trampa/',
-        rating: 3,
-        difficulty: 5,
-        technology_id: 1,
-        direction_id: 1
-      }
+      const response = await ArticleService.getSingleArticle({ id })
       setUserRating(response.rating)
       setArticle(response)
       setLoading(false)
