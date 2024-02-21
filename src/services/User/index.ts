@@ -12,4 +12,9 @@ export class UserService {
     })
     return response
   }
+
+  static async getUserInfo(id: number) {
+    const { data: response } = await axiosInstance.get<LoginUserResponseType>(`${Endpoints.user.getUser}/${id}`)
+    return response
+  }
 }
