@@ -6,6 +6,7 @@ import Loader from '../../components/Loader'
 import { useTelegram } from '../../hooks/useTelegram'
 import useTgTheme from '../../hooks/useTgTheme'
 import CustomRating from '../../components/CustomRating'
+import ErrorBoundary from '../ErrorBoundary'
 
 const TestResult: FC = () => {
   const { text_color, section_bg_color } = useTgTheme()
@@ -25,12 +26,15 @@ const TestResult: FC = () => {
     // await Te.setRating(id, newValue)
   }
 
-  const { result, name } = userInfo.test_results.find((test) => test.id === Number(id))!
+  const test = userInfo.test_results.find((test) => test.id === Number(id))
 
+  if (!test) {
+    return <ErrorBoundary />
+  }
   return (
     <Box>
       <Typography component='h1' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
-        {name}
+        {test.name}
       </Typography>
 
       <Typography component='p' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
@@ -51,7 +55,7 @@ const TestResult: FC = () => {
           alignItems: 'center',
           fontSize: '40px'
         }}
-      >{`${result} %`}</Box>
+      >{`${test.result} %`}</Box>
       <Typography component='p' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
         Результат теста
       </Typography>
