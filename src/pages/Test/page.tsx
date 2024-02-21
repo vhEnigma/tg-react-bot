@@ -115,7 +115,7 @@ const Test: FC = () => {
     if (validateErrors.length === 0) {
       onSendAnswers()
     } else {
-      tg.HapticFeedback.HapticFeedback('heavy')
+      tg.HapticFeedback.impactOccurred('heavy')
       setErrorQuestionIds(validateErrors)
     }
   }
