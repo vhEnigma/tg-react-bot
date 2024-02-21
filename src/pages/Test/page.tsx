@@ -153,7 +153,7 @@ const Test: FC = () => {
           variant='contained'
           disabled={isLoad}
         >
-          {isLoad ? <Loader /> : Отправить}
+          {isLoad ? <Loader /> : 'Отправить'}
         </Button>
       </Box>
     </>
