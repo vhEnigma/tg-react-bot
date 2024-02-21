@@ -52,8 +52,10 @@ const Test: FC = () => {
     }
 
     setAnswersMap(map)
-    console.log(event.target.checked, questionId, 'questionId', answerId, 'answerId', answersMap, 'answersMap')
+    console.log(event.target.checked, questionId, 'questionId', answerId, 'answerId', map, 'map')
   }
+
+  console.log(answersMap, 'answersMap')
 
   const renderAnswers = (answers: AnswerType[], questionId: number) =>
     answers.map((answer) => {
