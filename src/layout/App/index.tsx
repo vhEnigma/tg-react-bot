@@ -12,11 +12,10 @@ import { Navigation } from '../../components/Navigation'
 import { NAVIGATION_HEIGHT } from '../../constants/style'
 
 const App: FC<PropsWithChildren> = () => {
-  const { tg, user } = useTelegram()
+  const { tg } = useTelegram()
 
   useEffect(() => {
     const getToken = async () => {
-      await UserService.getUserInfo(user.id)
       const { token } = await UserService.loginUserRequest(tg.initData)
       if (token) {
         TokenService.saveToken(token)
