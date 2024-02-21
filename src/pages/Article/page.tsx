@@ -20,6 +20,9 @@ const Article: FC = () => {
   const [userRating, setUserRating] = useState(0)
 
   useEffect(() => {
+    if (tg.ready()) {
+      tg.backButton.show()
+    }
     const fetch = async () => {
       if (!id) return
       const response = await ArticleService.getSingleArticle(id)
@@ -29,7 +32,6 @@ const Article: FC = () => {
     }
 
     fetch()
-    tg.backButton.show()
   }, [])
 
   if (isLoading || !article) return <Loader />

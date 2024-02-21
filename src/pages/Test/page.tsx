@@ -20,6 +20,9 @@ const Test: FC = () => {
   const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
 
   useEffect(() => {
+    if (tg.ready()) {
+      tg.backButton.show()
+    }
     const fetch = async () => {
       if (!id) return
       const response = await TestService.getTest(id)
@@ -33,7 +36,6 @@ const Test: FC = () => {
     }
 
     fetch()
-    tg.backButton.show()
   }, [])
 
   if (isLoading || !answersMap || !id || !test) return <Loader />
