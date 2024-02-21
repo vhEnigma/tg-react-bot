@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Checkbox, Typography } from '@mui/material'
 import { AnswerType, QuestionType, TestType } from '../../types/menuList'
@@ -7,12 +7,17 @@ import useTgTheme from '../../hooks/useTgTheme'
 import MenuItemInfo from '../../components/MenuItemInfo'
 import { TestService } from '../../services/TestService'
 
+// const body = {
+//   id_question: ['id_answers']
+// }
+
 const Test: FC = () => {
   const { button_color, button_text_color, text_color, section_bg_color, bg_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [test, setTest] = useState<TestType>()
+  // const [answersMap, setAnswersMap] = useState()
 
   useEffect(() => {
     const fetch = async () => {
@@ -32,12 +37,16 @@ const Test: FC = () => {
     navigate(-1)
   }
 
-  const renderAnswers = (answers: AnswerType[]) =>
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>, questionId: number, answerId: number) => {
+    console.log(event, questionId, 'questionId', answerId, 'answerId')
+  }
+
+  const renderAnswers = (answers: AnswerType[], questionId: number) =>
     answers.map((answer) => {
       const { id, text } = answer
       return (
         <Box key={id} sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <Checkbox />
+          <Checkbox onChange={(event) => onChangeHandler(event, questionId, id)} />
           <Typography sx={{ color: text_color }}>{text}</Typography>
         </Box>
       )
@@ -46,7 +55,7 @@ const Test: FC = () => {
   const getQuestionList = (questions: QuestionType[]) =>
     questions.map((question, index) => {
       const { id, text, answer_options } = question
-      const answers = renderAnswers(answer_options)
+      const answers = renderAnswers(answer_options, id)
       return (
         <Box
           key={id}
