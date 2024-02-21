@@ -1,26 +1,16 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { Box, List, ListItemButton, ListItemText, Typography } from '@mui/material'
 import { useTelegram } from '../../hooks/useTelegram'
 import useTgTheme from '../../hooks/useTgTheme'
-import { UserService, UserType } from '../../services/User'
 import Loader from '../../components/Loader'
+import useUserInfo from '../../hooks/useUserInfo'
 
 const Root: FC = () => {
   const {
     user: { username, first_name, id }
   } = useTelegram()
   const { text_color, button_color } = useTgTheme()
-  const [userInfo, setUserInfo] = useState<UserType | null>(null)
-  const [isLoading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetch = async () => {
-      const response = await UserService.getUserInfo(id)
-      setUserInfo(response)
-      setLoading(false)
-    }
-    fetch()
-  }, [])
+  const { userInfo, isLoading } = useUserInfo(id)
 
   if (isLoading || !userInfo) {
     return <Loader />
