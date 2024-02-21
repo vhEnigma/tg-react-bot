@@ -6,11 +6,9 @@ import Loader from '../../components/Loader'
 import useUserInfo from '../../hooks/useUserInfo'
 
 const Root: FC = () => {
-  const {
-    user: { username, first_name, id }
-  } = useTelegram()
+  const { user } = useTelegram()
   const { text_color, button_color } = useTgTheme()
-  const { userInfo, isLoading } = useUserInfo(id)
+  const { userInfo, isLoading } = useUserInfo(user.id)
 
   if (isLoading || !userInfo) {
     return <Loader />
@@ -26,7 +24,7 @@ const Root: FC = () => {
       )
     })
 
-  const title = `${first_name} (${username})`
+  const title = `${userInfo.first_name} (${userInfo.last_name})`
   return (
     <Box>
       <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
