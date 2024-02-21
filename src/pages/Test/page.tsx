@@ -99,7 +99,7 @@ const Test: FC = () => {
     setLoading(true)
     await TestService.sendTest({ answersMap, id, tgId: user.id })
     setLoading(false)
-    navigate(RouteList.TestResult)
+    navigate(`/${RouteList.TestResult}`)
   }
 
   const validateHandle = () => {
