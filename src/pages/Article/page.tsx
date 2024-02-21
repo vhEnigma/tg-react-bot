@@ -19,7 +19,8 @@ const Article: FC = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const response = await ArticleService.getSingleArticle({ id })
+      if (!id) return
+      const response = await ArticleService.getSingleArticle(id)
       setUserRating(response.rating)
       setArticle(response)
       setLoading(false)
