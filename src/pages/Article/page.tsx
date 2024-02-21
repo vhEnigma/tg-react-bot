@@ -20,9 +20,7 @@ const Article: FC = () => {
   const [userRating, setUserRating] = useState(0)
 
   useEffect(() => {
-    if (tg.ready()) {
-      tg.BackButton.show()
-    }
+    tg.BackButton.show()
     const fetch = async () => {
       if (!id) return
       const response = await ArticleService.getSingleArticle(id)

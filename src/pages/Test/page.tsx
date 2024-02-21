@@ -20,9 +20,7 @@ const Test: FC = () => {
   const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
 
   useEffect(() => {
-    if (tg.ready()) {
-      tg.BackButton.show()
-    }
+    tg.BackButton.show()
     const fetch = async () => {
       if (!id) return
       const response = await TestService.getTest(id)
