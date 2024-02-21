@@ -7,6 +7,7 @@ import useTgTheme from '../../hooks/useTgTheme'
 import MenuItemInfo from '../../components/MenuItemInfo'
 import { TestService } from '../../services/TestService'
 import { useTelegram } from '../../hooks/useTelegram'
+import { RouteList } from '../../routes/routes'
 
 const Test: FC = () => {
   const { user } = useTelegram()
@@ -17,6 +18,7 @@ const Test: FC = () => {
   const [test, setTest] = useState<TestType>()
   const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
   const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
+  const [isLoad, setLoad] = useState(false)
 
   useEffect(() => {
     const fetch = async () => {
@@ -92,8 +94,10 @@ const Test: FC = () => {
     })
 
   const onSendAnswers = async () => {
-    const tgId = user.id
-    await TestService.sendTest({ answersMap, id, tgId })
+    setLoad(true)
+    await TestService.sendTest({ answersMap, id, tgId: user.id })
+    setLoad(false)
+    navigate(RouteList.TestResult)
   }
 
   const validateHandle = () => {
@@ -147,8 +151,9 @@ const Test: FC = () => {
           onClick={validateHandle}
           sx={{ mt: '20px', width: '50%', color: button_text_color, backgroundColor: button_color }}
           variant='contained'
+          disabled={isLoad}
         >
-          Отправить
+          {isLoad ? <Loader /> : Отправить}
         </Button>
       </Box>
     </>
