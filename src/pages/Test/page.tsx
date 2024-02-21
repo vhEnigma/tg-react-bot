@@ -14,7 +14,7 @@ const Test: FC = () => {
   const [isLoading, setLoading] = useState(true)
   const [test, setTest] = useState<TestType>()
   const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
-  // const [errorQuestionIds, setErrorQuestionIds] = useState<string[]>([])
+  const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
 
   useEffect(() => {
     const fetch = async () => {
@@ -42,12 +42,14 @@ const Test: FC = () => {
     const { checked } = event.target
     if (!answersMap) return
     const map = { ...answersMap }
+    let errors = [...errorQuestionIds]
     if (checked) {
       map[`${questionId}`].push(answerId)
+      errors = errorQuestionIds.filter((id) => id !== questionId)
     } else {
       map[`${questionId}`] = map[`${questionId}`].filter((number) => number !== answerId)
     }
-
+    setErrorQuestionIds(errors)
     setAnswersMap(map)
   }
 
@@ -68,6 +70,7 @@ const Test: FC = () => {
     questions.map((question, index) => {
       const { id, text, answer_options } = question
       const answers = renderAnswers(answer_options, id)
+      const isError = errorQuestionIds.includes(id)
       return (
         <Box
           key={id}
@@ -82,6 +85,7 @@ const Test: FC = () => {
           <Typography sx={{ color: text_color }}>
             {index + 1}. {text}
           </Typography>
+          {isError && <Typography sx={{ color: text_color }}>Нужно ответить на вопрос</Typography>}
           <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>{answers}</Box>
         </Box>
       )
@@ -94,19 +98,19 @@ const Test: FC = () => {
   const validateHanlde = () => {
     if (!answersMap) return
     const questionIdList = Object.keys(answersMap)
-    const validateErrors = []
+    const validateErrors: number[] = []
     questionIdList.forEach((questionId) => {
       const answer = answersMap[questionId]
       const isEmpty = answer.length === 0
       if (isEmpty) {
-        validateErrors.push(questionId)
+        validateErrors.push(Number(questionId))
       }
     })
 
     if (validateErrors.length === 0) {
       onSendAnswers()
     } else {
-      // setErrorQuestionIds(validateErrors)
+      setErrorQuestionIds(validateErrors)
     }
   }
 
