@@ -10,4 +10,11 @@ export class TestService {
 
     return response
   }
+
+  static async sendTest(data: Record<string, string | Record<string, number[]>>) {
+    const url = `${Endpoints.tests}/${data.id}`
+    const { data: response } = await axiosInstance.post(url, data.answersMap)
+
+    return response
+  }
 }

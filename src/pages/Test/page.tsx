@@ -15,7 +15,7 @@ const Test: FC = () => {
   const [test, setTest] = useState<TestType>()
   const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
   const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
-  console.log(answersMap)
+
   useEffect(() => {
     const fetch = async () => {
       if (!id) return
@@ -32,7 +32,7 @@ const Test: FC = () => {
     fetch()
   }, [])
 
-  if (isLoading || !test) return <Loader />
+  if (isLoading || !answersMap || !id || !test) return <Loader />
 
   const handleBack = () => {
     navigate(-1)
@@ -52,8 +52,6 @@ const Test: FC = () => {
     setErrorQuestionIds(errors)
     setAnswersMap(map)
   }
-
-  console.log(answersMap, 'answersMap')
 
   const renderAnswers = (answers: AnswerType[], questionId: number) =>
     answers.map((answer) => {
@@ -92,10 +90,10 @@ const Test: FC = () => {
     })
 
   const onSendAnswers = async () => {
-    console.log(answersMap, 'send')
+    await TestService.sendTest({ answersMap, id })
   }
 
-  const validateHanlde = () => {
+  const validateHandle = () => {
     if (!answersMap) return
     const questionIdList = Object.keys(answersMap)
     const validateErrors: number[] = []
@@ -143,7 +141,7 @@ const Test: FC = () => {
       {getQuestionList(questions)}
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button
-          onClick={validateHanlde}
+          onClick={validateHandle}
           sx={{ mt: '20px', width: '50%', color: button_text_color, backgroundColor: button_color }}
           variant='contained'
         >
