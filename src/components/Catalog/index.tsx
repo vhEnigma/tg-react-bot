@@ -58,11 +58,11 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
     const lastIndex = dataList.length - 1
     const redirect = () => navigate(`/${RouteList.Test}/${id}`)
     return dataList.map((test) => {
-      const { id, name, rating, difficulty } = test
+      const { id, name, rating } = test
       const content = (
         <>
           <ListItemText primary={name} />
-          <MenuItemInfo rating={rating} difficulty={difficulty} />
+          <MenuItemInfo rating={rating} />
         </>
       )
 
@@ -86,11 +86,11 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
     const lastIndex = dataList.length - 1
     const redirect = () => navigate(`/${RouteList.Article}/${id}`)
     return dataList.map((article) => {
-      const { id, rating, topic, reading_time, difficulty } = article
+      const { id, rating, topic, reading_time } = article
       const content = (
         <>
           <ListItemText primary={topic} />
-          <MenuItemInfo rating={rating} reading_time={reading_time} difficulty={difficulty} />
+          <MenuItemInfo rating={rating} reading_time={reading_time} />
         </>
       )
 

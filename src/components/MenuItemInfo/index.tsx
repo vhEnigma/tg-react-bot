@@ -5,13 +5,12 @@ import StarRateIcon from '@mui/icons-material/StarRate'
 import useTgTheme from '../../hooks/useTgTheme'
 
 type MenuItemInfoProps = {
-  difficulty: number
   rating: number
   reading_time?: number
   author?: string
 }
 
-const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, difficulty, author }) => {
+const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, author }) => {
   const { text_color } = useTgTheme()
 
   const getAuthor = () => {
@@ -40,7 +39,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, difficulty,
       {getAuthor()}
       {getReadingTime()}
       <Typography sx={{ color: text_color }} component='span'>
-        {rating}/{difficulty}
+        {rating}/5
       </Typography>
       <StarRateIcon sx={{ color: 'yellow' }} />
     </Box>

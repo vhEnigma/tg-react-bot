@@ -63,7 +63,7 @@ const Article: FC = () => {
     await ArticleService.setRating(id, newValue)
   }
 
-  const { topic: title, author, reading_time, rating, difficulty, article_link } = article
+  const { topic: title, author, reading_time, rating, article_link } = article
 
   return (
     <>
@@ -87,7 +87,7 @@ const Article: FC = () => {
         {title}
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <MenuItemInfo author={author} rating={rating} reading_time={reading_time} difficulty={difficulty} />
+        <MenuItemInfo author={author} rating={rating} reading_time={reading_time} />
       </Box>
       <Box sx={{ m: '20px auto', width: '50%' }}>
         <Button

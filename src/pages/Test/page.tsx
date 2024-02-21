@@ -121,7 +121,7 @@ const Test: FC = () => {
     }
   }
 
-  const { name: title, rating, difficulty, questions } = test
+  const { name: title, rating, questions } = test
 
   return (
     <>
@@ -145,7 +145,7 @@ const Test: FC = () => {
         {title}
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <MenuItemInfo rating={rating} difficulty={difficulty} />
+        <MenuItemInfo rating={rating} />
       </Box>
       {getQuestionList(questions)}
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
