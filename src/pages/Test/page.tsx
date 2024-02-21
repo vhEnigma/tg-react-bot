@@ -59,11 +59,13 @@ const Test: FC = () => {
   const renderAnswers = (answers: AnswerType[], questionId: number) =>
     answers.map((answer) => {
       const { id, text } = answer
-      /* <Typography sx={{ color: text_color }}>{text}</Typography> */
 
       return (
         <FormGroup key={id} sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <FormControlLabel control={<Checkbox onChange={(event) => onChangeHandler(event, questionId, id)} />} label={text} />
+          <FormControlLabel
+            control={<Checkbox onChange={(event) => onChangeHandler(event, questionId, id)} />}
+            label={<Typography sx={{ color: text_color }}>{text}</Typography>}
+          />
         </FormGroup>
       )
     })
