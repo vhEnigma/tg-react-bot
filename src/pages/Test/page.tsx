@@ -151,7 +151,7 @@ const Test: FC = () => {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button
           onClick={validateHandle}
-          sx={{ mt: '20px', width: '50%', color: button_text_color, backgroundColor: button_color }}
+          sx={{ m: '20px 0', width: '50%', color: button_text_color, backgroundColor: button_color }}
           variant='contained'
         >
           Отправить
