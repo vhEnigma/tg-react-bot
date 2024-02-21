@@ -11,6 +11,7 @@ import { RenderItemsProps } from '../InfinityScrollList'
 import { RouteList } from '../../routes/routes'
 import { IParams } from '../../types/params'
 import MenuItemInfo from '../MenuItemInfo'
+import NotFound from '../NotFound'
 
 type CatalogProps = {
   getInfoRequest: (id: string) => Promise<MenuListType>
@@ -56,6 +57,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   const renderTests = (props: RenderItemsProps<TestType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
+    if (dataList.length === 0) return <NotFound />
     const redirect = () => navigate(`/${RouteList.Test}/${id}`)
     return dataList.map((test) => {
       const { id, name, rating, difficulty } = test
@@ -84,6 +86,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
+    if (dataList.length === 0) return <NotFound />
     const redirect = () => navigate(`/${RouteList.Article}/${id}`)
     return dataList.map((article) => {
       const { id, rating, topic, reading_time, difficulty } = article
