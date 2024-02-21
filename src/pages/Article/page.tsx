@@ -1,26 +1,16 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Rating, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles'
-import { StarOutline } from '@mui/icons-material'
+import { Box, Button, Typography } from '@mui/material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import { openInNewTab } from '../../utils/common'
 import { ArticleService } from '../../services/ArticleService'
 import MenuItemInfo from '../../components/MenuItemInfo'
-
-const StyledRating = styled(Rating)({
-  '& .MuiRating-iconFilled': {
-    color: '#faaf00'
-  },
-  '& .MuiRating-iconHover': {
-    color: '#f2ba39'
-  }
-})
+import CustomRating from '../../components/CustomRating'
 
 const Article: FC = () => {
-  const { button_color, button_text_color, text_color, link_color } = useTgTheme()
+  const { button_color, button_text_color, text_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
@@ -99,15 +89,7 @@ const Article: FC = () => {
           Читать статью
         </Button>
       </Box>
-      <Box sx={{ textAlign: 'center' }}>
-        <StyledRating
-          name='simple-controlled'
-          value={userRating}
-          onChange={handleChangeRating}
-          size='large'
-          emptyIcon={<StarOutline sx={{ borderColor: 'red', color: link_color }} fontSize='inherit' />}
-        />
-      </Box>
+      <CustomRating rating={userRating} onChange={handleChangeRating} />
     </>
   )
 }
