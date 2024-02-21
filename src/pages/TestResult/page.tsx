@@ -42,7 +42,14 @@ const TestResult: FC = () => {
           backgroundColor: section_bg_color,
           color: text_color,
           borderRadius: '50%',
-          border: `1px solid section_bg_color`
+          border: `1px solid section_bg_color`,
+          width: '50%',
+          height: '35vh',
+          m: '0 auto',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '40px'
         }}
       >{`${result} %`}</Box>
       <Typography component='p' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
