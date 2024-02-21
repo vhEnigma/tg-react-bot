@@ -7,10 +7,6 @@ import useTgTheme from '../../hooks/useTgTheme'
 import MenuItemInfo from '../../components/MenuItemInfo'
 import { TestService } from '../../services/TestService'
 
-// const body = {
-//   id_question: ['id_answers']
-// }
-
 const Test: FC = () => {
   const { button_color, button_text_color, text_color, section_bg_color, bg_color } = useTgTheme()
   const navigate = useNavigate()
@@ -18,6 +14,7 @@ const Test: FC = () => {
   const [isLoading, setLoading] = useState(true)
   const [test, setTest] = useState<TestType>()
   const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
+  // const [errorQuestionIds, setErrorQuestionIds] = useState<string[]>([])
 
   useEffect(() => {
     const fetch = async () => {
@@ -52,7 +49,6 @@ const Test: FC = () => {
     }
 
     setAnswersMap(map)
-    console.log(event.target.checked, questionId, 'questionId', answerId, 'answerId', map, 'map')
   }
 
   console.log(answersMap, 'answersMap')
@@ -91,6 +87,29 @@ const Test: FC = () => {
       )
     })
 
+  const onSendAnswers = async () => {
+    console.log(answersMap, 'send')
+  }
+
+  const validateHanlde = () => {
+    if (!answersMap) return
+    const questionIdList = Object.keys(answersMap)
+    const validateErrors = []
+    questionIdList.forEach((questionId) => {
+      const answer = answersMap[questionId]
+      const isEmpty = answer.length === 0
+      if (isEmpty) {
+        validateErrors.push(questionId)
+      }
+    })
+
+    if (validateErrors.length === 0) {
+      onSendAnswers()
+    } else {
+      // setErrorQuestionIds(validateErrors)
+    }
+  }
+
   const { name: title, rating, difficulty, questions } = test
 
   return (
@@ -119,7 +138,11 @@ const Test: FC = () => {
       </Box>
       {getQuestionList(questions)}
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Button sx={{ mt: '20px', width: '50%', color: button_text_color, backgroundColor: button_color }} variant='contained'>
+        <Button
+          onClick={validateHanlde}
+          sx={{ mt: '20px', width: '50%', color: button_text_color, backgroundColor: button_color }}
+          variant='contained'
+        >
           Отправить
         </Button>
       </Box>
