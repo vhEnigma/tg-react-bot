@@ -18,7 +18,6 @@ const Test: FC = () => {
   const [test, setTest] = useState<TestType>()
   const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
   const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
-  const [isLoad, setLoad] = useState(false)
 
   useEffect(() => {
     const fetch = async () => {
@@ -62,8 +61,8 @@ const Test: FC = () => {
       const { id, text } = answer
       return (
         <Box key={id} sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <Checkbox onChange={(event) => onChangeHandler(event, questionId, id)} />
-          <Typography sx={{ color: text_color }}>{text}</Typography>
+          <Checkbox aria-label={text} onChange={(event) => onChangeHandler(event, questionId, id)} />
+          {/* <Typography sx={{ color: text_color }}>{text}</Typography> */}
         </Box>
       )
     })
@@ -94,9 +93,9 @@ const Test: FC = () => {
     })
 
   const onSendAnswers = async () => {
-    setLoad(true)
+    setLoading(true)
     await TestService.sendTest({ answersMap, id, tgId: user.id })
-    setLoad(false)
+    setLoading(false)
     navigate(RouteList.TestResult)
   }
 
@@ -151,9 +150,8 @@ const Test: FC = () => {
           onClick={validateHandle}
           sx={{ mt: '20px', width: '50%', color: button_text_color, backgroundColor: button_color }}
           variant='contained'
-          disabled={isLoad}
         >
-          {isLoad ? <Loader /> : 'Отправить'}
+          Отправить
         </Button>
       </Box>
     </>
