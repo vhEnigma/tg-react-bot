@@ -17,7 +17,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info }) => 
     if (Array.isArray(array)) {
       return array.map((item, index) => (
         <Typography key={index} sx={{ color: text_color }}>
-          {item} |{' '}
+          {item}&#160;|&#160;
         </Typography>
       ))
     }
