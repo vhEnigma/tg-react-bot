@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Container, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import useTgTheme from '../../hooks/useTgTheme'
 import { ARTICLE_KEY, tabsConfig, TEST_KEY } from '../../pages/SingleDirection/constants'
 import { ArticleType, MenuListType, TestType } from '../../types/menuList'
@@ -18,6 +19,11 @@ type CatalogProps = {
   testsByFilterRequest: (params: IParams) => Promise<TestType[]>
 }
 
+const StyledButton = styled(Button)({
+  '& .Mui-focusVisible': {
+    color: 'red'
+  }
+})
 const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, articlesByFilterRequest }) => {
   const { button_color, button_text_color, text_color, bg_color, link_color } = useTgTheme()
   const navigate = useNavigate()
@@ -47,9 +53,9 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const backgroundColor = isActive ? button_color : bg_color
       const color = isActive ? button_text_color : link_color
       return (
-        <Button key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
+        <StyledButton key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
           {title}
-        </Button>
+        </StyledButton>
       )
     })
 
