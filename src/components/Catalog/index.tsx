@@ -21,8 +21,8 @@ type CatalogProps = {
 
 const StyledButton = styled(Button)({
   '&:hover': {
-    color: 'inherit',
-    backgroundColor: 'inherit'
+    // color: 'inherit',
+    // backgroundColor: 'inherit'
   }
 })
 const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, articlesByFilterRequest }) => {
