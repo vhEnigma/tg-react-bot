@@ -50,7 +50,9 @@ const TestResult: FC = () => {
   const calcBackground = (percentage: number) => {
     const threshold = Object.keys(thresholdColors).find((key) => percentage <= Number(key)) as KeysType
 
-    return thresholdColors[threshold!]
+    if (threshold) {
+      return thresholdColors[threshold]
+    }
   }
 
   return (
