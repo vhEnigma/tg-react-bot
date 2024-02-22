@@ -44,7 +44,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
     setActiveTab(key)
   }
 
-  const throttledSwitchTab = useThrottle(onSwitchTab, 1000)
+  const throttledSwitchTab = useThrottle(onSwitchTab, 500)
 
   const handleSwitchTab = useCallback(
     (key: TabsType) => {
