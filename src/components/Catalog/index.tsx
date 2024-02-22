@@ -20,7 +20,7 @@ type CatalogProps = {
 }
 
 const StyledButton = styled(Button)({
-  '& .Mui-focusVisible': {
+  '&:hover': {
     color: 'red'
   }
 })
