@@ -35,6 +35,10 @@ const Test: FC = () => {
     }
 
     fetch()
+
+    return () => {
+      tg.BackButton.hide()
+    }
   }, [])
 
   if (isLoading || !answersMap || !id || !test) return <Loader />

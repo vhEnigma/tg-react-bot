@@ -31,6 +31,10 @@ const Article: FC = () => {
     }
 
     fetch()
+
+    return () => {
+      tg.BackButton.hide()
+    }
   }, [])
 
   if (isLoading || !article) return <Loader />
