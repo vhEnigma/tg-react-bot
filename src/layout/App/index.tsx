@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 import { useTelegram } from '../../hooks/useTelegram'
 import Loader from '../../components/Loader'
-import style from './style.module.css'
 import { UserService } from '../../services/User'
 import { TokenService } from '../../services/TokenService'
 import { createCustomTheme } from '../../utils/theme'
@@ -28,7 +27,13 @@ const App: FC<PropsWithChildren> = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box className={style.container} style={{ backgroundColor: theme.palette.customColors.secondary_bg_color.main }}>
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: theme.palette.customColors.secondary_bg_color.main
+        }}
+      >
         <Container sx={{ height: `calc(100vh - ${NAVIGATION_HEIGHT}px)`, overflow: 'auto' }}>
           <Suspense fallback={<Loader />}>
             <Outlet />
