@@ -15,6 +15,8 @@ const thresholdColors: Record<number, string> = {
   100: 'green'
 }
 
+type KeysType = 33 | 66 | 100 | undefined
+
 const TestResult: FC = () => {
   const { text_color } = useTgTheme()
   const { user } = useTelegram()
@@ -46,9 +48,9 @@ const TestResult: FC = () => {
   }
 
   const calcBackground = (percentage: number) => {
-    const threshold = Object.keys(thresholdColors).find((key) => percentage <= Number(key))!
+    const threshold = Object.keys(thresholdColors).find((key) => percentage <= Number(key)) as KeysType
 
-    return thresholdColors[threshold]
+    return thresholdColors[threshold!]
   }
 
   return (
