@@ -20,8 +20,8 @@ type CatalogProps = {
 }
 
 const StyledButton = styled(Button)({
-  '&:hover': {
-    color: 'red'
+  '& .custom:hover': {
+    pointerEvents: 'none'
   }
 })
 const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, articlesByFilterRequest }) => {
@@ -52,8 +52,16 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const isActive = key === activeTab
       const backgroundColor = isActive ? button_color : bg_color
       const color = isActive ? button_text_color : link_color
+      const className = isActive ? '' : 'custom'
       return (
-        <StyledButton key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
+        <StyledButton
+          className={className}
+          key={id}
+          onClick={() => setActiveTab(key)}
+          fullWidth
+          sx={{ backgroundColor, color }}
+          variant='contained'
+        >
           {title}
         </StyledButton>
       )
