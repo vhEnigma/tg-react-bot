@@ -20,7 +20,7 @@ type CatalogProps = {
 }
 
 const StyledButton = styled(Button)({
-  '& .custom:hover': {
+  '& :hover': {
     pointerEvents: 'none'
   }
 })
