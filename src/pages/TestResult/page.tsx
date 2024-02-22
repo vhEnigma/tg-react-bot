@@ -9,6 +9,12 @@ import CustomRating from '../../components/CustomRating'
 import ErrorBoundary from '../ErrorBoundary'
 import { TestService } from '../../services/TestService'
 
+const thresholdColors: Record<number, string> = {
+  33: 'red',
+  66: 'yellow',
+  100: 'green'
+}
+
 const TestResult: FC = () => {
   const { text_color } = useTgTheme()
   const { user } = useTelegram()
@@ -40,15 +46,9 @@ const TestResult: FC = () => {
   }
 
   const calcBackground = (percentage: number) => {
-    if (percentage > 0 && percentage <= 33) {
-      return 'red'
-    }
-    if (percentage > 33 && percentage <= 66) {
-      return 'yellow'
-    }
-    if (percentage > 66 && percentage <= 100) {
-      return 'green'
-    }
+    const threshold = Object.keys(thresholdColors).find((key) => percentage <= Number(key))!
+
+    return thresholdColors[threshold]
   }
 
   return (
