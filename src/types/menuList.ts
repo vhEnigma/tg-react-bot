@@ -29,6 +29,8 @@ export type TestType = {
   difficulty: number
   rating: number
   questions: QuestionType[]
+  technology_id: number
+  direction_id: number
 }
 
 export type AnswerType = {

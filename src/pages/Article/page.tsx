@@ -62,7 +62,7 @@ const Article: FC = () => {
         {title}
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <MenuItemInfo author={author} rating={rating} reading_time={reading_time} />
+        <MenuItemInfo info={[author]} rating={rating} reading_time={reading_time} />
       </Box>
       <Box sx={{ m: '20px auto', width: '50%' }}>
         <Button

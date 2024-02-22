@@ -8,6 +8,8 @@ import MenuItemInfo from '../../components/MenuItemInfo'
 import { TestService } from '../../services/TestService'
 import { useTelegram } from '../../hooks/useTelegram'
 import { RouteList } from '../../routes/routes'
+import { TechnologyService } from '../../services/Technology'
+import { DirectionService } from '../../services/Direction'
 
 const Test: FC = () => {
   const { tg, user } = useTelegram()
@@ -16,6 +18,7 @@ const Test: FC = () => {
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [test, setTest] = useState<TestType>()
+  const [testInfo, setTestInfo] = useState({ technology: '', direction: '' })
   const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
   const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
 
@@ -25,6 +28,8 @@ const Test: FC = () => {
     const fetch = async () => {
       if (!id) return
       const response = await TestService.getTest(id)
+      const technology = await TechnologyService.getTechnologyInfoRequest(`${response.technology_id}`)
+      const direction = await DirectionService.getDirectionInfoRequest(`${response.direction_id}`)
       const map: Record<string, number[]> = {}
       response.questions.forEach(({ id }) => {
         map[id] = []
@@ -32,6 +37,7 @@ const Test: FC = () => {
       setTest(response)
       setAnswersMap(map)
       setLoading(false)
+      setTestInfo({ technology: technology.name, direction: direction.name })
     }
 
     fetch()
@@ -125,6 +131,7 @@ const Test: FC = () => {
   }
 
   const { name: title, rating, questions } = test
+  const { technology: technologyName, direction: directionName } = testInfo
 
   return (
     <>
@@ -140,7 +147,7 @@ const Test: FC = () => {
         {title}
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <MenuItemInfo rating={rating} />
+        <MenuItemInfo rating={rating} info={[technologyName, directionName]} />
       </Box>
       {getQuestionList(questions)}
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>

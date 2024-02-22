@@ -7,15 +7,19 @@ import useTgTheme from '../../hooks/useTgTheme'
 type MenuItemInfoProps = {
   rating: number
   reading_time?: number
-  author?: string
+  info?: string[]
 }
 
-const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, author }) => {
+const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info }) => {
   const { text_color } = useTgTheme()
 
-  const getAuthor = () => {
-    if (author) {
-      return <Typography sx={{ color: text_color }}>{author} | </Typography>
+  const getInfo = (array?: string[]) => {
+    if (Array.isArray(array)) {
+      return array.map((item, index) => (
+        <Typography key={index} sx={{ color: text_color }}>
+          {item} |{' '}
+        </Typography>
+      ))
     }
 
     return ''
@@ -36,7 +40,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, author }) =
   }
   return (
     <Box sx={{ display: 'flex', gap: '10px' }}>
-      {getAuthor()}
+      {getInfo(info)}
       {getReadingTime()}
       <Typography sx={{ color: text_color }} component='span'>
         {rating}/5
