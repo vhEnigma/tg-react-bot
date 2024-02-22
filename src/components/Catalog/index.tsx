@@ -19,11 +19,10 @@ type CatalogProps = {
   testsByFilterRequest: (params: IParams) => Promise<TestType[]>
 }
 
-const StyledButton = (color: string, bg_color: string) =>
+const StyledButton = (color: string) =>
   styled(Button)({
     '&:hover': {
-      color,
-      backgroundColor: bg_color
+      color
     }
   })
 const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, articlesByFilterRequest }) => {
@@ -54,7 +53,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const isActive = key === activeTab
       const backgroundColor = isActive ? button_color : bg_color
       const color = isActive ? button_text_color : link_color
-      const Component = StyledButton(link_color, bg_color)
+      const Component = StyledButton(link_color)
       return (
         <Component key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
           {title}
