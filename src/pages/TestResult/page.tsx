@@ -10,7 +10,7 @@ import ErrorBoundary from '../ErrorBoundary'
 import { TestService } from '../../services/TestService'
 
 const TestResult: FC = () => {
-  const { text_color, section_bg_color } = useTgTheme()
+  const { text_color } = useTgTheme()
   const { user } = useTelegram()
   const { id } = useParams()
   const { userInfo, isLoading } = useUserInfo(user.id)
@@ -39,6 +39,18 @@ const TestResult: FC = () => {
     await TestService.setRating(id, newValue)
   }
 
+  const calcBackground = (percentage: number) => {
+    if (percentage > 0 && percentage <= 33) {
+      return 'red'
+    }
+    if (percentage > 33 && percentage <= 66) {
+      return 'yellow'
+    }
+    if (percentage > 66 && percentage <= 100) {
+      return 'green'
+    }
+  }
+
   return (
     <Box>
       <Typography component='h1' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
@@ -51,17 +63,18 @@ const TestResult: FC = () => {
 
       <Box
         sx={{
-          backgroundColor: section_bg_color,
+          backgroundColor: calcBackground(test.result),
           color: text_color,
           borderRadius: '50%',
           border: `1px solid section_bg_color`,
           width: '50%',
-          height: '35vh',
+          height: 'auto',
           m: '0 auto',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: '40px'
+          fontSize: '40px',
+          aspectRatio: '1/1'
         }}
       >{`${test.result} %`}</Box>
       <Typography component='p' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
