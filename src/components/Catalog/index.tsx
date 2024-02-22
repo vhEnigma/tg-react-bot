@@ -38,11 +38,6 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
     fetchData()
   }, [])
 
-  const onSwitchTab = (key: TabsType) => {
-    console.log(key, 'onswitch')
-    setActiveTab(key)
-  }
-
   if (isLoading) return <Loader />
 
   const renderTabs = () =>
@@ -52,7 +47,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const backgroundColor = isActive ? button_color : bg_color
       const color = isActive ? button_text_color : link_color
       return (
-        <Button key={id} onClick={() => onSwitchTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
+        <Button key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
           {title}
         </Button>
       )
