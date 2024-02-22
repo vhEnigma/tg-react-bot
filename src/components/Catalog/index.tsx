@@ -19,11 +19,12 @@ type CatalogProps = {
   testsByFilterRequest: (params: IParams) => Promise<TestType[]>
 }
 
-const StyledButton = styled(Button)({
-  '&:hover': {
-    color: 'red'
-  }
-})
+const StyledButton = (color: string) =>
+  styled(Button)({
+    '&:hover': {
+      color
+    }
+  })
 const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, articlesByFilterRequest }) => {
   const { button_color, button_text_color, text_color, bg_color, link_color } = useTgTheme()
   const navigate = useNavigate()
@@ -52,10 +53,11 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const isActive = key === activeTab
       const backgroundColor = isActive ? button_color : bg_color
       const color = isActive ? button_text_color : link_color
+      const Component = StyledButton(button_text_color)
       return (
-        <StyledButton key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
+        <Component key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
           {title}
-        </StyledButton>
+        </Component>
       )
     })
 
