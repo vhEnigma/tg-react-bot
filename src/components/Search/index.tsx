@@ -20,7 +20,7 @@ const Search: FC<SearchProps> = ({ value, setValue }) => {
       value={value}
       onChange={onChange}
       InputLabelProps={{ style: { color: text_color } }}
-      InputProps={{ style: { color: text_color, backgroundColor: section_bg_color } }}
+      InputProps={{ style: { color: text_color, backgroundColor: section_bg_color, borderRadius: '4px' } }}
       sx={{ mt: 2, borderColor: bg_color, backgroundColor: bg_color }}
       fullWidth
       id='outlined-basic'
