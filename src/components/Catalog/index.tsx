@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Container, ListItemButton, ListItemText, Typography } from '@mui/material'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -11,7 +11,6 @@ import { RenderItemsProps } from '../InfinityScrollList'
 import { RouteList } from '../../routes/routes'
 import { IParams } from '../../types/params'
 import MenuItemInfo from '../MenuItemInfo'
-import useThrottle from '../../hooks/useThrottle'
 
 type CatalogProps = {
   getInfoRequest: (id: string) => Promise<MenuListType>
@@ -44,16 +43,6 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
     setActiveTab(key)
   }
 
-  const throttledSwitchTab = useThrottle(onSwitchTab, 500)
-
-  const handleSwitchTab = useCallback(
-    (key: TabsType) => {
-      console.log(key, 'usecallback')
-      throttledSwitchTab(key)
-    },
-    [throttledSwitchTab]
-  )
-
   if (isLoading) return <Loader />
 
   const renderTabs = () =>
@@ -63,7 +52,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const backgroundColor = isActive ? button_color : bg_color
       const color = isActive ? button_text_color : link_color
       return (
-        <Button key={id} onClick={() => handleSwitchTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
+        <Button key={id} onClick={() => onSwitchTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
           {title}
         </Button>
       )
