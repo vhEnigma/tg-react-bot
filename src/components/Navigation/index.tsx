@@ -3,6 +3,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import CorporateFareRounded from '@mui/icons-material/CorporateFareRounded'
 import GroupRounded from '@mui/icons-material/GroupRounded'
 import HomeRounded from '@mui/icons-material/HomeRounded'
+import FeedIcon from '@mui/icons-material/Feed'
 import { Paper } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 import { FC, useState } from 'react'
@@ -34,7 +35,7 @@ const tabsConfig = [
     id: 4,
     route: RouteList.New,
     label: 'Новое',
-    IconComponent: CorporateFareRounded
+    IconComponent: FeedIcon
   }
 ]
 
