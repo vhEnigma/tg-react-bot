@@ -50,7 +50,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info }) => 
     return ''
   }
   return (
-    <Box sx={{ display: 'flex', gap: '10px' }}>
+    <Box sx={{ display: 'flex', gap: '5px' }}>
       {getInfo(info)}
       {getReadingTime()}
       <Typography sx={{ color: text_color, ...ellipsisStyle, minWidth: '40px', maxWidth: '40px' }} component='span'>
