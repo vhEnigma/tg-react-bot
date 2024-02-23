@@ -24,15 +24,15 @@ const Technology: FC = () => {
       if (isLastElement) {
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-            <ListItemText primary={name} />
             <img src={icon} alt='icon' />
+            <ListItemText primary={name} />
           </ListItemButton>
         )
       }
       return (
         <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-          <ListItemText primary={name} />
           <img src={icon} alt='icon' />
+          <ListItemText primary={name} />
         </ListItemButton>
       )
     })
