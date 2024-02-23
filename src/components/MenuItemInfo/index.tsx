@@ -10,7 +10,7 @@ type MenuItemInfoProps = {
   info?: string[]
 }
 
-const ellipsisStyle = { overflow: 'hidden', whiteSpace: 'no-wrap', textOverflow: 'ellipsis' }
+const ellipsisStyle = { overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }
 
 const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info }) => {
   const { text_color } = useTgTheme()
