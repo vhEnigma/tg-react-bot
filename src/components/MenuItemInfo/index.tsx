@@ -8,11 +8,12 @@ type MenuItemInfoProps = {
   rating: number
   reading_time?: number
   info?: string[]
+  withTimeEllipsis?: boolean
 }
 
 const ellipsisStyle = { overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }
 
-const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info }) => {
+const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info, withTimeEllipsis = false }) => {
   const { text_color } = useTgTheme()
 
   const getInfo = (array?: string[]) => {
@@ -29,6 +30,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info }) => 
 
   const getReadingTime = () => {
     if (reading_time) {
+      const maxWidth = withTimeEllipsis ? '100%' : '48px'
       return (
         <>
           <Typography
@@ -36,7 +38,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info }) => 
               color: text_color,
               ...ellipsisStyle,
               minWidth: '48px',
-              maxWidth: '48px'
+              maxWidth
             }}
           >
             {reading_time} мин.
