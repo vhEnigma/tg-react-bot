@@ -29,6 +29,12 @@ const tabsConfig = [
     route: RouteList.Technology,
     label: 'Технологии',
     IconComponent: CorporateFareRounded
+  },
+  {
+    id: 4,
+    route: RouteList.New,
+    label: 'Новое',
+    IconComponent: CorporateFareRounded
   }
 ]
 
