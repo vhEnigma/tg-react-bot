@@ -1,5 +1,5 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Box, Button, Typography } from '@mui/material'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
@@ -8,20 +8,17 @@ import { openInNewTab } from '../../utils/common'
 import { ArticleService } from '../../services/ArticleService'
 import MenuItemInfo from '../../components/MenuItemInfo'
 import CustomRating from '../../components/CustomRating'
-import { useTelegram } from '../../hooks/useTelegram'
+import useBackButton from '../../hooks/useBackButton'
 
 const Article: FC = () => {
-  const { tg } = useTelegram()
   const { button_color, button_text_color, text_color } = useTgTheme()
-  const navigate = useNavigate()
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [article, setArticle] = useState<ArticleType>()
   const [userRating, setUserRating] = useState(0)
+  useBackButton()
 
   useEffect(() => {
-    tg.BackButton.show()
-    tg.BackButton.onClick(() => navigate(-1))
     const fetch = async () => {
       if (!id) return
       const response = await ArticleService.getSingleArticle(id)
@@ -31,10 +28,6 @@ const Article: FC = () => {
     }
 
     fetch()
-
-    return () => {
-      tg.BackButton.hide()
-    }
   }, [])
 
   if (isLoading || !article) return <Loader />

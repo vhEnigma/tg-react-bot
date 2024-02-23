@@ -10,6 +10,7 @@ import { useTelegram } from '../../hooks/useTelegram'
 import { RouteList } from '../../routes/routes'
 import { TechnologyService } from '../../services/Technology'
 import { DirectionService } from '../../services/Direction'
+import useBackButton from '../../hooks/useBackButton'
 
 const Test: FC = () => {
   const { tg, user } = useTelegram()
@@ -21,10 +22,9 @@ const Test: FC = () => {
   const [testInfo, setTestInfo] = useState({ technology: '', direction: '' })
   const [answersMap, setAnswersMap] = useState<Record<string, number[]>>()
   const [errorQuestionIds, setErrorQuestionIds] = useState<number[]>([])
+  useBackButton()
 
   useEffect(() => {
-    tg.BackButton.show()
-    tg.BackButton.onClick(() => navigate(-1))
     const fetch = async () => {
       if (!id) return
       const response = await TestService.getTest(id)
@@ -41,10 +41,6 @@ const Test: FC = () => {
     }
 
     fetch()
-
-    return () => {
-      tg.BackButton.hide()
-    }
   }, [])
 
   if (isLoading || !answersMap || !id || !test) return <Loader />

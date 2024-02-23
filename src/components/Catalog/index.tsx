@@ -12,6 +12,7 @@ import { RenderItemsProps } from '../InfinityScrollList'
 import { RouteList } from '../../routes/routes'
 import { IParams } from '../../types/params'
 import MenuItemInfo from '../MenuItemInfo'
+import useBackButton from '../../hooks/useBackButton'
 
 type CatalogProps = {
   getInfoRequest: (id: string) => Promise<MenuListType>
@@ -32,6 +33,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   const [isLoading, setLoading] = useState(true)
   const [title, setTitle] = useState('')
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
+  useBackButton()
 
   useEffect(() => {
     const fetchData = async () => {
