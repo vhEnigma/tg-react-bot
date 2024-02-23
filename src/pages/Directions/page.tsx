@@ -31,6 +31,7 @@ const Directions: FC = () => {
       }
       return (
         <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
+          <img src={icon} alt='icon' />
           <ListItemText primary={name} />
         </ListItemButton>
       )

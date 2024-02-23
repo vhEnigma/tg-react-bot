@@ -7,6 +7,7 @@ import { RouteList } from '../../routes/routes'
 import useTgTheme from '../../hooks/useTgTheme'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
 import { MenuListType } from '../../types/menuList'
+import icon from '../../../public/js.svg'
 
 const Technology: FC = () => {
   const { button_color } = useTgTheme()
@@ -24,12 +25,14 @@ const Technology: FC = () => {
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
             <ListItemText primary={name} />
+            <img src={icon} alt='icon' />
           </ListItemButton>
         )
       }
       return (
         <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
           <ListItemText primary={name} />
+          <img src={icon} alt='icon' />
         </ListItemButton>
       )
     })
