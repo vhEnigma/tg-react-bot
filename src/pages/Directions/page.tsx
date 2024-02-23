@@ -7,6 +7,7 @@ import MenuList from '../../components/MenuList'
 import useTgTheme from '../../hooks/useTgTheme'
 import { MenuListType } from '../../types/menuList'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
+import icon from '../../../public/js.svg'
 
 const Directions: FC = () => {
   const { button_color } = useTgTheme()
@@ -23,6 +24,7 @@ const Directions: FC = () => {
       if (isLastElement) {
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
+            <img src={icon} alt='icon' />
             <ListItemText primary={name} />
           </ListItemButton>
         )
