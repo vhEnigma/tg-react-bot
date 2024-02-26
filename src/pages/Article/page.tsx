@@ -69,7 +69,7 @@ const Article: FC = () => {
         <AccordionDetails>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: 'red' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', backgroundColor: 'red' }}>
                 <Typography>{author}</Typography>
                 <Typography>{title}</Typography>
               </Box>
