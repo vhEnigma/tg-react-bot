@@ -109,10 +109,10 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
           <ListItemText
             sx={{
               '& span': {
-                display: 'block',
+                display: '-webkit-box',
                 overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                WebkitLineClamp: 3
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: 'vertical'
               }
             }}
             primary={topic}
