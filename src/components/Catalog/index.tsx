@@ -108,7 +108,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
         <>
           <ListItemText
             sx={{
-              '& .span': {
+              '& span': {
                 display: 'block',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
