@@ -87,13 +87,9 @@ const Article: FC = () => {
             <Typography sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
               Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
             </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box>
-                <Typography>Дата создания: 01.01.0000</Typography>
-                <Typography>Дата редактирования: 01.01.0000</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>{getTags()}</Box>
-            </Box>
+            <Typography>Дата создания: 01.01.0000</Typography>
+            <Typography>Дата редактирования: 01.01.0000</Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>{getTags()}</Box>
           </Box>
         </AccordionDetails>
       </Accordion>
