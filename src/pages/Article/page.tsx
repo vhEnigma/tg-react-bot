@@ -69,7 +69,7 @@ const Article: FC = () => {
         <AccordionDetails>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: 'red' }}>
                 <Typography>{author}</Typography>
                 <Typography>{title}</Typography>
               </Box>
@@ -82,23 +82,6 @@ const Article: FC = () => {
               <Box>{getTags()}</Box>
             </Box>
           </Box>
-          {/* <List sx={{ color: text_color }}> */}
-          {/*  <ListItem> */}
-          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Автор:' secondary={author} /> */}
-          {/*  </ListItem> */}
-          {/*  <ListItem> */}
-          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Время чтения' secondary={`${reading_time} минут`} /> */}
-          {/*  </ListItem> */}
-          {/*  <ListItem> */}
-          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Рейтинг' secondary={`${rating}/5`} /> */}
-          {/*  </ListItem> */}
-          {/*  <ListItem> */}
-          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата создания' secondary='01.01.1970' /> */}
-          {/*  </ListItem> */}
-          {/*  <ListItem> */}
-          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата редактирования' secondary='01.01.1970' /> */}
-          {/*  </ListItem> */}
-          {/* </List> */}
         </AccordionDetails>
       </Accordion>
       <Box sx={{ m: '20px auto', width: '50%' }}>
