@@ -1,6 +1,6 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Box, Button, Typography, Accordion, AccordionDetails, AccordionSummary, List, ListItem, ListItemText } from '@mui/material'
+import { Box, Button, Typography, Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
@@ -9,6 +9,7 @@ import { openInNewTab } from '../../utils/common'
 import { ArticleService } from '../../services/ArticleService'
 import CustomRating from '../../components/CustomRating'
 import useBackButton from '../../hooks/useBackButton'
+import MenuItemInfo from '../../components/MenuItemInfo'
 
 const Article: FC = () => {
   const { button_color, button_text_color, text_color, bg_color } = useTgTheme()
@@ -39,6 +40,13 @@ const Article: FC = () => {
     await ArticleService.setRating(id, newValue)
   }
 
+  const getTags = () =>
+    ['облако1', 'облако2', 'облако3'].map((tag, index) => (
+      <Box key={index} sx={{ color: text_color, backgroundColor: bg_color, borderRadius: '10px', p: '5px' }}>
+        {tag}
+      </Box>
+    ))
+
   const { topic: title, author, reading_time, rating, article_link } = article
 
   return (
@@ -59,23 +67,38 @@ const Article: FC = () => {
           <Typography>Подробнее</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <List sx={{ color: text_color }}>
-            <ListItem>
-              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Автор:' secondary={author} />
-            </ListItem>
-            <ListItem>
-              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Время чтения' secondary={`${reading_time} минут`} />
-            </ListItem>
-            <ListItem>
-              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Рейтинг' secondary={`${rating}/5`} />
-            </ListItem>
-            <ListItem>
-              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата создания' secondary='01.01.1970' />
-            </ListItem>
-            <ListItem>
-              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата редактирования' secondary='01.01.1970' />
-            </ListItem>
-          </List>
+          <Box>
+            <Box>
+              <Box>
+                <Typography>{title}</Typography>
+                <Typography>{author}</Typography>
+              </Box>
+              <MenuItemInfo rating={rating} reading_time={reading_time} />
+            </Box>
+            <Box>
+              <Box>
+                <Typography>Дата создания & Дата редактирования</Typography>
+              </Box>
+              <Box>{getTags()}</Box>
+            </Box>
+          </Box>
+          {/* <List sx={{ color: text_color }}> */}
+          {/*  <ListItem> */}
+          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Автор:' secondary={author} /> */}
+          {/*  </ListItem> */}
+          {/*  <ListItem> */}
+          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Время чтения' secondary={`${reading_time} минут`} /> */}
+          {/*  </ListItem> */}
+          {/*  <ListItem> */}
+          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Рейтинг' secondary={`${rating}/5`} /> */}
+          {/*  </ListItem> */}
+          {/*  <ListItem> */}
+          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата создания' secondary='01.01.1970' /> */}
+          {/*  </ListItem> */}
+          {/*  <ListItem> */}
+          {/*    <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата редактирования' secondary='01.01.1970' /> */}
+          {/*  </ListItem> */}
+          {/* </List> */}
         </AccordionDetails>
       </Accordion>
       <Box sx={{ m: '20px auto', width: '50%' }}>
