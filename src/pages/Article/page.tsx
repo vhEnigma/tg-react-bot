@@ -42,7 +42,16 @@ const Article: FC = () => {
 
   const getTags = () =>
     ['облако1', 'облако2', 'облако3'].map((tag, index) => (
-      <Box key={index} sx={{ color: text_color, backgroundColor: bg_color, borderRadius: '10px', p: '5px' }}>
+      <Box
+        key={index}
+        sx={{
+          color: button_text_color,
+          backgroundColor: button_color,
+          borderRadius: '10px',
+          p: '5px',
+          height: 'fit-content'
+        }}
+      >
         {tag}
       </Box>
     ))
@@ -77,7 +86,7 @@ const Article: FC = () => {
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Box>
-                <Typography>Дата создания & Дата редактирования</Typography>
+                <Typography>{`Дата создания: 01.01.0000 \n Дата редактирования: 01.01.0000`}</Typography>
               </Box>
               <Box>{getTags()}</Box>
             </Box>
