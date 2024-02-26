@@ -67,7 +67,7 @@ const Article: FC = () => {
               <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Время чтения' secondary={reading_time} />
             </ListItem>
             <ListItem>
-              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Рейтинг' secondary={rating} />
+              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Рейтинг' secondary={`${rating}/5`} />
             </ListItem>
             <ListItem>
               <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата создания' secondary='01.01.1970' />
