@@ -13,6 +13,7 @@ import { RouteList } from '../../routes/routes'
 import { IParams } from '../../types/params'
 import MenuItemInfo from '../MenuItemInfo'
 import useBackButton from '../../hooks/useBackButton'
+import { MultiLineEllipsisStyle } from '../../constants/style'
 
 type CatalogProps = {
   getInfoRequest: (id: string) => Promise<MenuListType>
@@ -70,7 +71,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const { id, name, rating } = test
       const content = (
         <>
-          <ListItemText primary={name} />
+          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
           <MenuItemInfo rating={rating} />
         </>
       )
@@ -106,17 +107,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const { id, rating, topic, reading_time } = article
       const content = (
         <>
-          <ListItemText
-            sx={{
-              '& span': {
-                display: '-webkit-box',
-                overflow: 'hidden',
-                WebkitLineClamp: 3,
-                WebkitBoxOrient: 'vertical'
-              }
-            }}
-            primary={topic}
-          />
+          <ListItemText sx={MultiLineEllipsisStyle} primary={topic} />
           <MenuItemInfo rating={rating} reading_time={reading_time} />
         </>
       )

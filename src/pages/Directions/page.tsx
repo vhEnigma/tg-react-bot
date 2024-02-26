@@ -8,6 +8,7 @@ import useTgTheme from '../../hooks/useTgTheme'
 import { MenuListType } from '../../types/menuList'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
 import icon from '../../../public/js.svg'
+import { MultiLineEllipsisStyle } from '../../constants/style'
 
 const Directions: FC = () => {
   const { button_color } = useTgTheme()
@@ -21,18 +22,22 @@ const Directions: FC = () => {
     const lastIndex = dataList.length - 1
     return dataList.map(({ id, name }, index) => {
       const isLastElement = index === lastIndex
+      const content = (
+        <>
+          <img src={icon} alt='icon' />
+          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
+        </>
+      )
       if (isLastElement) {
         return (
           <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-            <img src={icon} alt='icon' />
-            <ListItemText primary={name} />
+            {content}
           </ListItemButton>
         )
       }
       return (
         <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-          <img src={icon} alt='icon' />
-          <ListItemText primary={name} />
+          {content}
         </ListItemButton>
       )
     })
