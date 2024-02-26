@@ -106,7 +106,17 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const { id, rating, topic, reading_time } = article
       const content = (
         <>
-          <ListItemText sx={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', WebkitLineClamp: 3 }} primary={topic} />
+          <ListItemText
+            sx={{
+              '& .span': {
+                display: 'block',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                WebkitLineClamp: 3
+              }
+            }}
+            primary={topic}
+          />
           <MenuItemInfo rating={rating} reading_time={reading_time} />
         </>
       )
