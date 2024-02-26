@@ -12,7 +12,7 @@ import CustomRating from '../../components/CustomRating'
 import useBackButton from '../../hooks/useBackButton'
 
 const Article: FC = () => {
-  const { button_color, button_text_color, text_color } = useTgTheme()
+  const { button_color, button_text_color, text_color, bg_color } = useTgTheme()
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [article, setArticle] = useState<ArticleType>()
@@ -56,7 +56,7 @@ const Article: FC = () => {
         {title}
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Accordion>
+        <Accordion sx={{ backgroundColor: bg_color, color: text_color }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>
             <Typography>Подробнее</Typography>
           </AccordionSummary>
