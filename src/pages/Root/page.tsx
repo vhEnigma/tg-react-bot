@@ -16,7 +16,7 @@ const Root: FC = () => {
 
   const getTestList = () =>
     userInfo.test_results.map(({ id, result, name }) => {
-      const displayValue = `${name} - ${result}%`
+      const displayValue = `${name} - ${result}% (X) раз пройден`
       return (
         <ListItemButton key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
           <ListItemText primary={displayValue} />
