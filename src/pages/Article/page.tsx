@@ -1,6 +1,6 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Box, Button, Typography, Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import { Box, Button, Typography, Accordion, AccordionDetails, AccordionSummary, List, ListItem, ListItemText } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
@@ -61,11 +61,26 @@ const Article: FC = () => {
             <Typography>Подробнее</Typography>
           </AccordionSummary>
           <AccordionDetails>
+            <List>
+              <ListItem>
+                <ListItemText primary='Автор:' secondary={author} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary='Время чтения' secondary={reading_time} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary='Рейтинг' secondary={rating} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary='Дата создания' secondary='01.01.1970' />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary='Дата редактирования' secondary='01.01.1970' />
+              </ListItem>
+            </List>
             <MenuItemInfo info={[author]} rating={rating} reading_time={reading_time} withTimeEllipsis />
 
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-            </Typography>
+            <Typography>Дата создания : 01.01.1970 Дата Редактирования: 01.01.1970</Typography>
           </AccordionDetails>
         </Accordion>
       </Box>
