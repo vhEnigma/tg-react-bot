@@ -54,32 +54,30 @@ const Article: FC = () => {
       >
         {title}
       </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Accordion sx={{ backgroundColor: bg_color, color: text_color }}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>
-            <Typography>Подробнее</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <List sx={{ color: text_color }}>
-              <ListItem>
-                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Автор:' secondary={author} />
-              </ListItem>
-              <ListItem>
-                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Время чтения' secondary={reading_time} />
-              </ListItem>
-              <ListItem>
-                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Рейтинг' secondary={rating} />
-              </ListItem>
-              <ListItem>
-                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата создания' secondary='01.01.1970' />
-              </ListItem>
-              <ListItem>
-                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата редактирования' secondary='01.01.1970' />
-              </ListItem>
-            </List>
-          </AccordionDetails>
-        </Accordion>
-      </Box>
+      <Accordion sx={{ backgroundColor: bg_color, color: text_color }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>
+          <Typography>Подробнее</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <List sx={{ color: text_color }}>
+            <ListItem>
+              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Автор:' secondary={author} />
+            </ListItem>
+            <ListItem>
+              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Время чтения' secondary={reading_time} />
+            </ListItem>
+            <ListItem>
+              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Рейтинг' secondary={rating} />
+            </ListItem>
+            <ListItem>
+              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата создания' secondary='01.01.1970' />
+            </ListItem>
+            <ListItem>
+              <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата редактирования' secondary='01.01.1970' />
+            </ListItem>
+          </List>
+        </AccordionDetails>
+      </Accordion>
       <Box sx={{ m: '20px auto', width: '50%' }}>
         <Button
           onClick={() => openInNewTab(article_link)}
