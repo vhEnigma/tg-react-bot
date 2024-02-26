@@ -85,7 +85,7 @@ const Article: FC = () => {
               <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box>
+              <Box sx={{ p: '5px' }}>
                 <Typography>Дата создания: 01.01.0000</Typography>
                 <Typography>Дата редактирования: 01.01.0000</Typography>
               </Box>
