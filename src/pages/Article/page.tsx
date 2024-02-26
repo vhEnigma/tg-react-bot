@@ -1,6 +1,6 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Box, Button, Typography, Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import { Box, Button, Typography, Accordion, AccordionDetails, AccordionSummary, ButtonGroup } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
@@ -74,6 +74,12 @@ const Article: FC = () => {
         </Button>
       </Box>
       <CustomRating rating={userRating} onChange={handleChangeRating} />
+
+      <ButtonGroup variant='contained'>
+        <Button>Статьи</Button>
+        <Button>Тесты</Button>
+        <Button>Рекомендации</Button>
+      </ButtonGroup>
     </>
   )
 }
