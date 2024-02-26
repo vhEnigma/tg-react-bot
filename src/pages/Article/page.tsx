@@ -84,12 +84,15 @@ const Article: FC = () => {
               </Box>
               <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
             </Box>
+            <Typography sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
+            </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ p: '5px' }}>
+              <Box>
                 <Typography>Дата создания: 01.01.0000</Typography>
                 <Typography>Дата редактирования: 01.01.0000</Typography>
               </Box>
-              <Box sx={{ display: 'flex', gap: '5px' }}>{getTags()}</Box>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>{getTags()}</Box>
             </Box>
           </Box>
         </AccordionDetails>
