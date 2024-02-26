@@ -1,6 +1,7 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography, Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { ArticleType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -55,7 +56,18 @@ const Article: FC = () => {
         {title}
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <MenuItemInfo info={[author]} rating={rating} reading_time={reading_time} withTimeEllipsis />
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>
+            <Typography>Подробнее</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <MenuItemInfo info={[author]} rating={rating} reading_time={reading_time} withTimeEllipsis />
+
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
       </Box>
       <Box sx={{ m: '20px auto', width: '50%' }}>
         <Button
