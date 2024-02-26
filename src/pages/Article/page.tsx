@@ -86,9 +86,10 @@ const Article: FC = () => {
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Box>
-                <Typography>{`Дата создания: 01.01.0000 \n Дата редактирования: 01.01.0000`}</Typography>
+                <Typography>Дата создания: 01.01.0000</Typography>
+                <Typography>Дата редактирования: 01.01.0000</Typography>
               </Box>
-              <Box>{getTags()}</Box>
+              <Box sx={{ display: 'flex', gap: '5px' }}>{getTags()}</Box>
             </Box>
           </Box>
         </AccordionDetails>
