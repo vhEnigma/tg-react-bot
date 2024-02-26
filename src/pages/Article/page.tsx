@@ -9,7 +9,7 @@ import { openInNewTab } from '../../utils/common'
 import { ArticleService } from '../../services/ArticleService'
 import CustomRating from '../../components/CustomRating'
 import useBackButton from '../../hooks/useBackButton'
-import MenuItemInfo from '../../components/MenuItemInfo'
+import ArticleCard from '../../components/ArticleCard'
 
 const Article: FC = () => {
   const { button_color, button_text_color, text_color, bg_color } = useTgTheme()
@@ -40,23 +40,7 @@ const Article: FC = () => {
     await ArticleService.setRating(id, newValue)
   }
 
-  const getTags = () =>
-    ['облако1', 'облако2', 'облако3'].map((tag, index) => (
-      <Box
-        key={index}
-        sx={{
-          color: button_text_color,
-          backgroundColor: button_color,
-          borderRadius: '10px',
-          p: '5px',
-          height: 'fit-content'
-        }}
-      >
-        {tag}
-      </Box>
-    ))
-
-  const { topic: title, author, reading_time, rating, article_link } = article
+  const { topic, article_link } = article
 
   return (
     <>
@@ -69,28 +53,14 @@ const Article: FC = () => {
           textTransform: 'uppercase'
         }}
       >
-        {title}
+        {topic}
       </Typography>
       <Accordion sx={{ backgroundColor: bg_color, color: text_color }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>
           <Typography>Подробнее</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <Typography>{author}</Typography>
-                <Typography>{title}</Typography>
-              </Box>
-              <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
-            </Box>
-            <Typography sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
-            </Typography>
-            <Typography>Дата создания: 01.01.0000</Typography>
-            <Typography>Дата редактирования: 01.01.0000</Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>{getTags()}</Box>
-          </Box>
+          <ArticleCard article={article} />
         </AccordionDetails>
       </Accordion>
       <Box sx={{ m: '20px auto', width: '50%' }}>
