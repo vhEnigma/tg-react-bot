@@ -70,7 +70,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       const { id, name, rating } = test
       const content = (
         <>
-          <ListItemText primary={name} />
+          <ListItemText sx={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis' }} primary={name} />
           <MenuItemInfo rating={rating} />
         </>
       )
