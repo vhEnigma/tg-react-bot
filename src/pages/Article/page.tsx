@@ -67,13 +67,13 @@ const Article: FC = () => {
           <Typography>Подробнее</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <Box>
-              <Box>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography>{title}</Typography>
                 <Typography>{author}</Typography>
               </Box>
-              <MenuItemInfo rating={rating} reading_time={reading_time} />
+              <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
             </Box>
             <Box>
               <Box>
