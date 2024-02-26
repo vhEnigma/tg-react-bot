@@ -70,8 +70,12 @@ const Article: FC = () => {
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography>{title}</Typography>
                 <Typography>{author}</Typography>
+                <Typography>{title}</Typography>
+                <Typography>
+                  Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
+                  Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
+                </Typography>
               </Box>
               <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
             </Box>
