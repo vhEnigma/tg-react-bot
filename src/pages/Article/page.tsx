@@ -7,7 +7,6 @@ import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import { openInNewTab } from '../../utils/common'
 import { ArticleService } from '../../services/ArticleService'
-import MenuItemInfo from '../../components/MenuItemInfo'
 import CustomRating from '../../components/CustomRating'
 import useBackButton from '../../hooks/useBackButton'
 
@@ -61,26 +60,23 @@ const Article: FC = () => {
             <Typography>Подробнее</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <List>
+            <List sx={{ color: text_color }}>
               <ListItem>
-                <ListItemText primary='Автор:' secondary={author} />
+                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Автор:' secondary={author} />
               </ListItem>
               <ListItem>
-                <ListItemText primary='Время чтения' secondary={reading_time} />
+                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Время чтения' secondary={reading_time} />
               </ListItem>
               <ListItem>
-                <ListItemText primary='Рейтинг' secondary={rating} />
+                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Рейтинг' secondary={rating} />
               </ListItem>
               <ListItem>
-                <ListItemText primary='Дата создания' secondary='01.01.1970' />
+                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата создания' secondary='01.01.1970' />
               </ListItem>
               <ListItem>
-                <ListItemText primary='Дата редактирования' secondary='01.01.1970' />
+                <ListItemText secondaryTypographyProps={{ color: text_color }} primary='Дата редактирования' secondary='01.01.1970' />
               </ListItem>
             </List>
-            <MenuItemInfo info={[author]} rating={rating} reading_time={reading_time} withTimeEllipsis />
-
-            <Typography>Дата создания : 01.01.1970 Дата Редактирования: 01.01.1970</Typography>
           </AccordionDetails>
         </Accordion>
       </Box>
