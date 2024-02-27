@@ -75,7 +75,7 @@ const Article: FC = () => {
       </Box>
       <CustomRating rating={userRating} onChange={handleChangeRating} />
 
-      <ButtonGroup variant='contained'>
+      <ButtonGroup sx={{ display: 'flex', justifyContent: 'center' }} variant='contained'>
         <Button>Статьи</Button>
         <Button>Тесты</Button>
         <Button>Рекомендации</Button>
