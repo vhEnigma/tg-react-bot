@@ -11,7 +11,7 @@ type ArticleCardProps = {
 }
 
 const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
-  const { button_text_color, button_color, bg_color, accent_text_color } = useTgTheme()
+  const { button_text_color, button_color, bg_color, section_bg_color } = useTgTheme()
   const getTags = () =>
     ['облако1', 'облако2', 'облако3'].map((tag, index) => (
       <Box
@@ -48,7 +48,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
           display: 'flex',
           justifyContent: 'space-between',
           cursor: 'pointer',
-          backgroundColor: accent_text_color,
+          backgroundColor: section_bg_color,
           borderRadius: '5px',
           p: '5px'
         }}
