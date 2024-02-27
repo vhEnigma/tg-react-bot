@@ -4,6 +4,5 @@ export enum RouteList {
   Technology = 'technology',
   Article = 'article',
   Test = 'test',
-  TestResult = 'test-result',
-  New = 'new'
+  TestResult = 'test-result'
 }

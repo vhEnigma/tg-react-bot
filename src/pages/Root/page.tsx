@@ -4,6 +4,7 @@ import { useTelegram } from '../../hooks/useTelegram'
 import useTgTheme from '../../hooks/useTgTheme'
 import Loader from '../../components/Loader'
 import useUserInfo from '../../hooks/useUserInfo'
+import New from '../../components/New'
 
 const Root: FC = () => {
   const { user } = useTelegram()
@@ -26,14 +27,17 @@ const Root: FC = () => {
 
   const title = `${userInfo.first_name} ${userInfo.last_name}`
   return (
-    <Box>
-      <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
-        {title}
-      </Typography>
-      <List component='div' aria-label='secondary mailbox folder'>
-        {getTestList()}
-      </List>
-    </Box>
+    <>
+      <Box>
+        <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
+          {title}
+        </Typography>
+        <List component='div' aria-label='secondary mailbox folder'>
+          {getTestList()}
+        </List>
+      </Box>
+      <New />
+    </>
   )
 }
 
