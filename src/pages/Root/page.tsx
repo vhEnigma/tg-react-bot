@@ -8,7 +8,7 @@ import New from '../../components/New'
 
 const Root: FC = () => {
   const { user } = useTelegram()
-  const { text_color, button_color } = useTgTheme()
+  const { text_color, button_color, button_text_color } = useTgTheme()
   const { userInfo, isLoading } = useUserInfo(user.id)
 
   if (isLoading || !userInfo) {
@@ -32,7 +32,7 @@ const Root: FC = () => {
         <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
           {title}
         </Typography>
-        <Button sx={{ m: '10px', backgroundColor: button_color, color: text_color }} variant='contained'>
+        <Button sx={{ m: '10px', backgroundColor: button_color, color: button_text_color }} variant='contained'>
           Просмотреть историю
         </Button>
         <List component='div' aria-label='secondary mailbox folder'>
