@@ -75,7 +75,13 @@ const Article: FC = () => {
       const color = isActive ? button_text_color : link_color
       const Component = StyledButton(button_text_color)
       return (
-        <Component key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
+        <Component
+          key={id}
+          onClick={() => setActiveTab(key)}
+          fullWidth
+          sx={{ backgroundColor, color, fontSize: '12px' }}
+          variant='contained'
+        >
           {title}
         </Component>
       )
@@ -220,7 +226,7 @@ const Article: FC = () => {
       </Box>
       <CustomRating rating={userRating} onChange={handleChangeRating} />
 
-      <ButtonGroup sx={{ display: 'flex', justifyContent: 'center' }} variant='contained'>
+      <ButtonGroup sx={{ display: 'flex', justifyContent: 'center', mt: '10px' }} variant='contained'>
         {renderTabs()}
       </ButtonGroup>
       {renderMenuList()}
