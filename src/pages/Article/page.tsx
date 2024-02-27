@@ -153,11 +153,13 @@ const Article: FC = () => {
     })
   }
 
+  // todo replace requests and prop requestId => articleID
+
   const renderMenuList = () => {
     const menuLists = {
       [ARTICLE_KEY]: (
         <MenuList<ArticleType>
-          requestId={id}
+          requestId='1'
           activeTab={activeTab}
           request={DirectionService.getArticleListByDirectionRequest}
           getItems={renderArticles}
@@ -165,7 +167,7 @@ const Article: FC = () => {
       ),
       [TEST_KEY]: (
         <MenuList<TestType>
-          requestId={id}
+          requestId='1'
           activeTab={activeTab}
           request={DirectionService.getTestListByDirectionRequest}
           getItems={renderTests}
@@ -173,7 +175,7 @@ const Article: FC = () => {
       ),
       [RECOMMENDATION_KEY]: (
         <MenuList<TestType>
-          requestId={id}
+          requestId='1'
           activeTab={activeTab}
           request={DirectionService.getTestListByDirectionRequest}
           getItems={renderTests}
