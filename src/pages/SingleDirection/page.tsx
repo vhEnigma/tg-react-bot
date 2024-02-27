@@ -41,8 +41,8 @@ const SingleDirection: FC = () => {
       </Typography>
       <Catalog
         requestId={id}
-        articlesByFilterRequest={DirectionService.getArticleListByDirectionRequest}
-        testsByFilterRequest={DirectionService.getTestListByDirectionRequest}
+        articlesRequest={DirectionService.getArticleListByDirectionRequest}
+        testsRequest={DirectionService.getTestListByDirectionRequest}
       />
     </>
   )

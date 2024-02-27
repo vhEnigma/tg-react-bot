@@ -30,6 +30,11 @@ const History: FC = () => {
     <List component='div' aria-label='secondary mailbox folder'>
       {getTestList()}
     </List>
+
+    // <Catalog //todo added single request for test results and readed article
+    //         articlesRequest={DirectionService.getArticleListByDirectionRequest}
+    //         testsRequest={DirectionService.getTestListByDirectionRequest}
+    //       />
   )
 }
 

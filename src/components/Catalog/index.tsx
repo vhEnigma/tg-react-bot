@@ -16,8 +16,8 @@ import ArticleCard from '../ArticleCard'
 
 type CatalogProps = {
   requestId: string
-  articlesByFilterRequest: (params: IParams) => Promise<ArticleType[]>
-  testsByFilterRequest: (params: IParams) => Promise<TestType[]>
+  articlesRequest: (params: IParams) => Promise<ArticleType[]>
+  testsRequest: (params: IParams) => Promise<TestType[]>
 }
 
 const StyledButton = (color: string) =>
@@ -26,7 +26,7 @@ const StyledButton = (color: string) =>
       color
     }
   })
-const Catalog: FC<CatalogProps> = ({ requestId, testsByFilterRequest, articlesByFilterRequest }) => {
+const Catalog: FC<CatalogProps> = ({ requestId, testsRequest, articlesRequest }) => {
   const { button_color, button_text_color, bg_color, link_color } = useTgTheme()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
@@ -98,9 +98,9 @@ const Catalog: FC<CatalogProps> = ({ requestId, testsByFilterRequest, articlesBy
   const renderMenuList = () => {
     const menuLists = {
       [ARTICLE_KEY]: (
-        <MenuList<ArticleType> requestId={requestId} activeTab={activeTab} request={articlesByFilterRequest} getItems={renderArticles} />
+        <MenuList<ArticleType> requestId={requestId} activeTab={activeTab} request={articlesRequest} getItems={renderArticles} />
       ),
-      [TEST_KEY]: <MenuList<TestType> requestId={requestId} activeTab={activeTab} request={testsByFilterRequest} getItems={renderTests} />
+      [TEST_KEY]: <MenuList<TestType> requestId={requestId} activeTab={activeTab} request={testsRequest} getItems={renderTests} />
     }
     if (activeTab === RECOMMENDATION_KEY) return
     return menuLists[activeTab]
