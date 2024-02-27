@@ -1,43 +1,38 @@
 import { FC } from 'react'
-import { Box, Button, List, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import { useTelegram } from '../../hooks/useTelegram'
 import useTgTheme from '../../hooks/useTgTheme'
 import Loader from '../../components/Loader'
 import useUserInfo from '../../hooks/useUserInfo'
 import New from '../../components/New'
+import { RouteList } from '../../routes/routes'
 
 const Root: FC = () => {
   const { user } = useTelegram()
   const { text_color, button_color, button_text_color } = useTgTheme()
   const { userInfo, isLoading } = useUserInfo(user.id)
+  const navigate = useNavigate()
 
   if (isLoading || !userInfo) {
     return <Loader />
   }
 
-  const getTestList = () =>
-    userInfo.test_results.map(({ id, result, name }) => {
-      const displayValue = `${name} - ${result}% (X) раз пройден`
-      return (
-        <ListItemButton key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-          <ListItemText primary={displayValue} />
-        </ListItemButton>
-      )
-    })
-
   const title = `${userInfo.first_name} ${userInfo.last_name}`
+
   return (
     <>
       <Box>
         <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
           {title}
         </Typography>
-        <Button sx={{ m: '10px', backgroundColor: button_color, color: button_text_color }} variant='contained'>
+        <Button
+          onClick={() => navigate(RouteList.History)}
+          sx={{ m: '10px', backgroundColor: button_color, color: button_text_color }}
+          variant='contained'
+        >
           Просмотреть историю
         </Button>
-        <List component='div' aria-label='secondary mailbox folder'>
-          {getTestList()}
-        </List>
       </Box>
       <New />
     </>
