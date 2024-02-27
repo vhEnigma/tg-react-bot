@@ -4,11 +4,13 @@ import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import useUserInfo from '../../hooks/useUserInfo'
 import { useTelegram } from '../../hooks/useTelegram'
+import useBackButton from '../../hooks/useBackButton'
 
 const History: FC = () => {
   const { user } = useTelegram()
   const { button_color } = useTgTheme()
   const { userInfo, isLoading } = useUserInfo(user.id)
+  useBackButton()
 
   if (isLoading || !userInfo) {
     return <Loader />
