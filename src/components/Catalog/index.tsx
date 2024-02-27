@@ -1,11 +1,10 @@
-import React, { FC, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Container, ListItemButton, ListItemText, Typography } from '@mui/material'
+import React, { FC, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Box, Button, Container, ListItemButton, ListItemText } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import useTgTheme from '../../hooks/useTgTheme'
 import { ARTICLE_KEY, tabsCatalogConfig, TEST_KEY, TabsType, RECOMMENDATION_KEY } from '../../pages/SingleDirection/constants'
-import { ArticleType, MenuListType, TestType } from '../../types/menuList'
-import Loader from '../Loader'
+import { ArticleType, TestType } from '../../types/menuList'
 import MenuList from '../MenuList'
 import { RenderItemsProps } from '../InfinityScrollList'
 import { RouteList } from '../../routes/routes'
@@ -16,7 +15,7 @@ import { MultiLineEllipsisStyle } from '../../constants/style'
 import ArticleCard from '../ArticleCard'
 
 type CatalogProps = {
-  getInfoRequest: (id: string) => Promise<MenuListType>
+  requestId: string
   articlesByFilterRequest: (params: IParams) => Promise<ArticleType[]>
   testsByFilterRequest: (params: IParams) => Promise<TestType[]>
 }
@@ -27,28 +26,11 @@ const StyledButton = (color: string) =>
       color
     }
   })
-const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, articlesByFilterRequest }) => {
-  const { button_color, button_text_color, text_color, bg_color, link_color } = useTgTheme()
+const Catalog: FC<CatalogProps> = ({ requestId, testsByFilterRequest, articlesByFilterRequest }) => {
+  const { button_color, button_text_color, bg_color, link_color } = useTgTheme()
   const navigate = useNavigate()
-  const { id } = useParams()
-  const [isLoading, setLoading] = useState(true)
-  const [title, setTitle] = useState('')
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
   useBackButton()
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (id) {
-        const { name } = await getInfoRequest(id)
-        setTitle(name)
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  if (isLoading) return <Loader />
 
   const renderTabs = () =>
     tabsCatalogConfig.map((options) => {
@@ -116,9 +98,9 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   const renderMenuList = () => {
     const menuLists = {
       [ARTICLE_KEY]: (
-        <MenuList<ArticleType> requestId={id} activeTab={activeTab} request={articlesByFilterRequest} getItems={renderArticles} />
+        <MenuList<ArticleType> requestId={requestId} activeTab={activeTab} request={articlesByFilterRequest} getItems={renderArticles} />
       ),
-      [TEST_KEY]: <MenuList<TestType> requestId={id} activeTab={activeTab} request={testsByFilterRequest} getItems={renderTests} />
+      [TEST_KEY]: <MenuList<TestType> requestId={requestId} activeTab={activeTab} request={testsByFilterRequest} getItems={renderTests} />
     }
     if (activeTab === RECOMMENDATION_KEY) return
     return menuLists[activeTab]
@@ -126,17 +108,6 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
 
   return (
     <Box>
-      <Typography
-        component='h1'
-        sx={{
-          color: text_color,
-          textAlign: 'center',
-          m: '20px 0',
-          textTransform: 'uppercase'
-        }}
-      >
-        {title}
-      </Typography>
       <Container sx={{ display: 'flex', justifyContent: 'space-between', gap: '50px' }}>{renderTabs()}</Container>
       {renderMenuList()}
     </Box>
