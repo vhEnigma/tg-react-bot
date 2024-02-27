@@ -11,7 +11,7 @@ type ArticleCardProps = {
 }
 
 const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
-  const { button_color, bg_color, section_bg_color } = useTgTheme()
+  const { button_color, bg_color } = useTgTheme()
 
   const { author, rating, reading_time, topic } = article
 
@@ -33,7 +33,6 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
           display: 'flex',
           justifyContent: 'space-between',
           cursor: 'pointer',
-          backgroundColor: section_bg_color,
           borderRadius: '5px',
           p: '5px'
         }}
