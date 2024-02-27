@@ -11,28 +11,14 @@ type ArticleCardProps = {
 }
 
 const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
-  const { button_text_color, button_color, bg_color, header_bg_color } = useTgTheme()
-  const getTags = () =>
-    ['облако1', 'облако2', 'облако3'].map((tag, index) => (
-      <Box
-        key={index}
-        sx={{
-          color: button_text_color,
-          backgroundColor: button_color,
-          borderRadius: '10px',
-          p: '5px',
-          height: 'fit-content'
-        }}
-      >
-        {tag}
-      </Box>
-    ))
+  const { button_color, bg_color, section_bg_color } = useTgTheme()
 
   const { author, rating, reading_time, topic } = article
 
   return (
     <Box
       ref={customRef}
+      onClick={onCLick}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -43,12 +29,11 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
       }}
     >
       <Box
-        onClick={onCLick}
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
           cursor: 'pointer',
-          backgroundColor: header_bg_color,
+          backgroundColor: section_bg_color,
           borderRadius: '5px',
           p: '5px'
         }}
@@ -63,7 +48,6 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
         Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
       </Typography>
       <Typography>Дата создания: 01.01.0000</Typography>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>{getTags()}</Box>
     </Box>
   )
 }
