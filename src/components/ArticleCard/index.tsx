@@ -25,21 +25,19 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
         gap: '15px',
         borderTop: `1px solid ${button_color}`,
         backgroundColor: bg_color,
-        p: '10px'
+        p: '10px',
+        cursor: 'pointer'
       }}
     >
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
-          cursor: 'pointer',
-          borderRadius: '5px',
-          p: '5px'
+          justifyContent: 'space-between'
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <Typography>{author}</Typography>
-          <Typography>{topic}</Typography>
+          <Typography sx={{ fontWeight: 'bold' }}>{topic}</Typography>
         </Box>
         <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
       </Box>
