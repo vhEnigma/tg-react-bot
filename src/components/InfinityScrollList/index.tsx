@@ -3,7 +3,7 @@ import useInfinityScroll from '../../hooks/useInfinityScroll'
 import { PAGE_SIZE } from '../../constants/common'
 import { IParams } from '../../types/params'
 import { MenuItemType } from '../../types/menuList'
-import { TabsType } from '../../pages/SingleDirection/types'
+import { TabsType } from '../../pages/SingleDirection/constants'
 
 type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode

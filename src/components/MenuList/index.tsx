@@ -8,8 +8,8 @@ import NotFound from '../NotFound'
 import { calcLoaderWrapperHeight } from '../../utils/style'
 import InfinityScrollList, { RenderItemsProps } from '../InfinityScrollList'
 import { MenuItemType } from '../../types/menuList'
-import { TabsType } from '../../pages/SingleDirection/types'
 import { useTelegram } from '../../hooks/useTelegram'
+import { TabsType } from '../../pages/SingleDirection/constants'
 
 type MenuListProps<T> = {
   request: (params: IParams) => Promise<T[]>

@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Box, Button, Container, ListItemButton, ListItemText, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import useTgTheme from '../../hooks/useTgTheme'
-import { TabsType } from '../SingleDirection/types'
-import { ARTICLE_KEY, tabsConfig, TEST_KEY } from '../SingleDirection/constants'
+import { TabsType, ARTICLE_KEY, tabsCatalogConfig, TEST_KEY } from '../SingleDirection/constants'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
 import { ArticleType, TestType } from '../../types/menuList'
 import MenuItemInfo from '../../components/MenuItemInfo'
@@ -25,7 +24,7 @@ const New: FC = () => {
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
 
   const renderTabs = () =>
-    tabsConfig.map((options) => {
+    tabsCatalogConfig.map((options) => {
       const { id, title, key } = options
       const isActive = key === activeTab
       const backgroundColor = isActive ? button_color : bg_color

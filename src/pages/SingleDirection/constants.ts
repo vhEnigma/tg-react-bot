@@ -1,15 +1,17 @@
-import { DataMap, TabsType } from './types'
-
 export const ARTICLE_KEY = 'article'
 export const TEST_KEY = 'tests'
 
-type TabsCOnfigType = {
+export type TabsType = typeof ARTICLE_KEY | typeof TEST_KEY | typeof RECOMMENDATION_KEY
+
+export const RECOMMENDATION_KEY = 'recommendation'
+
+type TabsConfigType = {
   id: number
   title: string
   key: TabsType
 }
 
-export const tabsConfig: TabsCOnfigType[] = [
+export const tabsCatalogConfig: TabsConfigType[] = [
   {
     id: 1,
     title: 'Статьи',
@@ -22,7 +24,20 @@ export const tabsConfig: TabsCOnfigType[] = [
   }
 ]
 
-export const initDataMap: DataMap = {
-  [ARTICLE_KEY]: [],
-  [TEST_KEY]: []
-}
+export const tabsArticleAssociatedConfig: TabsConfigType[] = [
+  {
+    id: 1,
+    title: 'Статьи',
+    key: ARTICLE_KEY
+  },
+  {
+    id: 2,
+    title: 'Тесты',
+    key: TEST_KEY
+  },
+  {
+    id: 3,
+    title: 'Рекомендации',
+    key: RECOMMENDATION_KEY
+  }
+]

@@ -3,10 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Container, ListItemButton, ListItemText, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import useTgTheme from '../../hooks/useTgTheme'
-import { ARTICLE_KEY, tabsConfig, TEST_KEY } from '../../pages/SingleDirection/constants'
+import { ARTICLE_KEY, tabsCatalogConfig, TEST_KEY, TabsType, RECOMMENDATION_KEY } from '../../pages/SingleDirection/constants'
 import { ArticleType, MenuListType, TestType } from '../../types/menuList'
 import Loader from '../Loader'
-import { TabsType } from '../../pages/SingleDirection/types'
 import MenuList from '../MenuList'
 import { RenderItemsProps } from '../InfinityScrollList'
 import { RouteList } from '../../routes/routes'
@@ -51,7 +50,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   if (isLoading) return <Loader />
 
   const renderTabs = () =>
-    tabsConfig.map((options) => {
+    tabsCatalogConfig.map((options) => {
       const { id, title, key } = options
       const isActive = key === activeTab
       const backgroundColor = isActive ? button_color : bg_color
@@ -143,7 +142,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
       ),
       [TEST_KEY]: <MenuList<TestType> requestId={id} activeTab={activeTab} request={testsByFilterRequest} getItems={renderTests} />
     }
-
+    if (activeTab === RECOMMENDATION_KEY) return
     return menuLists[activeTab]
   }
 

@@ -1,8 +1,19 @@
 import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Box, Button, Typography, Accordion, AccordionDetails, AccordionSummary, ButtonGroup } from '@mui/material'
+import { useNavigate, useParams } from 'react-router-dom'
+import {
+  Box,
+  Button,
+  Typography,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  ButtonGroup,
+  ListItemText,
+  ListItemButton
+} from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { ArticleType } from '../../types/menuList'
+import { styled } from '@mui/material/styles'
+import { ArticleType, TestType } from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
 import { openInNewTab } from '../../utils/common'
@@ -10,13 +21,29 @@ import { ArticleService } from '../../services/ArticleService'
 import CustomRating from '../../components/CustomRating'
 import useBackButton from '../../hooks/useBackButton'
 import ArticleCard from '../../components/ArticleCard'
+import { ARTICLE_KEY, RECOMMENDATION_KEY, tabsArticleAssociatedConfig, TabsType, TEST_KEY } from '../SingleDirection/constants'
+import MenuList from '../../components/MenuList'
+import { DirectionService } from '../../services/Direction'
+import { RenderItemsProps } from '../../components/InfinityScrollList'
+import { MultiLineEllipsisStyle } from '../../constants/style'
+import MenuItemInfo from '../../components/MenuItemInfo'
+import { RouteList } from '../../routes/routes'
+
+const StyledButton = (color: string) =>
+  styled(Button)({
+    '&:hover': {
+      color
+    }
+  })
 
 const Article: FC = () => {
-  const { button_color, button_text_color, text_color, bg_color } = useTgTheme()
+  const { button_color, button_text_color, text_color, bg_color, link_color } = useTgTheme()
   const { id } = useParams()
   const [isLoading, setLoading] = useState(true)
   const [article, setArticle] = useState<ArticleType>()
   const [userRating, setUserRating] = useState(0)
+  const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
+  const navigate = useNavigate()
   useBackButton()
 
   useEffect(() => {
@@ -38,6 +65,122 @@ const Article: FC = () => {
     setUserRating(newValue)
 
     await ArticleService.setRating(id, newValue)
+  }
+
+  const renderTabs = () =>
+    tabsArticleAssociatedConfig.map((options) => {
+      const { id, title, key } = options
+      const isActive = key === activeTab
+      const backgroundColor = isActive ? button_color : bg_color
+      const color = isActive ? button_text_color : link_color
+      const Component = StyledButton(button_text_color)
+      return (
+        <Component key={id} onClick={() => setActiveTab(key)} fullWidth sx={{ backgroundColor, color }} variant='contained'>
+          {title}
+        </Component>
+      )
+    })
+
+  const renderTests = (props: RenderItemsProps<TestType>) => {
+    const { ref, dataList } = props
+    const lastIndex = dataList.length - 1
+    return dataList.map((test) => {
+      const { id, name, rating } = test
+      const content = (
+        <>
+          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
+          <MenuItemInfo rating={rating} />
+        </>
+      )
+
+      if (lastIndex) {
+        return (
+          <ListItemButton
+            key={id}
+            ref={ref}
+            onClick={() => navigate(`/${RouteList.Test}/${id}`)}
+            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
+          >
+            {content}
+          </ListItemButton>
+        )
+      }
+      return (
+        <ListItemButton
+          key={id}
+          onClick={() => navigate(`/${RouteList.Test}/${id}`)}
+          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
+        >
+          {content}
+        </ListItemButton>
+      )
+    })
+  }
+
+  const renderArticles = (props: RenderItemsProps<ArticleType>) => {
+    const { ref, dataList } = props
+    const lastIndex = dataList.length - 1
+    return dataList.map((article) => {
+      const { id, rating, topic, reading_time } = article
+      const content = (
+        <>
+          <ListItemText sx={MultiLineEllipsisStyle} primary={topic} />
+          <MenuItemInfo rating={rating} reading_time={reading_time} />
+        </>
+      )
+
+      if (lastIndex) {
+        return (
+          <ListItemButton
+            key={id}
+            ref={ref}
+            onClick={() => navigate(`/${RouteList.Article}/${id}`)}
+            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
+          >
+            {content}
+          </ListItemButton>
+        )
+      }
+      return (
+        <ListItemButton
+          key={id}
+          onClick={() => navigate(`/${RouteList.Article}/${id}`)}
+          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
+        >
+          {content}
+        </ListItemButton>
+      )
+    })
+  }
+
+  const renderMenuList = () => {
+    const menuLists = {
+      [ARTICLE_KEY]: (
+        <MenuList<ArticleType>
+          requestId={id}
+          activeTab={activeTab}
+          request={DirectionService.getArticleListByDirectionRequest}
+          getItems={renderArticles}
+        />
+      ),
+      [TEST_KEY]: (
+        <MenuList<TestType>
+          requestId={id}
+          activeTab={activeTab}
+          request={DirectionService.getTestListByDirectionRequest}
+          getItems={renderTests}
+        />
+      ),
+      [RECOMMENDATION_KEY]: (
+        <MenuList<TestType>
+          requestId={id}
+          activeTab={activeTab}
+          request={DirectionService.getTestListByDirectionRequest}
+          getItems={renderTests}
+        />
+      )
+    }
+    return menuLists[activeTab]
   }
 
   const { topic, article_link } = article
@@ -76,10 +219,9 @@ const Article: FC = () => {
       <CustomRating rating={userRating} onChange={handleChangeRating} />
 
       <ButtonGroup sx={{ display: 'flex', justifyContent: 'center' }} variant='contained'>
-        <Button>Статьи</Button>
-        <Button>Тесты</Button>
-        <Button>Рекомендации</Button>
+        {renderTabs()}
       </ButtonGroup>
+      {renderMenuList()}
     </>
   )
 }
