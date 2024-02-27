@@ -41,7 +41,14 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
         </Box>
         <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
       </Box>
-      <Typography sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+      <Typography
+        sx={{
+          display: '-webkit-box',
+          overflow: 'hidden',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical'
+        }}
+      >
         Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
       </Typography>
       <Typography sx={{ fontStyle: 'italic' }}>Дата создания: 01.01.0000</Typography>
