@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Box, Button, Container, ListItemButton, ListItemText, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import useTgTheme from '../../hooks/useTgTheme'
-import { TabsType, ARTICLE_KEY, tabsCatalogConfig, TEST_KEY } from '../SingleDirection/constants'
+import { TabsType, ARTICLE_KEY, tabsCatalogConfig, TEST_KEY, RECOMMENDATION_KEY } from '../SingleDirection/constants'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
 import { ArticleType, TestType } from '../../types/menuList'
 import MenuItemInfo from '../../components/MenuItemInfo'
@@ -128,6 +128,8 @@ const New: FC = () => {
         />
       )
     }
+
+    if (activeTab === RECOMMENDATION_KEY) return
 
     return menuLists[activeTab]
   }
