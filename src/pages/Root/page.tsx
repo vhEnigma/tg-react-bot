@@ -28,13 +28,13 @@ const Root: FC = () => {
   const title = `${userInfo.first_name} ${userInfo.last_name}`
   return (
     <>
-      <Button sx={{ m: '10px' }} variant='contained'>
-        Просмотреть историю
-      </Button>
-      <Box>
-        <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
+      <Box sx={{ color: text_color }}>
+        <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center' }}>
           {title}
         </Typography>
+        <Button sx={{ m: '10px', backgroundColor: button_color }} variant='contained'>
+          Просмотреть историю
+        </Button>
         <List component='div' aria-label='secondary mailbox folder'>
           {getTestList()}
         </List>
