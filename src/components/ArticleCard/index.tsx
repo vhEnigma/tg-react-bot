@@ -42,7 +42,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
         p: '10px'
       }}
     >
-      <Box onClick={onCLick} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box onClick={onCLick} sx={{ display: 'flex', justifyContent: 'space-between', cursor: 'pointer' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <Typography>{author}</Typography>
           <Typography>{topic}</Typography>
