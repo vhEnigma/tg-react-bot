@@ -10,7 +10,7 @@ type ArticleCardProps = {
 }
 
 const ArticleCard: FC<ArticleCardProps> = ({ article, customRef }) => {
-  const { button_text_color, button_color } = useTgTheme()
+  const { button_text_color, button_color, bg_color } = useTgTheme()
   const getTags = () =>
     ['облако1', 'облако2', 'облако3'].map((tag, index) => (
       <Box
@@ -30,7 +30,16 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef }) => {
   const { author, rating, reading_time, topic } = article
 
   return (
-    <Box ref={customRef} sx={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    <Box
+      ref={customRef}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px',
+        borderTop: `1px solid ${button_color}`,
+        backgroundColor: bg_color
+      }}
+    >
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <Typography>{author}</Typography>
