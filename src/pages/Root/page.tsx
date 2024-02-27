@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Box, List, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { Box, Button, List, ListItemButton, ListItemText, Typography } from '@mui/material'
 import { useTelegram } from '../../hooks/useTelegram'
 import useTgTheme from '../../hooks/useTgTheme'
 import Loader from '../../components/Loader'
@@ -28,6 +28,9 @@ const Root: FC = () => {
   const title = `${userInfo.first_name} ${userInfo.last_name}`
   return (
     <>
+      <Button sx={{ m: '10px' }} variant='contained'>
+        Просмотреть историю
+      </Button>
       <Box>
         <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
           {title}
