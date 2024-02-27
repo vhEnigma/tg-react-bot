@@ -7,9 +7,10 @@ import useTgTheme from '../../hooks/useTgTheme'
 type ArticleCardProps = {
   article: ArticleType
   customRef?: (node?: Element | null | undefined) => void
+  onCLick: () => void
 }
 
-const ArticleCard: FC<ArticleCardProps> = ({ article, customRef }) => {
+const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
   const { button_text_color, button_color, bg_color } = useTgTheme()
   const getTags = () =>
     ['облако1', 'облако2', 'облако3'].map((tag, index) => (
@@ -37,10 +38,11 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef }) => {
         flexDirection: 'column',
         gap: '15px',
         borderTop: `1px solid ${button_color}`,
-        backgroundColor: bg_color
+        backgroundColor: bg_color,
+        p: '10px'
       }}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box onClick={onCLick} sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <Typography>{author}</Typography>
           <Typography>{topic}</Typography>
@@ -51,7 +53,6 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef }) => {
         Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
       </Typography>
       <Typography>Дата создания: 01.01.0000</Typography>
-      <Typography>Дата редактирования: 01.01.0000</Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>{getTags()}</Box>
     </Box>
   )

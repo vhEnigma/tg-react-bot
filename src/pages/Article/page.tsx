@@ -211,7 +211,7 @@ const Article: FC = () => {
           <Typography>Подробнее</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ArticleCard article={article} />
+          <ArticleCard article={article} onCLick={() => {}} />
         </AccordionDetails>
       </Accordion>
       <Box sx={{ m: '20px auto', width: '50%' }}>
