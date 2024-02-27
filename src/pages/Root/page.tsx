@@ -23,7 +23,7 @@ const Root: FC = () => {
   return (
     <>
       <Box>
-        <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'center', color: text_color }}>
+        <Typography component='h1' sx={{ margin: '20px 0', textAlign: 'left', fontWeight: 'bold', color: text_color }}>
           {title}
         </Typography>
         <Button

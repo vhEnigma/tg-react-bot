@@ -44,7 +44,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
       <Typography sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
         Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
       </Typography>
-      <Typography>Дата создания: 01.01.0000</Typography>
+      <Typography sx={{ fontStyle: 'italic' }}>Дата создания: 01.01.0000</Typography>
     </Box>
   )
 }
