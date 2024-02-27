@@ -36,7 +36,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <Typography>{author}</Typography>
+          <Typography sx={{ fontStyle: 'italic' }}>{author}</Typography>
           <Typography sx={{ fontWeight: 'bold' }}>{topic}</Typography>
         </Box>
         <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
