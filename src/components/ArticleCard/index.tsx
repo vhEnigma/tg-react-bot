@@ -48,7 +48,9 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
           display: 'flex',
           justifyContent: 'space-between',
           cursor: 'pointer',
-          backgroundColor: link_color
+          backgroundColor: link_color,
+          borderRadius: '5px',
+          p: '5px'
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
