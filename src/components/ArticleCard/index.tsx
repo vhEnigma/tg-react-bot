@@ -6,9 +6,10 @@ import useTgTheme from '../../hooks/useTgTheme'
 
 type ArticleCardProps = {
   article: ArticleType
+  customRef?: (node?: Element | null | undefined) => void
 }
 
-const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
+const ArticleCard: FC<ArticleCardProps> = ({ article, customRef }) => {
   const { button_text_color, button_color } = useTgTheme()
   const getTags = () =>
     ['облако1', 'облако2', 'облако3'].map((tag, index) => (
@@ -29,7 +30,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
   const { author, rating, reading_time, topic } = article
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    <Box ref={customRef} sx={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <Typography>{author}</Typography>

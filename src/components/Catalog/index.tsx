@@ -13,6 +13,7 @@ import { IParams } from '../../types/params'
 import MenuItemInfo from '../MenuItemInfo'
 import useBackButton from '../../hooks/useBackButton'
 import { MultiLineEllipsisStyle } from '../../constants/style'
+import ArticleCard from '../ArticleCard'
 
 type CatalogProps = {
   getInfoRequest: (id: string) => Promise<MenuListType>
@@ -102,36 +103,40 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
-    return dataList.map((article) => {
-      const { id, rating, topic, reading_time } = article
-      const content = (
-        <>
-          <ListItemText sx={MultiLineEllipsisStyle} primary={topic} />
-          <MenuItemInfo rating={rating} reading_time={reading_time} />
-        </>
-      )
-
-      if (lastIndex) {
-        return (
-          <ListItemButton
-            key={id}
-            ref={ref}
-            onClick={() => navigate(`/${RouteList.Article}/${id}`)}
-            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-          >
-            {content}
-          </ListItemButton>
-        )
+    return dataList.map((article, index) => {
+      if (lastIndex === index) {
+        return <ArticleCard key={article.id} customRef={ref} article={article} />
       }
-      return (
-        <ListItemButton
-          key={id}
-          onClick={() => navigate(`/${RouteList.Article}/${id}`)}
-          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-        >
-          {content}
-        </ListItemButton>
-      )
+      return <ArticleCard key={article.id} article={article} />
+      // const { id, rating, topic, reading_time } = article
+      // const content = (
+      //   <>
+      //     <ListItemText sx={MultiLineEllipsisStyle} primary={topic} />
+      //     <MenuItemInfo rating={rating} reading_time={reading_time} />
+      //   </>
+      // )
+      //
+      // if (lastIndex) {
+      //   return (
+      //     <ListItemButton
+      //       key={id}
+      //       ref={ref}
+      //       onClick={() => navigate(`/${RouteList.Article}/${id}`)}
+      //       sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
+      //     >
+      //       {content}
+      //     </ListItemButton>
+      //   )
+      // }
+      // return (
+      //   <ListItemButton
+      //     key={id}
+      //     onClick={() => navigate(`/${RouteList.Article}/${id}`)}
+      //     sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
+      //   >
+      //     {content}
+      //   </ListItemButton>
+      // )
     })
   }
 
