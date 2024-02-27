@@ -41,8 +41,8 @@ const SingleTechnology: FC = () => {
       </Typography>
       <Catalog
         requestId={id}
-        articlesByFilterRequest={TechnologyService.getArticleListByTechnologyRequest}
-        testsByFilterRequest={TechnologyService.getTestListByTechnologyRequest}
+        articlesRequest={TechnologyService.getArticleListByTechnologyRequest}
+        testsRequest={TechnologyService.getTestListByTechnologyRequest}
       />
     </>
   )
