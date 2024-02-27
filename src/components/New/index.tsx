@@ -10,6 +10,7 @@ import MenuItemInfo from '../MenuItemInfo'
 import { RouteList } from '../../routes/routes'
 import MenuList from '../MenuList'
 import { DirectionService } from '../../services/Direction'
+import ArticleCard from '../ArticleCard'
 
 const StyledButton = (color: string) =>
   styled(Button)({
@@ -76,36 +77,13 @@ const New: FC = () => {
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
-    return dataList.map((article) => {
-      const { id, rating, topic, reading_time } = article
-      const content = (
-        <>
-          <ListItemText primary={topic} />
-          <MenuItemInfo rating={rating} reading_time={reading_time} />
-        </>
-      )
-
-      if (lastIndex) {
+    return dataList.map((article, index) => {
+      if (lastIndex === index) {
         return (
-          <ListItemButton
-            key={id}
-            ref={ref}
-            onClick={() => navigate(`/${RouteList.Article}/${id}`)}
-            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-          >
-            {content}
-          </ListItemButton>
+          <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} customRef={ref} article={article} />
         )
       }
-      return (
-        <ListItemButton
-          key={id}
-          onClick={() => navigate(`/${RouteList.Article}/${id}`)}
-          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-        >
-          {content}
-        </ListItemButton>
-      )
+      return <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
     })
   }
   // todo replace requests and remove prop requestId

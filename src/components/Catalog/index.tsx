@@ -67,7 +67,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
   const renderTests = (props: RenderItemsProps<TestType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
-    return dataList.map((test) => {
+    return dataList.map((test, index) => {
       const { id, name, rating } = test
       const content = (
         <>
@@ -76,7 +76,7 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
         </>
       )
 
-      if (lastIndex) {
+      if (lastIndex === index) {
         return (
           <ListItemButton
             key={id}
@@ -105,9 +105,11 @@ const Catalog: FC<CatalogProps> = ({ getInfoRequest, testsByFilterRequest, artic
     const lastIndex = dataList.length - 1
     return dataList.map((article, index) => {
       if (lastIndex === index) {
-        return <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${id}`)} key={article.id} customRef={ref} article={article} />
+        return (
+          <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} customRef={ref} article={article} />
+        )
       }
-      return <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${id}`)} key={article.id} article={article} />
+      return <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
     })
   }
 
