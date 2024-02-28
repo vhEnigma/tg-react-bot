@@ -82,13 +82,16 @@ const PassedTest: FC = () => {
           <Typography sx={{ color: text_color }}>
             Вопрос №{index + 1}: {text}
           </Typography>
+          <Typography sx={{ color: text_color }}>Выбранные ответы:</Typography>
           <Box
             sx={{
               width: '100%',
               display: 'flex',
               flexDirection: 'column'
             }}
-          >{`Выбранные ответы: ${answers}`}</Box>
+          >
+            {answers}
+          </Box>
         </Box>
       )
     })
