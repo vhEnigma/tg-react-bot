@@ -25,6 +25,12 @@ const mockResponse: PassedTestResponseType = {
           text: 'answer passed test',
           is_correct: false,
           weight: 1
+        },
+        {
+          id: 1,
+          text: 'answer passed test 2',
+          is_correct: false,
+          weight: 1
         }
       ]
     }
