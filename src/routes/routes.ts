@@ -5,5 +5,6 @@ export enum RouteList {
   Article = 'article',
   Test = 'test',
   TestResult = 'test-result',
-  History = 'history'
+  History = 'history',
+  PassedTest = 'passed-test'
 }

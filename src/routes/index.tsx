@@ -54,6 +54,10 @@ export const router = createBrowserRouter(
         {
           path: RouteList.History,
           element: <History />
+        },
+        {
+          path: `${RouteList.PassedTest}/:id`,
+          element: <History />
         }
       ]
     }
