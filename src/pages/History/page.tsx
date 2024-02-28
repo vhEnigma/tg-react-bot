@@ -20,6 +20,7 @@ const History: FC = () => {
   }
 
   const openTestHande = (id: number) => {
+    console.log(id, 'fucking id')
     navigate(`/${RouteList.PassedTest}/${id}`)
   }
 
