@@ -80,9 +80,9 @@ const PassedTest: FC = () => {
           }}
         >
           <Typography sx={{ color: text_color }}>
-            {index + 1}. {text}
+            Вопрос №{index + 1}: {text}
           </Typography>
-          <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>{answers}</Box>
+          <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>{`Ответы: ${answers}`}</Box>
         </Box>
       )
     })
