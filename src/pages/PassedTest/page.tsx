@@ -65,7 +65,7 @@ const PassedTest: FC = () => {
 
       return (
         <Typography key={id} sx={{ color: text_color }}>
-          &#150;&nbsp;{text}
+          {`- ${text}`}
         </Typography>
       )
     })
