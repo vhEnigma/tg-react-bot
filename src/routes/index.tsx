@@ -11,6 +11,7 @@ import Article from '../pages/Article'
 import SingleDirection from '../pages/SingleDirection'
 import SingleTechnology from '../pages/SingleTechnology'
 import History from '../pages/History'
+import PassedTest from '../pages/PassedTest'
 
 export const router = createBrowserRouter(
   [
@@ -57,7 +58,7 @@ export const router = createBrowserRouter(
         },
         {
           path: `${RouteList.PassedTest}/:id`,
-          element: <History />
+          element: <PassedTest />
         }
       ]
     }
