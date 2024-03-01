@@ -3,7 +3,11 @@ export const Endpoints = {
   tests: 'tests',
   technologies: 'technologies',
   article: {
-    getSingle: 'courses'
+    getSingle: 'courses',
+    readList: 'courses_read'
+  },
+  test: {
+    testResult: 'test_results'
   },
   user: {
     getUser: 'users',

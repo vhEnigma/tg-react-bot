@@ -1,8 +1,10 @@
 import React, { FC } from 'react'
-import { List } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import useBackButton from '../../hooks/useBackButton'
 import { RouteList } from '../../routes/routes'
+import Catalog from '../../components/Catalog'
+import { ArticleService } from '../../services/ArticleService'
+import { TestService } from '../../services/TestService'
 
 const History: FC = () => {
   const navigate = useNavigate()
@@ -14,14 +16,7 @@ const History: FC = () => {
 
   console.log(openTestHande)
 
-  return (
-    <List component='div' aria-label='secondary mailbox folder' />
-
-    // <Catalog //todo added single request for test results and readed article
-    //         articlesRequest={DirectionService.getArticleListByDirectionRequest}
-    //         testsRequest={DirectionService.getTestListByDirectionRequest}
-    //       />
-  )
+  return <Catalog requestId='' articlesRequest={ArticleService.getReadArticles} testsRequest={TestService.getTestResults} />
 }
 
 export default History
