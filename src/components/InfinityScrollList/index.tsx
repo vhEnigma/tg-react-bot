@@ -60,7 +60,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     if (isFetchingNextPage && enabled) {
       fetchWrapper()
     }
-  }, [isFetchingNextPage, enabled, activeTab])
+  }, [isFetchingNextPage, enabled])
 
   const props: RenderItemsProps<T> = {
     dataList,
