@@ -45,6 +45,8 @@ const History: FC = () => {
     )
   }
 
+  console.log('fuck')
+
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
