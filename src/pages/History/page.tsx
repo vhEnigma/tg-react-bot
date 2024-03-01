@@ -23,6 +23,7 @@ const History: FC = () => {
   const renderTests = (props: RenderItemsProps<TestResultType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
+    return 1
 
     return (
       <List component='div'>
