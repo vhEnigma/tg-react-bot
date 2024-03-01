@@ -43,17 +43,15 @@ export type AnswerType = {
 export type QuestionType = {
   id: number
   text: string
-  answer_options: AnswerType[]
+  attempt_answers: AnswerType[]
 }
 
 export type PassedTestResponseType = {
   id: number
+  user_id: number
+  test_id: number
   name: string
-  difficulty: number
-  questions: QuestionType[]
-  technology_id: number
-  direction_id: number
-  course_id: number
-  is_available: boolean
-  counter: number
+  rating: number
+  percentage: number
+  test_questions: QuestionType[]
 }

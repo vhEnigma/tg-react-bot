@@ -42,8 +42,8 @@ const PassedTest: FC = () => {
 
   const getQuestionList = (questions: QuestionType[]) =>
     questions.map((question, index) => {
-      const { id, text, answer_options } = question
-      const answers = renderAnswers(answer_options)
+      const { id, text, attempt_answers } = question
+      const answers = renderAnswers(attempt_answers)
       return (
         <Box
           key={id}
@@ -72,7 +72,7 @@ const PassedTest: FC = () => {
       )
     })
 
-  return getQuestionList(test.questions)
+  return getQuestionList(test.test_questions)
 }
 
 export default PassedTest
