@@ -23,7 +23,6 @@ const History: FC = () => {
   const renderTests = (props: RenderItemsProps<TestResultType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
-    return 1
 
     return (
       <List component='div'>
@@ -49,6 +48,7 @@ const History: FC = () => {
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
+    return 1
     return dataList.map((article, index) => {
       if (lastIndex === index) {
         return (
