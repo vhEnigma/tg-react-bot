@@ -5,37 +5,7 @@ import useBackButton from '../../hooks/useBackButton'
 import Loader from '../../components/Loader'
 import { AnswerType, PassedTestResponseType, QuestionType } from '../../types/menuList'
 import useTgTheme from '../../hooks/useTgTheme'
-
-const mockResponse: PassedTestResponseType = {
-  technology_id: 1,
-  counter: 1,
-  course_id: 1,
-  difficulty: 1,
-  id: 1,
-  direction_id: 1,
-  is_available: true,
-  name: 'passed test',
-  questions: [
-    {
-      id: 1,
-      text: 'questions passed text',
-      answer_options: [
-        {
-          id: 1,
-          text: 'answer passed test',
-          is_correct: false,
-          weight: 1
-        },
-        {
-          id: 1,
-          text: 'answer passed test 2',
-          is_correct: false,
-          weight: 1
-        }
-      ]
-    }
-  ]
-}
+import { TestService } from '../../services/TestService'
 
 const PassedTest: FC = () => {
   const { text_color, section_bg_color, bg_color } = useTgTheme()
@@ -45,13 +15,13 @@ const PassedTest: FC = () => {
   useBackButton()
 
   useEffect(() => {
-    const fetch = async () => {
-      // const response = await
+    const fetch = async (id: string) => {
+      const response = await TestService.getTestResult(id)
       setLoader(false)
-      setTest(mockResponse)
+      setTest(response)
     }
     if (id) {
-      fetch()
+      fetch(id)
     }
   }, [])
 
