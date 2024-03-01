@@ -35,7 +35,7 @@ const InfinityScrollList = <T extends MenuItemType>({ requestId, activeTab, rend
   }
 
   useEffect(() => {
-    if (activeTab && downloadedPages !== 1) {
+    if (activeTab) {
       setDownloadedPages(1)
       setDataList([])
       setStopInfinityScroll(false)
