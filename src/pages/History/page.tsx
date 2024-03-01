@@ -47,8 +47,8 @@ const History: FC = () => {
 
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
     const { ref, dataList } = props
-    console.log(dataList)
     const lastIndex = dataList.length - 1
+
     return dataList.map((article, index) => {
       if (lastIndex === index) {
         return (
