@@ -10,8 +10,8 @@ export class TestService {
     const url = `${Endpoints.test.testResult}${queryString}`
 
     const { data: response } = await axiosInstance.get<TestType[]>(url)
-
-    return response
+    console.log(response)
+    return []
   }
 
   static async getTest(id: string) {

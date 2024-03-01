@@ -10,8 +10,8 @@ export class ArticleService {
     const url = `${Endpoints.article.readList}${queryString}`
 
     const { data: response } = await axiosInstance.get<ArticleType[]>(url)
-
-    return response
+    console.log(response)
+    return []
   }
 
   static async getSingleArticle(id: string) {
