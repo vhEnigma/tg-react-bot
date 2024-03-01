@@ -46,16 +46,17 @@ const History: FC = () => {
   }
 
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
-    const { dataList } = props
-    // const lastIndex = dataList.length - 1
-    return dataList.map((article) => (
-      // if (lastIndex === index) {
-      //   return (
-      //     <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} customRef={ref} article={article} />
-      //   )
-      // }
-      <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
-    ))
+    const { ref, dataList } = props
+    console.log(dataList)
+    const lastIndex = dataList.length - 1
+    return dataList.map((article, index) => {
+      if (lastIndex === index) {
+        return (
+          <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} customRef={ref} article={article} />
+        )
+      }
+      return <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
+    })
   }
 
   return (
