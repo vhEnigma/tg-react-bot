@@ -5,6 +5,12 @@ import { IParams } from '../../types/params'
 import { getQueryString } from '../../utils/params'
 
 export class ArticleService {
+  static setReadArticle(id: number) {
+    const url = `${Endpoints.article.getSingle}/${id}/read`
+
+    axiosInstance.post(url)
+  }
+
   static async getReadArticles(params: IParams) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.article.readList}${queryString}`

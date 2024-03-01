@@ -168,6 +168,11 @@ const Article: FC = () => {
     return menuLists[activeTab]
   }
 
+  const openArticleHandle = (article_link: string, id: number) => {
+    openInNewTab(article_link)
+    ArticleService.setReadArticle(id)
+  }
+
   const { topic, article_link } = article
 
   return (
@@ -193,7 +198,7 @@ const Article: FC = () => {
       </Accordion>
       <Box sx={{ m: '20px auto', width: '50%' }}>
         <Button
-          onClick={() => openInNewTab(article_link)}
+          onClick={() => openArticleHandle(article_link, article.id)}
           fullWidth
           sx={{ backgroundColor: button_color, color: button_text_color }}
           variant='contained'
