@@ -28,7 +28,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   const { ref, setStopInfinityScroll, downloadedPages, setDownloadedPages, isFetchingNextPage } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
   const [countSwitchTab, setCountSwitchTab] = useState(0) // todo костыль => выпилить
-
+  console.log(dataList, 'dataList')
   const fetchWrapper = async () => {
     const params: IParams = { page: downloadedPages }
     if (requestId) params.id = requestId
