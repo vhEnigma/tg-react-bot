@@ -44,6 +44,7 @@ export type QuestionType = {
   id: number
   text: string
   attempt_answers: AnswerType[]
+  answer_options: AnswerType[]
 }
 
 export type PassedTestResponseType = {

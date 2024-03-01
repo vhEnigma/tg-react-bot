@@ -76,8 +76,8 @@ const Test: FC = () => {
 
   const getQuestionList = (questions: QuestionType[]) =>
     questions.map((question, index) => {
-      const { id, text, attempt_answers } = question
-      const answers = renderAnswers(attempt_answers, id)
+      const { id, text, answer_options } = question
+      const answers = renderAnswers(answer_options, id)
       const isError = errorQuestionIds.includes(id)
       return (
         <Box
