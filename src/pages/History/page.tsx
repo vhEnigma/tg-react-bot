@@ -19,7 +19,7 @@ const History: FC = () => {
 
   return (
     <Box sx={{ pt: '10px' }}>
-      <Catalog requestId='' articlesRequest={ArticleService.getReadArticles} testsRequest={TestService.getTestResults} />
+      <Catalog articlesRequest={ArticleService.getReadArticles} testsRequest={TestService.getTestResults} />
     </Box>
   )
 }

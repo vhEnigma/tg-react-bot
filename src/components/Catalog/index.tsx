@@ -15,7 +15,7 @@ import { MultiLineEllipsisStyle } from '../../constants/style'
 import ArticleCard from '../ArticleCard'
 
 type CatalogProps = {
-  requestId: string
+  requestId?: string
   articlesRequest: (params: IParams) => Promise<ArticleType[]>
   testsRequest: (params: IParams) => Promise<TestType[]>
 }
