@@ -1,6 +1,6 @@
 import { Endpoints } from '../client/endpoints'
 import { axiosInstance } from '../client/httpClient'
-import { TestType } from '../../types/menuList'
+import { ResultResponseType, TestType } from '../../types/menuList'
 import { IParams } from '../../types/params'
 import { getQueryString } from '../../utils/params'
 
@@ -9,7 +9,7 @@ export class TestService {
     const queryString = getQueryString(params)
     const url = `${Endpoints.test.testResult}${queryString}`
 
-    const { data: response } = await axiosInstance.get<TestType[]>(url)
+    const { data: response } = await axiosInstance.get<ResultResponseType<TestType>>(url)
     console.log(response)
     return []
   }

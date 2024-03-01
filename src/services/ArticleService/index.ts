@@ -1,6 +1,6 @@
 import { Endpoints } from '../client/endpoints'
 import { axiosInstance } from '../client/httpClient'
-import { ArticleType } from '../../types/menuList'
+import { ArticleType, ResultResponseType } from '../../types/menuList'
 import { IParams } from '../../types/params'
 import { getQueryString } from '../../utils/params'
 
@@ -9,7 +9,7 @@ export class ArticleService {
     const queryString = getQueryString(params)
     const url = `${Endpoints.article.readList}${queryString}`
 
-    const { data: response } = await axiosInstance.get<ArticleType[]>(url)
+    const { data: response } = await axiosInstance.get<ResultResponseType<ArticleType>>(url)
     console.log(response)
     return []
   }
