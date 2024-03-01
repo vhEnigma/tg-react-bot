@@ -95,7 +95,7 @@ const SingleDirection: FC = () => {
       >
         {title}
       </Typography>
-      <Catalog
+      <Catalog<TestType, ArticleType>
         requestId={id}
         articlesRequest={DirectionService.getArticleListByDirectionRequest}
         testsRequest={DirectionService.getTestListByDirectionRequest}

@@ -7,7 +7,7 @@ import Catalog from '../../components/Catalog'
 import { ArticleService } from '../../services/ArticleService'
 import { TestService } from '../../services/TestService'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
-import { ArticleType, TestType } from '../../types/menuList'
+import { ArticleType, TestResultType } from '../../types/menuList'
 import ArticleCard from '../../components/ArticleCard'
 import useTgTheme from '../../hooks/useTgTheme'
 
@@ -20,23 +20,23 @@ const History: FC = () => {
     navigate(`/${RouteList.PassedTest}/${id}`)
   }
 
-  const renderTests = (props: RenderItemsProps<TestType>) => {
+  const renderTests = (props: RenderItemsProps<TestResultType>) => {
     const { ref, dataList } = props
     const lastIndex = dataList.length - 1
 
     return (
       <List component='div'>
-        {dataList.map(({ id, name }, index) => {
-          const displayValue = `${name} - ${0}% (X) раз пройден`
+        {dataList.map(({ id, name, test_id, counter, percentage }, index) => {
+          const displayValue = `${name} - ${percentage}% (${counter}) раз пройден`
           if (lastIndex === index) {
             return (
-              <ListItemButton ref={ref} key={id} onClick={() => openTestHande(1)} sx={{ borderTop: `1px solid ${button_color}` }}>
+              <ListItemButton ref={ref} key={id} onClick={() => openTestHande(test_id)} sx={{ borderTop: `1px solid ${button_color}` }}>
                 <ListItemText primary={displayValue} />
               </ListItemButton>
             )
           }
           return (
-            <ListItemButton key={id} onClick={() => openTestHande(1)} sx={{ borderTop: `1px solid ${button_color}` }}>
+            <ListItemButton key={id} onClick={() => openTestHande(test_id)} sx={{ borderTop: `1px solid ${button_color}` }}>
               <ListItemText primary={displayValue} />
             </ListItemButton>
           )
@@ -60,7 +60,7 @@ const History: FC = () => {
 
   return (
     <Box sx={{ pt: '10px' }}>
-      <Catalog
+      <Catalog<TestResultType, ArticleType>
         articlesRequest={ArticleService.getReadArticles}
         testsRequest={TestService.getTestResults}
         renderTests={renderTests}

@@ -95,7 +95,7 @@ const SingleTechnology: FC = () => {
       >
         {title}
       </Typography>
-      <Catalog
+      <Catalog<TestType, ArticleType>
         requestId={id}
         articlesRequest={TechnologyService.getArticleListByTechnologyRequest}
         testsRequest={TechnologyService.getTestListByTechnologyRequest}

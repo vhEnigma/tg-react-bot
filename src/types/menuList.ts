@@ -56,3 +56,12 @@ export type PassedTestResponseType = {
   percentage: number
   test_questions: QuestionType[]
 }
+
+export type TestResultType = {
+  id: number
+  user_id: number
+  test_id: number
+  name: string
+  percentage: number
+  counter: number
+}
