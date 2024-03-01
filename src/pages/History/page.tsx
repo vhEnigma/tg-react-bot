@@ -30,13 +30,13 @@ const History: FC = () => {
           const displayValue = `${name} - ${0}% (X) раз пройден`
           if (lastIndex === index) {
             return (
-              <ListItemButton ref={ref} key={id} onClick={() => openTestHande(id)} sx={{ borderTop: `1px solid ${button_color}` }}>
+              <ListItemButton ref={ref} key={id} onClick={() => openTestHande(1)} sx={{ borderTop: `1px solid ${button_color}` }}>
                 <ListItemText primary={displayValue} />
               </ListItemButton>
             )
           }
           return (
-            <ListItemButton key={id} onClick={() => openTestHande(id)} sx={{ borderTop: `1px solid ${button_color}` }}>
+            <ListItemButton key={id} onClick={() => openTestHande(1)} sx={{ borderTop: `1px solid ${button_color}` }}>
               <ListItemText primary={displayValue} />
             </ListItemButton>
           )
