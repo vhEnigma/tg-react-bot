@@ -24,11 +24,11 @@ const TestResult: FC = () => {
   const { userInfo, isLoading } = useUserInfo(user.id)
   const [userRating, setUserRating] = useState(0)
 
-  const test = userInfo?.test_results.find((test) => test.id === Number(id))
+  const test = null
 
   useEffect(() => {
     if (test) {
-      setUserRating(test.rating)
+      setUserRating(0)
     }
   }, [test])
 
@@ -58,7 +58,7 @@ const TestResult: FC = () => {
   return (
     <Box>
       <Typography component='h1' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
-        {test.name}
+        {test}
       </Typography>
 
       <Typography component='p' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
@@ -67,7 +67,7 @@ const TestResult: FC = () => {
 
       <Box
         sx={{
-          backgroundColor: calcBackground(test.result),
+          backgroundColor: calcBackground(60),
           color: text_color,
           borderRadius: '50%',
           border: `1px solid section_bg_color`,
@@ -80,7 +80,7 @@ const TestResult: FC = () => {
           fontSize: '40px',
           aspectRatio: '1/1'
         }}
-      >{`${test.result} %`}</Box>
+      >{`${60} %`}</Box>
       <Typography component='p' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
         Результат теста
       </Typography>
