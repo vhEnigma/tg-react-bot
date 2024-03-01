@@ -1,23 +1,20 @@
-import React, { FC, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Box, Button, Container, ListItemButton, ListItemText } from '@mui/material'
+import React, { FC, ReactNode, useState } from 'react'
+import { Box, Button, Container } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import useTgTheme from '../../hooks/useTgTheme'
 import { ARTICLE_KEY, tabsCatalogConfig, TEST_KEY, TabsType, RECOMMENDATION_KEY } from '../../pages/SingleDirection/constants'
 import { ArticleType, TestType } from '../../types/menuList'
 import MenuList from '../MenuList'
 import { RenderItemsProps } from '../InfinityScrollList'
-import { RouteList } from '../../routes/routes'
 import { IParams } from '../../types/params'
-import MenuItemInfo from '../MenuItemInfo'
 import useBackButton from '../../hooks/useBackButton'
-import { MultiLineEllipsisStyle } from '../../constants/style'
-import ArticleCard from '../ArticleCard'
 
 type CatalogProps = {
   requestId?: string
   articlesRequest: (params: IParams) => Promise<ArticleType[]>
   testsRequest: (params: IParams) => Promise<TestType[]>
+  renderTests: (props: RenderItemsProps<TestType>) => ReactNode
+  renderArticles: (props: RenderItemsProps<ArticleType>) => ReactNode
 }
 
 const StyledButton = (color: string) =>
@@ -26,9 +23,8 @@ const StyledButton = (color: string) =>
       color
     }
   })
-const Catalog: FC<CatalogProps> = ({ requestId, testsRequest, articlesRequest }) => {
+const Catalog: FC<CatalogProps> = ({ requestId, testsRequest, articlesRequest, renderTests, renderArticles }) => {
   const { button_color, button_text_color, bg_color, link_color } = useTgTheme()
-  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<TabsType>(ARTICLE_KEY)
   useBackButton()
 
@@ -45,55 +41,6 @@ const Catalog: FC<CatalogProps> = ({ requestId, testsRequest, articlesRequest })
         </Component>
       )
     })
-
-  const renderTests = (props: RenderItemsProps<TestType>) => {
-    const { ref, dataList } = props
-    const lastIndex = dataList.length - 1
-    return dataList.map((test, index) => {
-      const { id, name, rating } = test
-      const content = (
-        <>
-          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
-          <MenuItemInfo rating={rating} />
-        </>
-      )
-
-      if (lastIndex === index) {
-        return (
-          <ListItemButton
-            key={id}
-            ref={ref}
-            onClick={() => navigate(`/${RouteList.Test}/${id}`)}
-            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-          >
-            {content}
-          </ListItemButton>
-        )
-      }
-      return (
-        <ListItemButton
-          key={id}
-          onClick={() => navigate(`/${RouteList.Test}/${id}`)}
-          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-        >
-          {content}
-        </ListItemButton>
-      )
-    })
-  }
-
-  const renderArticles = (props: RenderItemsProps<ArticleType>) => {
-    const { ref, dataList } = props
-    const lastIndex = dataList.length - 1
-    return dataList.map((article, index) => {
-      if (lastIndex === index) {
-        return (
-          <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} customRef={ref} article={article} />
-        )
-      }
-      return <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
-    })
-  }
 
   const renderMenuList = () => {
     const menuLists = {
