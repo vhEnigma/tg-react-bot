@@ -50,6 +50,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
       return <NotFound />
     }
     const array = searchList || props.dataList
+    console.log(array, 'array', searchList, 'searchList', props.dataList, 'dataList')
 
     return getItems({ ...props, dataList: array })
   }
