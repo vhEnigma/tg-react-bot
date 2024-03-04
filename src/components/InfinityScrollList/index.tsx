@@ -1,5 +1,5 @@
-import { MutableRefObject, ReactNode, useEffect, useState } from 'react'
-import useInfinityScroll from '../../hooks/useInfinityScroll'
+import { MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 import { PAGE_SIZE } from '../../constants/common'
 import { IParams } from '../../types/params'
 import { MenuItemType } from '../../types/menuList'
@@ -28,8 +28,14 @@ const InfinityScrollList = <T extends MenuItemType>({
   enabled,
   fetchRef
 }: InfinityScrollListProps<T>) => {
-  const { ref, setStopInfinityScroll, downloadedPages, isFetchingNextPage, setDownloadedPages } = useInfinityScroll()
+  const { ref } = useInView({
+    threshold: 0
+  })
+  const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
+  const [downloadedPages, setDownloadedPages] = useState(1)
+  // const isFetchingNextPage = inView && !isStopInfinityScroll
   const [dataList, setDataList] = useState<T[]>([])
+  const infinityTriggerDiv = useRef<HTMLDivElement | null>(null)
 
   const fetchWrapper = async (page: number) => {
     console.log('fetch func')
@@ -39,6 +45,8 @@ const InfinityScrollList = <T extends MenuItemType>({
     setDataList((prev) => [...prev, ...response])
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
+    } else {
+      setDownloadedPages(downloadedPages + 1)
     }
   }
 
@@ -61,27 +69,46 @@ const InfinityScrollList = <T extends MenuItemType>({
     }
   }, [activeTab])
 
-  useEffect(() => {
-    if (isFetchingNextPage) {
-      setDownloadedPages(downloadedPages + 1)
-    }
-  }, [isFetchingNextPage])
+  // useEffect(() => {
+  //   if (isFetchingNextPage) {
+  //     setDownloadedPages(downloadedPages + 1)
+  //   }
+  // }, [isFetchingNextPage])
 
-  useEffect(() => {
-    console.log(downloadedPages, 'downloadedPages')
-    if (isFetchingNextPage) {
-      if (!enabled) return
-      console.log('fetch 3')
-      fetchWrapper(downloadedPages)
-    }
-  }, [downloadedPages])
+  // useEffect(() => {
+  //   console.log(downloadedPages, 'downloadedPages')
+  //   if (isFetchingNextPage) {
+  //     if (!enabled) return
+  //     console.log('fetch 3')
+  //     fetchWrapper(downloadedPages)
+  //   }
+  // }, [downloadedPages])
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting && !isStopInfinityScroll && enabled) {
+        console.log('isIntersecting')
+        fetchWrapper(downloadedPages)
+      }
+    },
+    { threshold: 0 }
+  )
+
+  if (infinityTriggerDiv.current) {
+    observer.observe(infinityTriggerDiv.current)
+  }
 
   const props: RenderItemsProps<T> = {
     dataList,
     ref
   }
 
-  return renderItems(props)
+  return (
+    <>
+      {renderItems(props)}
+      {!isStopInfinityScroll && <div ref={infinityTriggerDiv} />}
+    </>
+  )
 }
 
 export default InfinityScrollList
