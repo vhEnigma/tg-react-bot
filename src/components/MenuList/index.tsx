@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { Box, List } from '@mui/material'
 import Search from '../Search'
 import Loader from '../Loader'
@@ -47,19 +47,16 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
     }
   }, [activeTab])
 
-  const renderItems = useCallback(
-    (props: RenderItemsProps<T>) => {
-      if (Array.isArray(searchList) && searchList.length === 0) {
-        tg.HapticFeedback.notificationOccurred('error')
-        return <NotFound />
-      }
-      const array = searchList || props.dataList
-      console.log(array, 'array', searchList, 'searchList', props.dataList, 'dataList')
+  const renderItems = (props: RenderItemsProps<T>) => {
+    if (Array.isArray(searchList) && searchList.length === 0) {
+      tg.HapticFeedback.notificationOccurred('error')
+      return <NotFound />
+    }
+    const array = searchList || props.dataList
+    console.log(array, 'array', searchList, 'searchList', props.dataList, 'dataList')
 
-      return getItems({ ...props, dataList: array })
-    },
-    [searchList]
-  )
+    return getItems({ ...props, dataList: array })
+  }
 
   return (
     <>
