@@ -43,6 +43,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     if (requestId) params.id = requestId
     const response = await request(params)
     setDataList((prev) => [...prev, ...response])
+    console.log(response.length < PAGE_SIZE)
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     } else {
@@ -52,7 +53,6 @@ const InfinityScrollList = <T extends MenuItemType>({
 
   useEffect(() => {
     console.log('start fetch')
-    fetchWrapper(downloadedPages)
     fetchRef.current = {
       fetchWrapper,
       setDownloadedPages
