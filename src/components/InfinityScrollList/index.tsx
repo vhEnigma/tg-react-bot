@@ -1,4 +1,4 @@
-import { MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react'
+import { MutableRefObject, ReactNode, useEffect, useState } from 'react'
 import useInfinityScroll from '../../hooks/useInfinityScroll'
 import { PAGE_SIZE } from '../../constants/common'
 import { IParams } from '../../types/params'
@@ -20,13 +20,6 @@ export type RenderItemsProps<T> = {
   ref: (node?: Element | null | undefined) => void
 }
 
-function useFirstRender() {
-  const ref = useRef(true)
-  const firstRender = ref.current
-  ref.current = false
-  return firstRender
-}
-
 const InfinityScrollList = <T extends MenuItemType>({
   requestId,
   activeTab,
@@ -37,7 +30,6 @@ const InfinityScrollList = <T extends MenuItemType>({
 }: InfinityScrollListProps<T>) => {
   const { ref, setStopInfinityScroll, downloadedPages, isFetchingNextPage, setDownloadedPages } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
-  const isFirstRender = useFirstRender()
   console.log(dataList, 'dataList')
   const fetchWrapper = async (page: number) => {
     console.log('fetch func')
@@ -69,7 +61,6 @@ const InfinityScrollList = <T extends MenuItemType>({
       setDataList([])
       setStopInfinityScroll(false)
       if (!enabled) return
-      if (isFirstRender) return
       console.log('fetch 2')
 
       fetchWrapper(1)
