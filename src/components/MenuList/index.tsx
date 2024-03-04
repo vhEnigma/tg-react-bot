@@ -39,6 +39,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
     }
 
     if (debouncedSearchValue) {
+      console.log('fucking fetch')
       findValues()
     } else {
       fetchRef.current?.fetchWrapper(1)
