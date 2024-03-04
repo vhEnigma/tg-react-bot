@@ -53,7 +53,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   }, [isFetchingNextPage])
 
   useEffect(() => {
-    if (activeTab) {
+    if (activeTab && enabled) {
       setDownloadedPages(1)
       setDataList([])
       setStopInfinityScroll(false)
