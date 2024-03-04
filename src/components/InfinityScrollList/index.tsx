@@ -51,6 +51,7 @@ const InfinityScrollList = <T extends MenuItemType>({
       setDownloadedPages(fuckingPage + 1)
     }
   }
+  console.log(downloadedPages, 'fuckign page')
 
   useEffect(() => {
     console.log('start fetch')
