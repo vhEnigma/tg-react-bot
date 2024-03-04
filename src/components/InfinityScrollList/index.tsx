@@ -53,7 +53,7 @@ const InfinityScrollList = <T extends MenuItemType>({
         setDownloadedPages(fuckingPage + 1)
       }
     },
-    [downloadedPages, request]
+    [downloadedPages, request, dataList]
   )
 
   useEffect(() => {
