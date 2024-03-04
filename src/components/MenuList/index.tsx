@@ -22,7 +22,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
   const { tg } = useTelegram()
   const fetchRef = useRef<(page: number) => Promise<void>>()
-
+  console.log(debouncedSearchValue, 'debouncedSearchValue')
   useEffect(() => {
     const findValues = async () => {
       setSearch(true)
@@ -32,10 +32,11 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
       setSearchList(response)
       setSearch(false)
     }
-
+    console.log('effect')
     if (debouncedSearchValue) {
       findValues()
     } else {
+      console.log('FUCK')
       fetchRef.current?.(1)
       setSearchList(null)
     }
