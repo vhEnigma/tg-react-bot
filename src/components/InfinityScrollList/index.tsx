@@ -20,6 +20,13 @@ export type RenderItemsProps<T> = {
   ref: (node?: Element | null | undefined) => void
 }
 
+function useFirstRender() {
+  const ref = useRef(true)
+  const firstRender = ref.current
+  ref.current = false
+  return firstRender
+}
+
 const InfinityScrollList = <T extends MenuItemType>({
   requestId,
   activeTab,
@@ -36,6 +43,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   // const isFetchingNextPage = inView && !isStopInfinityScroll
   const [dataList, setDataList] = useState<T[]>([])
   const infinityTriggerDiv = useRef<HTMLDivElement | null>(null)
+  const isFirstRender = useFirstRender()
 
   const fetchWrapper = useCallback(
     async (page?: number) => {
@@ -57,7 +65,6 @@ const InfinityScrollList = <T extends MenuItemType>({
   console.log(downloadedPages, 'fuckign page')
 
   useEffect(() => {
-    console.log('start fetch')
     fetchRef.current = {
       fetchWrapper,
       setDownloadedPages
@@ -94,21 +101,6 @@ const InfinityScrollList = <T extends MenuItemType>({
     }
   }, [activeTab])
 
-  // useEffect(() => {
-  //   if (isFetchingNextPage) {
-  //     setDownloadedPages(downloadedPages + 1)
-  //   }
-  // }, [isFetchingNextPage])
-
-  // useEffect(() => {
-  //   console.log(downloadedPages, 'downloadedPages')
-  //   if (isFetchingNextPage) {
-  //     if (!enabled) return
-  //     console.log('fetch 3')
-  //     fetchWrapper(downloadedPages)
-  //   }
-  // }, [downloadedPages])
-
   const props: RenderItemsProps<T> = {
     dataList,
     ref
@@ -117,7 +109,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   return (
     <>
       {renderItems(props)}
-      {!isStopInfinityScroll && <div ref={infinityTriggerDiv} />}
+      {!isFirstRender && !isStopInfinityScroll && <div ref={infinityTriggerDiv} />}
     </>
   )
 }
