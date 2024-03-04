@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useEffect, useRef } from 'react'
 import { Box, List } from '@mui/material'
 import Search from '../Search'
 import Loader from '../Loader'
@@ -18,10 +18,15 @@ type MenuListProps<T> = {
   activeTab?: TabsType
 }
 
+export type CustomRef = {
+  fetchWrapper: (page: number) => Promise<void>
+  setDownloadedPages: Dispatch<SetStateAction<number>>
+}
+
 const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getItems }: MenuListProps<T>) => {
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
   const { tg } = useTelegram()
-  const fetchRef = useRef<(page: number) => Promise<void>>()
+  const fetchRef = useRef<CustomRef>()
   console.log(debouncedSearchValue, 'debouncedSearchValue')
   useEffect(() => {
     const findValues = async () => {
@@ -37,7 +42,8 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
       findValues()
     } else {
       console.log('FUCK', searchValue)
-      fetchRef.current?.(1)
+      fetchRef.current?.fetchWrapper(1)
+      fetchRef.current?.setDownloadedPages(1)
       setSearchList(null)
     }
   }, [debouncedSearchValue])

@@ -4,6 +4,7 @@ import { PAGE_SIZE } from '../../constants/common'
 import { IParams } from '../../types/params'
 import { MenuItemType } from '../../types/menuList'
 import { TabsType } from '../../pages/SingleDirection/constants'
+import { CustomRef } from '../MenuList'
 
 type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
@@ -11,7 +12,7 @@ type InfinityScrollListProps<T> = {
   enabled: boolean
   requestId?: string
   activeTab?: TabsType
-  fetchRef: MutableRefObject<((page: number) => Promise<void>) | undefined>
+  fetchRef: MutableRefObject<CustomRef | undefined>
 }
 
 export type RenderItemsProps<T> = {
@@ -47,7 +48,10 @@ const InfinityScrollList = <T extends MenuItemType>({
       console.log('start fetch')
       fetchWrapper(downloadedPages)
     }
-    fetchRef.current = fetchWrapper
+    fetchRef.current = {
+      fetchWrapper,
+      setDownloadedPages
+    }
   }, [])
 
   useEffect(() => {
