@@ -21,6 +21,8 @@ type MenuListProps<T> = {
 const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getItems }: MenuListProps<T>) => {
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
   const { tg } = useTelegram()
+
+  console.log(debouncedSearchValue, 'debounceValue')
   useEffect(() => {
     const findValues = async () => {
       setSearch(true)
