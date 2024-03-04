@@ -57,6 +57,24 @@ const InfinityScrollList = <T extends MenuItemType>({
       fetchWrapper,
       setDownloadedPages
     }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isStopInfinityScroll && enabled) {
+          console.log('isIntersecting')
+          fetchWrapper(downloadedPages)
+        }
+      },
+      { threshold: 0 }
+    )
+
+    if (infinityTriggerDiv.current) {
+      observer.observe(infinityTriggerDiv.current)
+    }
+
+    return () => {
+      observer.disconnect()
+    }
   }, [])
 
   useEffect(() => {
@@ -85,20 +103,6 @@ const InfinityScrollList = <T extends MenuItemType>({
   //     fetchWrapper(downloadedPages)
   //   }
   // }, [downloadedPages])
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting && !isStopInfinityScroll && enabled) {
-        console.log('isIntersecting')
-        fetchWrapper(downloadedPages)
-      }
-    },
-    { threshold: 0 }
-  )
-
-  if (infinityTriggerDiv.current) {
-    observer.observe(infinityTriggerDiv.current)
-  }
 
   const props: RenderItemsProps<T> = {
     dataList,
