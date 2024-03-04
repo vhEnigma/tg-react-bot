@@ -46,11 +46,11 @@ const InfinityScrollList = <T extends MenuItemType>({
   }, [])
 
   useEffect(() => {
-    if (isFetchingNextPage && enabled) {
+    if (isFetchingNextPage) {
       console.log('increase page')
       setDownloadedPages(downloadedPages + 1)
     }
-  }, [isFetchingNextPage, enabled])
+  }, [isFetchingNextPage])
 
   useEffect(() => {
     if (activeTab && enabled) {
@@ -69,6 +69,13 @@ const InfinityScrollList = <T extends MenuItemType>({
       fetchWrapper(downloadedPages)
     }
   }, [downloadedPages])
+
+  useEffect(() => {
+    if (enabled) {
+      console.log('enabled fetch')
+      fetchWrapper(1)
+    }
+  }, [enabled])
 
   const props: RenderItemsProps<T> = {
     dataList,
