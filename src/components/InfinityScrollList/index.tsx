@@ -18,7 +18,13 @@ export type RenderItemsProps<T> = {
   ref: (node?: Element | null | undefined) => void
 }
 
-const InfinityScrollList = <T extends MenuItemType>({ requestId, activeTab, renderItems, request }: InfinityScrollListProps<T>) => {
+const InfinityScrollList = <T extends MenuItemType>({
+  requestId,
+  activeTab,
+  renderItems,
+  request,
+  enabled
+}: InfinityScrollListProps<T>) => {
   const { ref, setStopInfinityScroll, downloadedPages, isFetchingNextPage, setDownloadedPages } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
 
@@ -34,7 +40,7 @@ const InfinityScrollList = <T extends MenuItemType>({ requestId, activeTab, rend
 
   useEffect(() => {
     console.log('start fetch')
-    if (!activeTab) {
+    if (!activeTab && !enabled) {
       fetchWrapper(downloadedPages)
     }
   }, [])
