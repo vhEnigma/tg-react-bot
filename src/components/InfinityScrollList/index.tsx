@@ -39,8 +39,14 @@ const InfinityScrollList = <T extends MenuItemType>({ requestId, activeTab, rend
 
   useEffect(() => {
     if (isFetchingNextPage) {
-      console.log('fetch pages')
+      console.log('increase page')
+      setDownloadedPages(downloadedPages + 1)
+    }
+  }, [isFetchingNextPage])
 
+  useEffect(() => {
+    if (isFetchingNextPage) {
+      console.log('fetch pages')
       fetchWrapper()
     }
   }, [isFetchingNextPage, downloadedPages])
@@ -50,7 +56,7 @@ const InfinityScrollList = <T extends MenuItemType>({ requestId, activeTab, rend
       setDownloadedPages(1)
       setDataList([])
       setStopInfinityScroll(false)
-      console.log('fetch tab')
+      console.log('switch tab')
     }
   }, [activeTab])
 
