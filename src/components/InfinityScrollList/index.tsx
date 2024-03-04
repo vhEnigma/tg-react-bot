@@ -90,15 +90,13 @@ const InfinityScrollList = <T extends MenuItemType>({
   }, [fetchWrapper])
 
   useEffect(() => {
-    if (activeTab) {
-      setDownloadedPages(1)
-      setDataList([])
-      setStopInfinityScroll(false)
-      if (!enabled) return
-      console.log('fetch 2')
+    setDownloadedPages(1)
+    setDataList([])
+    setStopInfinityScroll(false)
+    if (!enabled) return
+    console.log('fetch 2')
 
-      fetchWrapper(1)
-    }
+    fetchWrapper(1)
   }, [activeTab])
 
   const props: RenderItemsProps<T> = {
