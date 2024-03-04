@@ -38,9 +38,9 @@ const InfinityScrollList = <T extends MenuItemType>({
   const infinityTriggerDiv = useRef<HTMLDivElement | null>(null)
 
   const fetchWrapper = async (page?: number) => {
-    const truePage = page || downloadedPages
+    const fuckingPage = page || downloadedPages
     console.log('fetch func')
-    const params: IParams = { page: truePage }
+    const params: IParams = { page: fuckingPage }
     if (requestId) params.id = requestId
     const response = await request(params)
     setDataList((prev) => [...prev, ...response])
@@ -48,7 +48,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     } else {
-      setDownloadedPages(truePage + 1)
+      setDownloadedPages(fuckingPage + 1)
     }
   }
 
