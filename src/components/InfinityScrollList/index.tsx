@@ -36,7 +36,9 @@ const InfinityScrollList = <T extends MenuItemType>({ requestId, activeTab, rend
 
   useEffect(() => {
     console.log('fetch')
-    fetchWrapper(1)
+    if (!activeTab) {
+      fetchWrapper(1)
+    }
   }, [])
 
   useEffect(() => {
