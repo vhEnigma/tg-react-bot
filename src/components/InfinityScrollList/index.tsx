@@ -1,4 +1,4 @@
-import { MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react'
+import { MutableRefObject, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { PAGE_SIZE } from '../../constants/common'
 import { IParams } from '../../types/params'
@@ -37,20 +37,23 @@ const InfinityScrollList = <T extends MenuItemType>({
   const [dataList, setDataList] = useState<T[]>([])
   const infinityTriggerDiv = useRef<HTMLDivElement | null>(null)
 
-  const fetchWrapper = async (page?: number) => {
-    const fuckingPage = page || downloadedPages
-    console.log('fetch func')
-    const params: IParams = { page: fuckingPage }
-    if (requestId) params.id = requestId
-    const response = await request(params)
-    setDataList((prev) => [...prev, ...response])
-    console.log(response.length < PAGE_SIZE, response.length, 'fucking resp')
-    if (response.length < PAGE_SIZE) {
-      setStopInfinityScroll(true)
-    } else {
-      setDownloadedPages(fuckingPage + 1)
-    }
-  }
+  const fetchWrapper = useCallback(
+    async (page?: number) => {
+      const fuckingPage = page || downloadedPages
+      console.log('fetch func')
+      const params: IParams = { page: fuckingPage }
+      if (requestId) params.id = requestId
+      const response = await request(params)
+      setDataList((prev) => [...prev, ...response])
+      console.log(response.length < PAGE_SIZE, response.length, 'fucking resp')
+      if (response.length < PAGE_SIZE) {
+        setStopInfinityScroll(true)
+      } else {
+        setDownloadedPages(fuckingPage + 1)
+      }
+    },
+    [downloadedPages]
+  )
   console.log(downloadedPages, 'fuckign page')
 
   useEffect(() => {
@@ -77,7 +80,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     return () => {
       observer.disconnect()
     }
-  }, [])
+  }, [fetchWrapper])
 
   useEffect(() => {
     if (activeTab) {
