@@ -68,6 +68,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   }, [activeTab])
 
   useEffect(() => {
+    console.log(downloadedPages, 'downloadedPages')
     if (isFetchingNextPage) {
       if (!enabled) return
       console.log('fetch 3')
