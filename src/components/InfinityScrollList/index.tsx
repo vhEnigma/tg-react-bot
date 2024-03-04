@@ -70,13 +70,6 @@ const InfinityScrollList = <T extends MenuItemType>({
     }
   }, [downloadedPages])
 
-  useEffect(() => {
-    if (enabled) {
-      console.log('enabled fetch')
-      fetchWrapper(1)
-    }
-  }, [enabled])
-
   const props: RenderItemsProps<T> = {
     dataList,
     ref
