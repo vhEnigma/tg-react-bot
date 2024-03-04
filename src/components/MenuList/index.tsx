@@ -42,6 +42,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
       console.log('fucking fetch')
       findValues()
     } else {
+      console.log('fucking fetch2')
       fetchRef.current?.fetchWrapper(1)
       fetchRef.current?.setDownloadedPages(1)
       setSearchList(null)
