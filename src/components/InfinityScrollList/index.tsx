@@ -51,6 +51,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   }
 
   useEffect(() => {
+    fetchWrapper(downloadedPages)
     fetchRef.current = {
       fetchWrapper,
       setDownloadedPages
