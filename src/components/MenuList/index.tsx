@@ -27,7 +27,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
   const { tg } = useTelegram()
   const fetchRef = useRef<CustomRef>()
-
+  console.log(debouncedSearchValue, 'deb')
   useEffect(() => {
     const findValues = async () => {
       setSearch(true)
