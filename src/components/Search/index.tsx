@@ -5,20 +5,13 @@ import useTgTheme from '../../hooks/useTgTheme'
 type SearchProps = {
   value: string
   setValue: Dispatch<SetStateAction<string>>
-  findCallback: () => Promise<void>
 }
 
-let timeOutId = 0
-
-const Search: FC<SearchProps> = ({ value, setValue, findCallback }) => {
+const Search: FC<SearchProps> = ({ value, setValue }) => {
   const { bg_color, text_color, section_bg_color } = useTgTheme()
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(event.target.value)
-    if (timeOutId) clearTimeout(timeOutId)
-    timeOutId = setTimeout(() => {
-      findCallback()
-    }, 500)
   }
 
   return (

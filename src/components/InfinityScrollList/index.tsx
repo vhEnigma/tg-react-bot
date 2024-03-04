@@ -5,6 +5,7 @@ import { IParams } from '../../types/params'
 import { MenuItemType } from '../../types/menuList'
 import { TabsType } from '../../pages/SingleDirection/constants'
 import { CustomRef } from '../MenuList'
+import useFirstRender from '../../hooks/useFirstRender'
 
 type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
@@ -18,13 +19,6 @@ type InfinityScrollListProps<T> = {
 export type RenderItemsProps<T> = {
   dataList: T[]
   ref: (node?: Element | null | undefined) => void
-}
-
-function useFirstRender() {
-  const ref = useRef(true)
-  const firstRender = ref.current
-  ref.current = false
-  return firstRender
 }
 
 const InfinityScrollList = <T extends MenuItemType>({

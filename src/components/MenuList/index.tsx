@@ -10,6 +10,7 @@ import InfinityScrollList, { RenderItemsProps } from '../InfinityScrollList'
 import { MenuItemType } from '../../types/menuList'
 import { useTelegram } from '../../hooks/useTelegram'
 import { TabsType } from '../../pages/SingleDirection/constants'
+import useFirstRender from '../../hooks/useFirstRender'
 
 type MenuListProps<T> = {
   request: (params: IParams) => Promise<T[]>
@@ -27,6 +28,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
   const { tg } = useTelegram()
   const fetchRef = useRef<CustomRef>()
+  const isFirstRender = useFirstRender()
 
   useEffect(() => {
     if (activeTab) {
@@ -35,22 +37,27 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
     }
   }, [activeTab])
 
-  const findWrapper = async () => {
-    if (debouncedSearchValue) {
-      console.log('fucking fetch')
-      setSearch(true)
-      const params: IParams = { q: debouncedSearchValue, pageSize: 1000 }
-      if (requestId) params.id = requestId
-      const response = await request(params)
-      setSearchList(response)
-      setSearch(false)
-    } else {
-      console.log('fucking fetch2')
-      fetchRef.current?.fetchWrapper(1)
-      fetchRef.current?.setDownloadedPages(1)
-      setSearchList(null)
+  useEffect(() => {
+    const findWrapper = async () => {
+      if (isFirstRender) return
+      if (debouncedSearchValue) {
+        console.log('fucking fetch')
+        setSearch(true)
+        const params: IParams = { q: debouncedSearchValue, pageSize: 1000 }
+        if (requestId) params.id = requestId
+        const response = await request(params)
+        setSearchList(response)
+        setSearch(false)
+      } else {
+        console.log('fucking fetch2')
+        fetchRef.current?.fetchWrapper(1)
+        fetchRef.current?.setDownloadedPages(1)
+        setSearchList(null)
+      }
     }
-  }
+
+    findWrapper()
+  }, [debouncedSearchValue])
 
   const renderItems = (props: RenderItemsProps<T>) => {
     if (Array.isArray(searchList) && searchList.length === 0) {
@@ -65,7 +72,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
   return (
     <>
       <Box sx={{ position: 'sticky', top: '-15px', zIndex: 1, borderRadius: '4px' }}>
-        <Search value={searchValue} setValue={setSearchValue} findCallback={findWrapper} />
+        <Search value={searchValue} setValue={setSearchValue} />
       </Box>
       <Box sx={{ height: calcLoaderWrapperHeight(72) }}>
         {isSearch ? (
