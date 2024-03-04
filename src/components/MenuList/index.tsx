@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import { Box, List } from '@mui/material'
 import Search from '../Search'
 import Loader from '../Loader'
@@ -21,6 +21,7 @@ type MenuListProps<T> = {
 const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getItems }: MenuListProps<T>) => {
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
   const { tg } = useTelegram()
+  const fetchRef = useRef<(page: number) => Promise<void>>()
 
   useEffect(() => {
     const findValues = async () => {
@@ -35,6 +36,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
     if (debouncedSearchValue) {
       findValues()
     } else {
+      fetchRef.current?.(1)
       setSearchList(null)
     }
   }, [debouncedSearchValue])
@@ -72,6 +74,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
               request={request}
               activeTab={activeTab}
               requestId={requestId}
+              fetchRef={fetchRef}
             />
           </List>
         )}
