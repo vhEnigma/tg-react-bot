@@ -44,7 +44,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     if (requestId) params.id = requestId
     const response = await request(params)
     setDataList((prev) => [...prev, ...response])
-    console.log(response.length < PAGE_SIZE)
+    console.log(response.length < PAGE_SIZE, response.length, 'fucking resp')
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     } else {
