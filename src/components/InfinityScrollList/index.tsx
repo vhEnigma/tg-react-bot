@@ -27,7 +27,7 @@ const InfinityScrollList = <T extends MenuItemType>({
 }: InfinityScrollListProps<T>) => {
   const { ref, setStopInfinityScroll, downloadedPages, isFetchingNextPage, setDownloadedPages } = useInfinityScroll()
   const [dataList, setDataList] = useState<T[]>([])
-  console.log(dataList, 'dataList')
+
   const fetchWrapper = async (page: number) => {
     if (!enabled) return
     const params: IParams = { page }
@@ -64,7 +64,6 @@ const InfinityScrollList = <T extends MenuItemType>({
   }, [activeTab])
 
   useEffect(() => {
-    console.log(downloadedPages, 'page', isFetchingNextPage, 'isFetchingNextPage')
     if (isFetchingNextPage) {
       console.log('fetch pages')
       fetchWrapper(downloadedPages)

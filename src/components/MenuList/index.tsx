@@ -22,7 +22,6 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
   const { tg } = useTelegram()
 
-  console.log(debouncedSearchValue, 'debounceValue')
   useEffect(() => {
     const findValues = async () => {
       setSearch(true)
@@ -32,7 +31,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
       setSearchList(response)
       setSearch(false)
     }
-    console.log(debouncedSearchValue, !!debouncedSearchValue, 'FUCK')
+
     if (debouncedSearchValue) {
       findValues()
     } else {
@@ -53,7 +52,6 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
       return <NotFound />
     }
     const array = searchList || props.dataList
-    console.log(array, 'array', searchList, 'searchList', props.dataList, 'dataList')
 
     return getItems({ ...props, dataList: array })
   }
