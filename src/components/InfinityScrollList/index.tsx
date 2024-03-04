@@ -48,7 +48,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     if (response.length < PAGE_SIZE) {
       setStopInfinityScroll(true)
     } else {
-      setDownloadedPages(downloadedPages + 1)
+      setDownloadedPages(truePage + 1)
     }
   }
 
