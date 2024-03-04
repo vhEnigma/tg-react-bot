@@ -37,9 +37,10 @@ const InfinityScrollList = <T extends MenuItemType>({
   const [dataList, setDataList] = useState<T[]>([])
   const infinityTriggerDiv = useRef<HTMLDivElement | null>(null)
 
-  const fetchWrapper = async (page: number) => {
+  const fetchWrapper = async (page?: number) => {
+    const truePage = page || downloadedPages
     console.log('fetch func')
-    const params: IParams = { page }
+    const params: IParams = { page: truePage }
     if (requestId) params.id = requestId
     const response = await request(params)
     setDataList((prev) => [...prev, ...response])
@@ -62,7 +63,7 @@ const InfinityScrollList = <T extends MenuItemType>({
       ([entry]) => {
         if (entry.isIntersecting && !isStopInfinityScroll && enabled) {
           console.log('isIntersecting')
-          fetchWrapper(downloadedPages)
+          fetchWrapper()
         }
       },
       { threshold: 0 }
