@@ -1,28 +1,32 @@
 import React, { FC } from 'react'
 import { Box, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import MenuItemInfo from '../MenuItemInfo'
 import { ArticleType } from '../../types/menuList'
 import useTgTheme from '../../hooks/useTgTheme'
+import { RouteList } from '../../routes/routes'
 
 type ArticleCardProps = {
   article: ArticleType
   customRef?: (node?: Element | null | undefined) => void
-  onCLick: () => void
+  withOutCLick?: boolean
 }
 
-const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
+const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, withOutCLick = false }) => {
   const { button_color, bg_color } = useTgTheme()
+  const navigate = useNavigate()
 
   const { author, rating, reading_time, topic, date_create } = article
-  const test = () => {
-    console.log('click')
-    onCLick()
+
+  const handleClick = () => {
+    if (withOutCLick) return
+    navigate(`/${RouteList.Article}/${article.id}`)
   }
 
   return (
     <Box
       ref={customRef}
-      onClick={test}
+      onClick={handleClick}
       sx={{
         display: 'flex',
         flexDirection: 'column',

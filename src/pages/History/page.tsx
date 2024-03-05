@@ -41,9 +41,7 @@ const History: FC = () => {
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
     const { dataList } = props
 
-    return dataList.map((article) => (
-      <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
-    ))
+    return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
   }
 
   return (
