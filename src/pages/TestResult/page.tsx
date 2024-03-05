@@ -6,9 +6,8 @@ import Loader from '../../components/Loader'
 import { useTelegram } from '../../hooks/useTelegram'
 import useTgTheme from '../../hooks/useTgTheme'
 import CustomRating from '../../components/CustomRating'
-import ErrorBoundary from '../ErrorBoundary'
 import { TestService } from '../../services/TestService'
-import { TestType } from '../../types/menuList'
+import { PassedTestResponseType } from '../../types/menuList'
 
 const thresholdColors: Record<number, string> = {
   33: 'red',
@@ -25,7 +24,7 @@ const TestResult: FC = () => {
   const { userInfo } = useUserInfo(user.id)
   const [isLoading, setLoading] = useState(true)
   const [userRating, setUserRating] = useState(0)
-  const [testResult, setTestResult] = useState<TestType[] | null>(null)
+  const [testResult, setTestResult] = useState<PassedTestResponseType | null>(null)
 
   const test = null
 
@@ -42,16 +41,12 @@ const TestResult: FC = () => {
 
   useEffect(() => {
     if (testResult) {
-      setUserRating(0)
+      setUserRating(testResult.rating)
     }
   }, [testResult])
 
-  if (isLoading || !userInfo) {
+  if (isLoading || !userInfo || !testResult) {
     return <Loader />
-  }
-
-  if (!testResult) {
-    return <ErrorBoundary />
   }
 
   const handleChangeRating = async (_: SyntheticEvent<Element, Event>, newValue: number | null) => {
@@ -81,7 +76,7 @@ const TestResult: FC = () => {
 
       <Box
         sx={{
-          backgroundColor: calcBackground(60),
+          backgroundColor: calcBackground(testResult.percentage),
           color: text_color,
           borderRadius: '50%',
           border: `1px solid section_bg_color`,
