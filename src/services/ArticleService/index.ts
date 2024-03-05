@@ -35,4 +35,12 @@ export class ArticleService {
 
     return response
   }
+
+  static async getAssociatedItems(id: string) {
+    const url = `${Endpoints.article.getSingle}/${id}/associated`
+
+    const { data: response } = await axiosInstance.get<ArticleType>(url)
+
+    return response
+  }
 }

@@ -50,6 +50,8 @@ const Article: FC = () => {
     const fetch = async () => {
       if (!id) return
       const response = await ArticleService.getSingleArticle(id)
+      ArticleService.getAssociatedItems(id)
+
       setUserRating(response.rating)
       setArticle(response)
       setLoading(false)
