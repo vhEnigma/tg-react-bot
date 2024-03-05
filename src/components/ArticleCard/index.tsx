@@ -14,11 +14,15 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
   const { button_color, bg_color } = useTgTheme()
 
   const { author, rating, reading_time, topic, date_create } = article
+  const test = () => {
+    console.log('click')
+    onCLick()
+  }
 
   return (
     <Box
       ref={customRef}
-      onClick={onCLick}
+      onClick={test}
       sx={{
         display: 'flex',
         flexDirection: 'column',
