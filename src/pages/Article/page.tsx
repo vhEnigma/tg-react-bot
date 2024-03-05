@@ -116,27 +116,16 @@ const Article: FC = () => {
     const menuLists = {
       [ARTICLE_KEY]: (
         <MenuList<ArticleType>
-          requestId='1'
           activeTab={activeTab}
           request={DirectionService.getArticleListByDirectionRequest}
           getItems={renderArticles}
         />
       ),
       [TEST_KEY]: (
-        <MenuList<TestType>
-          requestId='1'
-          activeTab={activeTab}
-          request={DirectionService.getTestListByDirectionRequest}
-          getItems={renderTests}
-        />
+        <MenuList<TestType> activeTab={activeTab} request={DirectionService.getTestListByDirectionRequest} getItems={renderTests} />
       ),
       [RECOMMENDATION_KEY]: (
-        <MenuList<TestType>
-          requestId='1'
-          activeTab={activeTab}
-          request={DirectionService.getTestListByDirectionRequest}
-          getItems={renderTests}
-        />
+        <MenuList<TestType> activeTab={activeTab} request={DirectionService.getTestListByDirectionRequest} getItems={renderTests} />
       )
     }
     return menuLists[activeTab]
