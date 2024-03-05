@@ -5,6 +5,7 @@ import { MenuItemType } from '../../types/menuList'
 import { TabsType } from '../../pages/SingleDirection/constants'
 import { CustomRef } from '../MenuList'
 import useFirstRender from '../../hooks/useFirstRender'
+import Loader from '../Loader'
 
 type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
@@ -32,6 +33,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   const [dataList, setDataList] = useState<T[]>([])
   const infinityTriggerDiv = useRef<HTMLDivElement | null>(null)
   const isFirstRender = useFirstRender()
+  const [isLoading, setLoading] = useState(false)
 
   const fetchWrapper = useCallback(
     async (page?: number) => {
@@ -74,12 +76,17 @@ const InfinityScrollList = <T extends MenuItemType>({
   }, [fetchWrapper])
 
   useEffect(() => {
-    if (!enabled) return
-    setDownloadedPages(1)
-    setDataList([])
-    setStopInfinityScroll(false)
+    const fetch = async () => {
+      if (!enabled) return
+      setLoading(true)
+      setDownloadedPages(1)
+      setDataList([])
+      setStopInfinityScroll(false)
+      await fetchWrapper(1)
+      setLoading(false)
+    }
 
-    fetchWrapper(1)
+    fetch()
   }, [activeTab])
 
   const props: RenderItemsProps<T> = {
@@ -88,7 +95,7 @@ const InfinityScrollList = <T extends MenuItemType>({
 
   return (
     <>
-      {renderItems(props)}
+      {isLoading ? <Loader /> : renderItems(props)}
       {!isFirstRender && !isStopInfinityScroll && <div ref={infinityTriggerDiv} />}
     </>
   )
