@@ -7,7 +7,7 @@ import { getQueryString } from '../../utils/params'
 export class TestService {
   static async getTestByDate(params: IParams) {
     const queryString = getQueryString(params)
-    const url = `${Endpoints.tests}/${queryString}`
+    const url = `${Endpoints.tests}${queryString}`
 
     const { data: response } = await axiosInstance.get<ResultResponseType<TestType>>(url)
 
