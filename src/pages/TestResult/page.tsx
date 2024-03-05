@@ -89,7 +89,7 @@ const TestResult: FC = () => {
           fontSize: '40px',
           aspectRatio: '1/1'
         }}
-      >{`${60} %`}</Box>
+      >{`${testResult.percentage} %`}</Box>
       <Typography component='p' sx={{ m: '20px 0', textAlign: 'center', color: text_color }}>
         Результат теста
       </Typography>
