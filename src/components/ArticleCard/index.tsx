@@ -20,6 +20,8 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, withOutCLick = 
 
   const handleClick = () => {
     if (withOutCLick) return
+    console.log('click')
+
     navigate(`/${RouteList.Article}/${article.id}`)
   }
 
