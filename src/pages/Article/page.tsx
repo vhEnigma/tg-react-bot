@@ -110,8 +110,6 @@ const Article: FC = () => {
     return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
   }
 
-  // todo replace requests and prop requestId => articleID
-
   const renderMenuList = () => {
     const menuLists = {
       [ARTICLE_KEY]: (
