@@ -13,7 +13,7 @@ import { DirectionService } from '../../services/Direction'
 import useBackButton from '../../hooks/useBackButton'
 
 const Test: FC = () => {
-  const { tg, user } = useTelegram()
+  const { tg } = useTelegram()
   const { button_color, button_text_color, text_color, section_bg_color, bg_color } = useTgTheme()
   const navigate = useNavigate()
   const { id } = useParams()
@@ -101,7 +101,7 @@ const Test: FC = () => {
 
   const onSendAnswers = async () => {
     setLoading(true)
-    await TestService.sendTest({ answersMap, id, tgId: user.id })
+    await TestService.sendTest({ answersMap, id })
     setLoading(false)
     navigate(`/${RouteList.TestResult}/${id}`)
   }

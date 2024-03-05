@@ -14,6 +14,14 @@ export class TestService {
     return response.result
   }
 
+  static async getTestResultById(id: string) {
+    const url = `${Endpoints.tests}${id}/test_results`
+
+    const { data: response } = await axiosInstance.get<ResultResponseType<TestType>>(url)
+
+    return response.result
+  }
+
   static async getTestResults(params: IParams) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.test.testResult}${queryString}`
@@ -40,7 +48,7 @@ export class TestService {
   }
 
   static async sendTest(data: Record<string, string | Record<string, number[]>>) {
-    const url = `${Endpoints.tests}/${data.id}?tg_id=${data.tgId}`
+    const url = `${Endpoints.tests}/${data.id}`
     const { data: response } = await axiosInstance.post(url, data.answersMap)
 
     return response

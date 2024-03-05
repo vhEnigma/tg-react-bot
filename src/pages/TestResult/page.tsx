@@ -8,6 +8,7 @@ import useTgTheme from '../../hooks/useTgTheme'
 import CustomRating from '../../components/CustomRating'
 import ErrorBoundary from '../ErrorBoundary'
 import { TestService } from '../../services/TestService'
+import { TestType } from '../../types/menuList'
 
 const thresholdColors: Record<number, string> = {
   33: 'red',
@@ -21,22 +22,35 @@ const TestResult: FC = () => {
   const { text_color } = useTgTheme()
   const { user } = useTelegram()
   const { id } = useParams()
-  const { userInfo, isLoading } = useUserInfo(user.id)
+  const { userInfo } = useUserInfo(user.id)
+  const [isLoading, setLoading] = useState(true)
   const [userRating, setUserRating] = useState(0)
+  const [testResult, setTestResult] = useState<TestType[] | null>(null)
 
   const test = null
 
   useEffect(() => {
-    if (test) {
+    const fetch = async (id: string) => {
+      const response = await TestService.getTestResultById(id)
+      setTestResult(response)
+      setLoading(false)
+    }
+    if (id) {
+      fetch(id)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (testResult) {
       setUserRating(0)
     }
-  }, [test])
+  }, [testResult])
 
   if (isLoading || !userInfo) {
     return <Loader />
   }
 
-  if (!test) {
+  if (!testResult) {
     return <ErrorBoundary />
   }
 
