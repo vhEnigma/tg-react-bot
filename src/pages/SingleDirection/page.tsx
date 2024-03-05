@@ -34,52 +34,28 @@ const SingleDirection: FC = () => {
   if (isLoading || !id) return <Loader />
 
   const renderTests = (props: RenderItemsProps<TestType>) => {
-    const { ref, dataList } = props
-    const lastIndex = dataList.length - 1
-    return dataList.map((test, index) => {
+    const { dataList } = props
+    return dataList.map((test) => {
       const { id, name, rating } = test
-      const content = (
-        <>
-          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
-          <MenuItemInfo rating={rating} />
-        </>
-      )
 
-      if (lastIndex === index) {
-        return (
-          <ListItemButton
-            key={id}
-            ref={ref}
-            onClick={() => navigate(`/${RouteList.Test}/${id}`)}
-            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-          >
-            {content}
-          </ListItemButton>
-        )
-      }
       return (
         <ListItemButton
           key={id}
           onClick={() => navigate(`/${RouteList.Test}/${id}`)}
           sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
         >
-          {content}
+          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
+          <MenuItemInfo rating={rating} />
         </ListItemButton>
       )
     })
   }
 
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
-    const { ref, dataList } = props
-    const lastIndex = dataList.length - 1
-    return dataList.map((article, index) => {
-      if (lastIndex === index) {
-        return (
-          <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} customRef={ref} article={article} />
-        )
-      }
-      return <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
-    })
+    const { dataList } = props
+    return dataList.map((article) => (
+      <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
+    ))
   }
 
   return (

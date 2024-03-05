@@ -1,5 +1,4 @@
 import { MutableRefObject, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
-import { useInView } from 'react-intersection-observer'
 import { PAGE_SIZE } from '../../constants/common'
 import { IParams } from '../../types/params'
 import { MenuItemType } from '../../types/menuList'
@@ -18,7 +17,6 @@ type InfinityScrollListProps<T> = {
 
 export type RenderItemsProps<T> = {
   dataList: T[]
-  ref: (node?: Element | null | undefined) => void
 }
 
 const InfinityScrollList = <T extends MenuItemType>({
@@ -29,12 +27,8 @@ const InfinityScrollList = <T extends MenuItemType>({
   enabled,
   fetchRef
 }: InfinityScrollListProps<T>) => {
-  const { ref } = useInView({
-    threshold: 0
-  })
   const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(1)
-  // const isFetchingNextPage = inView && !isStopInfinityScroll
   const [dataList, setDataList] = useState<T[]>([])
   const infinityTriggerDiv = useRef<HTMLDivElement | null>(null)
   const isFirstRender = useFirstRender()
@@ -42,7 +36,6 @@ const InfinityScrollList = <T extends MenuItemType>({
   const fetchWrapper = useCallback(
     async (page?: number) => {
       const fuckingPage = page || downloadedPages
-      console.log('fetch func')
       const params: IParams = { page: fuckingPage }
       if (requestId) params.id = requestId
       const response = await request(params)
@@ -65,7 +58,6 @@ const InfinityScrollList = <T extends MenuItemType>({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isStopInfinityScroll && enabled) {
-          console.log('isIntersecting')
           fetchWrapper()
         }
       },
@@ -86,14 +78,12 @@ const InfinityScrollList = <T extends MenuItemType>({
     setDataList([])
     setStopInfinityScroll(false)
     if (!enabled) return
-    console.log('fetch 2')
 
     fetchWrapper(1)
   }, [activeTab])
 
   const props: RenderItemsProps<T> = {
-    dataList,
-    ref
+    dataList
   }
 
   return (

@@ -21,20 +21,13 @@ const History: FC = () => {
   }
 
   const renderTests = (props: RenderItemsProps<TestResultType>) => {
-    const { ref, dataList } = props
-    const lastIndex = dataList.length - 1
+    const { dataList } = props
 
     return (
       <List component='div'>
-        {dataList.map(({ id, name, test_id, counter, percentage }, index) => {
+        {dataList.map(({ id, name, test_id, counter, percentage }) => {
           const displayValue = `${name} - ${percentage}% (${counter}) раз пройден`
-          if (lastIndex === index) {
-            return (
-              <ListItemButton ref={ref} key={id} onClick={() => openTestHande(test_id)} sx={{ borderTop: `1px solid ${button_color}` }}>
-                <ListItemText primary={displayValue} />
-              </ListItemButton>
-            )
-          }
+
           return (
             <ListItemButton key={id} onClick={() => openTestHande(test_id)} sx={{ borderTop: `1px solid ${button_color}` }}>
               <ListItemText primary={displayValue} />
@@ -46,17 +39,11 @@ const History: FC = () => {
   }
 
   const renderArticles = (props: RenderItemsProps<ArticleType>) => {
-    const { ref, dataList } = props
-    const lastIndex = dataList.length - 1
+    const { dataList } = props
 
-    return dataList.map((article, index) => {
-      if (lastIndex === index) {
-        return (
-          <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} customRef={ref} article={article} />
-        )
-      }
-      return <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
-    })
+    return dataList.map((article) => (
+      <ArticleCard onCLick={() => navigate(`/${RouteList.Article}/${article.id}`)} key={article.id} article={article} />
+    ))
   }
 
   return (
