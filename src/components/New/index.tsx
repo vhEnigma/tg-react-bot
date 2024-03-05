@@ -9,10 +9,11 @@ import { ArticleType, TestType } from '../../types/menuList'
 import MenuItemInfo from '../MenuItemInfo'
 import { RouteList } from '../../routes/routes'
 import MenuList from '../MenuList'
-import { DirectionService } from '../../services/Direction'
 import ArticleCard from '../ArticleCard'
 import { getIntervalDate } from '../../utils/common'
 import { DAY_PERIOD } from '../../constants/common'
+import { ArticleService } from '../../services/ArticleService'
+import { TestService } from '../../services/TestService'
 
 const StyledButton = (color: string) =>
   styled(Button)({
@@ -70,17 +71,12 @@ const New: FC = () => {
         <MenuList<ArticleType>
           queryParams={{ from, to }}
           activeTab={activeTab}
-          request={DirectionService.getArticleListByDirectionRequest}
+          request={ArticleService.getArticleByDate}
           getItems={renderArticles}
         />
       ),
       [TEST_KEY]: (
-        <MenuList<TestType>
-          queryParams={{ from, to }}
-          activeTab={activeTab}
-          request={DirectionService.getTestListByDirectionRequest}
-          getItems={renderTests}
-        />
+        <MenuList<TestType> queryParams={{ from, to }} activeTab={activeTab} request={TestService.getTestByDate} getItems={renderTests} />
       )
     }
 
