@@ -21,6 +21,7 @@ export type ArticleType = {
   difficulty: number
   technology_id: number
   direction_id: number
+  date_create: number
 }
 
 export type TestType = {

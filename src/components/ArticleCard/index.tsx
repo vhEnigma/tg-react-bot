@@ -13,7 +13,7 @@ type ArticleCardProps = {
 const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
   const { button_color, bg_color } = useTgTheme()
 
-  const { author, rating, reading_time, topic } = article
+  const { author, rating, reading_time, topic, date_create } = article
 
   return (
     <Box
@@ -52,7 +52,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, onCLick }) => {
         Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
         Описание Описание Описание Описание
       </Typography>
-      <Typography sx={{ fontStyle: 'italic' }}>Дата создания: 01.01.0000</Typography>
+      <Typography sx={{ fontStyle: 'italic' }}>Дата создания: {new Date(date_create * 1000).toDateString()}</Typography>
     </Box>
   )
 }
