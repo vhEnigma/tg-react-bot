@@ -1,4 +1,4 @@
-export const ARTICLE_KEY = 'article'
+export const ARTICLE_KEY = 'course'
 export const TEST_KEY = 'tests'
 
 export type TabsType = typeof ARTICLE_KEY | typeof TEST_KEY | typeof RECOMMENDATION_KEY

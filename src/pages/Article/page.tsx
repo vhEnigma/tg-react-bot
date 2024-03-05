@@ -23,7 +23,6 @@ import useBackButton from '../../hooks/useBackButton'
 import ArticleCard from '../../components/ArticleCard'
 import { ARTICLE_KEY, RECOMMENDATION_KEY, tabsArticleAssociatedConfig, TabsType, TEST_KEY } from '../SingleDirection/constants'
 import MenuList from '../../components/MenuList'
-import { DirectionService } from '../../services/Direction'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
 import { MultiLineEllipsisStyle } from '../../constants/style'
 import MenuItemInfo from '../../components/MenuItemInfo'
@@ -50,7 +49,6 @@ const Article: FC = () => {
     const fetch = async () => {
       if (!id) return
       const response = await ArticleService.getSingleArticle(id)
-      ArticleService.getAssociatedItems(id)
 
       setUserRating(response.rating)
       setArticle(response)
@@ -119,15 +117,26 @@ const Article: FC = () => {
       [ARTICLE_KEY]: (
         <MenuList<ArticleType>
           activeTab={activeTab}
-          request={DirectionService.getArticleListByDirectionRequest}
+          requestId={id}
+          request={ArticleService.getAssociatedArticlesByArticle}
           getItems={renderArticles}
         />
       ),
       [TEST_KEY]: (
-        <MenuList<TestType> activeTab={activeTab} request={DirectionService.getTestListByDirectionRequest} getItems={renderTests} />
+        <MenuList<TestType>
+          activeTab={activeTab}
+          requestId={id}
+          request={ArticleService.getAssociatedTestByArticle}
+          getItems={renderTests}
+        />
       ),
       [RECOMMENDATION_KEY]: (
-        <MenuList<TestType> activeTab={activeTab} request={DirectionService.getTestListByDirectionRequest} getItems={renderTests} />
+        <MenuList<ArticleType>
+          activeTab={activeTab}
+          requestId={id}
+          request={ArticleService.getAssociatedArticlesByArticle}
+          getItems={renderArticles}
+        />
       )
     }
     return menuLists[activeTab]
