@@ -5,6 +5,15 @@ import { IParams } from '../../types/params'
 import { getQueryString } from '../../utils/params'
 
 export class TestService {
+  static async getTestByDate(params: IParams) {
+    const queryString = getQueryString(params)
+    const url = `${Endpoints.tests}/${queryString}`
+
+    const { data: response } = await axiosInstance.get<ResultResponseType<TestType>>(url)
+
+    return response.result
+  }
+
   static async getTestResults(params: IParams) {
     const queryString = getQueryString(params)
     const url = `${Endpoints.test.testResult}${queryString}`

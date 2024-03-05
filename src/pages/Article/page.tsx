@@ -115,7 +115,7 @@ const Article: FC = () => {
       [ARTICLE_KEY]: (
         <MenuList<ArticleType>
           activeTab={activeTab}
-          requestId={id}
+          queryParams={{ requestId: id }}
           request={ArticleService.getAssociatedArticlesByArticle}
           getItems={renderArticles}
         />
@@ -123,7 +123,7 @@ const Article: FC = () => {
       [TEST_KEY]: (
         <MenuList<TestType>
           activeTab={activeTab}
-          requestId={id}
+          queryParams={{ requestId: id }}
           request={ArticleService.getAssociatedTestByArticle}
           getItems={renderTests}
         />
@@ -131,7 +131,7 @@ const Article: FC = () => {
       [RECOMMENDATION_KEY]: (
         <MenuList<ArticleType>
           activeTab={activeTab}
-          requestId={id}
+          queryParams={{ requestId: id }}
           request={ArticleService.getAssociatedArticlesByArticle}
           getItems={renderArticles}
         />

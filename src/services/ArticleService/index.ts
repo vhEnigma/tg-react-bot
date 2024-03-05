@@ -5,6 +5,15 @@ import { IParams } from '../../types/params'
 import { getQueryString } from '../../utils/params'
 
 export class ArticleService {
+  static async getArticleByDate(params: IParams) {
+    const queryString = getQueryString(params)
+    const url = `${Endpoints.article.getSingle}/${queryString}`
+
+    const { data: response } = await axiosInstance.get<ResultResponseType<ArticleType>>(url)
+
+    return response.result
+  }
+
   static setReadArticle(id: number) {
     const url = `${Endpoints.article.getSingle}/${id}/read`
 

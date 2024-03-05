@@ -70,7 +70,7 @@ const SingleTechnology: FC = () => {
         {title}
       </Typography>
       <Catalog<TestType, ArticleType>
-        requestId={id}
+        queryParams={{ requestId: id }}
         articlesRequest={TechnologyService.getArticleListByTechnologyRequest}
         testsRequest={TechnologyService.getTestListByTechnologyRequest}
         renderArticles={renderArticles}

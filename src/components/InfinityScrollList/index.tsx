@@ -1,6 +1,6 @@
 import { MutableRefObject, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { PAGE_SIZE } from '../../constants/common'
-import { IParams } from '../../types/params'
+import { IParams, QueryParamsType } from '../../types/params'
 import { MenuItemType } from '../../types/menuList'
 import { TabsType } from '../../pages/SingleDirection/constants'
 import { CustomRef } from '../MenuList'
@@ -11,7 +11,7 @@ type InfinityScrollListProps<T> = {
   renderItems: (props: RenderItemsProps<T>) => ReactNode
   request: (params: IParams) => Promise<T[]>
   enabled: boolean
-  requestId?: string
+  queryParams?: QueryParamsType
   activeTab?: TabsType
   fetchRef: MutableRefObject<CustomRef | undefined>
 }
@@ -21,12 +21,12 @@ export type RenderItemsProps<T> = {
 }
 
 const InfinityScrollList = <T extends MenuItemType>({
-  requestId,
   activeTab,
   renderItems,
   request,
   enabled,
-  fetchRef
+  fetchRef,
+  queryParams
 }: InfinityScrollListProps<T>) => {
   const [isStopInfinityScroll, setStopInfinityScroll] = useState(false)
   const [downloadedPages, setDownloadedPages] = useState(1)
@@ -39,9 +39,20 @@ const InfinityScrollList = <T extends MenuItemType>({
     async (page?: number) => {
       const fuckingPage = page || downloadedPages
       const params: IParams = { page: fuckingPage }
-      if (requestId) params.id = requestId
+
+      if (queryParams) {
+        const { to, from, requestId } = queryParams
+
+        if (requestId) params.id = requestId
+        if (from && to) {
+          params.date_to = to
+          params.date_from = from
+        }
+      }
+
       const response = await request(params)
       setDataList((prev) => [...prev, ...response])
+
       if (response.length < PAGE_SIZE) {
         setStopInfinityScroll(true)
       } else {

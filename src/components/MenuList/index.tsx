@@ -2,7 +2,7 @@ import { Dispatch, ReactNode, SetStateAction, useEffect, useRef } from 'react'
 import { Box, List } from '@mui/material'
 import Search from '../Search'
 import Loader from '../Loader'
-import { IParams } from '../../types/params'
+import { IParams, QueryParamsType } from '../../types/params'
 import useSearch from '../../hooks/useSearch'
 import NotFound from '../NotFound'
 import { calcLoaderWrapperHeight } from '../../utils/style'
@@ -15,7 +15,7 @@ import useFirstRender from '../../hooks/useFirstRender'
 type MenuListProps<T> = {
   request: (params: IParams) => Promise<T[]>
   getItems: (props: RenderItemsProps<T>) => ReactNode
-  requestId?: string
+  queryParams?: QueryParamsType
   activeTab?: TabsType
 }
 
@@ -24,7 +24,7 @@ export type CustomRef = {
   setDownloadedPages: Dispatch<SetStateAction<number>>
 }
 
-const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getItems }: MenuListProps<T>) => {
+const MenuList = <T extends MenuItemType>({ queryParams, activeTab, request, getItems }: MenuListProps<T>) => {
   const { searchList, setSearchList, setSearchValue, debouncedSearchValue, isSearch, setSearch, searchValue } = useSearch<T[]>()
   const { tg } = useTelegram()
   const fetchRef = useRef<CustomRef>()
@@ -43,7 +43,8 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
       if (debouncedSearchValue) {
         setSearch(true)
         const params: IParams = { q: debouncedSearchValue, pageSize: 1000 }
-        if (requestId) params.id = requestId
+        if (queryParams?.requestId) params.id = queryParams.requestId
+
         const response = await request(params)
         setSearchList(response)
         setSearch(false)
@@ -82,7 +83,7 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
               enabled={!searchValue}
               request={request}
               activeTab={activeTab}
-              requestId={requestId}
+              queryParams={queryParams}
               fetchRef={fetchRef}
             />
           </List>

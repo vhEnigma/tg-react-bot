@@ -70,7 +70,7 @@ const SingleDirection: FC = () => {
         {title}
       </Typography>
       <Catalog<TestType, ArticleType>
-        requestId={id}
+        queryParams={{ requestId: id }}
         articlesRequest={DirectionService.getArticleListByDirectionRequest}
         testsRequest={DirectionService.getTestListByDirectionRequest}
         renderTests={renderTests}

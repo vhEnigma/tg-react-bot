@@ -6,11 +6,11 @@ import { ARTICLE_KEY, tabsCatalogConfig, TEST_KEY, TabsType, RECOMMENDATION_KEY 
 import { MenuItemType } from '../../types/menuList'
 import MenuList from '../MenuList'
 import { RenderItemsProps } from '../InfinityScrollList'
-import { IParams } from '../../types/params'
+import { IParams, QueryParamsType } from '../../types/params'
 import useBackButton from '../../hooks/useBackButton'
 
 type CatalogProps<T, V> = {
-  requestId?: string
+  queryParams?: QueryParamsType
   articlesRequest: (params: IParams) => Promise<V[]>
   testsRequest: (params: IParams) => Promise<T[]>
   renderTests: (props: RenderItemsProps<T>) => ReactNode
@@ -24,7 +24,7 @@ const StyledButton = (color: string) =>
     }
   })
 const Catalog = <T extends MenuItemType, V extends MenuItemType>({
-  requestId,
+  queryParams,
   testsRequest,
   articlesRequest,
   renderTests,
@@ -50,8 +50,8 @@ const Catalog = <T extends MenuItemType, V extends MenuItemType>({
 
   const renderMenuList = () => {
     const menuLists = {
-      [ARTICLE_KEY]: <MenuList<V> requestId={requestId} activeTab={activeTab} request={articlesRequest} getItems={renderArticles} />,
-      [TEST_KEY]: <MenuList<T> requestId={requestId} activeTab={activeTab} request={testsRequest} getItems={renderTests} />
+      [ARTICLE_KEY]: <MenuList<V> queryParams={queryParams} activeTab={activeTab} request={articlesRequest} getItems={renderArticles} />,
+      [TEST_KEY]: <MenuList<T> queryParams={queryParams} activeTab={activeTab} request={testsRequest} getItems={renderTests} />
     }
     if (activeTab === RECOMMENDATION_KEY) return
     return menuLists[activeTab]

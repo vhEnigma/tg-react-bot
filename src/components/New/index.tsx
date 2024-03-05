@@ -11,6 +11,8 @@ import { RouteList } from '../../routes/routes'
 import MenuList from '../MenuList'
 import { DirectionService } from '../../services/Direction'
 import ArticleCard from '../ArticleCard'
+import { getIntervalDate } from '../../utils/common'
+import { DAY_PERIOD } from '../../constants/common'
 
 const StyledButton = (color: string) =>
   styled(Button)({
@@ -60,12 +62,13 @@ const New: FC = () => {
     const { dataList } = props
     return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
   }
-  // todo replace requests and remove prop requestId
+
   const renderMenuList = () => {
+    const { to, from } = getIntervalDate(DAY_PERIOD)
     const menuLists = {
       [ARTICLE_KEY]: (
         <MenuList<ArticleType>
-          requestId='1'
+          queryParams={{ from, to }}
           activeTab={activeTab}
           request={DirectionService.getArticleListByDirectionRequest}
           getItems={renderArticles}
@@ -73,7 +76,7 @@ const New: FC = () => {
       ),
       [TEST_KEY]: (
         <MenuList<TestType>
-          requestId='1'
+          queryParams={{ from, to }}
           activeTab={activeTab}
           request={DirectionService.getTestListByDirectionRequest}
           getItems={renderTests}
