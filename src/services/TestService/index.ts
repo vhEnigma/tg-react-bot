@@ -15,7 +15,7 @@ export class TestService {
   }
 
   static async getTestResultById(id: string) {
-    const url = `${Endpoints.tests}${id}/test_results`
+    const url = `${Endpoints.tests}/${id}/test_results`
 
     const { data: response } = await axiosInstance.get<ResultResponseType<TestType>>(url)
 
