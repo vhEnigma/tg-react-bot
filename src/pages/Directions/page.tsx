@@ -18,29 +18,13 @@ const Directions: FC = () => {
     navigate(`/${RouteList.Directions}/${id}`)
   }
   const getItems = (props: RenderItemsProps<MenuListType>) => {
-    const { dataList, ref } = props
-    const lastIndex = dataList.length - 1
-    return dataList.map(({ id, name }, index) => {
-      const isLastElement = index === lastIndex
-      const content = (
-        <>
-          <img src={icon} alt='icon' />
-          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
-        </>
-      )
-      if (isLastElement) {
-        return (
-          <ListItemButton ref={ref} onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-            {content}
-          </ListItemButton>
-        )
-      }
-      return (
-        <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-          {content}
-        </ListItemButton>
-      )
-    })
+    const { dataList } = props
+    return dataList.map(({ id, name }) => (
+      <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
+        <img src={icon} alt='icon' style={{ borderRadius: '50%' }} />
+        <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
+      </ListItemButton>
+    ))
   }
 
   return <MenuList<MenuListType> request={DirectionService.listDirectionRequest} getItems={getItems} />

@@ -41,7 +41,6 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
     const findWrapper = async () => {
       if (isFirstRender) return
       if (debouncedSearchValue) {
-        console.log('fucking fetch')
         setSearch(true)
         const params: IParams = { q: debouncedSearchValue, pageSize: 1000 }
         if (requestId) params.id = requestId
@@ -49,7 +48,6 @@ const MenuList = <T extends MenuItemType>({ requestId, activeTab, request, getIt
         setSearchList(response)
         setSearch(false)
       } else {
-        console.log('fucking fetch2')
         fetchRef.current?.fetchWrapper(1)
         fetchRef.current?.setDownloadedPages(1)
         setSearchList(null)
