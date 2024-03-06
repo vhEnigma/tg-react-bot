@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
+import React, { FC, SyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   Box,
@@ -105,12 +105,15 @@ const Article: FC = () => {
     })
   }
 
-  const renderArticles = (props: RenderItemsProps<ArticleType>) => {
-    const { dataList } = props
-    return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
-  }
+  const renderArticles = useCallback(
+    (props: RenderItemsProps<ArticleType>) => {
+      const { dataList } = props
+      return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
+    },
+    [id]
+  )
 
-  const renderMenuList = () => {
+  const renderMenuList = useCallback(() => {
     const menuLists = {
       [ARTICLE_KEY]: (
         <MenuList<ArticleType>
@@ -138,7 +141,7 @@ const Article: FC = () => {
       )
     }
     return menuLists[activeTab]
-  }
+  }, [id])
 
   const openArticleHandle = (article_link: string, id: number) => {
     openInNewTab(article_link)
