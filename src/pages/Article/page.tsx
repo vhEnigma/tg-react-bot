@@ -79,13 +79,10 @@ const Article: FC = () => {
     [id]
   )
 
-  const renderArticles = useCallback(
-    (props: RenderItemsProps<ArticleType>) => {
-      const { dataList } = props
-      return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
-    },
-    [id]
-  )
+  const renderArticles = (props: RenderItemsProps<ArticleType>) => {
+    const { dataList } = props
+    return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
+  }
 
   if (isLoading || !article) return <Loader />
 
