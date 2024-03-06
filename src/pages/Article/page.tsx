@@ -56,7 +56,7 @@ const Article: FC = () => {
     }
 
     fetch()
-  }, [])
+  }, [id])
 
   if (isLoading || !article) return <Loader />
 
