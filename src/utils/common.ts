@@ -9,7 +9,7 @@ export const getIntervalDate = (days: number) => {
   const today = new Date()
 
   return {
-    from: pastDate.getTime() * 1000,
-    to: today.getTime() * 1000
+    from: Math.floor(pastDate.getTime() / 1000),
+    to: Math.floor(today.getTime() / 1000)
   }
 }
