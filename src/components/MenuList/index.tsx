@@ -35,7 +35,7 @@ const MenuList = <T extends MenuItemType>({ queryParams, activeTab, request, get
       setSearchList(null)
       setSearchValue('')
     }
-  }, [activeTab])
+  }, [activeTab, queryParams?.requestId])
 
   useEffect(() => {
     const findWrapper = async () => {
