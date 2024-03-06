@@ -8,6 +8,7 @@ import useTgTheme from '../../hooks/useTgTheme'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
 import { MenuListType } from '../../types/menuList'
 import { MultiLineEllipsisStyle } from '../../constants/style'
+import Icon from '../../components/Icon'
 
 const Technology: FC = () => {
   const { button_color } = useTgTheme()
@@ -20,7 +21,7 @@ const Technology: FC = () => {
     const { dataList } = props
     return dataList.map(({ id, name, picture }) => (
       <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-        <img src={picture} alt='icon' style={{ borderRadius: '50%', width: '30px', height: '30px', marginRight: '10px' }} />
+        <Icon src={picture} />
         <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
       </ListItemButton>
     ))
