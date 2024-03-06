@@ -32,7 +32,7 @@ const TestResult: FC = () => {
     const fetch = async (id: string) => {
       const response = await TestService.getTestResultById(id)
       setTestResult(response)
-      setLoading(false)
+      setLoading(true)
     }
     if (id) {
       fetch(id)
