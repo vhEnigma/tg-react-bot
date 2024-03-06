@@ -58,52 +58,26 @@ const Article: FC = () => {
     fetch()
   }, [id])
 
-  if (isLoading || !article) return <Loader />
+  const renderTests = useCallback(
+    (props: RenderItemsProps<TestType>) => {
+      const { dataList } = props
+      return dataList.map((test) => {
+        const { id, name, rating } = test
 
-  const handleChangeRating = async (_: SyntheticEvent<Element, Event>, newValue: number | null) => {
-    if (!newValue || !id) return
-    setUserRating(newValue)
-
-    await ArticleService.setRating(id, newValue)
-  }
-
-  const renderTabs = () =>
-    tabsArticleAssociatedConfig.map((options) => {
-      const { id, title, key } = options
-      const isActive = key === activeTab
-      const backgroundColor = isActive ? button_color : bg_color
-      const color = isActive ? button_text_color : link_color
-      const Component = StyledButton(button_text_color)
-      return (
-        <Component
-          key={id}
-          onClick={() => setActiveTab(key)}
-          fullWidth
-          sx={{ backgroundColor, color, fontSize: '12px' }}
-          variant='contained'
-        >
-          {title}
-        </Component>
-      )
-    })
-
-  const renderTests = (props: RenderItemsProps<TestType>) => {
-    const { dataList } = props
-    return dataList.map((test) => {
-      const { id, name, rating } = test
-
-      return (
-        <ListItemButton
-          key={id}
-          onClick={() => navigate(`/${RouteList.Test}/${id}`)}
-          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-        >
-          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
-          <MenuItemInfo rating={rating} />
-        </ListItemButton>
-      )
-    })
-  }
+        return (
+          <ListItemButton
+            key={id}
+            onClick={() => navigate(`/${RouteList.Test}/${id}`)}
+            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
+          >
+            <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
+            <MenuItemInfo rating={rating} />
+          </ListItemButton>
+        )
+      })
+    },
+    [id]
+  )
 
   const renderArticles = useCallback(
     (props: RenderItemsProps<ArticleType>) => {
@@ -142,6 +116,35 @@ const Article: FC = () => {
     }
     return menuLists[activeTab]
   }, [id])
+
+  if (isLoading || !article) return <Loader />
+
+  const handleChangeRating = async (_: SyntheticEvent<Element, Event>, newValue: number | null) => {
+    if (!newValue || !id) return
+    setUserRating(newValue)
+
+    await ArticleService.setRating(id, newValue)
+  }
+
+  const renderTabs = () =>
+    tabsArticleAssociatedConfig.map((options) => {
+      const { id, title, key } = options
+      const isActive = key === activeTab
+      const backgroundColor = isActive ? button_color : bg_color
+      const color = isActive ? button_text_color : link_color
+      const Component = StyledButton(button_text_color)
+      return (
+        <Component
+          key={id}
+          onClick={() => setActiveTab(key)}
+          fullWidth
+          sx={{ backgroundColor, color, fontSize: '12px' }}
+          variant='contained'
+        >
+          {title}
+        </Component>
+      )
+    })
 
   const openArticleHandle = (article_link: string, id: number) => {
     openInNewTab(article_link)
