@@ -53,6 +53,7 @@ const Article: FC = () => {
       setUserRating(response.rating)
       setArticle(response)
       setLoading(false)
+      setActiveTab(ARTICLE_KEY)
     }
 
     fetch()
