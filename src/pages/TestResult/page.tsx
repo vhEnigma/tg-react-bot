@@ -77,7 +77,7 @@ const TestResult: FC = () => {
       <Box
         sx={{
           backgroundColor: calcBackground(testResult.percentage),
-          color: text_color,
+          color: '#000',
           borderRadius: '50%',
           border: `1px solid section_bg_color`,
           width: '50%',
