@@ -10,7 +10,7 @@ const tg = window.Telegram.WebApp
 export const useTelegram = () => {
   tg.expand()
   const { user } = tg.initDataUnsafe
-  console.log(tg)
+
   return {
     tg,
     user

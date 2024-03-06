@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Button, Container, Typography } from '@mui/material'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { RouteList } from '../../routes/routes'
 
 const styles = {
@@ -13,8 +13,7 @@ const styles = {
 
 const ErrorBoundary: FC = () => {
   const navigate = useNavigate()
-  const location = useLocation()
-  console.log(location)
+
   const returnHandle = () => {
     navigate(RouteList.Root)
   }
