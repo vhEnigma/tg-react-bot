@@ -84,7 +84,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     return () => {
       observer.disconnect()
     }
-  }, [fetchWrapper])
+  }, [fetchWrapper, queryParams?.requestId])
 
   useEffect(() => {
     const fetch = async () => {
