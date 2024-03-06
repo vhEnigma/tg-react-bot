@@ -59,7 +59,7 @@ const InfinityScrollList = <T extends MenuItemType>({
         setDownloadedPages(fuckingPage + 1)
       }
     },
-    [downloadedPages, request]
+    [downloadedPages, request, queryParams?.requestId]
   )
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const InfinityScrollList = <T extends MenuItemType>({
     return () => {
       observer.disconnect()
     }
-  }, [fetchWrapper])
+  }, [fetchWrapper, queryParams?.requestId])
 
   useEffect(() => {
     const fetch = async () => {
