@@ -94,7 +94,7 @@ const InfinityScrollList = <T extends MenuItemType>({
       setDataList([])
       setStopInfinityScroll(false)
       await fetchWrapper(1)
-      setLoading(true)
+      setLoading(false)
     }
 
     fetch()
