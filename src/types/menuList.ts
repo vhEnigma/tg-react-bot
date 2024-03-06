@@ -4,6 +4,7 @@ export type MenuItemType = Record<string, any>
 export type MenuListType = {
   id: number
   name: string
+  picture: string
 }
 
 export type ResultResponseType<T> = {

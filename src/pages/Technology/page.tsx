@@ -7,7 +7,6 @@ import { RouteList } from '../../routes/routes'
 import useTgTheme from '../../hooks/useTgTheme'
 import { RenderItemsProps } from '../../components/InfinityScrollList'
 import { MenuListType } from '../../types/menuList'
-import icon from '../../../public/js.svg'
 import { MultiLineEllipsisStyle } from '../../constants/style'
 
 const Technology: FC = () => {
@@ -19,9 +18,9 @@ const Technology: FC = () => {
   }
   const getItems = (props: RenderItemsProps<MenuListType>) => {
     const { dataList } = props
-    return dataList.map(({ id, name }) => (
+    return dataList.map(({ id, name, picture }) => (
       <ListItemButton onClick={() => openItemHandle(id)} key={id} sx={{ borderTop: `1px solid ${button_color}` }}>
-        <img src={icon} alt='icon' style={{ borderRadius: '50%' }} />
+        <img src={picture} alt='icon' style={{ borderRadius: '50%' }} />
         <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
       </ListItemButton>
     ))
