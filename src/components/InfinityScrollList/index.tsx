@@ -34,7 +34,7 @@ const InfinityScrollList = <T extends MenuItemType>({
   const infinityTriggerDiv = useRef<HTMLDivElement | null>(null)
   const isFirstRender = useFirstRender()
   const [isLoading, setLoading] = useState(false)
-
+  console.log(dataList, 'dataList')
   const fetchWrapper = useCallback(
     async (page?: number) => {
       const fuckingPage = page || downloadedPages
