@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Box, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import MenuItemInfo from '../MenuItemInfo'
 import { ArticleType } from '../../types/menuList'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -15,9 +15,10 @@ type ArticleCardProps = {
 const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, withOutCLick = false }) => {
   const { button_color, bg_color } = useTgTheme()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const { author, rating, reading_time, topic, date_create } = article
-
+  console.log(location)
   const handleClick = () => {
     if (withOutCLick) return
     console.log('click')
