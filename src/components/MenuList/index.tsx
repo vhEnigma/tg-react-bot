@@ -77,7 +77,7 @@ const MenuList = <T extends MenuItemType>({ queryParams, activeTab, request, get
         {isSearch ? (
           <Loader />
         ) : (
-          <List component='div' aria-label='secondary mailbox folder'>
+          <List sx={{ height: '100%' }} component='div' aria-label='secondary mailbox folder'>
             <InfinityScrollList<T>
               renderItems={renderItems}
               enabled={!searchValue}
