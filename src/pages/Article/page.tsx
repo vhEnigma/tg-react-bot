@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useEffect, useState } from 'react'
+import React, { FC, SyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   Box,
@@ -58,6 +58,35 @@ const Article: FC = () => {
     fetch()
   }, [id])
 
+  const renderTests = useCallback(
+    (props: RenderItemsProps<TestType>) => {
+      const { dataList } = props
+      return dataList.map((test) => {
+        const { id, name, rating } = test
+
+        return (
+          <ListItemButton
+            key={id}
+            onClick={() => navigate(`/${RouteList.Test}/${id}`)}
+            sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
+          >
+            <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
+            <MenuItemInfo rating={rating} />
+          </ListItemButton>
+        )
+      })
+    },
+    [id]
+  )
+
+  const renderArticles = useCallback(
+    (props: RenderItemsProps<ArticleType>) => {
+      const { dataList } = props
+      return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
+    },
+    [id]
+  )
+
   if (isLoading || !article) return <Loader />
 
   const handleChangeRating = async (_: SyntheticEvent<Element, Event>, newValue: number | null) => {
@@ -86,29 +115,6 @@ const Article: FC = () => {
         </Component>
       )
     })
-
-  const renderTests = (props: RenderItemsProps<TestType>) => {
-    const { dataList } = props
-    return dataList.map((test) => {
-      const { id, name, rating } = test
-
-      return (
-        <ListItemButton
-          key={id}
-          onClick={() => navigate(`/${RouteList.Test}/${id}`)}
-          sx={{ borderTop: `1px solid ${button_color}`, backgroundColor: bg_color }}
-        >
-          <ListItemText sx={MultiLineEllipsisStyle} primary={name} />
-          <MenuItemInfo rating={rating} />
-        </ListItemButton>
-      )
-    })
-  }
-
-  const renderArticles = (props: RenderItemsProps<ArticleType>) => {
-    const { dataList } = props
-    return dataList.map((article) => <ArticleCard key={article.id} article={article} />)
-  }
 
   const renderMenuList = () => {
     const menuLists = {
