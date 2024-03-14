@@ -33,7 +33,7 @@ const Root: FC = () => {
                         fontSize: '2rem'
                     }}
                 >
-                    {title}
+                    {title} <img src='./hand-emodji.webp' alt='Привет!'/>
                 </Typography>
                 <Button
                     onClick={() => navigate(RouteList.History)}
