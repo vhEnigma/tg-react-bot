@@ -5,6 +5,7 @@ import MenuItemInfo from '../MenuItemInfo'
 import { ArticleType } from '../../types/menuList'
 import useTgTheme from '../../hooks/useTgTheme'
 import { RouteList } from '../../routes/routes'
+import { MONTHS } from '../../constants/common'
 
 type ArticleCardProps = {
   article: ArticleType
@@ -22,6 +23,15 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, withOutCLick = 
     if (withOutCLick) return
 
     navigate(`/${RouteList.Article}/${article.id}`)
+  }
+
+  const formatTimestamp = (timestamp: number) => {
+    const date = new Date(timestamp * 1000)
+    const day = date.getDate()
+    const month = MONTHS[date.getMonth()]
+    const year = date.getFullYear()
+
+    return `${day}/${month}/${year}`
   }
 
   return (
@@ -58,7 +68,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, withOutCLick = 
         Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
         Описание Описание Описание Описание
       </Typography>
-      <Typography>{`${author}, ${new Date(date_create * 1000).toDateString()}`}</Typography>
+      <Typography>{`${author}, ${formatTimestamp(date_create)} - ${new Date(date_create * 1000).toDateString()}`}</Typography>
     </Box>
   )
 }
