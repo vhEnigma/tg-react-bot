@@ -44,10 +44,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, withOutCLick = 
           justifyContent: 'space-between'
         }}
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <Typography>{author}</Typography>
-          <Typography sx={{ fontWeight: 'bold' }}>{topic}</Typography>
-        </Box>
+        <Typography sx={{ fontWeight: 'bold' }}>{topic}</Typography>
         <MenuItemInfo rating={rating} reading_time={reading_time} withTimeEllipsis />
       </Box>
       <Typography
@@ -61,6 +58,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, withOutCLick = 
         Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
         Описание Описание Описание Описание
       </Typography>
+      <Typography>{author}</Typography>
       <Typography>Дата создания: {new Date(date_create * 1000).toDateString()}</Typography>
     </Box>
   )
