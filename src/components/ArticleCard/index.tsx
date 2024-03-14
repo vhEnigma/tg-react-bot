@@ -68,7 +68,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article, customRef, withOutCLick = 
         Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание
         Описание Описание Описание Описание
       </Typography>
-      <Typography>{`${author}, ${formatTimestamp(date_create)} - ${new Date(date_create * 1000).toDateString()}`}</Typography>
+      <Typography>{`${author}, ${formatTimestamp(date_create)}`}</Typography>
     </Box>
   )
 }
