@@ -18,7 +18,7 @@ const Root: FC = () => {
         return <Loader/>
     }
 
-    const title = `${userInfo.first_name} ${userInfo.last_name} 👋`
+    const title = `${userInfo.first_name} ${userInfo.last_name}`
 
     return (
         <>
@@ -33,7 +33,7 @@ const Root: FC = () => {
                         fontSize: '2rem'
                     }}
                 >
-                    {title} <img src='./hand-emodji.webp' alt='Привет!'/>
+                    {title} <img width={30} height={30} src='./hand-emodji.webp' alt='Привет!'/>
                 </Typography>
                 <Button
                     onClick={() => navigate(RouteList.History)}
