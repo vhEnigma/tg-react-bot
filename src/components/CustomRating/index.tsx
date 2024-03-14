@@ -10,6 +10,13 @@ const StyledRating = styled(Rating)({
   },
   '& .MuiRating-iconHover': {
     color: '#f2ba39'
+  },
+  '& .iconFilled': {
+    color: 'red',
+    background: 'blue'
+  },
+  iconFilled: {
+    color: 'brown'
   }
 })
 
