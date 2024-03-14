@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Box, Typography } from '@mui/material'
-import { AccessTime } from '@mui/icons-material'
-import StarRateIcon from '@mui/icons-material/StarRate'
+import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded'
 import useTgTheme from '../../hooks/useTgTheme'
 
 type MenuItemInfoProps = {
@@ -43,7 +42,6 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info, withT
           >
             {reading_time} мин.
           </Typography>
-          <AccessTime sx={{ color: text_color }} />
           <Typography sx={{ color: text_color }}> | </Typography>
         </>
       )
@@ -58,7 +56,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info, withT
       <Typography sx={{ color: text_color, ...ellipsisStyle, minWidth: '40px', maxWidth: '40px' }} component='span'>
         {rating}/5
       </Typography>
-      <StarRateIcon sx={{ color: '#faaf00' }} />
+      <StarBorderRoundedIcon sx={{ color: '#faaf00' }} />
     </Box>
   )
 }
