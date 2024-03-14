@@ -13,7 +13,7 @@ type MenuItemInfoProps = {
 const ellipsisStyle = { overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }
 
 const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info, withTimeEllipsis = false }) => {
-  const { text_color } = useTgTheme()
+  const { text_color, button_color } = useTgTheme()
 
   const getInfo = (array?: string[]) => {
     if (Array.isArray(array)) {
@@ -56,7 +56,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({ reading_time, rating, info, withT
       <Typography sx={{ color: text_color, ...ellipsisStyle, minWidth: '40px', maxWidth: '40px' }} component='span'>
         {rating}/5
       </Typography>
-      <StarBorderRoundedIcon sx={{ color: '#faaf00' }} />
+      <StarBorderRoundedIcon sx={{ color: button_color }} />
     </Box>
   )
 }
