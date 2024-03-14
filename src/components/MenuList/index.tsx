@@ -70,7 +70,7 @@ const MenuList = <T extends MenuItemType>({ queryParams, activeTab, request, get
 
   return (
     <>
-      <Box sx={{ position: 'sticky', top: '-15px', zIndex: 1, borderRadius: '4px' }}>
+      <Box sx={{ position: 'sticky', top: '-9px', zIndex: 1, borderRadius: '4px' }}>
         <Search value={searchValue} setValue={setSearchValue} />
       </Box>
       <Box sx={{ height: calcLoaderWrapperHeight(72) }}>
