@@ -80,8 +80,8 @@ const Test: FC = () => {
             return (
                 <FormGroup key={id} sx={{display: 'flex', gap: '10px', alignItems: 'flex-start'}}>
                     <FormControlLabel
-                        control={<CheckBoxComponent sx={{borderColor: button_color}}
-                                                    onChange={(event) => onChangeHandler(event, questionId, id)}/>}
+                        control={<Checkbox sx={{borderColor: button_color}}
+                                           onChange={(event) => onChangeHandler(event, questionId, id)}/>}
                         label={<Typography sx={{color: text_color}}>{text}</Typography>}
                     />
                 </FormGroup>
