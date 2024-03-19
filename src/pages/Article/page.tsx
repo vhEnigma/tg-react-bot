@@ -43,7 +43,7 @@ const StyledButton = (color: string) =>
 
 const StyledAccordionSummary = (color: string) => {
     return styled(AccordionSummary)({
-        '& ."MuiAccordionSummary-expandIconWrapper': {
+        '& .MuiAccordionSummary-expandIconWrapper': {
             color
         }
     })
