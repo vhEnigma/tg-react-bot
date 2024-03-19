@@ -15,7 +15,7 @@ import {styled} from "@mui/material/styles";
 
 const StyledCheckbox = (color: string) => {
     return styled(Checkbox)({
-        '& .MuiCheckbox-colorPrimary ': {
+        '& .MuiButtonBase-root': {
             color
         }
     })
