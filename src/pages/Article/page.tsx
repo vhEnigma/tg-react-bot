@@ -174,7 +174,7 @@ const Article: FC = () => {
                 <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls='panel2-content' id='panel2-header'>
                     <Typography>Подробнее</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{color: 'red'}}>
+                <AccordionDetails sx={{color: 'red !important', backgroundColor: 'red'}}>
                     <ArticleCard article={article} withOutCLick/>
                 </AccordionDetails>
             </Accordion>
