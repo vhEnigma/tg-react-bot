@@ -16,10 +16,10 @@ import {styled} from "@mui/material/styles";
 const StyledCheckbox = (color: string, borderColor: string) => {
     return styled(Checkbox)({
         '&.MuiButtonBase-root': {
-            color: borderColor
-        },
-        '&.Mui-checked': {
             color
+        },
+        '&. Mui-checked': {
+            color: borderColor
         }
     })
 }
