@@ -170,37 +170,30 @@ const Article: FC = () => {
             >
                 {topic}
             </Typography>
-            <Accordion sx={{backgroundColor: bg_color, color: 'green'}}>
-                <AccordionSummary sx={{color: 'red'}} expandIcon={<ExpandMoreIcon/>} aria-controls='panel2-content'
-                                  id='panel2-header'>
+            <Accordion sx={{backgroundColor: bg_color, color: text_color}}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls='panel2-content' id='panel2-header'>
                     <Typography>Подробнее</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{color: 'yellow !important', backgroundColor: 'brown'}}>
+                <AccordionDetails>
                     <ArticleCard article={article} withOutCLick/>
                 </AccordionDetails>
             </Accordion>
-            <Box sx={{mt: '10px'}}>
-                <CustomRating rating={userRating} onChange={handleChangeRating}/>
+            <Box sx={{m: '20px auto', width: '50%'}}>
+                <Button
+                    onClick={() => openArticleHandle(article_link, article.id)}
+                    fullWidth
+                    sx={{backgroundColor: button_color, color: button_text_color}}
+                    variant='contained'
+                >
+                    Читать статью
+                </Button>
             </Box>
+            <CustomRating rating={userRating} onChange={handleChangeRating}/>
+
             <ButtonGroup sx={{display: 'flex', justifyContent: 'center', mt: '10px'}} variant='contained'>
                 {renderTabs()}
             </ButtonGroup>
             {renderMenuList()}
-            <Button
-                onClick={() => openArticleHandle(article_link, article.id)}
-                fullWidth
-                sx={{
-                    backgroundColor: button_color, color: button_text_color, width: '25%',
-                    borderRadius: '50%',
-                    position: 'fixed',
-                    bottom: '15%',
-                    right: '10%',
-                    aspectRatio: '1/1',
-                }}
-                variant='contained'
-            >
-                Читать статью
-            </Button>
         </>
     )
 }
