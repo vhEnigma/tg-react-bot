@@ -53,7 +53,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({reading_time, rating, info, withTi
         <Box sx={{display: 'flex', gap: '5px', ml: '10px'}}>
             {getInfo(info)}
             {getReadingTime()}
-            <Typography sx={{color: text_color, ...ellipsisStyle, minWidth: '40px', maxWidth: '40px'}} component='span'>
+            <Typography sx={{color: text_color, ...ellipsisStyle, minWidth: '20px', maxWidth: '26px'}} component='span'>
                 {rating}/5
             </Typography>
             <StarRateRoundedIcon sx={{color: button_color}}/>
