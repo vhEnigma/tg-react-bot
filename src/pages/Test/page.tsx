@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
-import {Box, Button, Checkbox, FormControlLabel, FormGroup, Typography} from '@mui/material'
+import {AccordionSummary, Box, Button, Checkbox, FormControlLabel, FormGroup, Typography} from '@mui/material'
 import {AnswerType, QuestionType, TestType} from '../../types/menuList'
 import Loader from '../../components/Loader'
 import useTgTheme from '../../hooks/useTgTheme'
@@ -11,6 +11,15 @@ import {RouteList} from '../../routes/routes'
 import {TechnologyService} from '../../services/Technology'
 import {DirectionService} from '../../services/Direction'
 import useBackButton from '../../hooks/useBackButton'
+import {styled} from "@mui/material/styles";
+
+const StyledCheckbox = (color: string) => {
+    return styled(Checkbox)({
+        '& .MuiCheckbox-colorPrimary ': {
+            color
+        }
+    })
+}
 
 const Test: FC = () => {
     const {tg} = useTelegram()
@@ -60,20 +69,22 @@ const Test: FC = () => {
         setAnswersMap(map)
     }
 
-    const renderAnswers = (answers: AnswerType[], questionId: number) =>
-        answers.map((answer) => {
+    const renderAnswers = (answers: AnswerType[], questionId: number) => {
+        const CheckBoxComponent = StyledCheckbox(button_color)
+        return answers.map((answer) => {
             const {id, text} = answer
 
             return (
                 <FormGroup key={id} sx={{display: 'flex', gap: '10px', alignItems: 'flex-start'}}>
                     <FormControlLabel
-                        control={<Checkbox sx={{borderColor: button_color}}
-                                           onChange={(event) => onChangeHandler(event, questionId, id)}/>}
+                        control={<CheckBoxComponent sx={{borderColor: button_color}}
+                                                    onChange={(event) => onChangeHandler(event, questionId, id)}/>}
                         label={<Typography sx={{color: text_color}}>{text}</Typography>}
                     />
                 </FormGroup>
             )
         })
+    }
 
     const getQuestionList = (questions: QuestionType[]) =>
         questions.map((question, index) => {
