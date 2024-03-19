@@ -178,10 +178,9 @@ const Article: FC = () => {
                     <ArticleCard article={article} withOutCLick/>
                 </AccordionDetails>
             </Accordion>
-            <Box sx={{mt: '20px'}}>
+            <Box sx={{mt: '10px'}}>
                 <CustomRating rating={userRating} onChange={handleChangeRating}/>
             </Box>
-
             <ButtonGroup sx={{display: 'flex', justifyContent: 'center', mt: '10px'}} variant='contained'>
                 {renderTabs()}
             </ButtonGroup>
