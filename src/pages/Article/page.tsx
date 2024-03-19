@@ -170,11 +170,12 @@ const Article: FC = () => {
             >
                 {topic}
             </Typography>
-            <Accordion sx={{backgroundColor: bg_color, color: text_color}}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls='panel2-content' id='panel2-header'>
+            <Accordion sx={{backgroundColor: bg_color, color: 'green'}}>
+                <AccordionSummary sx={{color: 'red'}} expandIcon={<ExpandMoreIcon/>} aria-controls='panel2-content'
+                                  id='panel2-header'>
                     <Typography>Подробнее</Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{color: 'red !important', backgroundColor: 'red'}}>
+                <AccordionDetails sx={{color: 'yellow !important', backgroundColor: 'brown'}}>
                     <ArticleCard article={article} withOutCLick/>
                 </AccordionDetails>
             </Accordion>
