@@ -78,7 +78,7 @@ const TestResult: FC = () => {
                 sx={{
                     color: calcColor(testResult.percentage),
                     fontSize: '40px',
-                    m: '0 auto'
+                    textAlign: 'center'
                 }}
             >{`${testResult.percentage} %`}</Box>
             <Typography component='p' sx={{m: '20px 0', textAlign: 'center', color: text_color}}>
