@@ -11,18 +11,6 @@ import {RouteList} from '../../routes/routes'
 import {TechnologyService} from '../../services/Technology'
 import {DirectionService} from '../../services/Direction'
 import useBackButton from '../../hooks/useBackButton'
-import {styled} from "@mui/material/styles";
-
-const StyledCheckbox = (color: string, borderColor: string) => {
-    return styled(Checkbox)({
-        '&.MuiButtonBase-root': {
-            color
-        },
-        '&. Mui-checked': {
-            color: borderColor
-        }
-    })
-}
 
 const Test: FC = () => {
     const {tg} = useTelegram()
@@ -73,14 +61,13 @@ const Test: FC = () => {
     }
 
     const renderAnswers = (answers: AnswerType[], questionId: number) => {
-        const CheckBoxComponent = StyledCheckbox(button_color, button_text_color)
         return answers.map((answer) => {
             const {id, text} = answer
 
             return (
                 <FormGroup key={id} sx={{display: 'flex', gap: '10px', alignItems: 'flex-start'}}>
                     <FormControlLabel
-                        control={<Checkbox sx={{borderColor: 'red', color: 'green'}}
+                        control={<Checkbox sx={{color: button_color}}
                                            onChange={(event) => onChangeHandler(event, questionId, id)}/>}
                         label={<Typography sx={{color: text_color}}>{text}</Typography>}
                     />
