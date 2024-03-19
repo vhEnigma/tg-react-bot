@@ -69,7 +69,7 @@ const Test: FC = () => {
                     <FormControlLabel
                         control={<Checkbox sx={{color: button_color}}
                                            onChange={(event) => onChangeHandler(event, questionId, id)}/>}
-                        label={<Typography sx={{color: text_color}}>{text}</Typography>}
+                        label={<Typography sx={{color: text_color, userSelect: 'none'}}>{text}</Typography>}
                     />
                 </FormGroup>
             )
