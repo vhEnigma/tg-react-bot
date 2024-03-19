@@ -184,16 +184,21 @@ const Article: FC = () => {
                 {renderTabs()}
             </ButtonGroup>
             {renderMenuList()}
-            <Box sx={{width: '50%', position: 'fixed', bottom: 0, right: 0, aspectRatio: '1/1'}}>
-                <Button
-                    onClick={() => openArticleHandle(article_link, article.id)}
-                    fullWidth
-                    sx={{backgroundColor: button_color, color: button_text_color}}
-                    variant='contained'
-                >
-                    Читать статью
-                </Button>
-            </Box>
+            <Button
+                onClick={() => openArticleHandle(article_link, article.id)}
+                fullWidth
+                sx={{
+                    backgroundColor: button_color, color: button_text_color, width: '25%',
+                    borderRadius: '50%',
+                    position: 'fixed',
+                    bottom: '15%',
+                    right: '10%',
+                    aspectRatio: '1/1',
+                }}
+                variant='contained'
+            >
+                Читать статью
+            </Button>
         </>
     )
 }
