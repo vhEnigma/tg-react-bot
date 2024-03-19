@@ -41,6 +41,14 @@ const StyledButton = (color: string) =>
         }
     })
 
+const StyledAccordionSummary = (color: string) => {
+    return styled(AccordionSummary)({
+        '& ."MuiAccordionSummary-expandIconWrapper': {
+            color
+        }
+    })
+}
+
 const Article: FC = () => {
     const {button_color, button_text_color, text_color, bg_color, link_color} = useTgTheme()
     const {id} = useParams()
@@ -156,6 +164,8 @@ const Article: FC = () => {
     }
 
     const {topic, article_link} = article
+    const AccordionSummaryStyled = StyledAccordionSummary(button_text_color)
+
 
     return (
         <>
@@ -171,9 +181,10 @@ const Article: FC = () => {
                 {topic}
             </Typography>
             <Accordion sx={{backgroundColor: bg_color, color: text_color}}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls='panel2-content' id='panel2-header'>
+                <AccordionSummaryStyled expandIcon={<ExpandMoreIcon/>} aria-controls='panel2-content'
+                                        id='panel2-header'>
                     <Typography>Подробнее</Typography>
-                </AccordionSummary>
+                </AccordionSummaryStyled>
                 <AccordionDetails>
                     <ArticleCard article={article} withOutCLick/>
                 </AccordionDetails>
