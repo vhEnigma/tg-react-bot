@@ -56,7 +56,7 @@ const MenuItemInfo: FC<MenuItemInfoProps> = ({reading_time, rating, info, withTi
             <Typography sx={{color: text_color, ...ellipsisStyle, minWidth: '20px', maxWidth: '26px'}} component='span'>
                 {rating}/5
             </Typography>
-            <StarRateRoundedIcon sx={{color: button_color}}/>
+            <StarRateRoundedIcon sx={{width: '20px', height: '20px', color: button_color}}/>
         </Box>
     )
 }
